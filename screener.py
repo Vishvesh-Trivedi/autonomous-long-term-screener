@@ -528,17 +528,23 @@ def get_sector_gm_threshold(info: dict) -> float:
 def compute_debt_ratios(info: dict) -> dict:
     try:
         debt     = info.get('totalDebt', 0) or 0
-        equity   = info.get('totalStockholderEquity', 0) or info.get('bookValue', 0) or 0
         ebitda   = info.get('ebitda', 0) or 0
         interest = abs(info.get('interestExpense', 0) or 0)
         c_assets = info.get('totalCurrentAssets', 0) or 0
         c_liab   = info.get('totalCurrentLiabilities', 0) or 0
 
-        # Sanity: if equity is extremely low or negative, D/E is meaningless
-        if equity < 1e6:
-            de_ratio = 999.0
+        # yfinance no longer exposes 'totalStockholderEquity'. Prefer its own
+        # 'debtToEquity' (reported as a percentage, e.g. 79.5 == 0.795x). Falling
+        # back to bookValue (equity PER SHARE) * sharesOutstanding for total equity
+        # in dollars — using bookValue alone as if it were total equity produced a
+        # units mismatch (debt in dollars / equity per-share) that always exceeded
+        # the sentinel threshold, silently zeroing out every T1/T2 candidate.
+        yf_de = info.get('debtToEquity')
+        if yf_de is not None and yf_de >= 0:
+            de_ratio = round(yf_de / 100, 2)
         else:
-            de_ratio = round(debt/equity, 2)
+            equity = (info.get('bookValue', 0) or 0) * (info.get('sharesOutstanding', 0) or 0)
+            de_ratio = round(debt / equity, 2) if equity >= 1e6 else 999.0
         if de_ratio > 100:
             de_ratio = 999.0
 
@@ -870,6 +876,8 @@ def fetch_technicals(ticker: str) -> dict:
         if hist.empty or len(hist) < 50:
             return {}
         close         = hist['Close']
+        if len(close) < 756:  # period='10y' should return ~2512 rows; flag silent truncation
+            log.warning(f'  {ticker}: requested 10y history but got only {len(close)} rows — CAGR will be limited')
         current_price = float(close.iloc[-1])
         ma_200        = float(close.tail(200).mean()) if len(close) >= 200 else float(close.mean())
         above_200ma   = current_price > ma_200
@@ -1448,7 +1456,8 @@ def _doh_resolve_hostname(hostname: str) -> str | None:
                 for ans in data.get('Answer', []):
                     if ans.get('type') == 1:
                         return ans['data']
-        except Exception:
+        except Exception as e:
+            log.warning(f'  DoH via {doh_ip} failed for {hostname}: {type(e).__name__}: {e}')
             continue
     return None
 
