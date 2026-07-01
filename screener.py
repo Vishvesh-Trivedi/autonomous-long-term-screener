@@ -38,7 +38,6 @@ import requests
 import pandas as pd
 import yfinance as yf
 from llm_client import research_stock, call_llm
-import anthropic
 
 # ── LOGGING ───────────────────────────────────────────────────────────────────
 logging.basicConfig(

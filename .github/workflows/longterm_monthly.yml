@@ -98,6 +98,7 @@ jobs:
           EMAIL_RECIPIENT:   ${{ secrets.EMAIL_RECIPIENT }}
           RUN_MODE:          ${{ github.event.inputs.run_mode || 'FULL' }}
         run: |
+          set -o pipefail
           python screener.py 2>&1 | tee screener.log
       - name: Commit updated data
         if: always()
