@@ -75,6 +75,7 @@ def _holding_card(h: dict) -> str:
     cur_price = h.get('current_price')
     above200  = h.get('above_200ma')
     pct_high  = h.get('pct_from_high')
+    pct_200ma = h.get('pct_from_200ma')
     ret_1yr   = h.get('return_1yr')
     vs_qqq    = h.get('return_vs_qqq')
     trend     = h.get('trend','—')
@@ -96,6 +97,7 @@ def _holding_card(h: dict) -> str:
     sec_events     = h.get('sec_8k_events', [])
     sec_highlights = h.get('sec_8k_highlights', [])
     sec_latest_date= h.get('sec_8k_latest_date', '')
+    congress_tx    = h.get('congress_disclosures', [])
 
     # Research
     thesis    = h.get('thesis_summary','')
@@ -145,8 +147,8 @@ def _holding_card(h: dict) -> str:
     roic_c      = '#15803d' if (roic or 0) > 0.12 else ('#d97706' if (roic or 0) > 0.06 else '#374151')
     gm_c        = '#15803d' if (gm or 0) > 0.40 else ('#d97706' if (gm or 0) > 0.20 else '#374151')
     rg_c        = '#15803d' if (rev_gr or 0) > 0.10 else ('#d97706' if (rev_gr or 0) > 0 else '#dc2626')
-    above_str   = (f'+{abs(pct_high or 0):.1f}% above 200MA' if above200
-                   else f'{abs(pct_high or 0):.1f}% below 200MA' if above200 is not None else '—')
+    above_str   = (f'+{abs(pct_200ma or 0):.1f}% above 200MA' if above200
+                   else f'{abs(pct_200ma or 0):.1f}% below 200MA' if above200 is not None else '—')
     above_c     = '#15803d' if above200 else ('#dc2626' if above200 is not None else '#6b7280')
     sect_c      = {'HIGH': '#15803d', 'MEDIUM': '#d97706', 'LOW': '#dc2626'}.get(sect_dur, '#6b7280')
 
@@ -270,6 +272,27 @@ def _holding_card(h: dict) -> str:
             f'</div>'
         )
 
+    # ── CONGRESSIONAL TRADING (House + Senate, last 90 days) ───────────────
+    congress_html = ''
+    if congress_tx:
+        rows = ''.join(
+            f'<div style="font-size:10px;padding:4px 0;color:#1a1d23;border-bottom:1px solid #e0e7f5">'
+            f'<strong>{tx.get("name","—")}</strong>'
+            f'&nbsp;<span style="color:#6b7280">({tx.get("chamber","—")})</span>'
+            f'&nbsp;<span style="color:{"#15803d" if tx.get("type")=="Purchase" else "#dc2626" if tx.get("type")=="Sale" else "#6b7280"}">{tx.get("type","—")}</span>'
+            + (f'&nbsp;<span style="color:#6b7280">{tx.get("amount")}</span>' if tx.get('amount') else '')
+            + f'&nbsp;<span style="color:#9ca3af">{tx.get("date","")}</span>'
+            f'</div>'
+            for tx in congress_tx[:5]
+        )
+        congress_html = (
+            f'<div style="margin-top:10px;padding:10px 12px;background:#f5f3ff;border-left:4px solid #7c3aed;border-radius:2px">'
+            f'<div style="font-size:8px;font-weight:700;color:#6d28d9;letter-spacing:.1em;'
+            f'text-transform:uppercase;margin-bottom:6px">Congressional trading &middot; last 90 days</div>'
+            f'{rows}'
+            f'</div>'
+        )
+
     # ── BUILD CARD ────────────────────────────────────────────────────────
     thesis_html = thesis if thesis else '<em style="color:#9ca3af">Thesis pending</em>'
     card = (
@@ -318,6 +341,7 @@ def _holding_card(h: dict) -> str:
         + (f'<div style="font-size:9.5px;color:#374151;margin-top:6px">'
            f'<strong>Primary risk:</strong> {risk}</div>' if risk else '')
         + ten_k_html
+        + congress_html
         + (f'<div style="font-size:9.5px;color:#b91c1c;border-left:3px solid #fecaca;padding:5px 10px;'
            f'margin-top:8px;background:#fef2f2"><strong>Exit if:</strong> {breaks_if}</div>'
            if breaks_if else '')
@@ -374,7 +398,7 @@ def _holding_card(h: dict) -> str:
         f'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>'
         + _stat('200-Day MA', above_str, above_c)
         + _stat('52w High', f'{_val(pct_high,"pct1") if pct_high else "—"} from high')
-        + _stat('vs QQQ', f'{ret_1yr - (h.get("return_vs_qqq") or 0):+.1f}% alpha' if ret_1yr and h.get("return_vs_qqq") else '—', last=True)
+        + _stat('vs QQQ', f'{vs_qqq:+.1f}% alpha' if vs_qqq is not None else '—', last=True)
         + f'</tr></table>'
         f'</td></tr>'
 
@@ -630,6 +654,7 @@ def _screened_card(s: dict) -> str:
     # Technicals
     above200= s.get('above_200ma')
     pct_high= s.get('pct_from_high')
+    pct_200ma = s.get('pct_from_200ma')
     ret_1yr = s.get('return_1yr')
     vs_qqq  = s.get('return_vs_qqq')
 
@@ -641,8 +666,8 @@ def _screened_card(s: dict) -> str:
     signal  = s.get('signal_or_noise','NOISE')
     themes  = s.get('key_themes',[])
 
-    above_str = (f'✓ +{abs(pct_high or 0):.1f}% above' if above200
-                 else f'✗ {abs(pct_high or 0):.1f}% below' if above200 is not None
+    above_str = (f'✓ +{abs(pct_200ma or 0):.1f}% above' if above200
+                 else f'✗ {abs(pct_200ma or 0):.1f}% below' if above200 is not None
                  else '—')
     above_cls = 'pos' if above200 else ('neg' if above200 is not None else 'neu')
     themes_str= ', '.join(themes) if themes else '—'

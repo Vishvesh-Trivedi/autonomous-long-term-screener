@@ -709,8 +709,9 @@ For a 20-YEAR investor, return ONLY valid JSON:
         result = call_llm(prompt, system='Long-term investment analyst. Return ONLY valid JSON.', max_tokens=350)
         if result['success'] and isinstance(result['data'], dict):
             return result['data']
+        log.warning(f'  News intelligence failed for {ticker}: {result.get("error")}')
     except Exception as e:
-        log.debug(f'get_news_intelligence {ticker}: {e}')
+        log.warning(f'  News intelligence failed for {ticker}: {e}')
     return {}
 
 
@@ -872,6 +873,7 @@ def fetch_technicals(ticker: str) -> dict:
         current_price = float(close.iloc[-1])
         ma_200        = float(close.tail(200).mean()) if len(close) >= 200 else float(close.mean())
         above_200ma   = current_price > ma_200
+        pct_from_200ma = round((current_price - ma_200) / ma_200 * 100, 1) if ma_200 else None
         hist_1yr      = close.tail(252)
         high_52w      = float(hist_1yr.max())
         low_52w       = float(hist_1yr.min())
@@ -882,8 +884,10 @@ def fetch_technicals(ticker: str) -> dict:
         trend         = 'UP' if current_price > ma_126 else 'DOWN'
 
         # Multi-year history (long-term context) — CAGR per year held + max drawdown
+        # Uses 250 trading days/yr (not 252) since yfinance's period='Ny' request
+        # typically returns slightly fewer than N*252 rows (~2512 for '10y').
         def _cagr(years):
-            n = years * 252
+            n = years * 250
             if len(close) < n + 1:
                 return None
             start = float(close.iloc[-n]); end = current_price
@@ -907,6 +911,7 @@ def fetch_technicals(ticker: str) -> dict:
             'high_52w':      round(high_52w, 2),
             'low_52w':       round(low_52w, 2),
             'pct_from_high': pct_from_high,
+            'pct_from_200ma': pct_from_200ma,
             'return_1yr':    return_1yr,
             'return_3yr_cagr':  return_3yr_cagr,
             'return_5yr_cagr':  return_5yr_cagr,
@@ -917,7 +922,7 @@ def fetch_technicals(ticker: str) -> dict:
             'trend':         trend,
         }
     except Exception as e:
-        log.debug(f'  Technicals failed for {ticker}: {e}')
+        log.warning(f'  Technicals failed for {ticker}: {e}')
         return {}
 
 # ── STEP 3.5: SENTIMENT ───────────────────────────────────────────────────────
@@ -2233,6 +2238,7 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
                 'entry_price':        tech.get('current_price'),
                 'above_200ma':        tech.get('above_200ma'),
                 'pct_from_high':      tech.get('pct_from_high'),
+                'pct_from_200ma':     tech.get('pct_from_200ma'),
                 'return_1yr':         tech.get('return_1yr'),
                 'return_vs_qqq':      tech.get('return_vs_qqq_1yr'),
                 'trend':              tech.get('trend','—'),
@@ -2335,6 +2341,7 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
             'current_price':      technicals.get('current_price'),
             'above_200ma':        technicals.get('above_200ma'),
             'pct_from_high':      technicals.get('pct_from_high'),
+            'pct_from_200ma':     technicals.get('pct_from_200ma'),
             'return_1yr':         technicals.get('return_1yr'),
             'return_vs_qqq':      technicals.get('return_vs_qqq_1yr'),
             'return_3yr_cagr':    technicals.get('return_3yr_cagr'),
