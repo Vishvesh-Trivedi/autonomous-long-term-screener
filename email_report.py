@@ -271,6 +271,7 @@ def _holding_card(h: dict) -> str:
         )
 
     # ── BUILD CARD ────────────────────────────────────────────────────────
+    thesis_html = thesis if thesis else '<em style="color:#9ca3af">Thesis pending</em>'
     card = (
         f'<table id="{ticker}" width="100%" border="0" cellpadding="0" cellspacing="0" '
         f'style="margin-bottom:14px;border:1px solid #e5e7eb;border-left:4px solid {border_c};background:#fff">'
@@ -301,7 +302,7 @@ def _holding_card(h: dict) -> str:
         f'<tr><td style="padding:0">{_sec_label("Investment Thesis", "NVIDIA Llama · 20-year view")}</td></tr>'
         f'<tr><td style="padding:12px 14px 10px">'
         f'<div style="font-size:11px;color:#1a1d23;line-height:1.65">'
-        f'{thesis if thesis else "<em style=\'color:#9ca3af\'>Thesis pending</em>"}'
+        f'{thesis_html}'
         f'</div>'
         + (f'<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-top:10px"><tr>'
            f'<td style="font-size:9.5px;color:#6b7280;padding-right:10px">Moat: <strong style="color:#374151">{moat_type}</strong></td>'
