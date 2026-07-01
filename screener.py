@@ -705,7 +705,7 @@ def get_news_intelligence(ticker: str, company_name: str, headlines: list, reddi
     _max_items = _cn(30, 'sentiment_data', 'finnhub_headlines_for_llm') + _cn(15, 'sentiment_data', 'reddit_titles_for_llm')
     all_items = [h for h in (headlines + reddit_titles) if h][:_max_items]
     if not all_items:
-        return {}
+        return {'_status': 'no_data'}
     try:
         from llm_client import call_llm
         all_text  = '\n'.join(f'• {h}' for h in all_items)
@@ -719,11 +719,13 @@ For a 20-YEAR investor, return ONLY valid JSON:
 {{"thesis_impact":"STRENGTHENS|NEUTRAL|THREATENS","impact_reason":"one sentence why","key_insights":["specific insight with names/amounts (20 words max)","specific insight with names/amounts (20 words max)","specific insight with names/amounts (20 words max)"],"watch_flag":"specific catalyst or risk to watch, or empty string","sentiment_summary":"2-sentence summary of what market is focused on"}}"""
         result = call_llm(prompt, system='Long-term investment analyst. Return ONLY valid JSON.', max_tokens=350)
         if result['success'] and isinstance(result['data'], dict):
-            return result['data']
-        log.warning(f'  News intelligence failed for {ticker}: {result.get("error")}')
+            return {**result['data'], '_status': 'ok'}
+        err = result.get('error', 'unknown error')
+        log.warning(f'  News intelligence failed for {ticker}: {err}')
+        return {'_status': 'failed', '_error': str(err)[:150]}
     except Exception as e:
         log.warning(f'  News intelligence failed for {ticker}: {e}')
-    return {}
+        return {'_status': 'failed', '_error': str(e)[:150]}
 
 
 # ── STEP 3: SCREENING ─────────────────────────────────────────────────────────

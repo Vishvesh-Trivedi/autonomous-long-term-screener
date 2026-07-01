@@ -117,6 +117,8 @@ def _holding_card(h: dict) -> str:
 
     # LLM news intelligence
     intel          = h.get('news_intelligence', {})
+    intel_status   = intel.get('_status', 'ok' if intel else 'no_data')  # 'ok' | 'no_data' | 'failed'
+    intel_error    = intel.get('_error', '')
     intel_impact   = intel.get('thesis_impact', '')
     intel_reason   = intel.get('impact_reason', '')
     intel_insights = intel.get('key_insights', [])
@@ -197,7 +199,7 @@ def _holding_card(h: dict) -> str:
         )
 
     # ── MARKET INTELLIGENCE BLOCK ──────────────────────────────────────────
-    if intel:
+    if intel_status == 'ok' and intel:
         ic, ibg, ibdr, ilbl = {
             'STRENGTHENS': ('#15803d', '#f0fdf4', '#bbf7d0', 'Strengthens 20-yr thesis'),
             'THREATENS':   ('#b91c1c', '#fef2f2', '#fecaca', 'Threatens 20-yr thesis'),
@@ -219,8 +221,16 @@ def _holding_card(h: dict) -> str:
             f'{watch_html}'
             f'</div>'
         )
+    elif intel_status == 'failed':
+        intel_html = (
+            f'<div style="border-left:4px solid #dc2626;background:#fef2f2;border-radius:2px;padding:10px 12px">'
+            f'<div style="font-size:9px;font-weight:700;color:#b91c1c;text-transform:uppercase;'
+            f'letter-spacing:.08em;margin-bottom:4px">⚠ LLM analysis failed</div>'
+            f'<div style="font-size:10px;color:#7f1d1d">{intel_error or "Unknown error — check screener.log"}</div>'
+            f'</div>'
+        )
     else:
-        intel_html = f'<div style="font-size:10px;color:#9ca3af;font-style:italic">No LLM intelligence data yet.</div>'
+        intel_html = f'<div style="font-size:10px;color:#9ca3af;font-style:italic">No recent news to analyze.</div>'
 
     # ── SEC / NEWS BLOCK (existing colour-coding logic, clean table) ───────
     _news_hl = h.get('news_highlights', [])
