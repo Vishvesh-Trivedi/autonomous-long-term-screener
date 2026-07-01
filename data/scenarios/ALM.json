@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Almonty Industries successfully expands its tungsten supply chain, leading to significant revenue growth and increased market capitalization.",
+    "revenue_10yr_b": 0.5,
+    "mktcap_10yr_b": 15.0,
+    "multiple": 10.0,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "Almonty Industries maintains its current position in the tungsten supply chain, with moderate revenue growth and stable market capitalization.",
+    "revenue_10yr_b": 0.1,
+    "mktcap_10yr_b": 7.0,
+    "multiple": 5.0,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "Almonty Industries fails to generate significant revenue due to supply chain disruptions, leading to a decline in market capitalization.",
+    "mktcap_10yr_b": 2.0,
+    "multiple": 2.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "Monitoring revenue growth and supply chain developments.",
+  "thesis_breaks_if": "Failure to generate significant revenue within the next 5 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-17T15:59:19.740309",
+  "ticker": "ALM"
+}

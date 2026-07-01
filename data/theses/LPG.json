@@ -1,0 +1,29 @@
+{
+  "category": "Liquefied Petroleum Gas (LPG) shipping and trading",
+  "tam_estimate_b": 10,
+  "unfair_advantage": "Existing fleet and global customer relationships",
+  "milestone_1": "Increase fleet utilization to 80%",
+  "milestone_2": "Expand trading operations to new markets",
+  "milestone_3": "Develop strategic partnerships with major LPG producers",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 2.5,
+  "bull_mktcap_10yr_b": 5,
+  "bull_multiple": 2,
+  "base_revenue_10yr_b": 1.5,
+  "base_mktcap_10yr_b": 2.5,
+  "base_multiple": 1.5,
+  "kill_risk": "Prolonged decline in LPG prices or global demand",
+  "thesis_summary": "Dorian LPG is a high-growth potential company with a strong position in the LPG shipping market, poised for long-term success with increasing demand and expanding operations.",
+  "thesis_breaks_if": "Failure to achieve 80% fleet utilization within the next 2 years",
+  "moonshot_score": 7,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The Company's fleet consists of 22 vessels, including 19 LPG carriers and 3 other vessels.",
+    "The Company's revenue is primarily generated from the transportation of LPG and other petroleum gases.",
+    "The Company is subject to various risks, including fluctuations in LPG prices and global demand, as well as regulatory and environmental risks."
+  ],
+  "research_date": "2026-06-17T13:16:35.731352",
+  "ticker": "LPG"
+}

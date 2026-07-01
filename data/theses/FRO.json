@@ -1,0 +1,29 @@
+{
+  "category": "Energy Shipping and Tanker Market",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Established fleet and operational expertise in the tanker market, which competitors cannot replicate in 5 years",
+  "milestone_1": "Increase fleet capacity by 20%",
+  "milestone_2": "Expand operations into new geographic regions",
+  "milestone_3": "Achieve a fleet utilization rate of 90%",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 5000,
+  "bull_mktcap_10yr_b": 20000,
+  "bull_multiple": 4,
+  "base_revenue_10yr_b": 3000,
+  "base_mktcap_10yr_b": 10000,
+  "base_multiple": 3,
+  "kill_risk": "Prolonged downturn in the tanker market",
+  "thesis_summary": "Frontline is well-positioned to capitalize on the growing demand for energy shipping and tanker services, with a strong fleet and operational expertise",
+  "thesis_breaks_if": "Tanker market shows significant weakness",
+  "moonshot_score": 7,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company has a strong fleet of tankers, with a total capacity of 2251.480064M DWT",
+    "Frontline has a history of generating strong cash flows, with a cash runway of FCF positive",
+    "The company is focused on expanding its operations and increasing its fleet capacity, with a goal of achieving a fleet utilization rate of 90%"
+  ],
+  "research_date": "2026-06-08T02:40:36.730011",
+  "ticker": "FRO"
+}

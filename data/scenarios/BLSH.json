@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "BLSH achieves significant revenue growth through strategic partnerships and innovative product offerings, establishing a strong presence in the financial services sector.",
+    "revenue_10yr_b": 5.0,
+    "mktcap_10yr_b": 20.0,
+    "multiple": 15.0,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "BLSH experiences moderate growth, expanding its customer base and increasing revenue, but faces intense competition and margin pressure.",
+    "revenue_10yr_b": 1.5,
+    "mktcap_10yr_b": 8.0,
+    "multiple": 10.0,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "BLSH fails to achieve significant revenue growth, struggling to compete with established players and facing declining market share and profitability.",
+    "mktcap_10yr_b": 1.0,
+    "multiple": 5.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "BLSH's current financials indicate a speculative investment with high risk and potential for significant growth or decline.",
+  "thesis_breaks_if": "Failure to achieve significant revenue growth within the next 5 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-17T15:58:56.037219",
+  "ticker": "BLSH"
+}

@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "GitLab's strong network effects and high gross margin drive long-term growth, achieving $5B in revenue by year 10, with a market cap of $20B and a multiple of 4x, driven by successful expansion into new markets and increased adoption of its platform.",
+    "revenue_10yr_b": 5.0,
+    "mktcap_10yr_b": 20.0,
+    "multiple": 4.3,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "GitLab maintains its current growth trajectory, reaching $2.5B in revenue by year 10, with a market cap of $10B and a multiple of 4x, as the company continues to execute on its strategy and navigate industry challenges.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 10.0,
+    "multiple": 2.2,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "GitLab fails to achieve positive ROIC within the next 5 years, leading to stagnating revenue growth, reaching only $1.2B by year 10, with a market cap of $3B and a multiple of 2.5x, due to increased competition and inability to expand its customer base.",
+    "mktcap_10yr_b": 3.0,
+    "multiple": 0.6,
+    "probability": 0.1
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "GitLab's current financial performance and industry trends suggest a steady growth trajectory, but the company must continue to innovate and expand its offerings to maintain its competitive position.",
+  "thesis_breaks_if": "GitLab fails to achieve positive ROIC within the next 5 years, indicating a failure to generate returns on investment and potentially leading to a decline in investor confidence.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-18T02:01:03.015894",
+  "ticker": "GTLB"
+}

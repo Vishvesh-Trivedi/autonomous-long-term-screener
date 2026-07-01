@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Applied Digital Corp successfully develops and commercializes its patented technology, achieving significant market share in the cloud computing and AI industries. The company secures additional funding and forms strategic partnerships, driving revenue growth and increasing its market capitalization.",
+    "revenue_10yr_b": 10.0,
+    "mktcap_10yr_b": 100.0,
+    "multiple": 25.0,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "Applied Digital Corp makes steady progress in developing its technology and forming partnerships, but faces significant competition and challenges in achieving its goals. The company secures some additional funding, but revenue growth is moderate and market capitalization increases at a slower pace.",
+    "revenue_10yr_b": 2.0,
+    "mktcap_10yr_b": 20.0,
+    "multiple": 10.0,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "Applied Digital Corp fails to secure additional funding and struggles to develop and commercialize its technology. The company faces significant competition and challenges, leading to stagnant revenue growth and a decline in market capitalization.",
+    "mktcap_10yr_b": 5.0,
+    "multiple": 5.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "The company's progress in developing its technology and forming partnerships will be closely monitored, as well as its ability to secure additional funding.",
+  "thesis_breaks_if": "Failure to secure additional funding within the next 12 months",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-17T16:04:06.889892",
+  "ticker": "APLD"
+}

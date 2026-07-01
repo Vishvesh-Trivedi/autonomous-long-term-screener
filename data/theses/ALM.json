@@ -1,0 +1,29 @@
+{
+  "category": "Tungsten Supply Chain",
+  "tam_estimate_b": 10,
+  "unfair_advantage": "Established position in the tungsten supply chain, with a recent $700M convertible notes offering providing a strong financial foundation",
+  "milestone_1": "Successful issuance of convertible senior notes",
+  "milestone_2": "Upsize option of $100M exercised",
+  "milestone_3": "Profitability from tungsten supply chain operations",
+  "survival_probability": 0.2,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 5,
+  "bull_mktcap_10yr_b": 20,
+  "bull_multiple": 4,
+  "base_revenue_10yr_b": 1,
+  "base_mktcap_10yr_b": 5,
+  "base_multiple": 5,
+  "kill_risk": "Inability to generate revenue due to supply chain disruptions",
+  "thesis_summary": "Almonty Industries is a speculative investment opportunity with potential for high returns due to its established position in the tungsten supply chain and recent financial developments",
+  "thesis_breaks_if": "Failure to generate significant revenue within the next 5 years",
+  "moonshot_score": 6,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 2,
+  "ten_k_highlights": [
+    "Almonty Industries plans to offer $700M convertible senior notes due 2031, with a $100M upsize option",
+    "The company has a strong financial foundation, with recent oversubscribed convertible notes offerings",
+    "Almonty Industries is well-positioned to profit from the tungsten supply chain war, with a established market presence"
+  ],
+  "research_date": "2026-06-08T02:41:16.554877",
+  "ticker": "ALM"
+}

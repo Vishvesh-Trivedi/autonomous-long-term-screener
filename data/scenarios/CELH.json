@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Celsius Holdings successfully expands its product line and increases international distribution, becoming a leading player in the energy drink and functional beverage market.",
+    "revenue_10yr_b": 15.43,
+    "mktcap_10yr_b": 43.8,
+    "multiple": 5.7,
+    "probability": 0.6
+  },
+  "base": {
+    "narrative": "Celsius Holdings maintains its current market position and grows steadily, but faces increasing competition in the energy drink and functional beverage market.",
+    "revenue_10yr_b": 8.91,
+    "mktcap_10yr_b": 23.1,
+    "multiple": 3.0,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "Celsius Holdings fails to expand its product line and increase international distribution, leading to stagnating sales and a decline in market share.",
+    "mktcap_10yr_b": 4.2,
+    "multiple": 0.5,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Strong brand and distribution network, with potential for international expansion.",
+  "thesis_breaks_if": "Failure to expand product line and increase international distribution within the next 3 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-18T09:01:20.720595",
+  "ticker": "CELH"
+}

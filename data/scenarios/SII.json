@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Sprott Inc. successfully rides the commodity cycle growth trend, leveraging its brand and expertise to increase market share and revenue. Commodity prices rise, driving demand for precious metals and commodity investments.",
+    "revenue_10yr_b": 1.52,
+    "mktcap_10yr_b": 8.5,
+    "multiple": 2.5,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "Sprott Inc. maintains its current market position, with steady demand for precious metals and commodity investments. The company adapts to market changes, but commodity prices remain relatively stable.",
+    "revenue_10yr_b": 0.76,
+    "mktcap_10yr_b": 4.8,
+    "multiple": 1.4,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "Commodity prices plummet, reducing demand for precious metals and commodity investments. Sprott Inc. fails to adapt to market changes, losing market share and revenue.",
+    "mktcap_10yr_b": 1.2,
+    "multiple": 0.3,
+    "probability": 0.1
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "Monitoring commodity price trends and company adaptation to market changes.",
+  "thesis_breaks_if": "Commodity prices plummet or the company fails to adapt to market changes",
+  "natural_eval_window_days": 180,
+  "written_date": "2026-06-18T02:07:43.320924",
+  "ticker": "SII"
+}

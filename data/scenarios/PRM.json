@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Perimeter Solutions achieves significant revenue growth through expansion of its fire safety and specialty chemicals market, driven by increasing demand for patented products and a solid customer base.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 20.0,
+    "multiple": 3.4,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "Perimeter Solutions maintains its current market position and grows revenue at a moderate pace, driven by steady demand for its products and services.",
+    "revenue_10yr_b": 1.5,
+    "mktcap_10yr_b": 10.0,
+    "multiple": 1.7,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "Perimeter Solutions fails to achieve significant revenue growth due to increased competition, patent expiration, or declining demand for its products and services.",
+    "mktcap_10yr_b": 2.0,
+    "multiple": 0.3,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Monitoring revenue growth and market expansion.",
+  "thesis_breaks_if": "Failure to achieve significant revenue growth within the next 5 years.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-18T02:08:01.639687",
+  "ticker": "PRM"
+}

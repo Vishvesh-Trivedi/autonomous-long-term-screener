@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Argan Inc. continues to execute on its growth strategy, expanding its market share and increasing revenue at a 15% CAGR. The company's cost advantage moat and disciplined management enable it to maintain a gross margin above 20%, driving significant earnings growth and resulting in a market capitalization of $30.0B in 10 years.",
+    "revenue_10yr_b": 2.93,
+    "mktcap_10yr_b": 30.0,
+    "multiple": 3.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "Argan Inc. delivers steady growth, with revenue increasing at a 10% CAGR over the next 10 years. The company maintains its gross margin above 18%, resulting in moderate earnings growth and a market capitalization of $20.0B in 10 years.",
+    "revenue_10yr_b": 2.24,
+    "mktcap_10yr_b": 20.0,
+    "multiple": 2.0,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "Argan Inc. faces significant challenges, including increased competition and rising costs, resulting in a decline in gross margin to 12%. Revenue growth slows to 5% CAGR, and the market capitalization falls to $5.0B in 10 years.",
+    "mktcap_10yr_b": 5.0,
+    "multiple": 0.5,
+    "probability": 0.1
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "The company's current financial performance is in line with the base case scenario, with a strong cost advantage moat and disciplined management.",
+  "thesis_breaks_if": "if the company's gross margin falls below 15% for two consecutive years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-18T02:00:26.248179",
+  "ticker": "AGX"
+}

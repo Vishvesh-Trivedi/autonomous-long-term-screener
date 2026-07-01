@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Victory Capital Holdings experiences rapid growth, exceeding 15% annual revenue growth due to its strong brand and customer base, leading to a significant increase in market capitalization.",
+    "revenue_10yr_b": 4.51,
+    "mktcap_10yr_b": 23.19,
+    "multiple": 5.13,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "Victory Capital Holdings maintains steady growth, with annual revenue growth of 10-12%, resulting in moderate market capitalization expansion.",
+    "revenue_10yr_b": 3.21,
+    "mktcap_10yr_b": 14.19,
+    "multiple": 4.42,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "Victory Capital Holdings struggles to adapt to changing market conditions, leading to stagnant revenue growth and a decline in market capitalization.",
+    "mktcap_10yr_b": 2.75,
+    "multiple": 1.86,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Currently tracking above projected growth due to strong Q1 earnings.",
+  "thesis_breaks_if": "Revenue growth fails to exceed 10% annually for 3 consecutive years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-17T19:25:23.887228",
+  "ticker": "VCTR"
+}

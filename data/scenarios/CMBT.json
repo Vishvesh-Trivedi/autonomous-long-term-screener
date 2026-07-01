@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "CMBT achieves exceptional earnings growth, driven by its strong uptrend momentum, resulting in a 20% annual revenue growth rate over the next 10 years.",
+    "revenue_10yr_b": 13.45,
+    "mktcap_10yr_b": 44.0,
+    "multiple": 3.25,
+    "probability": 0.6
+  },
+  "base": {
+    "narrative": "CMBT maintains its current growth trajectory, with a 10% annual revenue growth rate over the next 10 years, driven by its strong sector position.",
+    "revenue_10yr_b": 6.45,
+    "mktcap_10yr_b": 14.4,
+    "multiple": 2.25,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "CMBT fails to achieve positive free cash flow within the next 2 years, leading to a decline in investor confidence and a subsequent decrease in market capitalization.",
+    "mktcap_10yr_b": 1.4,
+    "multiple": 0.75,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Strong earnings growth and uptrend momentum indicate a high potential for long-term growth.",
+  "thesis_breaks_if": "Failure to achieve positive free cash flow within the next 2 years",
+  "natural_eval_window_days": 730,
+  "written_date": "2026-06-17T15:57:10.563905",
+  "ticker": "CMBT"
+}

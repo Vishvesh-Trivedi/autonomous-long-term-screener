@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "WaterBridge Infrastructure achieves significant revenue growth, driven by successful execution of infrastructure projects, leading to a market capitalization of $15B and revenue of $6.3B in 10 years, with a multiple of 2.4.",
+    "revenue_10yr_b": 6.3,
+    "mktcap_10yr_b": 15.0,
+    "multiple": 2.4,
+    "probability": 0.6
+  },
+  "base": {
+    "narrative": "WaterBridge Infrastructure experiences steady growth, with moderate success in infrastructure projects, resulting in a market capitalization of $5B and revenue of $2.5B in 10 years, with a multiple of 2.0.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 5.0,
+    "multiple": 2.0,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "WaterBridge Infrastructure fails to achieve significant revenue growth due to poor execution of infrastructure projects, leading to a market capitalization of $0.5B and a multiple of 0.8.",
+    "mktcap_10yr_b": 0.5,
+    "multiple": 0.8,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Initial infrastructure projects are on track for completion, with promising signs of revenue growth.",
+  "thesis_breaks_if": "Failure to achieve significant revenue growth within 5 years",
+  "natural_eval_window_days": 3650,
+  "written_date": "2026-06-17T15:59:37.164763",
+  "ticker": "WBI"
+}

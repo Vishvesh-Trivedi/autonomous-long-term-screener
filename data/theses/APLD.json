@@ -1,0 +1,29 @@
+{
+  "category": "Cloud Computing and Artificial Intelligence",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Patented technology and strategic partnerships",
+  "milestone_1": "Development of a scalable AI platform",
+  "milestone_2": "Integration with major cloud service providers",
+  "milestone_3": "Launch of a commercial AI-powered product",
+  "survival_probability": 0.2,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 50,
+  "bull_mktcap_10yr_b": 500,
+  "bull_multiple": 10,
+  "base_revenue_10yr_b": 10,
+  "base_mktcap_10yr_b": 50,
+  "base_multiple": 5,
+  "kill_risk": "Insufficient cash runway and inability to secure additional funding",
+  "thesis_summary": "Applied Digital Corp has the potential to revolutionize the cloud computing and AI industries with its patented technology and strategic partnerships, but faces significant risks and challenges in achieving its goals.",
+  "thesis_breaks_if": "Failure to secure additional funding within the next 12 months",
+  "moonshot_score": 6,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 2,
+  "ten_k_highlights": [
+    "The company has a strong focus on research and development, with a team of experienced engineers and scientists.",
+    "Applied Digital Corp has established partnerships with major industry players to accelerate the development and deployment of its technology.",
+    "The company's patented technology has the potential to significantly improve the efficiency and scalability of AI-powered systems."
+  ],
+  "research_date": "2026-06-17T13:15:59.868310",
+  "ticker": "APLD"
+}

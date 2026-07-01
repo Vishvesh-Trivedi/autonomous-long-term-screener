@@ -1,0 +1,29 @@
+{
+  "category": "Pharmaceuticals and Biotechnology",
+  "tam_estimate_b": 10,
+  "unfair_advantage": "Proprietary print technology for creating precise and uniform particles",
+  "milestone_1": "Completion of clinical trials for lead product candidate",
+  "milestone_2": "Regulatory approval for lead product candidate",
+  "milestone_3": "Commercial launch of lead product candidate",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 5,
+  "bull_mktcap_10yr_b": 20,
+  "bull_multiple": 4,
+  "base_revenue_10yr_b": 1,
+  "base_mktcap_10yr_b": 5,
+  "base_multiple": 2,
+  "kill_risk": "Failure to achieve regulatory approval for lead product candidate",
+  "thesis_summary": "Liquidia Corporation has a strong potential for long-term growth due to its proprietary technology and promising product pipeline.",
+  "thesis_breaks_if": "failure to achieve regulatory approval within the next 5 years",
+  "moonshot_score": 7,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "We are a clinical-stage biopharmaceutical company focused on the development and commercialization of innovative products.",
+    "Our proprietary print technology enables the creation of precise and uniform particles, which can improve the efficacy and safety of our products.",
+    "We have a strong pipeline of product candidates, including our lead candidate, which is currently in clinical trials."
+  ],
+  "research_date": "2026-06-17T13:15:04.972005",
+  "ticker": "LQDA"
+}

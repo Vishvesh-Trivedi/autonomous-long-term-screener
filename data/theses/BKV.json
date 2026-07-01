@@ -1,0 +1,29 @@
+{
+  "category": "Energy",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Innovative technology and strategic partnerships",
+  "milestone_1": "Completion of product development",
+  "milestone_2": "Regulatory approvals",
+  "milestone_3": "Commercial-scale production",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 50,
+  "bull_mktcap_10yr_b": 500,
+  "bull_multiple": 10,
+  "base_revenue_10yr_b": 10,
+  "base_mktcap_10yr_b": 100,
+  "base_multiple": 5,
+  "kill_risk": "Failure to achieve regulatory approvals",
+  "thesis_summary": "BKV is a high-risk, high-reward investment opportunity in the energy sector with potential for significant growth",
+  "thesis_breaks_if": "Failure to reach milestone 1 within the next 2 years",
+  "moonshot_score": 6,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company is focused on developing innovative energy solutions",
+    "BKV has established strategic partnerships to drive growth",
+    "The company's management team has extensive experience in the energy sector"
+  ],
+  "research_date": "2026-06-17T13:16:28.898846",
+  "ticker": "BKV"
+}

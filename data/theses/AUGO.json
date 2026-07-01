@@ -1,0 +1,29 @@
+{
+  "category": "Metals and Mining",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Unable to determine from provided extract, as 10-K/S-1 filing is not available",
+  "milestone_1": "Establishing a strong presence in the gold mining market",
+  "milestone_2": "Increasing production capacity to meet growing demand",
+  "milestone_3": "Expanding operations into new regions",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 5000,
+  "bull_mktcap_10yr_b": 20000,
+  "bull_multiple": 4,
+  "base_revenue_10yr_b": 2000,
+  "base_mktcap_10yr_b": 10000,
+  "base_multiple": 5,
+  "kill_risk": "Weakness in Chinese demand",
+  "thesis_summary": "AUGO has the potential to become a leading player in the metals and mining market, driven by its strong gold mining operations and growing demand",
+  "thesis_breaks_if": "Failure to achieve significant revenue growth within the next 5 years",
+  "moonshot_score": 6,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "Unable to provide highlights as 10-K/S-1 filing is not available",
+    " Aura Minerals Shares Surge 73% in a Year: What's Driving the Rally?",
+    "Shares of several metals & mining companies are trading lower amid reports of weakness in Chinese demand"
+  ],
+  "research_date": "2026-06-08T02:37:50.731745",
+  "ticker": "AUGO"
+}

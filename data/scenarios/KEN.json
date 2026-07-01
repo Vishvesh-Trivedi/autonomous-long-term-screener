@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Kenon Holdings achieves consistent 20% YoY revenue growth, driven by successful diversification and strategic investments, leading to a significant increase in market capitalization.",
+    "revenue_10yr_b": 5.12,
+    "mktcap_10yr_b": 23.21,
+    "multiple": 6.5,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "Kenon Holdings maintains a steady 10% YoY revenue growth, with moderate expansion of its diversified portfolio, resulting in a stable increase in market capitalization.",
+    "revenue_10yr_b": 2.59,
+    "mktcap_10yr_b": 9.21,
+    "multiple": 2.6,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "Kenon Holdings fails to achieve 5% YoY revenue growth, due to increased competition and unsuccessful investments, leading to a decline in market capitalization.",
+    "mktcap_10yr_b": 1.82,
+    "multiple": 0.5,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Kenon Holdings' strong revenue growth and diversified portfolio support the bull narrative.",
+  "thesis_breaks_if": "Failure to achieve 15% YoY revenue growth for 3 consecutive years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-18T02:08:26.040404",
+  "ticker": "KEN"
+}

@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "CRDO achieves significant market share gains, driven by successful product qualification with major cloud providers and a strong product roadmap, leading to revenue growth of 30% per annum and a market capitalization of $200B in 10 years.",
+    "revenue_10yr_b": 13.4,
+    "mktcap_10yr_b": 200.0,
+    "multiple": 15,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "CRDO executes on its product roadmap, qualifies with major cloud providers, and achieves steady revenue growth of 20% per annum, resulting in a market capitalization of $100B in 10 years.",
+    "revenue_10yr_b": 6.7,
+    "mktcap_10yr_b": 100.0,
+    "multiple": 10,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "CRDO fails to qualify with major cloud providers, experiences significant delays in its product roadmap, and achieves limited revenue growth of 5% per annum, resulting in a market capitalization of $20B in 10 years.",
+    "mktcap_10yr_b": 20.0,
+    "multiple": 5,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "CRDO has made significant progress in its product roadmap and is on track to qualify with major cloud providers.",
+  "thesis_breaks_if": "failure to reach $1B in annual revenue within 5 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-17T16:06:07.502351",
+  "ticker": "CRDO"
+}

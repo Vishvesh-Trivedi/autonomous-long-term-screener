@@ -1,0 +1,11 @@
+# Long-Term Screener dependencies (pinned for reproducible installs)
+anthropic>=0.28.0,<1.0.0
+yfinance>=0.2.38,<0.3.0
+pandas>=2.0.0,<3.0.0
+numpy>=1.26.0,<3.0.0
+requests>=2.31.0,<3.0.0
+openai>=1.0.0,<2.0.0
+vaderSentiment>=3.3.2,<4.0.0
+praw>=7.7.0,<8.0.0
+ta>=0.11.0,<0.12.0
+python-dotenv>=1.0.0,<2.0.0

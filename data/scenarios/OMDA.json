@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Omada Health achieves strong revenue growth, exceeding 20% annually, driven by expanding digital health market and successful product offerings, resulting in a 10-year revenue of $2.5B and market cap of $10.0B, with a multiple of 4.0 and a probability of 0.4",
+    "revenue_10yr_b": 16.198530048,
+    "mktcap_10yr_b": 8.099265024,
+    "multiple": 8.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "Omada Health maintains steady revenue growth, averaging 15% annually, driven by stable digital health market and consistent product offerings, resulting in a 10-year revenue of $1.8B and market cap of $5.0B, with a multiple of 2.8 and a probability of 0.5",
+    "revenue_10yr_b": 9.719118028799999,
+    "mktcap_10yr_b": 4.859559014399999,
+    "multiple": 4.8,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "Omada Health experiences declining revenue growth, averaging 5% annually, due to increased competition and market saturation, resulting in a 10-year market cap of $0.5B, with a multiple of 1.8 and a probability of 0.1",
+    "mktcap_10yr_b": 2.4297795071999997,
+    "multiple": 2.4,
+    "probability": 0.1
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "Monitoring revenue growth and market trends to adjust projections",
+  "thesis_breaks_if": "Omada Health fails to achieve positive ROIC within the next 5 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-18T09:00:46.782036",
+  "ticker": "OMDA"
+}

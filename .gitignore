@@ -1,0 +1,5 @@
+.env
+__pycache__/
+*.pyc
+data/checkpoints/
+data/bad_symbols.txt

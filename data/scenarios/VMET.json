@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "VMET successfully capitalizes on the growing demand for precious metals royalty and streaming, achieving significant revenue growth and expanding its market share.",
+    "revenue_10yr_b": 1.5,
+    "mktcap_10yr_b": 15.0,
+    "multiple": 10.6,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "VMET experiences steady growth, meeting industry expectations and maintaining its current market position.",
+    "revenue_10yr_b": 0.5,
+    "mktcap_10yr_b": 5.0,
+    "multiple": 3.5,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "VMET fails to reach $100M in annual revenue within 5 years, leading to a decline in market capitalization and investor confidence.",
+    "mktcap_10yr_b": 0.5,
+    "multiple": 0.4,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "VMET's current growth trajectory and industry trends suggest a high potential for success.",
+  "thesis_breaks_if": "failure to reach $100M in annual revenue within 5 years",
+  "natural_eval_window_days": 3650,
+  "written_date": "2026-06-18T02:07:55.710032",
+  "ticker": "VMET"
+}

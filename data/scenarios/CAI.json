@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Caris Life Sciences achieves significant revenue growth, driven by its comprehensive testing capabilities and patient data insights, becoming a leader in the genomic testing and precision medicine market.",
+    "revenue_10yr_b": 5.5,
+    "mktcap_10yr_b": 25.0,
+    "multiple": 15.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "Caris Life Sciences experiences steady growth, but faces increased competition in the genomic testing and precision medicine market, limiting its potential for significant expansion.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 10.0,
+    "multiple": 10.0,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "Caris Life Sciences fails to achieve significant revenue growth, struggling with increased competition and regulatory challenges, leading to a decline in market value.",
+    "mktcap_10yr_b": 2.0,
+    "multiple": 5.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Launch of Behind the Diagnosis Campaign expected to drive growth",
+  "thesis_breaks_if": "failure to reach $1 billion in revenue within the next 5 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-17T15:56:59.458047",
+  "ticker": "CAI"
+}

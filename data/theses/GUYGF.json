@@ -1,0 +1,29 @@
+{
+  "category": "Unknown due to lack of filing information",
+  "tam_estimate_b": 0,
+  "unfair_advantage": "Unable to determine from provided information",
+  "milestone_1": "Unable to determine from provided information",
+  "milestone_2": "Unable to determine from provided information",
+  "milestone_3": "Unable to determine from provided information",
+  "survival_probability": 0.0,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 0,
+  "bull_mktcap_10yr_b": 0,
+  "bull_multiple": 0,
+  "base_revenue_10yr_b": 0,
+  "base_mktcap_10yr_b": 0,
+  "base_multiple": 0,
+  "kill_risk": "Insufficient cash runway and lack of revenue",
+  "thesis_summary": "Investment in GUYGF is highly speculative due to lack of information and financial instability",
+  "thesis_breaks_if": "Failure to secure additional funding or achieve significant revenue growth",
+  "moonshot_score": 2,
+  "verdict": "AVOID",
+  "position_size_pct": 0,
+  "ten_k_highlights": [
+    "No filing information available",
+    "No financial data or company description provided",
+    "Investment analysis is severely limited by lack of SEC filing extract"
+  ],
+  "research_date": "2026-06-08T02:41:04.343772",
+  "ticker": "GUYGF"
+}

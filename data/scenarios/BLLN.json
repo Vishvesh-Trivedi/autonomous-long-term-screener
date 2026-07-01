@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "BillionToOne achieves significant revenue growth through successful clinical trials and regulatory approvals, leading to widespread adoption of its proprietary technology in the genomics and precision medicine market.",
+    "revenue_10yr_b": 5.0,
+    "mktcap_10yr_b": 50.0,
+    "multiple": 20.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "BillionToOne experiences steady growth as it navigates the challenges of clinical trials and regulatory approvals, ultimately establishing itself as a notable player in the genomics and precision medicine market.",
+    "revenue_10yr_b": 1.5,
+    "mktcap_10yr_b": 15.0,
+    "multiple": 10.0,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "BillionToOne fails to achieve significant revenue growth due to unsuccessful clinical trials, regulatory hurdles, or intense competition in the genomics and precision medicine market, leading to a decline in market capitalization.",
+    "mktcap_10yr_b": 1.0,
+    "multiple": 2.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Strong potential for growth with promising clinical trials and proprietary technology.",
+  "thesis_breaks_if": "Failure to achieve significant revenue growth within the next 5 years",
+  "natural_eval_window_days": 3650,
+  "written_date": "2026-06-17T16:03:19.591900",
+  "ticker": "BLLN"
+}

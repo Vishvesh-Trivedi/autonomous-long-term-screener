@@ -1,0 +1,29 @@
+{
+  "category": "Technology",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Strong uptrend momentum and exceptional earnings growth",
+  "milestone_1": "Achieving positive free cash flow",
+  "milestone_2": "Increasing revenue growth rate",
+  "milestone_3": "Expanding product offerings",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 500,
+  "bull_mktcap_10yr_b": 1000,
+  "bull_multiple": 20,
+  "base_revenue_10yr_b": 200,
+  "base_mktcap_10yr_b": 500,
+  "base_multiple": 10,
+  "kill_risk": "Failure to maintain strong earnings growth",
+  "thesis_summary": "CMBT has strong potential for long-term growth due to its exceptional earnings growth and uptrend momentum",
+  "thesis_breaks_if": "Failure to achieve positive free cash flow within the next 2 years",
+  "moonshot_score": 8,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "CMB.TECH NV shows strong uptrend momentum with exceptional earnings growth",
+    "The company has a cash runway with a cash balance of $202.871008M",
+    "The company's technical context indicates an upward trend with a 1yr return of 65.7%"
+  ],
+  "research_date": "2026-06-08T02:37:40.997513",
+  "ticker": "CMBT"
+}

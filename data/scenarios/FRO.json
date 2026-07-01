@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Frontline successfully expands its fleet and diversifies its services, capturing a significant share of the marine transportation and energy market, leading to a substantial increase in revenue and market capitalization.",
+    "revenue_10yr_b": 10.5,
+    "mktcap_10yr_b": 35.0,
+    "multiple": 4.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "Frontline maintains its current market position and continues to operate efficiently, with moderate growth in revenue and market capitalization.",
+    "revenue_10yr_b": 4.5,
+    "mktcap_10yr_b": 15.0,
+    "multiple": 1.7,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "Frontline fails to expand its fleet or diversify its services, leading to a decline in market share and revenue, resulting in a decrease in market capitalization.",
+    "mktcap_10yr_b": 5.0,
+    "multiple": 0.6,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Frontline's recent strategic moves indicate a strong potential for growth and expansion.",
+  "thesis_breaks_if": "Failure to expand fleet or diversify services within the next 5 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-18T02:02:59.818624",
+  "ticker": "FRO"
+}

@@ -1,0 +1,29 @@
+{
+  "category": "Information Technology",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "No specific advantage mentioned in the filing, as the filing is not available",
+  "milestone_1": "Achieving first significant revenue",
+  "milestone_2": "Expanding product offerings",
+  "milestone_3": "Establishing strategic partnerships",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 10000,
+  "bull_mktcap_10yr_b": 1000,
+  "bull_multiple": 10,
+  "base_revenue_10yr_b": 5000,
+  "base_mktcap_10yr_b": 500,
+  "base_multiple": 5,
+  "kill_risk": "Lack of funding or inability to achieve significant revenue",
+  "thesis_summary": "ALAB has potential for long-term growth in the information technology sector",
+  "thesis_breaks_if": "Failure to achieve significant revenue within the next 5 years",
+  "moonshot_score": 6,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "No highlights available due to lack of filing",
+    "No financial data available for analysis",
+    "No management discussion available for review"
+  ],
+  "research_date": "2026-06-17T13:15:27.383756",
+  "ticker": "ALAB"
+}

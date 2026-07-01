@@ -1,0 +1,29 @@
+{
+  "category": "Mining",
+  "tam_estimate_b": 10,
+  "unfair_advantage": "Experienced management team with a track record of successful mining operations",
+  "milestone_1": "Completion of feasibility studies",
+  "milestone_2": "Obtaining necessary permits and licenses",
+  "milestone_3": "Commencement of commercial production",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 500,
+  "bull_mktcap_10yr_b": 10,
+  "bull_multiple": 20,
+  "base_revenue_10yr_b": 200,
+  "base_mktcap_10yr_b": 5,
+  "base_multiple": 15,
+  "kill_risk": "Failure to secure necessary funding for project development",
+  "thesis_summary": "Orla Mining has the potential to become a leading player in the mining industry with its experienced management team and promising projects",
+  "thesis_breaks_if": "Failure to achieve commercial production within the next 5 years",
+  "moonshot_score": 6,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company's projects are located in politically stable jurisdictions with favorable mining regulations",
+    "Orla Mining has a strong balance sheet with sufficient cash to fund its current operations",
+    "The company's management team has a proven track record of successfully developing and operating mining projects"
+  ],
+  "research_date": "2026-06-18T01:52:05.031600",
+  "ticker": "ORLA"
+}

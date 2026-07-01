@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "International Seaways successfully expands services, improves efficiency, and capitalizes on growing demand for global trade, resulting in significant revenue growth and increased market share.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 12.0,
+    "multiple": 3.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "International Seaways maintains its established position in the maritime shipping industry, with moderate revenue growth and stable market share.",
+    "revenue_10yr_b": 1.5,
+    "mktcap_10yr_b": 6.0,
+    "multiple": 1.5,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "International Seaways fails to achieve positive free cash flow, and a significant decline in global shipping volumes negatively impacts revenue and market share.",
+    "mktcap_10yr_b": 1.5,
+    "multiple": 0.4,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Monitoring progress towards positive free cash flow and global shipping volume trends.",
+  "thesis_breaks_if": "Failure to achieve positive free cash flow within the next 24 months or a significant decline in global shipping volumes",
+  "natural_eval_window_days": 730,
+  "written_date": "2026-06-18T02:03:33.403956",
+  "ticker": "INSW"
+}

@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Orla Mining achieves commercial production within the next 5 years, driven by successful project development and experienced management team, leading to significant revenue growth and market cap expansion.",
+    "revenue_10yr_b": 5.0,
+    "mktcap_10yr_b": 15.0,
+    "multiple": 11.5,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "Orla Mining makes steady progress in project development, achieves commercial production, but faces challenges and competition in the mining industry, resulting in moderate revenue growth and market cap expansion.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 8.0,
+    "multiple": 6.2,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "Orla Mining fails to achieve commercial production within the next 5 years due to funding issues, project delays, or management team challenges, leading to significant revenue decline and market cap contraction.",
+    "mktcap_10yr_b": 1.0,
+    "multiple": 0.8,
+    "probability": 0.1
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "Orla Mining's progress in project development and funding will be closely monitored to assess the likelihood of achieving commercial production.",
+  "thesis_breaks_if": "Failure to achieve commercial production within the next 5 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-18T01:52:37.607964",
+  "ticker": "ORLA"
+}

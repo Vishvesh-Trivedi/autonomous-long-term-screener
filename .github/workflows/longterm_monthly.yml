@@ -1,0 +1,124 @@
+name: Long-Term Screener
+
+on:
+  schedule:
+    - cron: '0 8 1 * *'     # Main screener: 1st of every month 8AM UTC
+    - cron: '0 6 * * 1'     # IPO monitor: every Monday 6AM UTC
+    - cron: '0 7 1 */3 *'   # Quarterly review: 1st day of Jan/Apr/Jul/Oct 7AM UTC
+  workflow_dispatch:
+    inputs:
+      run_mode:
+        description: 'RUN_MODE (FULL, TRIAL, or IPO_ONLY)'
+        required: false
+        default: 'FULL'
+
+permissions:
+  contents: write
+
+jobs:
+  # ── JOB 1: IPO Monitor (weekly) ─────────────────────────────────────────────
+  ipo-monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: github.event.schedule == '0 6 * * 1' || github.event.schedule == '0 7 1 */3 *' || github.event.inputs.run_mode == 'IPO_ONLY'
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install --upgrade pip && pip install requests
+      - name: Run IPO monitor
+        run: python ipo_monitor.py
+      - name: Run quarterly megatrend review (if due)
+        env:
+          NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python quarterly_review.py || echo "Quarterly review skipped (not due or no credits)" 
+      - name: Commit IPO watchlist
+        run: |
+          git config user.name  "AC Screener Bot"
+          git config user.email "screener@noreply.github.com"
+          git add data/ipo_watchlist.json || true
+          git diff --staged --quiet || git commit -m "Auto: IPO watchlist update $(date +'%Y-%m-%d')"
+          git push
+
+  # ── JOB 2: Main Screener (monthly) ──────────────────────────────────────────
+  run-screener:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    if: github.event.schedule == '0 8 1 * *' || github.event.inputs.run_mode == 'FULL' || github.event.inputs.run_mode == 'TRIAL' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install dependencies
+        run: pip install --upgrade pip && pip install -r requirements.txt
+      - name: Check congress data feeds
+        continue-on-error: true
+        run: |
+          python -c "
+          import requests, sys
+          sources = [
+              ('Senate EFTS (official)', 'https://efts.us.senate.gov/LATEST/search.json?q=&type=PT'),
+              ('House watcher (community)', 'https://housestockwatcher.com/api/transactions_flat.json'),
+              ('Senate watcher (community)', 'https://www.senatestockwatcher.com/api/transactions'),
+          ]
+          ok = 0
+          for name, url in sources:
+              try:
+                  r = requests.get(url, timeout=10, headers={'User-Agent': 'LongTermScreener/2.0'})
+                  print(f'  [OK {r.status_code}] {name} ({len(r.content)} bytes)')
+                  ok += 1
+              except Exception as e:
+                  print(f'  [FAIL] {name}: {e}')
+          print(f'Congress feeds reachable: {ok}/{len(sources)}')
+          if ok == 0:
+              print('WARNING: No congress feeds reachable — disclosures will be absent from this run')
+          "
+      - name: Run screener
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
+          FINNHUB_API_KEY:   ${{ secrets.FINNHUB_API_KEY }}
+          GMAIL_SENDER:      ${{ secrets.GMAIL_SENDER }}
+          GMAIL_PASSWORD:    ${{ secrets.GMAIL_PASSWORD }}
+          EMAIL_RECIPIENT:   ${{ secrets.EMAIL_RECIPIENT }}
+          RUN_MODE:          ${{ github.event.inputs.run_mode || 'FULL' }}
+        run: |
+          python screener.py 2>&1 | tee screener.log
+      - name: Commit updated data
+        if: always()
+        run: |
+          git config user.name  "AC Screener Bot"
+          git config user.email "screener@noreply.github.com"
+          git add data/portfolio.json        || true
+          git add data/knowledge_base.json   || true
+          git add data/bad_symbols.txt       || true
+          git add data/ipo_watchlist.json    || true
+          git add data/megatrend_scores.json  || true
+          git add data/theses/               || true
+          git add data/scenarios/            || true
+          git add data/checkpoints/          || true
+          git add data/congress_disclosures_cache.json || true
+          git diff --staged --quiet || git commit -m "Auto: screener run $(date +'%Y-%m-%d')"
+          git push
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screener-logs-${{ github.run_id }}
+          path: screener.log
+          retention-days: 14

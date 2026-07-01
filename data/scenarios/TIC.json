@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "TIC Solutions achieves significant revenue growth through successful implementation of its patented technology and strategic partnerships, becoming a leader in the oil and gas technology market.",
+    "revenue_10yr_b": 10.0,
+    "mktcap_10yr_b": 20.0,
+    "multiple": 10.6,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "TIC Solutions experiences steady growth, with moderate success in its technology and partnerships, resulting in a stable market position.",
+    "revenue_10yr_b": 5.0,
+    "mktcap_10yr_b": 10.0,
+    "multiple": 5.3,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "TIC Solutions fails to achieve significant revenue growth due to unsuccessful implementation of its technology and lack of effective partnerships, resulting in a decline in market position.",
+    "mktcap_10yr_b": 0.5,
+    "multiple": 0.3,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Monitoring revenue growth and partnership developments.",
+  "thesis_breaks_if": "Failure to achieve first significant revenue within the next 5 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-18T02:08:13.869179",
+  "ticker": "TIC"
+}

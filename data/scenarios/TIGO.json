@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "TIGO expands its digital services and strengthens its presence in Latin America, leading to significant revenue growth and increased market capitalization.",
+    "revenue_10yr_b": 15.63,
+    "mktcap_10yr_b": 44.85,
+    "multiple": 3.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "TIGO maintains its current market position and grows at a steady rate, driven by its established presence in Latin America and modest expansion of digital services.",
+    "revenue_10yr_b": 10.33,
+    "mktcap_10yr_b": 24.92,
+    "multiple": 1.7,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "TIGO fails to maintain positive free cash flow, leading to a decline in its market capitalization and revenue growth.",
+    "mktcap_10yr_b": 7.42,
+    "multiple": 0.5,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "TIGO's current financials indicate a strong potential for growth, but the company must maintain positive free cash flow to achieve its long-term goals.",
+  "thesis_breaks_if": "Failure to maintain positive free cash flow for two consecutive years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-18T02:04:25.038127",
+  "ticker": "TIGO"
+}

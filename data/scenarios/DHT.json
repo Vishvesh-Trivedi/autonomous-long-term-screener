@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "DHT achieves significant growth in fleet utilization rate, leading to increased revenue and profitability. The company expands its operations, capitalizing on the rising demand for energy shipping. As a result, revenue grows at a CAGR of 15%, reaching $2.5B in 10 years. Market capitalization increases to $20B, driven by a price-to-earnings multiple expansion to 25x.",
+    "revenue_10yr_b": 47.436423168,
+    "mktcap_10yr_b": 23.718211584,
+    "multiple": 25,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "DHT maintains a stable fleet utilization rate, with moderate growth in revenue and profitability. The company continues to operate efficiently, but faces challenges in expanding its market share. Revenue grows at a CAGR of 5%, reaching $1.2B in 10 years. Market capitalization increases to $6B, driven by a price-to-earnings multiple of 15x.",
+    "revenue_10yr_b": 47.436423168,
+    "mktcap_10yr_b": 23.718211584,
+    "multiple": 15,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "DHT struggles to achieve positive net income due to a prolonged decline in oil prices, leading to reduced demand for energy shipping. The company's fleet utilization rate declines, resulting in decreased revenue and profitability. Market capitalization decreases to $1B, driven by a price-to-earnings multiple contraction to 5x.",
+    "mktcap_10yr_b": 23.718211584,
+    "multiple": 5,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "DHT's current financials indicate a strong potential for growth, with a market capitalization of $3.0B and revenue of $0.66B. The company's ability to increase its fleet utilization rate will be crucial in achieving positive net income and driving long-term growth.",
+  "thesis_breaks_if": "Failure to achieve positive net income within 5 years",
+  "natural_eval_window_days": 3650,
+  "written_date": "2026-06-17T19:25:14.084588",
+  "ticker": "DHT"
+}

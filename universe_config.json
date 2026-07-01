@@ -1,0 +1,517 @@
+{
+  "_comment": "universe_config.json \u2014 all tunable parameters. Edit this, never edit screener.py for configuration changes.",
+  "_version": "2.0",
+  "_last_updated": "2026-06-01",
+  "email": {
+    "recipient": "vishvesh.niyati@gmail.com",
+    "cc": [],
+    "bcc": [
+      "rujul04@gmail.com",
+      "aakash.modi@hotmail.com",
+      "Akshaykadidal@gmail.com",
+      "danninamanoj123@gmail.com",
+      "investing101.unifier546@passmail.com"
+    ],
+    "sender_name": "Autonomous Capital"
+  },
+  "llm": {
+    "_comment": "LLM provider for stock research. NVIDIA NIM is free (40 req/min). Anthropic is paid. Set provider here, model here, fallback here \u2014 no hardcoding.",
+    "provider": "nvidia",
+    "model": "nvidia/llama-3.3-nemotron-super-49b-v1.5",
+    "fallback_provider": "anthropic",
+    "fallback_model": "claude-sonnet-4-5",
+    "_alternative_models": {
+      "_comment": "Other free NVIDIA models you can switch to by changing model above",
+      "reasoning_best": "deepseek-ai/deepseek-r1",
+      "fast": "meta/llama-3.1-8b-instruct",
+      "long_context": "meta/llama-3.3-70b-instruct",
+      "ultra_flagship": "nvidia/nemotron-3-ultra-550b-a55b",
+      "previous": "meta/llama-3.3-70b-instruct",
+      "nvidia_own": "nvidia/llama-3.1-nemotron-70b-instruct",
+      "mistral": "mistralai/mixtral-8x22b-instruct-v0.1"
+    }
+  },
+  "nz_fif": {
+    "threshold_nzd": 100000,
+    "_comment": "NZ Foreign Investment Fund threshold. Updated 2026 \u2014 was $50K, now $100K."
+  },
+  "universe": {
+    "exchanges": [
+      "nasdaq",
+      "nyse",
+      "amex"
+    ],
+    "min_ticker_length": 1,
+    "max_ticker_length": 5,
+    "exclude_patterns": [
+      "-W",
+      "-UN",
+      "-R",
+      "BULL",
+      "BEAR"
+    ],
+    "exclude_suffixes": [
+      ".A",
+      ".B",
+      ".C",
+      ".WS",
+      ".RT",
+      ".UN"
+    ],
+    "blacklist": [],
+    "user_custom": [],
+    "_comment_sp500_core": "SP500_CORE list removed. Universe is fully discovered from SEC EDGAR + NASDAQ API. No hardcoded tickers."
+  },
+  "scenario_sanity": {
+    "_comment": "Caps on LLM-generated 10-year market cap projections. Prevents hallucinated trillion-dollar numbers.",
+    "max_multiple_of_current": 15,
+    "cap_multiple": 8,
+    "absolute_max_market_cap_b": 500
+  },
+  "sentiment_data": {
+    "_comment": "Controls how much news/Reddit data is fetched and sent to the LLM per ticker.",
+    "finnhub_articles_fetch": 20,
+    "finnhub_headlines_for_llm": 15,
+    "reddit_posts_per_subreddit": 15,
+    "reddit_titles_for_llm": 15,
+    "pre_filter_batch_size": 50,
+    "pre_filter_sleep_seconds": 2.0,
+    "pre_filter_retry_sleep_seconds": 45,
+    "pre_filter_rate_limit_threshold": 0.70
+  },
+  "stock_screening": {
+    "t1": {
+      "_comment": "Quality compounders. 20-year hold candidates.",
+      "min_market_cap": 5000000000,
+      "min_revenue": 500000000,
+      "min_adv_usd": 500000,
+      "max_de_ratio": 3.0,
+      "min_interest_coverage": 2.0,
+      "min_current_ratio": 0.8,
+      "min_roic": 0.1,
+      "min_score": 3
+    },
+    "t2": {
+      "_comment": "Growth leaders. Strong trajectory, not yet T1 quality.",
+      "min_market_cap": 500000000,
+      "min_revenue": 50000000,
+      "min_adv_usd": 250000,
+      "max_de_ratio": 5.0,
+      "min_interest_coverage": 1.5,
+      "min_rev_growth": 0.15,
+      "min_gross_margin": 0.35,
+      "min_cash_runway_months": 12,
+      "min_score": 3
+    },
+    "t3": {
+      "_comment": "Moonshots. Pre-revenue or early-revenue. Survival is the screen.",
+      "min_market_cap": 200000000,
+      "min_adv_usd": 100000,
+      "min_cash_nzd": 10000000,
+      "min_cash_runway_months": 18,
+      "max_dilution_rate": 0.4,
+      "flag_dilution_rate": 0.15,
+      "min_gross_margin_if_revenue": 0.2,
+      "min_revenue_for_gm_check": 5000000
+    },
+    "universal": {
+      "min_market_cap_absolute": 50000000,
+      "max_same_factor_t3_holdings": 3
+    },
+    "sector_gm_thresholds": {
+      "_comment": "Sector-adjusted gross margin minimums for T1 gate. Costco has 13% GM and is a T1 compounder.",
+      "retail_distribution": 0.12,
+      "industrial_manufacturing": 0.18,
+      "energy_materials": 0.18,
+      "financial_banking": 0.15,
+      "default": 0.3,
+      "sector_keywords": {
+        "retail_distribution": [
+          "retail",
+          "distribution",
+          "grocery",
+          "food",
+          "wholesale"
+        ],
+        "industrial_manufacturing": [
+          "industrial",
+          "manufactur",
+          "aerospace",
+          "defense",
+          "constr"
+        ],
+        "energy_materials": [
+          "energy",
+          "oil",
+          "gas",
+          "mining",
+          "material"
+        ],
+        "financial_banking": [
+          "financial",
+          "bank",
+          "insurance",
+          "diversified"
+        ]
+      }
+    },
+    "max_candidates_per_tier": 15
+  },
+  "etf_screening": {
+    "_comment": "ETFs screened separately from stocks. ROIC/revenue are meaningless for funds. Expense ratio and AUM are the quality signals.",
+    "core_tier": {
+      "_comment": "Broad market core ETFs. Your benchmark. Low-cost, deep liquidity, broad exposure.",
+      "max_expense_ratio": 0.0025,
+      "min_aum": 10000000000,
+      "min_adv_usd": 10000000,
+      "required_types": [
+        "broad_market",
+        "developed_market",
+        "sector_quality"
+      ]
+    },
+    "thematic_tier": {
+      "_comment": "Megatrend-aligned thematic ETFs. Bridge position before individual winners are identifiable.",
+      "max_expense_ratio": 0.0075,
+      "min_aum": 100000000,
+      "min_adv_usd": 1000000,
+      "min_megatrend_score": 7,
+      "min_inception_years": 2,
+      "_comment_why_2yr": "Avoid newly launched ETFs with no track record. 2yr minimum.",
+      "exclude_leveraged": true,
+      "exclude_inverse": true
+    },
+    "screening_fields": {
+      "expense_ratio": "annualReportExpenseRatio",
+      "aum": "totalAssets",
+      "nav": "navPrice",
+      "inception_date": "fundInceptionDate"
+    }
+  },
+  "t3_factor_groups": {
+    "_comment": "Cap same-factor T3 holdings to avoid correlated moonshot concentration. Update as new themes emerge.",
+    "nuclear": [
+      "nuclear",
+      "reactor",
+      "uranium",
+      "fission",
+      "enrichment",
+      "smr"
+    ],
+    "space": [
+      "satellite",
+      "rocket",
+      "launch",
+      "orbit",
+      "spacecraft",
+      "constellation"
+    ],
+    "biotech_gene": [
+      "crispr",
+      "gene editing",
+      "gene therapy",
+      "base editing",
+      "prime editing"
+    ],
+    "quantum": [
+      "quantum computing",
+      "qubit",
+      "quantum hardware",
+      "quantum software"
+    ],
+    "crypto_adj": [
+      "bitcoin",
+      "cryptocurrency",
+      "digital asset",
+      "blockchain infrastructure"
+    ],
+    "ev_air": [
+      "evtol",
+      "electric vertical",
+      "electric aircraft",
+      "urban air mobility"
+    ]
+  },
+  "megatrends": {
+    "_comment": "Megatrend definitions. Add new categories here \u2014 no code changes needed. Claude quarterly review updates scores in data/megatrend_scores.json.",
+    "_scoring_guide": "10=generational 20yr+ tailwind, 9=major 25yr tailwind, 8=clear 15yr tailwind, 7=real but uncertain timing",
+    "ai_infrastructure": {
+      "label": "AI Infrastructure",
+      "base_score": 10,
+      "tailwind_years": 20,
+      "rationale": "Generational compute buildout. Every hyperscaler committed. Power, networking, cooling, connectivity semiconductors all structurally undersupplied.",
+      "keywords": [
+        "artificial intelligence",
+        "machine learning",
+        "gpu",
+        "data center",
+        "cloud computing",
+        "semiconductor",
+        "networking",
+        "connectivity",
+        "inference",
+        "hyperscale",
+        "compute",
+        "cooling infrastructure",
+        "ai chip",
+        "ai accelerator",
+        "neural processing"
+      ]
+    },
+    "nuclear_renaissance": {
+      "label": "Nuclear Renaissance",
+      "base_score": 9,
+      "tailwind_years": 30,
+      "rationale": "Clean baseload power is the only 24/7 zero-carbon option. SMR economics improving rapidly. Policy support accelerating globally.",
+      "keywords": [
+        "nuclear",
+        "reactor",
+        "uranium",
+        "small modular reactor",
+        "smr",
+        "advanced nuclear",
+        "molten salt",
+        "microreactor",
+        "fission",
+        "nuclear fuel",
+        "enrichment",
+        "nuclear power",
+        "baseload clean"
+      ]
+    },
+    "space_commercial": {
+      "label": "Space Commercialisation",
+      "base_score": 9,
+      "tailwind_years": 25,
+      "rationale": "Launch costs falling 10x per decade. Satellite internet, earth observation, in-orbit services, eventual space resources.",
+      "keywords": [
+        "launch vehicle",
+        "rocket",
+        "satellite",
+        "orbit",
+        "space",
+        "propulsion",
+        "spacecraft",
+        "constellation",
+        "reusable launch",
+        "in-orbit services",
+        "earth observation",
+        "space infrastructure"
+      ]
+    },
+    "synthetic_biology": {
+      "label": "Synthetic Biology",
+      "base_score": 9,
+      "tailwind_years": 25,
+      "rationale": "RNA and gene editing platforms address every major chronic disease. Platform economics mean each new drug costs less to approve than the last.",
+      "keywords": [
+        "rna",
+        "mrna",
+        "gene therapy",
+        "gene editing",
+        "crispr",
+        "synthetic biology",
+        "biologics",
+        "cell therapy",
+        "immunotherapy",
+        "genomics",
+        "proteomics",
+        "base editing",
+        "prime editing",
+        "rna interference",
+        "rnai",
+        "gene silencing"
+      ]
+    },
+    "critical_minerals": {
+      "label": "Critical Minerals",
+      "base_score": 8,
+      "tailwind_years": 20,
+      "rationale": "Energy transition requires 6x more minerals by 2040. Supply chains geopolitically constrained. Strategic for national security.",
+      "keywords": [
+        "tungsten",
+        "lithium",
+        "cobalt",
+        "rare earth",
+        "nickel",
+        "manganese",
+        "graphite",
+        "vanadium",
+        "gallium",
+        "germanium",
+        "critical mineral",
+        "strategic material",
+        "battery material",
+        "rare earth element",
+        "critical metal"
+      ]
+    },
+    "defense_technology": {
+      "label": "Defense Technology",
+      "base_score": 8,
+      "tailwind_years": 20,
+      "rationale": "Geopolitical fragmentation driving defense budgets up globally. Autonomous systems, cyber warfare, new domains replacing legacy platforms.",
+      "keywords": [
+        "autonomous systems",
+        "unmanned",
+        "drone",
+        "cyber security",
+        "defense",
+        "military",
+        "surveillance",
+        "counter-drone",
+        "electronic warfare",
+        "hypersonic",
+        "directed energy",
+        "c4isr",
+        "autonomous weapons",
+        "defense technology",
+        "defense contractor"
+      ]
+    },
+    "aging_demographics": {
+      "label": "Aging Demographics",
+      "base_score": 8,
+      "tailwind_years": 25,
+      "rationale": "Global 65+ population doubles by 2050. Chronic disease management, longevity medicine, elder care infrastructure all structurally undersupplied.",
+      "keywords": [
+        "oncology",
+        "alzheimer",
+        "parkinson",
+        "cardiovascular",
+        "diabetes",
+        "chronic disease",
+        "longevity",
+        "age-related",
+        "elder care",
+        "therapeutics",
+        "precision medicine",
+        "rare disease",
+        "orphan drug",
+        "geriatric",
+        "senescence"
+      ]
+    },
+    "energy_transition": {
+      "label": "Energy Transition",
+      "base_score": 7,
+      "tailwind_years": 20,
+      "rationale": "Real structural tailwind but higher execution risk and policy dependency than other categories. Winner selection harder.",
+      "keywords": [
+        "solar",
+        "wind",
+        "battery storage",
+        "grid storage",
+        "ev charging",
+        "clean energy",
+        "renewable",
+        "hydrogen",
+        "fuel cell",
+        "energy storage",
+        "power electronics",
+        "grid modernization",
+        "smart grid",
+        "clean power"
+      ]
+    },
+    "fintech_inclusion": {
+      "label": "Fintech and Inclusion",
+      "base_score": 7,
+      "tailwind_years": 15,
+      "rationale": "Digital finance has shorter runway than hard-tech megatrends. Winner-takes-most dynamics mean most participants lose.",
+      "keywords": [
+        "digital payments",
+        "neobank",
+        "digital lending",
+        "insurtech",
+        "wealthtech",
+        "embedded finance",
+        "financial inclusion",
+        "open banking",
+        "buy now pay later",
+        "digital banking",
+        "payment infrastructure",
+        "remittance"
+      ]
+    },
+    "water_food_security": {
+      "label": "Water and Food Security",
+      "base_score": 7,
+      "tailwind_years": 25,
+      "rationale": "Climate-driven scarcity is structurally real but investment solutions still early stage. Long runway, high uncertainty on individual winners.",
+      "keywords": [
+        "water treatment",
+        "desalination",
+        "water infrastructure",
+        "irrigation",
+        "precision agriculture",
+        "vertical farming",
+        "alternative protein",
+        "food security",
+        "agritech",
+        "water scarcity",
+        "food waste",
+        "crop science",
+        "water technology"
+      ]
+    }
+  },
+  "megatrend_overrides": {
+    "_comment": "Your manual score overrides. These beat everything including Claude quarterly review. Add entries like 'nuclear_renaissance': 10 when you have conviction beyond the base score.",
+    "_example": "nuclear_renaissance: 10 \u2014 if you believe NRC licensing acceleration justifies highest score"
+  },
+  "ipo_monitor": {
+    "standard_cooling_days": 180,
+    "fast_track_cooling_days": 90,
+    "fast_track_min_megatrend_score": 9,
+    "min_megatrend_score_to_watch": 6,
+    "form_types_to_watch": [
+      "S-1",
+      "F-1",
+      "S-4"
+    ],
+    "days_back_to_scan": 30
+  },
+  "portfolio": {
+    "max_sector_concentration": 3,
+    "position_size_defaults": {
+      "T1": 6.0,
+      "T2": 4.0,
+      "T3": 1.5,
+      "ETF_CORE": 10.0,
+      "ETF_THEMATIC": 3.0
+    },
+    "position_size_min": 1.0,
+    "position_size_max": 10.0
+  },
+  "research_cache_ttl_days": {
+    "T1": 180,
+    "T2": 180,
+    "T3": 90,
+    "ETF": 365
+  },
+  "quarterly_review": {
+    "ttl_days": 90,
+    "model": "claude-sonnet-4-5"
+  },
+  "sharesies_kiwisaver_available": {
+    "_comment": "Tickers available in Sharesies KiwiSaver self-select. Update as Sharesies adds/removes options.",
+    "individual_stocks": [
+      "AAPL",
+      "MSFT",
+      "GOOGL",
+      "AMZN",
+      "NVDA",
+      "TSLA",
+      "META"
+    ],
+    "etfs": [
+      "QQQ",
+      "SPY",
+      "VGT",
+      "VWRL",
+      "IVV"
+    ],
+    "nz_stocks_and_funds": []
+  }
+}

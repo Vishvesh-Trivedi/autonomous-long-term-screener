@@ -1,0 +1,29 @@
+{
+  "category": "Financial Services",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "None identified due to lack of filing information",
+  "milestone_1": "Establishing a significant customer base",
+  "milestone_2": "Developing a unique financial product or service",
+  "milestone_3": "Achieving profitability",
+  "survival_probability": 0.5,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 10,
+  "bull_mktcap_10yr_b": 50,
+  "bull_multiple": 5,
+  "base_revenue_10yr_b": 5,
+  "base_mktcap_10yr_b": 20,
+  "base_multiple": 4,
+  "kill_risk": "Lack of significant revenue growth",
+  "thesis_summary": "BLSH has potential for long-term growth in the financial services sector, but lacks clear competitive advantages and significant revenue",
+  "thesis_breaks_if": "Failure to achieve significant revenue growth within the next 5 years",
+  "moonshot_score": 4,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 2,
+  "ten_k_highlights": [
+    "No filing information available",
+    "Company has $342.692M in cash",
+    "Cash runway is FCF positive with R&D expenses of $0.0M"
+  ],
+  "research_date": "2026-06-08T02:40:17.100288",
+  "ticker": "BLSH"
+}

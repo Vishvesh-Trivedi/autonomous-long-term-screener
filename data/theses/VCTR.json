@@ -1,0 +1,29 @@
+{
+  "category": "Financial Services",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Established brand and existing customer base",
+  "milestone_1": "Achieve $1B in revenue",
+  "milestone_2": "Expand product offerings to new markets",
+  "milestone_3": "Establish strategic partnerships with key industry players",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 500,
+  "bull_mktcap_10yr_b": 2000,
+  "bull_multiple": 25,
+  "base_revenue_10yr_b": 200,
+  "base_mktcap_10yr_b": 1000,
+  "base_multiple": 15,
+  "kill_risk": "Failure to adapt to changing market conditions",
+  "thesis_summary": "Victory Capital Holdings has a strong brand and customer base, positioning it for long-term growth in the financial services market.",
+  "thesis_breaks_if": "Revenue growth fails to exceed 10% annually for 3 consecutive years",
+  "moonshot_score": 6,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company has a strong track record of financial performance, with revenue growth exceeding 10% annually for the past 5 years.",
+    "The company's management team has a proven track record of success, with an average tenure of over 10 years.",
+    "The company has a diversified product offerings, with a mix of investment management and financial planning services."
+  ],
+  "research_date": "2026-06-17T19:24:39.318532",
+  "ticker": "VCTR"
+}

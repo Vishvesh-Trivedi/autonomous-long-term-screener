@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Gold and silver prices surge above $4,000/oz driven by de-dollarisation and central bank buying. Franco-Nevada's royalty pipeline matures with Cobre Panama resuming and new additions. 10yr revenue CAGR of 12%.",
+    "revenue_10yr_b": 5.5,
+    "mktcap_10yr_b": 150.0,
+    "multiple": 3.5,
+    "probability": 0.25
+  },
+  "base": {
+    "narrative": "Gold holds $2,500-$3,000/oz. Royalty portfolio grows organically at 7% annually. Cobre Panama remains suspended but pipeline adds 3-4 new streams per year.",
+    "revenue_10yr_b": 3.2,
+    "mktcap_10yr_b": 75.0,
+    "multiple": 1.8,
+    "probability": 0.55
+  },
+  "bear": {
+    "narrative": "Gold retreats to $1,500/oz on strong USD and rising real rates. Royalty model faces write-downs. Revenue stagnates. Multiple compression to 15x earnings.",
+    "mktcap_10yr_b": 20.0,
+    "multiple": 0.5,
+    "probability": 0.2
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "Gold at $3,200/oz, royalty portfolio intact, Cobre Panama suspended but optionality preserved. Base case trajectory.",
+  "thesis_breaks_if": "Gold falls below $1,800/oz for 24+ months AND Cobre Panama is permanently abandoned",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-21T09:35:14.192344",
+  "ticker": "FNV"
+}

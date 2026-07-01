@@ -1,0 +1,29 @@
+{
+  "category": "Data Center and Cloud Networking",
+  "tam_estimate_b": 10,
+  "unfair_advantage": "High-speed, low-power connectivity solutions",
+  "milestone_1": "Product qualification with major cloud providers",
+  "milestone_2": "Volume production ramp of 400G and 800G products",
+  "milestone_3": "Expansion into new markets such as artificial intelligence and edge computing",
+  "survival_probability": 0.9,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 5000,
+  "bull_mktcap_10yr_b": 200000,
+  "bull_multiple": 40,
+  "base_revenue_10yr_b": 2000,
+  "base_mktcap_10yr_b": 80000,
+  "base_multiple": 40,
+  "kill_risk": "Failure to execute on product roadmap and qualify with major cloud providers",
+  "thesis_summary": "CRDO is a high-growth company with a strong product roadmap and expanding market opportunities, making it an attractive long-term investment opportunity.",
+  "thesis_breaks_if": "failure to reach $1B in annual revenue within 5 years",
+  "moonshot_score": 8,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "Our products are designed to provide high-speed, low-power connectivity solutions for data center and cloud networking applications.",
+    "We have a strong product roadmap, with multiple new products in development, including 400G and 800G products.",
+    "Our revenue growth is expected to be driven by increasing demand for high-speed connectivity solutions in the data center and cloud markets."
+  ],
+  "research_date": "2026-06-17T15:56:03.677817",
+  "ticker": "CRDO"
+}

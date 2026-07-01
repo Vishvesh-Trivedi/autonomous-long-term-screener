@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Freedom Holding Corp achieves significant revenue growth, expanding its market share in the financial services sector, driven by its strong relationships and increasing demand for its services.",
+    "revenue_10yr_b": 6.53,
+    "mktcap_10yr_b": 51.9,
+    "multiple": 8,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "Freedom Holding Corp maintains steady growth, leveraging its established relationships to increase revenue and market share, but faces moderate competition and regulatory challenges.",
+    "revenue_10yr_b": 3.26,
+    "mktcap_10yr_b": 20.5,
+    "multiple": 6.3,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "Freedom Holding Corp experiences significant revenue decline due to failure to maintain key relationships, increased competition, and adverse regulatory changes, leading to a loss of market share.",
+    "mktcap_10yr_b": 2.5,
+    "multiple": 1.5,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Monitoring revenue growth and relationship maintenance with key countries.",
+  "thesis_breaks_if": "Revenue growth slows down significantly",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-17T15:58:11.878465",
+  "ticker": "FRHC"
+}

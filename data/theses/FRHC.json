@@ -1,0 +1,29 @@
+{
+  "category": "Financial Services",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Established relationships with key points in the proposed conflict-resolution plan between the U.S. and Iran",
+  "milestone_1": "Increase revenue by 20% YoY",
+  "milestone_2": "Expand services to new markets",
+  "milestone_3": "Achieve profitability",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 10000,
+  "bull_mktcap_10yr_b": 50000,
+  "bull_multiple": 5,
+  "base_revenue_10yr_b": 5000,
+  "base_mktcap_10yr_b": 20000,
+  "base_multiple": 4,
+  "kill_risk": "Failure to maintain relationships with key countries",
+  "thesis_summary": "Freedom Holding Corp has a strong potential for growth in the financial services market due to its established relationships and increasing revenue",
+  "thesis_breaks_if": "Revenue growth slows down significantly",
+  "moonshot_score": 7,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "Revenue increased by 69% YoY to $503.140M",
+    "EPS increased to $0.13 from $(2.50) YoY",
+    "No recent 8-K filings"
+  ],
+  "research_date": "2026-06-08T02:39:02.374881",
+  "ticker": "FRHC"
+}

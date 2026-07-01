@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "BE achieves significant revenue growth through innovative products and strategic expansion, leading to a market capitalization of $250B in 10 years.",
+    "revenue_10yr_b": 15.0,
+    "mktcap_10yr_b": 250.0,
+    "multiple": 3.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "BE maintains steady growth, driven by its strong financial position and industry demand, resulting in a market capitalization of $150B in 10 years.",
+    "revenue_10yr_b": 8.0,
+    "mktcap_10yr_b": 150.0,
+    "multiple": 1.8,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "BE faces significant challenges, including increased competition and failure to achieve revenue targets, leading to a market capitalization of $50B in 10 years.",
+    "mktcap_10yr_b": 50.0,
+    "multiple": 0.6,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "BE's current financials and innovative capabilities support a bullish outlook.",
+  "thesis_breaks_if": "Failure to achieve $5 billion in revenue within the next 5 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-18T09:02:09.967610",
+  "ticker": "BE"
+}

@@ -1,0 +1,18 @@
+{
+  "last_reviewed": "2026-05-29T03:55:55.909207",
+  "next_review": "2026-08-27",
+  "scores": {
+    "ai_infrastructure": 10,
+    "nuclear_renaissance": 9,
+    "space_commercial": 9,
+    "synthetic_biology": 9,
+    "critical_minerals": 8,
+    "defense_technology": 8,
+    "aging_demographics": 8,
+    "energy_transition": 7,
+    "fintech_inclusion": 7,
+    "water_food": 7
+  },
+  "detail": {},
+  "model_used": "claude-sonnet-4-5"
+}

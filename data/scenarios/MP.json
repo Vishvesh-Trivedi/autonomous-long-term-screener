@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "MP Materials Corp achieves commercial-scale production and becomes a leading player in the rare-earth mining industry, driven by growing demand for rare earth elements and successful advancement of the rare earth value chain.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 50.0,
+    "multiple": 20.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "MP Materials Corp makes steady progress in advancing the rare earth value chain, but faces challenges in achieving commercial-scale production, resulting in moderate growth.",
+    "revenue_10yr_b": 1.2,
+    "mktcap_10yr_b": 20.0,
+    "multiple": 10.0,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "MP Materials Corp fails to secure additional funding and advance the rare earth value chain, leading to significant decline in market value.",
+    "mktcap_10yr_b": 2.0,
+    "multiple": 2.0,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Monitoring progress towards commercial-scale production and rare earth value chain advancement.",
+  "thesis_breaks_if": "Failure to achieve commercial-scale production within the next 5 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-17T15:59:27.767469",
+  "ticker": "MP"
+}

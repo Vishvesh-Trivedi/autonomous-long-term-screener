@@ -1,0 +1,29 @@
+{
+  "category": "Infrastructure",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Established infrastructure and strategic partnerships",
+  "milestone_1": "Completion of initial infrastructure projects",
+  "milestone_2": "Expansion into new markets",
+  "milestone_3": "Achievement of significant revenue growth",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 5000,
+  "bull_mktcap_10yr_b": 20000,
+  "bull_multiple": 4,
+  "base_revenue_10yr_b": 1000,
+  "base_mktcap_10yr_b": 5000,
+  "base_multiple": 5,
+  "kill_risk": "Failure to execute on infrastructure projects",
+  "thesis_summary": "WaterBridge Infrastructure is well-positioned for long-term growth in the infrastructure market.",
+  "thesis_breaks_if": "failure to achieve significant revenue growth within 5 years",
+  "moonshot_score": 6,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "WaterBridge Infrastructure LLC is focused on developing and operating infrastructure assets.",
+    "The company has established strategic partnerships to support its growth.",
+    "WaterBridge Infrastructure is committed to creating long-term value for its shareholders."
+  ],
+  "research_date": "2026-06-17T13:13:52.270312",
+  "ticker": "WBI"
+}

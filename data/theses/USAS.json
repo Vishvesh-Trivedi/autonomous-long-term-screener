@@ -1,0 +1,29 @@
+{
+  "category": "Precious Metals Mining",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Established agreements with affiliates like Royal Gold for settling fixed gold delivery obligations, providing a stable financial foundation",
+  "milestone_1": "Successful settlement of fixed gold delivery obligations",
+  "milestone_2": "Increased revenue through expanded mining operations",
+  "milestone_3": "Improved quarterly results leading to enhanced valuation",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 500,
+  "bull_mktcap_10yr_b": 5000,
+  "bull_multiple": 10,
+  "base_revenue_10yr_b": 200,
+  "base_mktcap_10yr_b": 2000,
+  "base_multiple": 10,
+  "kill_risk": "Failure to meet gold delivery obligations leading to financial instability",
+  "thesis_summary": "Americas Gold and Silver is poised for long-term growth due to its strategic agreements and improving quarterly results.",
+  "thesis_breaks_if": "Failure to achieve positive cash flow within the next 2 years",
+  "moonshot_score": 7,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company has settled its fixed gold delivery obligation with an affiliate of Royal Gold.",
+    "Americas Gold and Silver has announced agreements that improve its financial stability and valuation.",
+    "The company's recent quarterly results show improvement, indicating potential for future growth."
+  ],
+  "research_date": "2026-06-18T01:51:48.155904",
+  "ticker": "USAS"
+}

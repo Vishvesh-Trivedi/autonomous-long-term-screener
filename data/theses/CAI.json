@@ -1,0 +1,29 @@
+{
+  "category": "Genomic Testing and Precision Medicine",
+  "tam_estimate_b": 15,
+  "unfair_advantage": "Comprehensive genomic testing capabilities and patient data insights that competitors cannot replicate in 5 years",
+  "milestone_1": "Launch of Behind the Diagnosis Campaign",
+  "milestone_2": "Expansion of genomic testing services to new patient populations",
+  "milestone_3": "Establishment of strategic partnerships with healthcare providers and pharmaceutical companies",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 5,
+  "bull_mktcap_10yr_b": 20,
+  "bull_multiple": 4,
+  "base_revenue_10yr_b": 2,
+  "base_mktcap_10yr_b": 10,
+  "base_multiple": 2,
+  "kill_risk": "Failure to achieve significant revenue growth and become cash flow positive",
+  "thesis_summary": "Caris Life Sciences has the potential to become a leader in the genomic testing and precision medicine market, driven by its comprehensive testing capabilities and patient data insights.",
+  "thesis_breaks_if": "failure to reach $1 billion in revenue within the next 5 years",
+  "moonshot_score": 7,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "Caris Life Sciences launches Behind the Diagnosis Campaign to spotlight patient lives transformed by comprehensive genomic testing",
+    "The company has established a strong foundation for growth, with a significant cash runway and no R&D expenses",
+    "Caris Life Sciences has the potential to disrupt the traditional healthcare industry with its innovative approach to precision medicine"
+  ],
+  "research_date": "2026-06-08T02:38:01.274583",
+  "ticker": "CAI"
+}

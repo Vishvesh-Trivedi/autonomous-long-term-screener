@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "AUGO becomes a leading player in the metals and mining market, driven by its strong gold mining operations and growing demand, resulting in significant revenue growth and increased market capitalization.",
+    "revenue_10yr_b": 5.5,
+    "mktcap_10yr_b": 20.0,
+    "multiple": 15.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "AUGO maintains its current market position and revenue growth is moderate, driven by steady demand and stable gold mining operations.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 10.0,
+    "multiple": 8.0,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "AUGO fails to achieve significant revenue growth due to weakness in Chinese demand and increased competition in the gold mining market, resulting in decreased market capitalization.",
+    "mktcap_10yr_b": 2.0,
+    "multiple": 4.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Monitoring revenue growth and Chinese demand trends.",
+  "thesis_breaks_if": "Failure to achieve significant revenue growth within the next 5 years",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-17T15:56:18.095729",
+  "ticker": "AUGO"
+}

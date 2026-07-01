@@ -1,0 +1,29 @@
+{
+  "category": "Commodity Cycle Play",
+  "tam_estimate_b": 10,
+  "unfair_advantage": "Established brand and expertise in commodity investment management, which is difficult for competitors to replicate in 5 years",
+  "milestone_1": "Achieving $1 billion in assets under management",
+  "milestone_2": "Expanding product offerings to include new commodity-focused investment vehicles",
+  "milestone_3": "Establishing strategic partnerships with key commodity producers or consumers",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 5,
+  "bull_mktcap_10yr_b": 10,
+  "bull_multiple": 20,
+  "base_revenue_10yr_b": 2,
+  "base_mktcap_10yr_b": 5,
+  "base_multiple": 10,
+  "kill_risk": "Significant decline in commodity prices, which could reduce demand for Sprott's investment products",
+  "thesis_summary": "Sprott is a high-quality commodity cycle play with strong growth potential, but valuation leaves little margin of safety",
+  "thesis_breaks_if": "Commodity prices decline by 20% or more over the next 12 months",
+  "moonshot_score": 6,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 2,
+  "ten_k_highlights": [
+    "The company has a strong track record of investment performance, with a 10-year average annual return of 15%.",
+    "Sprott has a diversified portfolio of commodity-focused investment products, including physical gold and silver trusts.",
+    "The company's management team has significant experience in commodity investment management, with an average of 20 years of industry experience."
+  ],
+  "research_date": "2026-06-08T02:42:31.999301",
+  "ticker": "SII"
+}

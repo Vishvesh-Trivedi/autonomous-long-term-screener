@@ -1,0 +1,29 @@
+{
+  "category": "Mining and Natural Resources",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Experienced management team and established mining operations",
+  "milestone_1": "Completion of mine improvement projects",
+  "milestone_2": "Increase in production capacity",
+  "milestone_3": "Expansion into new markets",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 5000,
+  "bull_mktcap_10yr_b": 10000,
+  "bull_multiple": 20,
+  "base_revenue_10yr_b": 2000,
+  "base_mktcap_10yr_b": 5000,
+  "base_multiple": 10,
+  "kill_risk": "Decline in global commodity prices",
+  "thesis_summary": "Nexa Resources is a promising mining company with a strong management team and established operations, poised for long-term growth and expansion.",
+  "thesis_breaks_if": "Failure to achieve significant revenue growth within the next 5 years",
+  "moonshot_score": 6,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company has a strong track record of mine improvement and expansion.",
+    "Nexa Resources has a diverse portfolio of mining assets and operations.",
+    "The company is focused on increasing production capacity and expanding into new markets."
+  ],
+  "research_date": "2026-06-17T19:24:53.873996",
+  "ticker": "NEXA"
+}

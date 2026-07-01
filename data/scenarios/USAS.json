@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Americas Gold and Silver achieves significant growth through strategic agreements and improved quarterly results, leading to increased revenue and market cap.",
+    "revenue_10yr_b": 1.5,
+    "mktcap_10yr_b": 10.0,
+    "multiple": 15.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "The company maintains steady growth, meeting its gold delivery obligations and achieving positive cash flow, resulting in moderate increases in revenue and market cap.",
+    "revenue_10yr_b": 0.5,
+    "mktcap_10yr_b": 4.0,
+    "multiple": 8.0,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "Failure to achieve positive cash flow and meet gold delivery obligations leads to financial instability, resulting in decreased market cap.",
+    "mktcap_10yr_b": 0.5,
+    "multiple": 2.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "The company's improving quarterly results and strategic agreements position it for long-term growth.",
+  "thesis_breaks_if": "Failure to achieve positive cash flow within the next 2 years",
+  "natural_eval_window_days": 730,
+  "written_date": "2026-06-18T01:52:30.598084",
+  "ticker": "USAS"
+}

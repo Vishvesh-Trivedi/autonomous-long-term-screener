@@ -1,0 +1,87 @@
+{
+  "_comment": "Long-Term Screener Knowledge Base. Written exclusively by Claude after each evaluated position. Never edit manually.",
+  "_version": "1.0",
+  "created": "2026-05-18",
+  "last_updated": null,
+  "total_evaluated_exits": 0,
+
+  "signal_credibility": {
+    "_comment": "Rolling win rates per signal. Starts with research-backed priors. Updates as positions are evaluated.",
+    "roic_above_20": {
+      "win_rate": 0.76, "sample": 0, "confidence": "PRIOR",
+      "note": "Prior based on academic literature — no personal data yet"
+    },
+    "gross_margin_above_60_expanding": {
+      "win_rate": 0.72, "sample": 0, "confidence": "PRIOR",
+      "note": "Pricing power proxy — strong prior"
+    },
+    "founder_led_high_insider_ownership": {
+      "win_rate": 0.69, "sample": 0, "confidence": "PRIOR"
+    },
+    "revenue_cagr_above_20": {
+      "win_rate": 0.71, "sample": 0, "confidence": "PRIOR"
+    },
+    "cash_runway_above_24mo": {
+      "win_rate": 0.68, "sample": 0, "confidence": "PRIOR",
+      "note": "Survivability filter — critical for T3"
+    },
+    "wide_moat_classification": {
+      "win_rate": 0.74, "sample": 0, "confidence": "PRIOR"
+    },
+    "thesis_breaks_if_not_triggered": {
+      "win_rate": 0.71, "sample": 0, "confidence": "PRIOR",
+      "note": "Positions where exit condition never fired outperform"
+    }
+  },
+
+  "sentiment_decay_map": {
+    "_comment": "Average peak return day per catalyst type. Builds over time.",
+    "energy_geopolitical": {
+      "avg_peak_day": 3.2, "sample": 0, "confidence": "PRIOR",
+      "note": "Prior from swing screener data"
+    },
+    "AI_tech_infrastructure": {
+      "avg_peak_day": 8.4, "sample": 0, "confidence": "PRIOR"
+    },
+    "earnings_beat_catalyst": {
+      "avg_peak_day": 1.8, "sample": 0, "confidence": "PRIOR"
+    },
+    "regulatory_approval": {
+      "avg_peak_day": 5.0, "sample": 0, "confidence": "PRIOR",
+      "note": "FDA/NRC approvals — medium-term catalyst"
+    }
+  },
+
+  "tier_migration_log": [],
+
+  "benchmark_history": {
+    "_comment": "Portfolio vs QQQ and SPY. Populates after first full year.",
+    "portfolio_vs_qqq_1yr": "no_data",
+    "portfolio_vs_qqq_3yr": "no_data",
+    "portfolio_vs_spy_1yr": "no_data",
+    "portfolio_vs_spy_3yr": "no_data"
+  },
+
+  "scenario_accuracy": {
+    "_comment": "Was Bull/Base/Bear prediction correct? Updated quarterly.",
+    "bull_correct_rate": "no_data",
+    "base_correct_rate": "no_data",
+    "bear_correct_rate": "no_data"
+  },
+
+  "thesis_graveyard": [],
+
+  "open_lessons": [
+    "No lessons yet — screener has not completed any full position cycles."
+  ],
+
+  "dont_sell_decisions": [],
+
+  "sector_performance": {
+    "_comment": "Which sectors have produced the best T1/T2/T3 results. Builds over time."
+  },
+
+  "kiwisaver_routing_history": {
+    "_comment": "Tracks which recommendations were routed to KiwiSaver vs manual Sharesies"
+  }
+}

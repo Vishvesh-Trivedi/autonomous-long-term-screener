@@ -1,0 +1,29 @@
+{
+  "category": "Eco-friendly Tanker Market",
+  "tam_estimate_b": 10,
+  "unfair_advantage": "Cannot replicate in 5 years: Established relationships with tanker clients and expertise in navigating a rapidly changing tanker market",
+  "milestone_1": "Achieve record earnings",
+  "milestone_2": "Expand tanker fleet",
+  "milestone_3": "Establish a strong market presence",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 500,
+  "bull_mktcap_10yr_b": 10,
+  "bull_multiple": 20,
+  "base_revenue_10yr_b": 200,
+  "base_mktcap_10yr_b": 2,
+  "base_multiple": 10,
+  "kill_risk": "Rapidly changing tanker market conditions",
+  "thesis_summary": "ECO is poised to capitalize on the growing demand for eco-friendly tankers with its established expertise and client relationships.",
+  "thesis_breaks_if": "Failure to achieve record earnings",
+  "moonshot_score": 6,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "Record earnings achieved",
+    "Rapidly changing tanker market conditions",
+    "Established relationships with tanker clients"
+  ],
+  "research_date": "2026-06-08T02:38:54.956645",
+  "ticker": "ECO"
+}

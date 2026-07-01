@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "ECO successfully capitalizes on the growing demand for eco-friendly tankers, achieving record earnings and expanding its market share.",
+    "revenue_10yr_b": 5.0,
+    "mktcap_10yr_b": 20.0,
+    "multiple": 40.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "ECO maintains its current market position and grows revenue in line with industry averages, but fails to achieve significant market share gains.",
+    "revenue_10yr_b": 1.5,
+    "mktcap_10yr_b": 5.0,
+    "multiple": 20.0,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "ECO fails to adapt to rapidly changing tanker market conditions, leading to a decline in revenue and market share.",
+    "mktcap_10yr_b": 0.5,
+    "multiple": 10.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "ECO's established expertise and client relationships position it for success in the growing eco-friendly tanker market.",
+  "thesis_breaks_if": "Failure to achieve record earnings",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-06-17T15:57:22.064918",
+  "ticker": "ECO"
+}

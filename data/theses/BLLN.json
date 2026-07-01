@@ -1,0 +1,29 @@
+{
+  "category": "Genomics and Precision Medicine",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Proprietary technology for non-invasive genetic testing and analysis",
+  "milestone_1": "Completion of clinical trials for lead product",
+  "milestone_2": "Regulatory approval for lead product",
+  "milestone_3": "Commercial launch and revenue growth",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 10,
+  "bull_mktcap_10yr_b": 50,
+  "bull_multiple": 5,
+  "base_revenue_10yr_b": 5,
+  "base_mktcap_10yr_b": 20,
+  "base_multiple": 4,
+  "kill_risk": "Failure to achieve regulatory approval",
+  "thesis_summary": "BillionToOne has a strong potential for growth in the genomics and precision medicine market with its proprietary technology and promising clinical trials.",
+  "thesis_breaks_if": "Failure to achieve significant revenue growth within the next 5 years",
+  "moonshot_score": 8,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company has made significant progress in developing its proprietary technology for non-invasive genetic testing and analysis.",
+    "The company has a strong management team with extensive experience in the genomics and precision medicine industry.",
+    "The company has a solid financial position with sufficient cash to support its operations and growth plans."
+  ],
+  "research_date": "2026-06-08T02:42:48.460771",
+  "ticker": "BLLN"
+}

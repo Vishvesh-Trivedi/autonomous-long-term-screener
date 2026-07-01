@@ -1,0 +1,29 @@
+{
+  "category": "Marine Transportation",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Zero-debt valuation and strong fundamentals",
+  "milestone_1": "Increase in fleet size",
+  "milestone_2": "Expansion into new markets",
+  "milestone_3": "Implementation of efficient logistics systems",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 5000,
+  "bull_mktcap_10yr_b": 10000,
+  "bull_multiple": 20,
+  "base_revenue_10yr_b": 2000,
+  "base_mktcap_10yr_b": 5000,
+  "base_multiple": 10,
+  "kill_risk": "Debt financing risks",
+  "thesis_summary": "International Seaways is a high-yield dividend play with strong fundamentals, poised for long-term growth in the marine transportation market.",
+  "thesis_breaks_if": "Failure to maintain zero-debt valuation",
+  "moonshot_score": 6,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "International Seaways has a strong track record of dividend payments.",
+    "The company has a zero-debt valuation, providing a competitive advantage.",
+    "International Seaways has a diverse fleet of vessels, reducing dependence on a single market."
+  ],
+  "research_date": "2026-06-08T02:42:43.376144",
+  "ticker": "INSW"
+}

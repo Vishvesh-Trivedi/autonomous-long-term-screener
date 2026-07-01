@@ -1,0 +1,29 @@
+{
+  "category": "Energy Drink Market",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Established brand recognition and distribution network",
+  "milestone_1": "Increase market share in the energy drink sector",
+  "milestone_2": "Expand product offerings to cater to diverse consumer preferences",
+  "milestone_3": "Establish strategic partnerships to enhance brand visibility",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 10000,
+  "bull_mktcap_10yr_b": 20000,
+  "bull_multiple": 20,
+  "base_revenue_10yr_b": 5000,
+  "base_mktcap_10yr_b": 10000,
+  "base_multiple": 10,
+  "kill_risk": "Intense competition in the energy drink market",
+  "thesis_summary": "Celsius Holdings is poised for long-term growth in the energy drink market due to its established brand and distribution network.",
+  "thesis_breaks_if": "Failure to increase market share over the next 5 years",
+  "moonshot_score": 6,
+  "verdict": "SPECULATIVE",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company's products are distributed in over 100,000 retail locations",
+    "Celsius Holdings has a strong e-commerce platform with direct-to-consumer sales",
+    "The company has a robust product development pipeline with new flavors and products in development"
+  ],
+  "research_date": "2026-06-08T02:40:28.393987",
+  "ticker": "CELH"
+}

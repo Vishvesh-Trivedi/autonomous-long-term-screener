@@ -1,0 +1,29 @@
+{
+  "category": "Energy Shipping",
+  "tam_estimate_b": 100,
+  "unfair_advantage": "Existing fleet and operational expertise",
+  "milestone_1": "Increase fleet utilization rate",
+  "milestone_2": "Expand customer base",
+  "milestone_3": "Achieve positive net income",
+  "survival_probability": 0.8,
+  "community_signal_quality": "NOISE",
+  "bull_revenue_10yr_b": 10,
+  "bull_mktcap_10yr_b": 50,
+  "bull_multiple": 5,
+  "base_revenue_10yr_b": 5,
+  "base_mktcap_10yr_b": 20,
+  "base_multiple": 4,
+  "kill_risk": "Prolonged decline in oil prices",
+  "thesis_summary": "DHT is a promising long-term investment in the energy shipping sector with a strong potential for growth.",
+  "thesis_breaks_if": "Failure to achieve positive net income within 5 years",
+  "moonshot_score": 6,
+  "verdict": "MOONSHOT",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company operates a fleet of crude oil tankers",
+    "DHT has a history of paying dividends to its shareholders",
+    "The company is focused on maintaining a strong balance sheet"
+  ],
+  "research_date": "2026-06-17T13:15:24.246832",
+  "ticker": "DHT"
+}
