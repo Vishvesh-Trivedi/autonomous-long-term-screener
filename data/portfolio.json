@@ -2,7 +2,7 @@
   "_comment": "Long-Term Investment Screener \u00e2\u20ac\u201d Portfolio History. DO NOT edit manually. Managed by screener.py",
   "_version": "1.0",
   "created": "2026-05-18",
-  "last_updated": "2026-06-23T18:33:46.541146",
+  "last_updated": "2026-07-01T07:40:56.179536",
   "holdings": [
     {
       "ticker": "AGX",
@@ -49,9 +49,11 @@
       "signal_or_noise": "SIGNAL",
       "key_themes": [
         "AI demand",
-        "Data centre"
+        "Data centre",
+        "Acquisition",
+        "Guidance"
       ],
-      "sec_8k_count": 4,
+      "sec_8k_count": 3,
       "sec_8k_events": [
         {
           "date": "2026-06-10",
@@ -107,7 +109,7 @@
         "bear": {
           "narrative": "Argan Inc. faces significant challenges, including increased competition and rising costs, resulting in a decline in gross margin to 12%. Revenue growth slows to 5% CAGR, and the market capitalization falls to $5.0B in 10 years.",
           "mktcap_10yr_b": 5.0,
-          "multiple": 0.5,
+          "multiple": 0.4,
           "probability": 0.1
         },
         "current_tracking": "BASE",
@@ -117,21 +119,21 @@
         "written_date": "2026-06-18T02:00:26.248179",
         "ticker": "AGX"
       },
-      "current_price": 790.0,
-      "market_cap": 11075205120,
+      "current_price": 798.55,
+      "market_cap": 11195069440,
       "revenue": 1041900032,
       "sec_8k_highlights": [
-        "Record revenue of $291.0 million for the first quarter of fiscal 2027.",
-        "Gross margin of 21% for the first quarter of fiscal 2027.",
-        "Diluted earnings per share of $3.24 for the first quarter of fiscal 2027.",
-        "Net income of $46,063 for the first quarter of fiscal 2027.",
-        "Adjusted EBITDA of $56,439 for the first quarter of fiscal 2027.",
-        "Adjusted EBITDA margin of 19.4% for the first quarter of fiscal 2027.",
-        "Cash dividends per share of $0.500 for the first quarter of fiscal 2027."
+        "Argan, Inc. reported record revenue of $291.0 million for its first quarter of fiscal 2027.",
+        "The company's gross margin was 21.0% and net income was $46.063 million for the quarter.",
+        "Diluted earnings per share were $3.24 and adjusted EBITDA was $56.439 million for the quarter.",
+        "The company's project backlog was $2.8 billion as of April 30, 2026.",
+        "Argan's industrial segment is seeing increased demand, highlighted by a data center contract awarded in November 2025.",
+        "The company has begun construction on a new fabrication facility in North Carolina, expected to be completed during the third quarter of fiscal 2027.",
+        "Argan remains well positioned to capitalize on the current demand environment with its skill set, financial flexibility, industry relationships, and longstanding customer base."
       ],
       "sec_8k_latest_date": "2026-06-04",
       "news_intelligence": {},
-      "fcf_yield": 4.45,
+      "fcf_yield": 4.4,
       "net_cash_m": 964.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -153,7 +155,7 @@
       "mutualfund_holders": [
         {
           "name": "iShares Trust-iShares Core S&P Small-Cap ETF",
-          "pct": 0.060300004
+          "pct": 0.06
         },
         {
           "name": "First TRT Exch-Trd Fd. VI-First TRT RBA American Industrial Renaissanc",
@@ -204,24 +206,24 @@
       "return_1yr": 72.0,
       "return_vs_qqq": 38.3,
       "trend": "UP",
-      "news_count": 14,
+      "news_count": 12,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "Guidance"
+        "Regulatory"
       ],
       "sec_8k_count": 2,
       "sec_8k_events": [
         {
-          "date": "2026-05-06",
-          "description": "Results of operations / earnings, Financial statements attached"
+          "date": "2026-06-29",
+          "description": "Director/officer departure or appointment, Item 5.07, Financial statements attached"
         },
         {
-          "date": "2026-03-30",
-          "description": "Other material event, Financial statements attached"
+          "date": "2026-05-06",
+          "description": "Results of operations / earnings, Financial statements attached"
         }
       ],
       "qqq_price_at_entry": 705.0599975585938,
@@ -275,8 +277,8 @@
         "written_date": "2026-06-06T00:40:53.530294",
         "ticker": "UTHR"
       },
-      "current_price": 538.3,
-      "market_cap": 22849075200,
+      "current_price": 541.83,
+      "market_cap": 22998913024,
       "revenue": 3169799936,
       "sec_8k_highlights": [
         "Total revenues in the first quarter of 2026 decreased by two percent year-over-year to $781.5 million, compared to $794.4 million in the first quarter of 2025.",
@@ -284,12 +286,11 @@
         "Net income, per basic share in the first quarter of 2026 was $6.32, compared to $7.18 in the first quarter of 2025.",
         "Net income, per diluted share in the first quarter of 2026 was $5.82, compared to $6.63 in the first quarter of 2025.",
         "Total Tyvaso revenues decreased by two percent to $457.5 million in the first quarter of 2026, compared to $466.3 million in the first quarter of 2025.",
-        "The growth in Tyvaso DPI revenues resulted primarily from an increase in quantities sold of $16.0 million and, to a lesser extent, a price increase.",
-        "The decrease in Nebulized Tyvaso revenues resulted primarily from a decrease in U.S. quantities sold of $33.3 million and, to a lesser extent, a decrease in international revenues, partially offset by a price increase."
+        "[RISK] The competitive landscape for inhaled prostacyclins remains dynamic."
       ],
       "sec_8k_latest_date": "2026-05-06",
       "news_intelligence": {},
-      "fcf_yield": 6.84,
+      "fcf_yield": 6.8,
       "net_cash_m": 2154.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -311,7 +312,7 @@
       "mutualfund_holders": [
         {
           "name": "iShares Trust-iShares Core S&P Mid-Cap ETF",
-          "pct": 0.0343
+          "pct": 0.0344
         },
         {
           "name": "VANGUARD INDEX FUNDS-Vanguard Total Stock Market Index Fund",
@@ -362,7 +363,7 @@
       "return_1yr": 27.3,
       "return_vs_qqq": -6.4,
       "trend": "DOWN",
-      "news_count": 5,
+      "news_count": 7,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
@@ -412,14 +413,14 @@
           "narrative": "Gold and silver prices surge above $4,000/oz driven by de-dollarisation and central bank buying. Franco-Nevada's royalty pipeline matures with Cobre Panama resuming and new additions. 10yr revenue CAGR of 12%.",
           "revenue_10yr_b": 5.5,
           "mktcap_10yr_b": 150.0,
-          "multiple": 3.5,
+          "multiple": 3.7,
           "probability": 0.25
         },
         "base": {
           "narrative": "Gold holds $2,500-$3,000/oz. Royalty portfolio grows organically at 7% annually. Cobre Panama remains suspended but pipeline adds 3-4 new streams per year.",
           "revenue_10yr_b": 3.2,
           "mktcap_10yr_b": 75.0,
-          "multiple": 1.8,
+          "multiple": 1.9,
           "probability": 0.55
         },
         "bear": {
@@ -435,17 +436,17 @@
         "written_date": "2026-06-21T09:35:14.192344",
         "ticker": "FNV"
       },
-      "current_price": 220.73,
-      "market_cap": 42569003008,
+      "current_price": 208.44,
+      "market_cap": 40198807552,
       "revenue": 2087699968,
       "sec_8k_highlights": [
-        "Franco-Nevada is aware of a news release issued by Riverstone Karma SA announcing a local court decision in Burkina Faso purporting to nullify the stream agreement related to the Karma Mine.",
-        "Franco-Nevada believes the Burkina Faso judgement is not valid and is seeking to have the judgement vacated.",
-        "Franco-Nevada is also pursuing its own legal remedies in Ontario and elsewhere in accordance with the dispute resolution provisions in the agreement against Riverstone Karma SA, its parent N\u00e9r\u00e9 Mining SA and other relevant affiliates to protect its legal rights."
+        "Franco-Nevada Corporation reported that a local court in Burkina Faso has nullified the stream agreement related to the Karma Mine, but the company believes the judgement is not valid and is seeking to have it vacated.",
+        "Franco-Nevada is pursuing its own legal remedies in Ontario and elsewhere in accordance with the dispute resolution provisions in the agreement against Riverstone Karma SA, its parent N\u00e9r\u00e9 Mining SA and other relevant affiliates to protect its legal rights.",
+        "Franco-Nevada Corporation is governed by Ontario law."
       ],
       "sec_8k_latest_date": "2026-06-17",
       "news_intelligence": {},
-      "fcf_yield": 4.05,
+      "fcf_yield": 4.29,
       "net_cash_m": 715.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -510,7 +511,7 @@
       "de_ratio": 0.0,
       "interest_coverage": 999.0,
       "dilution_rate": 0.006555423122765197,
-      "insider_ownership": 0.0335,
+      "insider_ownership": 0.03343,
       "earnings_quality": "WATCH",
       "entry_price": 31.12,
       "above_200ma": false,
@@ -530,8 +531,12 @@
         "Product launch",
         "Data centre"
       ],
-      "sec_8k_count": 4,
+      "sec_8k_count": 5,
       "sec_8k_events": [
+        {
+          "date": "2026-06-24",
+          "description": "Director/officer departure or appointment, Item 5.07"
+        },
         {
           "date": "2026-06-02",
           "description": "Results of operations / earnings, Item 2.05, Regulation FD disclosure, Financial statements attached"
@@ -539,10 +544,6 @@
         {
           "date": "2026-05-19",
           "description": "Regulation FD disclosure"
-        },
-        {
-          "date": "2026-05-11",
-          "description": "Results of operations / earnings, Regulation FD disclosure, Financial statements attached"
         }
       ],
       "qqq_price_at_entry": 705.0599975585938,
@@ -573,20 +574,20 @@
           "narrative": "GitLab's strong network effects and high gross margin drive long-term growth, achieving $5B in revenue by year 10, with a market cap of $20B and a multiple of 4x, driven by successful expansion into new markets and increased adoption of its platform.",
           "revenue_10yr_b": 5.0,
           "mktcap_10yr_b": 20.0,
-          "multiple": 4.6,
+          "multiple": 3.9,
           "probability": 0.4
         },
         "base": {
           "narrative": "GitLab maintains its current growth trajectory, reaching $2.5B in revenue by year 10, with a market cap of $10B and a multiple of 4x, as the company continues to execute on its strategy and navigate industry challenges.",
           "revenue_10yr_b": 2.5,
           "mktcap_10yr_b": 10.0,
-          "multiple": 2.3,
+          "multiple": 1.9,
           "probability": 0.5
         },
         "bear": {
           "narrative": "GitLab fails to achieve positive ROIC within the next 5 years, leading to stagnating revenue growth, reaching only $1.2B by year 10, with a market cap of $3B and a multiple of 2.5x, due to increased competition and inability to expand its customer base.",
           "mktcap_10yr_b": 3.0,
-          "multiple": 0.7,
+          "multiple": 0.6,
           "probability": 0.1
         },
         "current_tracking": "BASE",
@@ -596,21 +597,21 @@
         "written_date": "2026-06-18T02:01:03.015894",
         "ticker": "GTLB"
       },
-      "current_price": 25.83,
-      "market_cap": 4362686976,
+      "current_price": 30.53,
+      "market_cap": 5156516864,
       "revenue": 1004873024,
       "sec_8k_highlights": [
-        "Total revenue of $264.2 million, up 23% year-over-year",
-        "GAAP operating margin of (6)%; non-GAAP operating margin of 14%",
-        "Operating cash flow of $149.2 million and non-GAAP adjusted free cash flow of $146.7 million",
-        "Customers with more than $5,000 of ARR reached 10,831, an increase of 7% year-over-year",
-        "Customers with more than $100,000 of ARR reached 1,519, an increase of 18% year-over-year",
-        "Dollar-Based Net Retention Rate was 117%",
-        "Total RPO grew 18% year-over-year to $1.1 billion, while cRPO grew 24% to $724.1 million"
+        "Total revenue of $264.2 million, up 23% year-over-year.",
+        "GAAP operating margin of (6)% and non-GAAP operating margin of 14%.",
+        "Operating cash flow of $149.2 million and non-GAAP adjusted free cash flow of $146.7 million.",
+        "Customers with more than $5,000 of ARR reached 10,831, an increase of 7% year-over-year.",
+        "Customers with more than $100,000 of ARR reached 1,519, an increase of 18% year-over-year.",
+        "Dollar-Based Net Retention Rate was 117%.",
+        "Total RPO grew 18% year-over-year to $1.1 billion, while cRPO grew 24% to $724.1 million."
       ],
       "sec_8k_latest_date": "2026-06-02",
       "news_intelligence": {},
-      "fcf_yield": 6.32,
+      "fcf_yield": 5.35,
       "net_cash_m": 1358.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -675,7 +676,7 @@
       "de_ratio": 0.0,
       "interest_coverage": 999.0,
       "dilution_rate": 0.0,
-      "insider_ownership": 0.02121,
+      "insider_ownership": 0.02187,
       "earnings_quality": "WATCH",
       "entry_price": 17.93,
       "above_200ma": true,
@@ -729,20 +730,20 @@
           "narrative": "Omada Health achieves strong revenue growth, exceeding 20% annually, driven by expanding digital health market and successful product offerings, resulting in a 10-year revenue of $2.5B and market cap of $10.0B, with a multiple of 4.0 and a probability of 0.4",
           "revenue_10yr_b": 16.198530048,
           "mktcap_10yr_b": 8.099265024,
-          "multiple": 7.6,
+          "multiple": 6.2,
           "probability": 0.4
         },
         "base": {
           "narrative": "Omada Health maintains steady revenue growth, averaging 15% annually, driven by stable digital health market and consistent product offerings, resulting in a 10-year revenue of $1.8B and market cap of $5.0B, with a multiple of 2.8 and a probability of 0.5",
           "revenue_10yr_b": 9.719118028799999,
           "mktcap_10yr_b": 4.859559014399999,
-          "multiple": 4.5,
+          "multiple": 3.7,
           "probability": 0.5
         },
         "bear": {
           "narrative": "Omada Health experiences declining revenue growth, averaging 5% annually, due to increased competition and market saturation, resulting in a 10-year market cap of $0.5B, with a multiple of 1.8 and a probability of 0.1",
           "mktcap_10yr_b": 2.4297795071999997,
-          "multiple": 2.3,
+          "multiple": 1.9,
           "probability": 0.1
         },
         "current_tracking": "BASE",
@@ -752,21 +753,16 @@
         "written_date": "2026-06-18T09:00:46.782036",
         "ticker": "OMDA"
       },
-      "current_price": 17.98,
-      "market_cap": 1068884160,
+      "current_price": 21.95,
+      "market_cap": 1304894848,
       "revenue": 283295008,
       "sec_8k_highlights": [
-        "Omada Health reported revenue of $78 million in the first quarter, up 42% year over year.",
-        "Total Members at the end of Q1 were 1.02 million, up 51% year over year.",
-        "Omada's gross margin was 62% in the first quarter, up from 58% in Q1 2025.",
-        "Omada's non-GAAP gross margin was 64% in the first quarter, up from 60% in Q1 2025.",
-        "Omada reported a net loss of $3 million in the first quarter, compared with a net loss of $9 million in Q1 2025.",
-        "Omada's adjusted EBITDA was $1 million in the first quarter, compared with an adjusted EBITDA loss of $4 million in Q1 2025.",
-        "Omada has relationships with the nation's three leading PBMs, who serve most commercially insured lives and processed 80% of prescription claims in 2025."
+        "Sean Duffy and Trevor Fetter were elected to serve as Class I Directors until the Company\u2019s 2029 annual meeting of stockholders and until each such director\u2019s respective successor is elected and qualified.",
+        "The stockholders ratified the appointment of Deloitte & Touche LLP as the Company\u2019s independent registered public accounting firm for the fiscal year ending December 31, 2026."
       ],
-      "sec_8k_latest_date": "2026-05-07",
+      "sec_8k_latest_date": "2026-06-16",
       "news_intelligence": {},
-      "fcf_yield": 2.11,
+      "fcf_yield": 1.73,
       "net_cash_m": 212.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -788,7 +784,7 @@
       "mutualfund_holders": [
         {
           "name": "American Century Mutual Funds, Inc.-Small Cap Growth Fund",
-          "pct": 0.0312
+          "pct": 0.0374
         },
         {
           "name": "VANGUARD INDEX FUNDS-Vanguard Total Stock Market Index Fund",
@@ -839,16 +835,13 @@
       "return_1yr": -41.1,
       "return_vs_qqq": -74.8,
       "trend": "DOWN",
-      "news_count": 13,
-      "news_sentiment": "POSITIVE",
+      "news_count": 12,
+      "news_sentiment": "MIXED",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "POSITIVE",
+      "overall_sentiment": "MIXED",
       "signal_or_noise": "SIGNAL",
-      "key_themes": [
-        "Product launch",
-        "Space/Launch"
-      ],
+      "key_themes": [],
       "sec_8k_count": 3,
       "sec_8k_events": [
         {
@@ -900,14 +893,14 @@
           "narrative": "Caris Life Sciences successfully expands its comprehensive genomic testing to over 1000 healthcare providers, driving revenue growth and establishing itself as a leader in the precision medicine market. The company's data analytics capabilities and strategic partnerships further enhance its competitive advantage, leading to a significant increase in market share and revenue.",
           "revenue_10yr_b": 15.0,
           "mktcap_10yr_b": 41.66713344,
-          "multiple": 8.5,
+          "multiple": 8.3,
           "probability": 0.4
         },
         "base": {
           "narrative": "Caris Life Sciences achieves moderate success in expanding its comprehensive genomic testing services, but faces intense competition and regulatory challenges. The company's revenue growth is steady, but not spectacular, and its market share increases gradually. The data analytics capabilities and partnerships contribute to the company's growth, but not to the extent anticipated in the bull scenario.",
           "revenue_10yr_b": 5.0,
           "mktcap_10yr_b": 20.0,
-          "multiple": 4.1,
+          "multiple": 4.0,
           "probability": 0.3
         },
         "bear": {
@@ -923,8 +916,8 @@
         "written_date": "2026-06-06T00:44:17.189747",
         "ticker": "CAI"
       },
-      "current_price": 17.31,
-      "market_cap": 4893202944,
+      "current_price": 17.82,
+      "market_cap": 5037369856,
       "revenue": 907292032,
       "sec_8k_highlights": [
         "Reported total revenue of $216.2 million, an increase of 79% over the corresponding prior year period.",
@@ -932,12 +925,12 @@
         "Reported gross margin of 65%, an approximate 1,800 bps improvement over the corresponding prior year period.",
         "Reported net loss of $0.5 million.",
         "Reported positive Adjusted EBITDA of $26.2 million.",
-        "Reported positive net cash provided by operating activities of $32.9 million, and positive free cash flow of $22.5 million, inclusive of annual bonus payments of $30.5 million.",
-        "Refinanced $400 million credit facility at a lower borrowing cost and secured access to additional strategic capital from Blue Owl and Blackstone."
+        "Refinanced $400 million credit facility at a lower borrowing cost and secured access to additional strategic capital from Blue Owl and Blackstone.",
+        "Launched and received MolDX approval for Caris ChromoSeq, Caris\u2019 comprehensive whole genome tumor profiling assay for myeloid malignancies."
       ],
       "sec_8k_latest_date": "2026-05-07",
       "news_intelligence": {},
-      "fcf_yield": 3.01,
+      "fcf_yield": 2.93,
       "net_cash_m": 393.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -959,7 +952,7 @@
       "mutualfund_holders": [
         {
           "name": "Fidelity Select Portfolios-Select Health Care Portfolio",
-          "pct": 0.0127
+          "pct": 0.013300001
         },
         {
           "name": "VANGUARD INDEX FUNDS-Vanguard Total Stock Market Index Fund",
@@ -1010,7 +1003,7 @@
       "return_1yr": 65.7,
       "return_vs_qqq": 32.0,
       "trend": "UP",
-      "news_count": 4,
+      "news_count": 3,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
@@ -1020,15 +1013,15 @@
       "sec_8k_count": 7,
       "sec_8k_events": [
         {
+          "date": "2026-06-29",
+          "description": "Material event filed"
+        },
+        {
           "date": "2026-06-22",
           "description": "Material event filed"
         },
         {
           "date": "2026-05-26",
-          "description": "Material event filed"
-        },
-        {
-          "date": "2026-05-21",
           "description": "Material event filed"
         }
       ],
@@ -1068,20 +1061,20 @@
           "narrative": "CMBT successfully deploys AI-powered security solutions in over 1000 enterprise clients, achieving 25% annual revenue growth and becoming a market leader in AI-powered cybersecurity.",
           "revenue_10yr_b": 5.0,
           "mktcap_10yr_b": 50.0,
-          "multiple": 11.3,
+          "multiple": 12.3,
           "probability": 0.4
         },
         "base": {
           "narrative": "CMBT meets its growth targets, deploying AI-powered security solutions in 100 enterprise clients and achieving 20% annual revenue growth, establishing itself as a major player in the AI-powered cybersecurity market.",
           "revenue_10yr_b": 2.0,
           "mktcap_10yr_b": 20.0,
-          "multiple": 4.5,
+          "multiple": 4.9,
           "probability": 0.5
         },
         "bear": {
           "narrative": "CMBT fails to innovate and keep pace with rapidly evolving cybersecurity threats and technologies, resulting in stagnant revenue growth and a loss of market share.",
           "mktcap_10yr_b": 5.0,
-          "multiple": 1.1,
+          "multiple": 1.2,
           "probability": 0.1
         },
         "current_tracking": "BULL",
@@ -1091,20 +1084,18 @@
         "written_date": "2026-06-06T00:45:22.350330",
         "ticker": "CMBT"
       },
-      "current_price": 15.27,
-      "market_cap": 4430892544,
+      "current_price": 13.99,
+      "market_cap": 4059474944,
       "revenue": 1950665984,
       "sec_8k_highlights": [
-        "CMB.TECH NV and Fortescue have signed an agreement for the charter of up to 12 ammonia-capable vessels.",
-        "Up to three of the vessels will be delivered with dual-fuel ammonia engines and are expected to enter into service by the end of 2026.",
-        "The combined fleet could reduce carbon dioxide emissions by approximately 250,000 tonnes a year compared with conventional marine fuels.",
-        "CMB.TECH NV will announce its Q2 2026 results on 27 August 2026.",
-        "Alexander Saverys, CEO of CMB.TECH, said the agreement marks an important step in showcasing ammonia as a viable marine fuel and advancing the transition to zero-emission shipping.",
-        "Katie Charuga, Fortescue Director Integrated Operations, said the shipping industry needs action, not talk, and green ammonia is one of the clearest pathways to reducing carbon dioxide emissions from shipping."
+        "CMB.TECH has sold two Suezmaxes, generating a capital gain of approximately 100.5 million USD.",
+        "The vessels will be delivered to their new owner in Q3 2026.",
+        "CMB.TECH will deploy those returns in line with its capital allocation strategy and invest in the continued growth of its diversified maritime group.",
+        "CMB.TECH has offices across Europe, Asia and Africa."
       ],
-      "sec_8k_latest_date": "2026-06-22",
+      "sec_8k_latest_date": "2026-06-29",
       "news_intelligence": {},
-      "fcf_yield": 13.03,
+      "fcf_yield": 14.22,
       "net_cash_m": -5042.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1258,13 +1249,21 @@
         "written_date": "2026-06-18T09:01:20.720595",
         "ticker": "CELH"
       },
-      "current_price": 29.12,
-      "market_cap": 7444247040,
+      "current_price": 29.28,
+      "market_cap": 7485149696,
       "revenue": 2968608000,
-      "sec_8k_highlights": [],
-      "sec_8k_latest_date": "2026-06-01",
+      "sec_8k_highlights": [
+        "Revenue for the first quarter of 2026 was $782.6 million, a 138% increase from the prior-year period.",
+        "Gross margin for the first quarter of 2026 was 48.3%, a decrease of 400 bps from the prior-year period.",
+        "Net income for the first quarter of 2026 was $110.1 million, a 148% increase from the prior-year period.",
+        "Diluted EPS for the first quarter of 2026 was $0.33, a 120% increase from the prior-year period.",
+        "Adjusted Diluted EPS for the first quarter of 2026 was $0.41, a 128% increase from the prior-year period.",
+        "Adjusted EBITDA for the first quarter of 2026 was $195.5 million, a 181% increase from the prior-year period.",
+        "Alani Nu achieved record sales of approximately $368.1 million in the first quarter of 2026."
+      ],
+      "sec_8k_latest_date": "2026-05-07",
       "news_intelligence": {},
-      "fcf_yield": 4.43,
+      "fcf_yield": 4.41,
       "net_cash_m": -127.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1290,7 +1289,7 @@
         },
         {
           "name": "iShares Trust-iShares Core S&P Mid-Cap ETF",
-          "pct": 0.094399996
+          "pct": 0.094799995
         },
         {
           "name": "VANGUARD INDEX FUNDS-Vanguard Small-Cap Index Fund",
@@ -1337,21 +1336,17 @@
       "return_1yr": 102.2,
       "return_vs_qqq": 68.5,
       "trend": "UP",
-      "news_count": 7,
+      "news_count": 8,
       "news_sentiment": "MIXED",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
       "overall_sentiment": "MIXED",
       "signal_or_noise": "SIGNAL",
       "key_themes": [],
-      "sec_8k_count": 2,
+      "sec_8k_count": 1,
       "sec_8k_events": [
         {
           "date": "2026-05-26",
-          "description": "Material event filed"
-        },
-        {
-          "date": "2026-03-30",
           "description": "Material event filed"
         }
       ],
@@ -1391,20 +1386,20 @@
           "narrative": "Frontline successfully expands its fleet and diversifies its services, capturing a significant share of the marine transportation and energy market, leading to a substantial increase in revenue and market capitalization.",
           "revenue_10yr_b": 10.5,
           "mktcap_10yr_b": 35.0,
-          "multiple": 3.8,
+          "multiple": 4.5,
           "probability": 0.4
         },
         "base": {
           "narrative": "Frontline maintains its current market position and continues to operate efficiently, with moderate growth in revenue and market capitalization.",
           "revenue_10yr_b": 4.5,
           "mktcap_10yr_b": 15.0,
-          "multiple": 1.6,
+          "multiple": 1.9,
           "probability": 0.3
         },
         "bear": {
           "narrative": "Frontline fails to expand its fleet or diversify its services, leading to a decline in market share and revenue, resulting in a decrease in market capitalization.",
           "mktcap_10yr_b": 5.0,
-          "multiple": 0.5,
+          "multiple": 0.6,
           "probability": 0.3
         },
         "current_tracking": "BULL",
@@ -1414,15 +1409,15 @@
         "written_date": "2026-06-18T02:02:59.818624",
         "ticker": "FRO"
       },
-      "current_price": 41.58,
-      "market_cap": 9256659968,
+      "current_price": 34.79,
+      "market_cap": 7745050624,
       "revenue": 2251480064,
       "sec_8k_highlights": [
         "Attached hereto as Exhibit 1 is a copy of the press release issued by Frontline plc (the \u201cCompany\u201d) on May 22, 2026, reporting the Company\u2019s results for the first quarter and three months ended March 31, 2026."
       ],
       "sec_8k_latest_date": "2026-05-26",
       "news_intelligence": {},
-      "fcf_yield": 10.01,
+      "fcf_yield": 11.97,
       "net_cash_m": -2159.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1502,9 +1497,10 @@
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "Partnership"
+        "Partnership",
+        "Guidance"
       ],
-      "sec_8k_count": 5,
+      "sec_8k_count": 4,
       "sec_8k_events": [
         {
           "date": "2026-06-12",
@@ -1555,20 +1551,20 @@
           "narrative": "International Seaways successfully expands services, improves efficiency, and capitalizes on growing demand for global trade, resulting in significant revenue growth and increased market share.",
           "revenue_10yr_b": 2.5,
           "mktcap_10yr_b": 12.0,
-          "multiple": 2.7,
+          "multiple": 3.2,
           "probability": 0.4
         },
         "base": {
           "narrative": "International Seaways maintains its established position in the maritime shipping industry, with moderate revenue growth and stable market share.",
           "revenue_10yr_b": 1.5,
           "mktcap_10yr_b": 6.0,
-          "multiple": 1.4,
+          "multiple": 1.6,
           "probability": 0.3
         },
         "bear": {
           "narrative": "International Seaways fails to achieve positive free cash flow, and a significant decline in global shipping volumes negatively impacts revenue and market share.",
           "mktcap_10yr_b": 1.5,
-          "multiple": 0.3,
+          "multiple": 0.4,
           "probability": 0.3
         },
         "current_tracking": "BULL",
@@ -1578,19 +1574,18 @@
         "written_date": "2026-06-18T02:03:33.403956",
         "ticker": "INSW"
       },
-      "current_price": 88.41,
-      "market_cap": 4376710144,
+      "current_price": 76.59,
+      "market_cap": 3791564544,
       "revenue": 987283968,
       "sec_8k_highlights": [
-        "International Seaways, Inc. entered into an Equity Distribution Agreement to issue and sell up to $200,000,000 of Common Stock.",
-        "The Company has neither sold nor undertaken to sell any shares pursuant to the Distribution Agreement as of the date hereof.",
+        "International Seaways, Inc. entered into an Equity Distribution Agreement with BTIG, LLC, B. Riley Securities, Inc., Clarksons Securities, Inc. and Fearnleys Securities, Inc. to issue and sell up to $200,000,000 of Common Stock.",
         "Each Sales Agent will receive a commission of up to 3.0% of the gross sales price of all common shares sold through it as sales agent under the Distribution Agreement.",
-        "International Seaways, Inc. entered into an Equity Distribution Agreement with BTIG, LLC, B. Riley Securities, Inc., Clarksons Securities, Inc. and Fearnleys Securities, Inc. as sales agents on May 11, 2026.",
-        "[RISK] The Company has entered into an Equity Distribution Agreement which may result in the sale of shares of Common Stock, which could have a negative impact on the Company's stock price and value."
+        "International Seaways, Inc. has neither sold nor undertaken to sell any shares pursuant to the Distribution Agreement as of the date hereof.",
+        "Sales of shares of Common Stock made pursuant to the Distribution Agreement, if any, will be made pursuant to the Company\u2019s prospectus supplement, dated May 11, 2026."
       ],
       "sec_8k_latest_date": "2026-05-11",
       "news_intelligence": {},
-      "fcf_yield": 10.31,
+      "fcf_yield": 11.9,
       "net_cash_m": -233.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1612,7 +1607,7 @@
       "mutualfund_holders": [
         {
           "name": "iShares Trust-iShares Core S&P Small-Cap ETF",
-          "pct": 0.0499
+          "pct": 0.0497
         },
         {
           "name": "American Century ETF Trust-Avantis U.S. Small Cap Value ETF",
@@ -1655,7 +1650,7 @@
       "de_ratio": 545629825.93,
       "interest_coverage": 999.0,
       "dilution_rate": 0.0,
-      "insider_ownership": 0.44207,
+      "insider_ownership": 0.46147,
       "earnings_quality": "CLEAN",
       "entry_price": 82.66,
       "above_200ma": true,
@@ -1663,14 +1658,14 @@
       "return_1yr": 150.2,
       "return_vs_qqq": 116.5,
       "trend": "UP",
-      "news_count": 6,
-      "news_sentiment": "MIXED",
+      "news_count": 5,
+      "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "MIXED",
+      "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [],
-      "sec_8k_count": 7,
+      "sec_8k_count": 6,
       "sec_8k_events": [
         {
           "date": "2026-05-21",
@@ -1721,14 +1716,14 @@
           "narrative": "TIGO expands its digital services and strengthens its presence in Latin America, leading to significant revenue growth and increased market capitalization.",
           "revenue_10yr_b": 15.63,
           "mktcap_10yr_b": 44.85,
-          "multiple": 3.1,
+          "multiple": 2.9,
           "probability": 0.4
         },
         "base": {
           "narrative": "TIGO maintains its current market position and grows at a steady rate, driven by its established presence in Latin America and modest expansion of digital services.",
           "revenue_10yr_b": 10.33,
           "mktcap_10yr_b": 24.92,
-          "multiple": 1.7,
+          "multiple": 1.6,
           "probability": 0.3
         },
         "bear": {
@@ -1744,20 +1739,20 @@
         "written_date": "2026-06-18T02:04:25.038127",
         "ticker": "TIGO"
       },
-      "current_price": 85.35,
-      "market_cap": 14299661312,
+      "current_price": 90.76,
+      "market_cap": 15206061056,
       "revenue": 6435999744,
       "sec_8k_highlights": [
-        "The AGM set the number of directors at eight and re-elected eight directors, with Maxime Lombardini re-elected as Chair of the Board of Directors.",
+        "The AGM set the number of directors at eight and re-elected eight directors.",
         "The annual accounts and the consolidated accounts for the year ended December 31, 2025, were approved.",
         "A dividend distribution of USD 3 per share to be paid in four equal installments on or around July 15, 2026, October 15, 2026, January 15, 2027, and April 15, 2027, was approved.",
-        "The discharge of all the current and former Directors of Millicom who served at any point in time during the financial year ended December 31, 2025, for the performance of their mandates, was approved.",
         "KPMG was re-elected as the external auditor of Millicom.",
+        "The remuneration to the Board and external auditor was approved.",
         "The Share Repurchase Plan was approved."
       ],
       "sec_8k_latest_date": "2026-05-21",
       "news_intelligence": {},
-      "fcf_yield": 13.82,
+      "fcf_yield": 12.99,
       "net_cash_m": -10709.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1831,14 +1826,16 @@
       "return_vs_qqq": 149.7,
       "trend": "UP",
       "news_count": 20,
-      "news_sentiment": "POSITIVE",
+      "news_sentiment": "MIXED",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "POSITIVE",
+      "overall_sentiment": "MIXED",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
         "AI demand",
-        "Revenue beat"
+        "Revenue beat",
+        "Product launch",
+        "Space/Launch"
       ],
       "sec_8k_count": 2,
       "sec_8k_events": [
@@ -1887,14 +1884,14 @@
           "narrative": "CRDO achieves significant market share gains, driven by successful product qualification with major cloud providers and a strong product roadmap, leading to revenue growth of 30% per annum and a market capitalization of $200B in 10 years.",
           "revenue_10yr_b": 13.4,
           "mktcap_10yr_b": 200.0,
-          "multiple": 3.5,
+          "multiple": 3.9,
           "probability": 0.4
         },
         "base": {
           "narrative": "CRDO executes on its product roadmap, qualifies with major cloud providers, and achieves steady revenue growth of 20% per annum, resulting in a market capitalization of $100B in 10 years.",
           "revenue_10yr_b": 6.7,
           "mktcap_10yr_b": 100.0,
-          "multiple": 1.8,
+          "multiple": 2.0,
           "probability": 0.5
         },
         "bear": {
@@ -1910,21 +1907,21 @@
         "written_date": "2026-06-17T16:06:07.502351",
         "ticker": "CRDO"
       },
-      "current_price": 302.52,
-      "market_cap": 56413294592,
+      "current_price": 271.95,
+      "market_cap": 50712670208,
       "revenue": 1335116032,
       "sec_8k_highlights": [
-        "Revenue of $437.0 million grew by 7.4% quarter over quarter and 157.0% year over year.",
-        "GAAP gross margin of 68.2% and non-GAAP gross margin of 68.3%.",
-        "GAAP operating expenses of $142.2 million and non-GAAP operating expenses of $81.7 million.",
-        "GAAP net income of $169.1 million and non-GAAP net income of $226.7 million.",
-        "GAAP diluted net income per share of $0.88 and non-GAAP diluted net income per share of $1.16.",
-        "Ending cash and short-term investment balance of $1.4 billion.",
-        "[RISK] Credo expects to achieve continued strong financial performance with our innovative and vertically integrated approach that enables customers to accelerate cluster time-to-stability, maximize GPU utilization, improve network reliability, and reduce overall infrastructure power and operating costs."
+        "Revenue of $437.0 million grew by 7.4% quarter over quarter and 157.0% year over year",
+        "GAAP gross margin of 68.2% and non-GAAP gross margin of 68.3%",
+        "GAAP operating expenses of $142.2 million and non-GAAP operating expenses of $81.7 million",
+        "GAAP net income of $169.1 million and non-GAAP net income of $226.7 million",
+        "GAAP diluted net income per share of $0.88 and non-GAAP diluted net income per share of $1.16",
+        "Ending cash and short-term investment balance of $1.4 billion",
+        "Revenue is expected to be between $465.0 million and $475.0 million"
       ],
       "sec_8k_latest_date": "2026-06-01",
       "news_intelligence": {},
-      "fcf_yield": 0.82,
+      "fcf_yield": 0.92,
       "net_cash_m": 1418.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -1966,7 +1963,7 @@
       "tier": "T2",
       "date_added": "2026-06-07",
       "sector": "Financial Services",
-      "market_cap": 3044407040,
+      "market_cap": 2896672768,
       "revenue": 384672000,
       "sentiment_confidence": 2,
       "megatrend": "general",
@@ -2000,7 +1997,7 @@
       "return_1yr": 99.2,
       "return_vs_qqq": 65.5,
       "trend": "DOWN",
-      "news_count": 0,
+      "news_count": 1,
       "news_sentiment": "NEUTRAL",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
@@ -2057,14 +2054,14 @@
           "narrative": "Sprott Inc. successfully rides the commodity cycle growth trend, leveraging its brand and expertise to increase market share and revenue. Commodity prices rise, driving demand for precious metals and commodity investments.",
           "revenue_10yr_b": 1.52,
           "mktcap_10yr_b": 8.5,
-          "multiple": 2.8,
+          "multiple": 2.9,
           "probability": 0.4
         },
         "base": {
           "narrative": "Sprott Inc. maintains its current market position, with steady demand for precious metals and commodity investments. The company adapts to market changes, but commodity prices remain relatively stable.",
           "revenue_10yr_b": 0.76,
           "mktcap_10yr_b": 4.8,
-          "multiple": 1.6,
+          "multiple": 1.7,
           "probability": 0.5
         },
         "bear": {
@@ -2080,11 +2077,17 @@
         "written_date": "2026-06-18T02:07:43.320924",
         "ticker": "SII"
       },
-      "current_price": 118.08,
-      "sec_8k_highlights": [],
-      "sec_8k_latest_date": "2026-05-07",
+      "current_price": 112.35,
+      "sec_8k_highlights": [
+        "Sprott\u2019s Assets Under Management (\u201cAUM\u201d) were $65.1 billion as at March 31, 2026, up 9% from $59.6 billion as at December 31, 2025.",
+        "During the quarter we reported $1.7 billion in net sales.",
+        "Subsequent to quarter-end, as at May 1, 2026, AUM was $65.5 billion, up 1% from March 31, 2026.",
+        "Net income for the quarter was $29.2 million ($1.13 per share), up $17.3 million from $12 million ($0.46 per share) for the quarter ended March 31, 2025.",
+        "Adjusted EBITDA was $57.9 million ($2.25 per share) for the quarter, up $36 million from $21.9 million ($0.85 per share) for the quarter ended March 31, 2025."
+      ],
+      "sec_8k_latest_date": "2026-05-06",
       "news_intelligence": {},
-      "fcf_yield": 4.2,
+      "fcf_yield": 4.42,
       "net_cash_m": 175.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -2113,8 +2116,8 @@
           "pct": 0.0159
         },
         {
-          "name": "AIM Intl Mutual Fd.s -Invesco Intl Small-Mid Company Fd.",
-          "pct": 0.0099
+          "name": "VANGUARD TAX-MANAGED FUNDS-Vanguard Developed Markets Index Fund",
+          "pct": 0.0081
         }
       ],
       "congress_disclosures": [],
@@ -2126,7 +2129,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Basic Materials",
-      "market_cap": 1280278912,
+      "market_cap": 1335644672,
       "revenue": 55275000,
       "sentiment_confidence": 1,
       "megatrend": "nuclear_renaissance",
@@ -2170,15 +2173,15 @@
       "sec_8k_count": 6,
       "sec_8k_events": [
         {
+          "date": "2026-06-30",
+          "description": "Material event filed"
+        },
+        {
           "date": "2026-05-28",
           "description": "Material event filed"
         },
         {
           "date": "2026-05-20",
-          "description": "Material event filed"
-        },
-        {
-          "date": "2026-05-14",
           "description": "Material event filed"
         }
       ],
@@ -2225,14 +2228,14 @@
           "narrative": "VMET successfully capitalizes on the growing demand for precious metals royalty and streaming, achieving significant revenue growth and expanding its market share.",
           "revenue_10yr_b": 1.5,
           "mktcap_10yr_b": 15.0,
-          "multiple": 11.7,
+          "multiple": 11.2,
           "probability": 0.4
         },
         "base": {
           "narrative": "VMET experiences steady growth, meeting industry expectations and maintaining its current market position.",
           "revenue_10yr_b": 0.5,
           "mktcap_10yr_b": 5.0,
-          "multiple": 3.9,
+          "multiple": 3.7,
           "probability": 0.3
         },
         "bear": {
@@ -2248,16 +2251,17 @@
         "written_date": "2026-06-18T02:07:55.710032",
         "ticker": "VMET"
       },
-      "current_price": 11.79,
+      "current_price": 12.3,
       "sec_8k_highlights": [
-        "KPMG has resigned as the auditor of the Company effective May 15, 2026.",
-        "PwC has been appointed as auditor of the Company to fill the vacancy, to hold office commencing on May 15, 2026 until the close of the next annual meeting of shareholders of the Company.",
-        "There have been no modified opinions in the reports from KPMG on the Company\u2019s financial statements relating to the \u201crelevant period\u201d (as that term is defined in Section 4.11 of NI 51-102).",
-        "In the opinion of the Company, as at the date hereof, there have been no \u201creportable events\u201d (as that term is defined in Section 4.11 of NI 51-102)."
+        "The Company hereby gives notice pursuant to Section 4.11 of NI 51-102 as follows:",
+        "Effective May 15, 2026 (the \u201cEffective Date \u201d), KPMG has resigned as the auditor of the Company at the Company\u2019s request.",
+        "PwC has been appointed as auditor of the Company to fill the vacancy, to hold office commencing on the Effective Date until the close of the next annual meeting of shareholders of the Company.",
+        "[RISK] There have been no modified opinions in the reports from KPMG on the Company\u2019s financial statements relating to the \u201crelevant period\u201d (as that term is defined in Section 4.11 of NI 51-102).",
+        "[RISK] In the opinion of the Company, as at the date hereof, there have been no \u201creportable events\u201d (as that term is defined in Section 4.11 of NI 51-102)."
       ],
       "sec_8k_latest_date": "2026-05-20",
       "news_intelligence": {},
-      "fcf_yield": 2.47,
+      "fcf_yield": 2.37,
       "net_cash_m": -39.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -2299,7 +2303,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Basic Materials",
-      "market_cap": 6105845760,
+      "market_cap": 5815479808,
       "revenue": 705900992,
       "sentiment_confidence": 1,
       "megatrend": "synthetic_biology",
@@ -2394,14 +2398,14 @@
           "narrative": "Perimeter Solutions achieves significant revenue growth through expansion of its fire safety and specialty chemicals market, driven by increasing demand for patented products and a solid customer base.",
           "revenue_10yr_b": 2.5,
           "mktcap_10yr_b": 20.0,
-          "multiple": 3.3,
+          "multiple": 3.4,
           "probability": 0.4
         },
         "base": {
           "narrative": "Perimeter Solutions maintains its current market position and grows revenue at a moderate pace, driven by steady demand for its products and services.",
           "revenue_10yr_b": 1.5,
           "mktcap_10yr_b": 10.0,
-          "multiple": 1.6,
+          "multiple": 1.7,
           "probability": 0.3
         },
         "bear": {
@@ -2417,19 +2421,19 @@
         "written_date": "2026-06-18T02:08:01.639687",
         "ticker": "PRM"
       },
-      "current_price": 37.43,
+      "current_price": 35.65,
       "sec_8k_highlights": [
-        "Perimeter Solutions reported first quarter 2026 Net Income of $72.9M and Adjusted Net Income of $9.0M.",
-        "Adjusted EBITDA increased 128% to $41.2 million in the first quarter, as compared to $18.1 million in the prior year quarter.",
-        "Net sales increased 74% to $125.1 million in the first quarter, as compared to $72.0 million in the prior year quarter.",
-        "Perimeter Solutions entered into key five-year contracts with the United States Defense Logistics Agency for suppressants and with California Department of Forestry for retardants in April 2026.",
-        "Perimeter Solutions acquired the outstanding capital stock of Medical Manufacturing Technologies, LLC for a total cash purchase price, net of cash acquired of $682.3 million.",
-        "Perimeter Solutions invested $5.8 million in capital expenditures during the quarter ended March 31, 2026.",
-        "Perimeter Solutions management will hold a conference call at 8:30 a.m. ET on Wednesday, May 6, 2026 to discuss financial results for the first quarter 2026."
+        "Net sales increased 74% to $125.1 million in the first quarter.",
+        "Net income during the first quarter was $72.9 million, or $0.44 earnings per diluted share.",
+        "Adjusted EBITDA increased 128% to $41.2 million in the first quarter.",
+        "First quarter non-GAAP adjusted earnings per diluted share was $0.06.",
+        "The Company acquired the outstanding capital stock of Medical Manufacturing Technologies, LLC for a total cash purchase price, net of cash acquired of $682.3 million.",
+        "Perimeter Solutions management will hold a conference call at 8:30 a.m. ET on Wednesday, May 6, 2026 to discuss financial results for the first quarter 2026.",
+        "The Company invested $5.8 million in capital expenditures during the quarter ended March 31, 2026."
       ],
       "sec_8k_latest_date": "2026-05-06",
       "news_intelligence": {},
-      "fcf_yield": 2.05,
+      "fcf_yield": 2.16,
       "net_cash_m": -1282.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -2451,7 +2455,7 @@
       "mutualfund_holders": [
         {
           "name": "Principal Funds, Inc-MidCap Fund",
-          "pct": 0.048899997
+          "pct": 0.0498
         },
         {
           "name": "VANGUARD INDEX FUNDS-Vanguard Total Stock Market Index Fund",
@@ -2471,7 +2475,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Industrials",
-      "market_cap": 1783813760,
+      "market_cap": 1788234752,
       "revenue": 1784109952,
       "sentiment_confidence": 5,
       "megatrend": "general",
@@ -2505,11 +2509,11 @@
       "return_1yr": -20.0,
       "return_vs_qqq": -53.7,
       "trend": "DOWN",
-      "news_count": 3,
-      "news_sentiment": "NEUTRAL",
+      "news_count": 1,
+      "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "NEUTRAL",
+      "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [],
       "sec_8k_count": 2,
@@ -2589,13 +2593,13 @@
         "written_date": "2026-06-18T02:08:13.869179",
         "ticker": "TIC"
       },
-      "current_price": 8.07,
+      "current_price": 8.09,
       "sec_8k_highlights": [
-        "TIC Solutions, Inc. entered into the Third Amendment to Credit Agreement on June 2, 2026, which reduced the stated rate of interest of the Amendment No. 3 Term Loans by 25.0 basis points and increased the Letter of Credit Sublimit to $50.0 million."
+        "Reduced interest rate by 25.0 bps; increased LC sublimit to $50.0 million"
       ],
       "sec_8k_latest_date": "2026-06-05",
       "news_intelligence": {},
-      "fcf_yield": 4.04,
+      "fcf_yield": 4.03,
       "net_cash_m": -1276.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -2624,8 +2628,8 @@
           "pct": 0.039100002
         },
         {
-          "name": "VANGUARD INDEX FUNDS-Vanguard Extended Market Index Fund",
-          "pct": 0.0167
+          "name": "Reaves Utility Income Fund",
+          "pct": 0.0215
         }
       ],
       "congress_disclosures": [],
@@ -2637,7 +2641,7 @@
       "tier": "T1",
       "date_added": "2026-06-07",
       "sector": "Communication Services",
-      "market_cap": 11667063808,
+      "market_cap": 11327152128,
       "revenue": 2874144000,
       "sentiment_confidence": 1,
       "megatrend": "general",
@@ -2672,15 +2676,14 @@
       "return_vs_qqq": 5.8,
       "trend": "UP",
       "news_count": 20,
-      "news_sentiment": "POSITIVE",
+      "news_sentiment": "MIXED",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "POSITIVE",
+      "overall_sentiment": "MIXED",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
         "AI demand",
-        "Partnership",
-        "Nuclear/Energy"
+        "Partnership"
       ],
       "sec_8k_count": 2,
       "sec_8k_events": [
@@ -2728,7 +2731,7 @@
           "narrative": "The New York Times continues to thrive as a trusted news source, with increasing demand for high-quality journalism driving subscription growth and revenue expansion.",
           "revenue_10yr_b": 15.0,
           "mktcap_10yr_b": 20.0,
-          "multiple": 1.7,
+          "multiple": 1.8,
           "probability": 0.4
         },
         "base": {
@@ -2751,19 +2754,18 @@
         "written_date": "2026-06-07T13:16:22.456153",
         "ticker": "NYT"
       },
-      "current_price": 72.08,
+      "current_price": 69.98,
       "sec_8k_highlights": [
-        "Digital-only subscription revenues grew 16.1 percent year-over-year, driven by growth in both digital-only subscribers and digital-only average revenue per user (\u201cARPU\u201d).",
-        "The Company added approximately 310,000 net digital-only subscribers compared with the end of the fourth quarter of 2025, bringing the total number of subscribers to 13.08 million.",
+        "Digital-only subscription revenues grew 16.1 percent year-over-year, driven by growth in both digital-only subscribers and digital-only average revenue per user.",
         "Digital advertising revenues increased 31.6 percent year-over-year primarily due to strong marketer demand and growth in advertising supply.",
-        "Operating costs increased 7.7 percent year-over-year and adjusted operating costs (defined below) increased 9.4 percent year-over-year, largely as a result of higher compensation and benefits expenses, primarily relating to our journalism.",
-        "Operating profit increased 54.5 percent year-over-year to $90.6 million, while adjusted operating profit (defined below) increased 27.2 percent year-over-year to $117.9 million.",
-        "Operating profit margin increased to 12.7 percent, while adjusted operating profit margin (defined below) increased to 16.6 percent, a year-over-year increase of approximately 350 and 200 basis points, respectively.",
-        "Diluted earnings per share for the quarter was $0.54, a $0.24 increase year-over-year and adjusted diluted earnings per share (defined below) was $0.61, a $0.20 increase year-over-year."
+        "Operating profit increased 54.5 percent year-over-year to $90.6 million, while adjusted operating profit increased 27.2 percent year-over-year to $117.9 million.",
+        "Operating profit margin increased to 12.7 percent, while adjusted operating profit margin increased to 16.6 percent, a year-over-year increase of approximately 350 and 200 basis points, respectively.",
+        "Diluted earnings per share for the quarter was $0.54, a $0.24 increase year-over-year and adjusted diluted earnings per share was $0.61, a $0.20 increase year-over-year.",
+        "Total subscribers were 13.08 million, with 12.52 million digital-only subscribers, and digital-only subscribers quarterly net additions were 310,000."
       ],
       "sec_8k_latest_date": "2026-05-06",
       "news_intelligence": {},
-      "fcf_yield": 4.95,
+      "fcf_yield": 5.1,
       "net_cash_m": 595.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -2785,7 +2787,7 @@
       "mutualfund_holders": [
         {
           "name": "iShares Trust-iShares Core S&P Mid-Cap ETF",
-          "pct": 0.0339
+          "pct": 0.034
         },
         {
           "name": "VANGUARD INDEX FUNDS-Vanguard Total Stock Market Index Fund",
@@ -2805,7 +2807,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Financial Services",
-      "market_cap": 8717643776,
+      "market_cap": 7996843008,
       "revenue": 1634574976,
       "sentiment_confidence": 5,
       "megatrend": "general",
@@ -2839,15 +2841,21 @@
       "return_1yr": -4.2,
       "return_vs_qqq": -37.9,
       "trend": "UP",
-      "news_count": 3,
+      "news_count": 4,
       "news_sentiment": "NEGATIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
       "overall_sentiment": "NEGATIVE",
       "signal_or_noise": "SIGNAL",
-      "key_themes": [],
-      "sec_8k_count": 2,
+      "key_themes": [
+        "Insider activity"
+      ],
+      "sec_8k_count": 3,
       "sec_8k_events": [
+        {
+          "date": "2026-06-29",
+          "description": "Director/officer departure or appointment"
+        },
         {
           "date": "2026-06-12",
           "description": "Regulation FD disclosure, Financial statements attached"
@@ -2900,7 +2908,7 @@
           "narrative": "Freedom Holding Corp expands its financial services market share through strategic partnerships and innovative products, driving revenue growth of 25% YoY and increasing market capitalization by 500% in the next 10 years.",
           "revenue_10yr_b": 5.0,
           "mktcap_10yr_b": 10.0,
-          "multiple": 1.1,
+          "multiple": 1.3,
           "probability": 0.4
         },
         "base": {
@@ -2923,14 +2931,15 @@
         "written_date": "2026-06-07T13:16:29.761783",
         "ticker": "FRHC"
       },
-      "current_price": 142.23,
+      "current_price": 130.47,
       "sec_8k_highlights": [
-        "Freedom Holding Corp. has launched an offering of its common stock for an aggregate amount of up to US$300 million.",
-        "The price per share of common stock offered in the offering is US$126.35."
+        "Valeriy Kim has been appointed as Chief Financial Officer of Freedom Holding Corp, effective immediately.",
+        "Evgeny Ler is expected to serve as a special advisor to Freedom Holding Corp Chief Executive Officer Timur Turlov, focusing on financing and M&A activities.",
+        "No forward guidance provided."
       ],
-      "sec_8k_latest_date": "2026-06-12",
+      "sec_8k_latest_date": "2026-06-29",
       "news_intelligence": {},
-      "fcf_yield": 2.12,
+      "fcf_yield": 2.32,
       "net_cash_m": 874.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -2972,7 +2981,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Utilities",
-      "market_cap": 3450618112,
+      "market_cap": 3483967488,
       "revenue": 1005929024,
       "sentiment_confidence": 1,
       "megatrend": "energy_transition",
@@ -3015,18 +3024,18 @@
       "key_themes": [
         "Regulatory"
       ],
-      "sec_8k_count": 10,
+      "sec_8k_count": 9,
       "sec_8k_events": [
+        {
+          "date": "2026-06-29",
+          "description": "Material event filed"
+        },
         {
           "date": "2026-06-22",
           "description": "Material event filed"
         },
         {
           "date": "2026-06-03",
-          "description": "Material event filed"
-        },
-        {
-          "date": "2026-06-01",
           "description": "Material event filed"
         }
       ],
@@ -3080,7 +3089,7 @@
           "narrative": "Kenon Holdings maintains a steady 10% YoY revenue growth, with moderate expansion of its diversified portfolio, resulting in a stable increase in market capitalization.",
           "revenue_10yr_b": 2.59,
           "mktcap_10yr_b": 9.21,
-          "multiple": 2.7,
+          "multiple": 2.6,
           "probability": 0.3
         },
         "bear": {
@@ -3096,14 +3105,18 @@
         "written_date": "2026-06-18T02:08:26.040404",
         "ticker": "KEN"
       },
-      "current_price": 66.22,
+      "current_price": 66.86,
       "sec_8k_highlights": [
-        "Kenon's subsidiary OPC Energy Ltd. has announced receipt of tariff approval from the Israeli Electricity Authority for the Hadera Expansion Project, a combined-cycle natural gas-fired power plant with an estimated capacity of approximately 850 MW.",
-        "The principal terms of the approval include an availability tariff of 3.31 agorot for a period of approximately 25 years from the commercial operation date, and sale of energy at the half-hourly market price, SMP."
+        "Kenon Holdings Ltd. announces that an ad hoc committee has issued a decision in favor of Kenon and its wholly-owned subsidiary IC Power Ltd., rejecting all of the Republic of Peru's arguments and dismissing Peru's application for partial annulment in relation to the arbitration award.",
+        "The Committee also ordered Peru to pay Kenon and IC Power approximately $1.3 million, which amounts to approximately 50% of their legal fees incurred in defending the annulment application.",
+        "As of June 29, 2026, the total amount of the Award, together with awarded fees, costs and accrued interest, was approximately $200 million, with Kenon's estimated share of the Award, including interest and net of certain outstanding arbitration costs, approximately $93 million, subject to tax.",
+        "[RISK] Interest will continue to accrue until the Award is paid.",
+        "Kenon and IC Power have entered into an agreement with a capital provider to provide capital for expenses in relation to the pursuit of their arbitration claims against Peru and other costs.",
+        "In the event that Kenon or IC Power receives proceeds in connection with the Award or settlement thereof, the capital provider will be entitled to be repaid the amount committed by the capital provider (which, to date, has equaled $12 million) and to receive up to approximately 55% of the net claim proceeds, subject to the terms of the agreement among Kenon, IC Power and the capital provider."
       ],
-      "sec_8k_latest_date": "2026-06-22",
+      "sec_8k_latest_date": "2026-06-29",
       "news_intelligence": {},
-      "fcf_yield": 5.91,
+      "fcf_yield": 5.85,
       "net_cash_m": -593.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -3145,7 +3158,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Industrials",
-      "market_cap": 98374918144,
+      "market_cap": 86101164032,
       "revenue": 2449027072,
       "sentiment_confidence": 1,
       "megatrend": "energy_transition",
@@ -3186,9 +3199,12 @@
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "AI demand"
+        "AI demand",
+        "Revenue beat",
+        "Space/Launch",
+        "Insider activity"
       ],
-      "sec_8k_count": 6,
+      "sec_8k_count": 5,
       "sec_8k_events": [
         {
           "date": "2026-06-17",
@@ -3246,20 +3262,20 @@
           "narrative": "BE achieves significant revenue growth through innovative products and strategic expansion, leading to a market capitalization of $250B in 10 years.",
           "revenue_10yr_b": 15.0,
           "mktcap_10yr_b": 250.0,
-          "multiple": 2.5,
+          "multiple": 2.9,
           "probability": 0.4
         },
         "base": {
           "narrative": "BE maintains steady growth, driven by its strong financial position and industry demand, resulting in a market capitalization of $150B in 10 years.",
           "revenue_10yr_b": 8.0,
           "mktcap_10yr_b": 150.0,
-          "multiple": 1.5,
+          "multiple": 1.7,
           "probability": 0.5
         },
         "bear": {
           "narrative": "BE faces significant challenges, including increased competition and failure to achieve revenue targets, leading to a market capitalization of $50B in 10 years.",
           "mktcap_10yr_b": 50.0,
-          "multiple": 0.5,
+          "multiple": 0.6,
           "probability": 0.1
         },
         "current_tracking": "BULL",
@@ -3269,13 +3285,14 @@
         "written_date": "2026-06-18T09:02:09.967610",
         "ticker": "BE"
       },
-      "current_price": 345.85,
+      "current_price": 302.7,
       "sec_8k_highlights": [
-        "Bloom Energy Corporation reported that its market-capitalization value grew from approximately $5b as of December 31, 2024 to approximately $79b as of June 15, 2026."
+        "Bloom Energy Corporation reported that its market-capitalization value grew from approximately $5b as of December 31, 2024 to approximately $79b as of June 15, 2026.",
+        "The Board approved a grant of performance-based restricted stock units (PSUs) in respect of 271,076 shares of common stock of the Company at the target level to Dr. KR Sridhar on June 15, 2026."
       ],
       "sec_8k_latest_date": "2026-06-17",
       "news_intelligence": {},
-      "fcf_yield": 0.3,
+      "fcf_yield": 0.35,
       "net_cash_m": -461.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -3714,6 +3731,13 @@
     },
     {
       "date": "2026-06-23",
+      "new_additions": [],
+      "exits": [],
+      "migrations": [],
+      "holdings_count": 20
+    },
+    {
+      "date": "2026-07-01",
       "new_additions": [],
       "exits": [],
       "migrations": [],
