@@ -21,7 +21,7 @@ Requires: ANTHROPIC_API_KEY
 import os, json, re, logging, time
 from datetime import datetime, timedelta
 from pathlib import Path
-import anthropic
+from llm_client import call_llm, get_active_provider
 
 log = logging.getLogger('quarterly_review')
 logging.basicConfig(
@@ -32,9 +32,6 @@ logging.basicConfig(
 BASE_DIR    = Path(__file__).parent
 SCORES_FILE = BASE_DIR / 'data' / 'megatrend_scores.json'
 SCORES_FILE.parent.mkdir(parents=True, exist_ok=True)
-
-ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
-CLAUDE_MODEL      = 'claude-sonnet-4-5'
 
 # How long scores stay valid before next quarterly review
 SCORE_TTL_DAYS = 90
@@ -150,7 +147,7 @@ def save_scores(scores: dict, review_results: dict) -> None:
         'next_review':   (datetime.now() + timedelta(days=SCORE_TTL_DAYS)).strftime('%Y-%m-%d'),
         'scores':        scores,
         'detail':        review_results,
-        'model_used':    CLAUDE_MODEL,
+        'model_used':    model if (provider := get_active_provider()[0]) else 'unknown',
     }
     with open(SCORES_FILE, 'w') as f:
         json.dump(data, f, indent=2)
@@ -172,17 +169,18 @@ def run_quarterly_review(force: bool = False) -> dict:
         existing = load_existing_scores()
         return existing.get('scores', {})
 
-    if not ANTHROPIC_API_KEY:
-        log.warning('ANTHROPIC_API_KEY not set — quarterly review skipped')
+    provider, model = get_active_provider()
+    if not provider:
+        log.warning('No LLM provider configured — quarterly review skipped')
         return {k: v['base_score'] for k, v in MEGATRENDS_FOR_REVIEW.items()}
 
     log.info('=' * 60)
     log.info('  QUARTERLY MEGATREND REVIEW')
     log.info(f'  Date: {datetime.now().strftime("%Y-%m-%d")}')
+    log.info(f'  Provider: {provider} / {model}')
     log.info(f'  Reviewing {len(MEGATRENDS_FOR_REVIEW)} megatrends')
     log.info('=' * 60)
 
-    client       = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     scores       = {}
     review_detail= {}
     date_str     = datetime.now().strftime('%B %Y')
@@ -197,17 +195,10 @@ def run_quarterly_review(force: bool = False) -> dict:
         )
 
         try:
-            resp = client.messages.create(
-                model      = CLAUDE_MODEL,
-                max_tokens = 300,
-                system     = ('You are a senior equity research analyst. '
-                              'Return ONLY valid JSON. No preamble, no markdown.'),
-                messages   = [{'role': 'user', 'content': prompt}]
-            )
-            text = resp.content[0].text.strip()
-            text = re.sub(r'^```json?\s*', '', text)
-            text = re.sub(r'\s*```$', '', text)
-            result = json.loads(text)
+            llm_result = call_llm(prompt, max_tokens=300)
+            if not llm_result.get('success'):
+                raise Exception(llm_result.get('error', 'LLM call failed'))
+            result = llm_result['data']
 
             new_score = int(result.get('score', mt['base_score']))
             new_score = max(1, min(10, new_score))   # clamp 1-10
