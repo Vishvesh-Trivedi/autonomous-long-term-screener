@@ -41,6 +41,8 @@ CONCEPTS = {
                        'WeightedAverageNumberOfDilutedSharesOutstanding'],
     'gross_profit':   ['GrossProfit'],
     'rd_expense':     ['ResearchAndDevelopmentExpense'],
+    'stockholders_equity': ['StockholdersEquity',
+                            'StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'],
 }
 
 
@@ -234,6 +236,29 @@ def compute_trajectory(ticker: str) -> dict:
         'dilution_trajectory': dilution_flag,
         'edgar_note':         f'{len(revenue)} years of filed data',
     }
+
+
+_EQUITY_CACHE: dict = {}
+
+def get_stockholders_equity(ticker: str) -> float | None:
+    """
+    Most recent total stockholders' equity (USD) filed with SEC, for use as a
+    fallback when Yahoo Finance has no usable equity figure (yfinance dropped
+    'totalStockholderEquity' from its schema; 'bookValue' is per-share, not
+    total). Cached per-run since gates may check the same ticker more than once.
+    """
+    if ticker in _EQUITY_CACHE:
+        return _EQUITY_CACHE[ticker]
+    equity = None
+    try:
+        facts  = fetch_company_facts(ticker)
+        series = _extract_annual_series(facts, CONCEPTS['stockholders_equity'])
+        if series:
+            equity = series[0]['val']
+    except Exception as e:
+        log.debug(f'  EDGAR equity fetch failed for {ticker}: {e}')
+    _EQUITY_CACHE[ticker] = equity
+    return equity
 
 
 # ── YAHOO CROSS-CHECK ─────────────────────────────────────────────────────────

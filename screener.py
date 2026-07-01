@@ -23,7 +23,7 @@ v2.0 additions:
 from email_builder import generate_action_email, generate_exit_email, generate_trial_email
 from email_report import generate_full_report
 from research_metrics import compute_all_metrics, MEGATRENDS
-from edgar_fundamentals import compute_trajectory, cross_check_yahoo, fetch_customer_concentration
+from edgar_fundamentals import compute_trajectory, cross_check_yahoo, fetch_customer_concentration, get_stockholders_equity
 from ipo_monitor import run_ipo_monitor, get_ipo_watchlist_summary, get_eligible_for_screening
 from quarterly_review import run_quarterly_review, print_score_report
 import os, json, time, pickle, logging, ssl, smtplib, re
@@ -525,7 +525,7 @@ def get_sector_gm_threshold(info: dict) -> float:
             return thresholds.get(sector_key, 0.30)
     return gm_cfg.get('default', 0.30)
 
-def compute_debt_ratios(info: dict) -> dict:
+def compute_debt_ratios(info: dict, ticker: str = '') -> dict:
     try:
         debt     = info.get('totalDebt', 0) or 0
         ebitda   = info.get('ebitda', 0) or 0
@@ -534,16 +534,21 @@ def compute_debt_ratios(info: dict) -> dict:
         c_liab   = info.get('totalCurrentLiabilities', 0) or 0
 
         # yfinance no longer exposes 'totalStockholderEquity'. Prefer its own
-        # 'debtToEquity' (reported as a percentage, e.g. 79.5 == 0.795x). Falling
-        # back to bookValue (equity PER SHARE) * sharesOutstanding for total equity
-        # in dollars — using bookValue alone as if it were total equity produced a
-        # units mismatch (debt in dollars / equity per-share) that always exceeded
-        # the sentinel threshold, silently zeroing out every T1/T2 candidate.
+        # 'debtToEquity' (reported as a percentage, e.g. 79.5 == 0.795x), then
+        # bookValue (equity PER SHARE) * sharesOutstanding for total equity in
+        # dollars — using bookValue alone as if it were total equity produced a
+        # units mismatch (debt in dollars / equity per-share) that always
+        # exceeded the sentinel threshold, silently zeroing out every T1/T2
+        # candidate. If Yahoo has neither, fall back to SEC EDGAR's filed
+        # StockholdersEquity (authoritative, no rate limits, but a network call
+        # — only worth it once Yahoo has already come up empty).
         yf_de = info.get('debtToEquity')
         if yf_de is not None and yf_de >= 0:
             de_ratio = round(yf_de / 100, 2)
         else:
             equity = (info.get('bookValue', 0) or 0) * (info.get('sharesOutstanding', 0) or 0)
+            if equity < 1e6 and ticker:
+                equity = get_stockholders_equity(ticker) or 0
             de_ratio = round(debt / equity, 2) if equity >= 1e6 else 999.0
         if de_ratio > 100:
             de_ratio = 999.0
@@ -722,7 +727,7 @@ For a 20-YEAR investor, return ONLY valid JSON:
 
 
 # ── STEP 3: SCREENING ─────────────────────────────────────────────────────────
-def passes_t1_gate(info: dict) -> tuple:
+def passes_t1_gate(info: dict, ticker: str = '') -> tuple:
     mkt_cap = info.get('marketCap', 0) or 0
     revenue = info.get('totalRevenue', 0) or 0
     ocf     = info.get('operatingCashflow', 0) or 0
@@ -736,7 +741,7 @@ def passes_t1_gate(info: dict) -> tuple:
     if gm < gm_min:                  return False, f'GM {gm:.0%} < {gm_min:.0%}'
     roic = compute_roic(info)
     if roic < _cs("t1","min_roic",0.10):                  return False, f'ROIC {roic:.0%} < 10%'
-    debt = compute_debt_ratios(info)
+    debt = compute_debt_ratios(info, ticker)
     if debt['de_ratio']  > _cs("t1","max_de_ratio",3.0): return False, f'D/E {debt["de_ratio"]:.1f}x > 3x'
     if 0 < debt['coverage'] < _cs("t1","min_interest_coverage",2.0): return False, f'coverage {debt["coverage"]:.1f}x < 2x'
     if debt['curr_ratio'] < _cs("t1","min_current_ratio",0.80):    return False, f'curr ratio {debt["curr_ratio"]:.1f}x < 0.8'
@@ -750,7 +755,7 @@ def passes_t1_gate(info: dict) -> tuple:
     if get_insider_ownership(info) > 0.05: score += 1
     return score >= _cs("t1","min_score",3), f'T1 score {score}/10 | ROIC {roic:.0%} | D/E {debt["de_ratio"]:.1f}x'
 
-def passes_t2_gate(info: dict) -> tuple:
+def passes_t2_gate(info: dict, ticker: str = '') -> tuple:
     mkt_cap  = info.get('marketCap', 0) or 0
     revenue  = info.get('totalRevenue', 0) or 0
     rev_grow = info.get('revenueGrowth', 0) or 0
@@ -766,7 +771,7 @@ def passes_t2_gate(info: dict) -> tuple:
     monthly_burn = abs(ocf) / 12 if ocf < 0 else 0
     runway = (cash / monthly_burn) if monthly_burn > 0 else 999
     if runway < _cs("t2","min_cash_runway_months",12) and ocf < 0:   return False, f'only {runway:.0f}mo runway'
-    debt = compute_debt_ratios(info)
+    debt = compute_debt_ratios(info, ticker)
     if debt['de_ratio'] > _cs("t2","max_de_ratio",5.0): return False, f'D/E {debt["de_ratio"]:.1f}x > 5x'
     if 0 < debt['coverage'] < 1.5:         return False, f'coverage {debt["coverage"]:.1f}x < 1.5x'
     score = 0
@@ -805,14 +810,14 @@ def passes_t3_gate(info: dict) -> tuple:
     ins_note = f' | founders {get_insider_ownership(info):.0%}' if get_insider_ownership(info) > 0.03 else ''
     return True, f'T3 PASS ({"pre-revenue" if pre_rev else "early-revenue"}){dil_note}{ins_note}'
 
-def compute_t1_score(info: dict) -> float:
+def compute_t1_score(info: dict, ticker: str = '') -> float:
     roic  = compute_roic(info)
     gm    = info.get('grossMargins', 0) or 0
     rev   = info.get('totalRevenue', 0) or 0
     ocf   = info.get('operatingCashflow', 0) or 0
     score = min(roic * 100, 35) + min(gm * 40, 20) + min(rev / 1e9, 15) + min((ocf / max(rev,1)) * 30, 15)
     score += min(get_insider_ownership(info) * 30, 5)
-    if compute_debt_ratios(info)['de_ratio'] > 2.0: score -= 5
+    if compute_debt_ratios(info, ticker)['de_ratio'] > 2.0: score -= 5
     return round(score, 2)
 
 def compute_t2_score(info: dict) -> float:
@@ -844,11 +849,11 @@ def run_screening(fundamentals: dict) -> dict:
         excluded, _ = is_excluded_instrument(ticker, info)
         if excluded: excl += 1; continue
         if (info.get('marketCap', 0) or 0) < _cu("min_market_cap_absolute", 50_000_000): continue
-        t1_pass, t1_reason = passes_t1_gate(info)
+        t1_pass, t1_reason = passes_t1_gate(info, ticker)
         if t1_pass:
-            t1_cands[ticker] = {'tier':'T1','score':compute_t1_score(info),'reason':t1_reason,'info':info}
+            t1_cands[ticker] = {'tier':'T1','score':compute_t1_score(info, ticker),'reason':t1_reason,'info':info}
             continue
-        t2_pass, t2_reason = passes_t2_gate(info)
+        t2_pass, t2_reason = passes_t2_gate(info, ticker)
         if t2_pass:
             t2_cands[ticker] = {'tier':'T2','score':compute_t2_score(info),'reason':t2_reason,'info':info}
             continue
@@ -2231,7 +2236,7 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
                 'ocf_ni_ratio':       all_metrics.get('ocf_ni_ratio'),
                 'net_cash_m':         all_metrics.get('net_cash_m'),
                 'net_cash_flag':      all_metrics.get('net_cash_flag','—'),
-                'de_ratio':           all_metrics.get('de_ratio') or (compute_debt_ratios(info)['de_ratio']),
+                'de_ratio':           all_metrics.get('de_ratio') or (compute_debt_ratios(info, ticker)['de_ratio']),
                 'capital_intensity':  all_metrics.get('capital_intensity'),
                 'rd_intensity':       all_metrics.get('rd_intensity', 0),
                 'reinvestment_rate':  all_metrics.get('reinvestment_rate'),
@@ -2308,7 +2313,7 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
         technicals  = cand.get('technicals', {})
         sentiment   = cand.get('sentiment', {})
         eq_flag     = compute_earnings_quality(info)
-        debt        = compute_debt_ratios(info)
+        debt        = compute_debt_ratios(info, ticker)
         all_metrics = compute_all_metrics(ticker, info)
 
         new_holding = {
