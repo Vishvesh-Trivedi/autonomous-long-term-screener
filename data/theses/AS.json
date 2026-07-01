@@ -1,0 +1,6 @@
+{
+  "verdict": "PARSE_ERROR",
+  "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0). Response: {\n  \"category\": \"Sports apparel and equipment\",\n  \"tam_estimate_b\": 200,\n  \"unfair_advantage\": \"Established brand equity in global sports markets and potential exclusive partnerships with key retailer",
+  "research_date": "2026-06-25T16:56:25.994584",
+  "ticker": "AS"
+}

@@ -1,0 +1,6 @@
+{
+  "verdict": "PARSE_ERROR",
+  "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0). Response: {\n  \"category\": \"Copper Mining and Resource Development\",\n  \"tam_estimate_b\": 100,\n  \"unfair_advantage\": \"Exclusive rights to the MAC Copper Scheme with Harmony, providing operational synergies and co",
+  "research_date": "2026-06-25T16:59:46.519168",
+  "ticker": "AYA"
+}
