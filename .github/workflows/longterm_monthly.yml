@@ -88,6 +88,27 @@ jobs:
           if ok == 0:
               print('WARNING: No congress feeds reachable — disclosures will be absent from this run')
           "
+      - name: Diagnose imports
+        run: |
+          python -c "
+          import sys
+          print('Python:', sys.version)
+          import pkg_resources
+          for pkg in ['anthropic','yfinance','pandas','numpy','requests','openai','vaderSentiment','praw','ta','python-dotenv']:
+              try:
+                  v = pkg_resources.get_distribution(pkg).version
+                  print(f'  {pkg}=={v}')
+              except Exception:
+                  print(f'  {pkg}=NOT INSTALLED')
+          print()
+          for mod in ['email_builder','email_report','research_metrics','edgar_fundamentals','ipo_monitor','quarterly_review','llm_client','screener']:
+              try:
+                  __import__(mod)
+                  print(f'  IMPORT OK: {mod}')
+              except Exception as e:
+                  print(f'  IMPORT FAIL: {mod}: {e}')
+                  import traceback; traceback.print_exc()
+          "
       - name: Run screener
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
