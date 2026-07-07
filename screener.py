@@ -717,7 +717,7 @@ Recent news and community posts (last 30 days):
 
 For a 20-YEAR investor, return ONLY valid JSON:
 {{"thesis_impact":"STRENGTHENS|NEUTRAL|THREATENS","impact_reason":"one sentence why","key_insights":["specific insight with names/amounts (20 words max)","specific insight with names/amounts (20 words max)","specific insight with names/amounts (20 words max)"],"watch_flag":"specific catalyst or risk to watch, or empty string","sentiment_summary":"2-sentence summary of what market is focused on"}}"""
-        result = call_llm(prompt, system='Long-term investment analyst. Return ONLY valid JSON.', max_tokens=350)
+        result = call_llm(prompt, system='Long-term investment analyst. Return ONLY valid JSON.', max_tokens=450)
         if result['success'] and isinstance(result['data'], dict):
             return {**result['data'], '_status': 'ok'}
         err = result.get('error', 'unknown error')

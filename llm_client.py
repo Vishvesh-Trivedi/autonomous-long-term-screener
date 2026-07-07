@@ -47,6 +47,29 @@ def _load_llm_config() -> dict:
     return {}
 
 
+_NVIDIA_CALL_TIMES: list = []
+
+def _throttle_nvidia_rpm() -> None:
+    """
+    Proactively pace calls to stay under NVIDIA NIM's free-tier rate limit
+    (documented as 40 requests/minute — exceeding it returns HTTP 429).
+    Sleeps before making a call that would push us over the limit, instead of
+    firing and reacting to a 429 after the fact.
+    """
+    limit  = PROVIDERS['nvidia']['rate_limit_per_min']
+    window = 60.0
+    now = time.time()
+    global _NVIDIA_CALL_TIMES
+    _NVIDIA_CALL_TIMES = [t for t in _NVIDIA_CALL_TIMES if now - t < window]
+    if len(_NVIDIA_CALL_TIMES) >= limit:
+        sleep_for = window - (now - _NVIDIA_CALL_TIMES[0]) + 0.5
+        if sleep_for > 0:
+            log.warning(f'  NVIDIA RPM guard: {len(_NVIDIA_CALL_TIMES)} calls in the last {window:.0f}s '
+                        f'(limit {limit}) — sleeping {sleep_for:.1f}s')
+            time.sleep(sleep_for)
+    _NVIDIA_CALL_TIMES.append(time.time())
+
+
 def is_provider_available(provider: str = None) -> bool:
     """Check if a provider is configured and has an API key."""
     if provider is None:
@@ -103,15 +126,28 @@ def call_llm(prompt: str, system: str = None, max_tokens: int = 2000,
 
     try:
         if provider == 'nvidia':
-            # Retry NVIDIA up to 3 times on empty response
+            # Retry NVIDIA up to 3 times. Two distinct failure modes observed in
+            # practice: (1) HTTP 429 when the 40 req/min free-tier limit is hit —
+            # previously this raised straight out of the loop with zero retries;
+            # (2) a 200 OK with genuinely empty content, which free-tier NIM
+            # capacity produces under load even within the rate limit.
             text = ''
             for _attempt in range(3):
-                text = _call_nvidia(prompt, system_msg, model, max_tokens, temperature)
+                _throttle_nvidia_rpm()
+                try:
+                    text = _call_nvidia(prompt, system_msg, model, max_tokens, temperature)
+                except Exception as e:
+                    is_rate_limited = getattr(e, 'status_code', None) == 429 or '429' in str(e)
+                    if is_rate_limited and _attempt < 2:
+                        log.warning(f'  NVIDIA rate-limited (attempt {_attempt+1}/3) — backing off 15s...')
+                        time.sleep(15)
+                        continue
+                    raise
                 if text:
                     break
                 if _attempt < 2:
                     log.warning(f'  NVIDIA empty response (attempt {_attempt+1}/3) — retrying...')
-                    time.sleep(2)
+                    time.sleep(3)
             if not text:
                 return {'success': False, 'data': None,
                         'error': 'NVIDIA returned empty after 3 attempts',
