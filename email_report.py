@@ -78,6 +78,7 @@ def _holding_card(h: dict) -> str:
     pct_200ma = h.get('pct_from_200ma')
     ret_1yr   = h.get('return_1yr')
     vs_qqq    = h.get('return_vs_qqq')
+    qqq_ret   = (ret_1yr - vs_qqq) if (ret_1yr is not None and vs_qqq is not None) else None
     trend     = h.get('trend','—')
     cagr3     = h.get('return_3yr_cagr')
     cagr5     = h.get('return_5yr_cagr')
@@ -408,7 +409,10 @@ def _holding_card(h: dict) -> str:
         f'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>'
         + _stat('200-Day MA', above_str, above_c)
         + _stat('52w High', f'{_val(pct_high,"pct1") if pct_high else "—"} from high')
-        + _stat('vs QQQ', f'{vs_qqq:+.1f}% alpha' if vs_qqq is not None else '—', last=True)
+        + _stat('Stock vs QQQ (1yr)',
+                (f'{ret_1yr:+.0f}% <span style="font-weight:400;color:#9ca3af">vs</span> {qqq_ret:+.0f}%'
+                 if (ret_1yr is not None and qqq_ret is not None) else '—'),
+                '#15803d' if (vs_qqq or 0) >= 0 else '#dc2626', last=True)
         + f'</tr></table>'
         f'</td></tr>'
 
@@ -667,6 +671,7 @@ def _screened_card(s: dict) -> str:
     pct_200ma = s.get('pct_from_200ma')
     ret_1yr = s.get('return_1yr')
     vs_qqq  = s.get('return_vs_qqq')
+    qqq_ret = (ret_1yr - vs_qqq) if (ret_1yr is not None and vs_qqq is not None) else None
 
     # Sentiment
     news_n  = s.get('news_count', 0) or 0
@@ -762,7 +767,7 @@ def _screened_card(s: dict) -> str:
         <td class="k">1yr return</td><td class="{_cls(ret_1yr,0,-20) if ret_1yr else 'neu'}">{_pct2(ret_1yr)}</td>
       </tr>
       <tr>
-        <td class="k">vs QQQ</td><td class="{_cls(vs_qqq,0,-10) if vs_qqq else 'neu'}">{_pct2(vs_qqq)}</td>
+        <td class="k">QQQ 1yr</td><td class="neu">{_pct2(qqq_ret)}</td>
         <td class="k">Trend</td><td>{s.get('trend','—')}</td>
       </tr>
     </table>

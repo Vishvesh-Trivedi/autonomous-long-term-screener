@@ -879,12 +879,24 @@ def fetch_technicals(ticker: str) -> dict:
     200MA, 52-week range, 1-year return. No RSI/MACD — those are short-term noise.
     """
     try:
-        hist = yf.Ticker(ticker).history(period='10y')
-        if hist.empty or len(hist) < 50:
-            return {}
-        close         = hist['Close']
-        if len(close) < 756:  # period='10y' should return ~2512 rows; flag silent truncation
-            log.warning(f'  {ticker}: requested 10y history but got only {len(close)} rows — CAGR will be limited')
+        # yfinance can silently return far fewer rows than requested under Yahoo
+        # rate-limiting, with no error raised — a period='10y' request should give
+        # ~2512 rows. Retry a couple of times before accepting a truncated result,
+        # since this is usually transient throttling, not genuinely short history.
+        close = None
+        for attempt in range(3):
+            hist = yf.Ticker(ticker).history(period='10y')
+            if hist.empty or len(hist) < 50:
+                return {}
+            close = hist['Close']
+            if len(close) >= 756 or attempt == 2:
+                break
+            log.warning(f'  {ticker}: got only {len(close)} rows on attempt {attempt+1}/3 '
+                        f'(expected ~2512 for 10y) — retrying...')
+            time.sleep(5)
+        if len(close) < 756:
+            log.warning(f'  {ticker}: requested 10y history but got only {len(close)} rows '
+                        f'after 3 attempts — CAGR will be limited')
         current_price = float(close.iloc[-1])
         ma_200        = float(close.tail(200).mean()) if len(close) >= 200 else float(close.mean())
         above_200ma   = current_price > ma_200

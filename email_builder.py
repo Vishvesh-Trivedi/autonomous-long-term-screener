@@ -681,6 +681,7 @@ def _action_card(item, kind):
     above_200     = item.get('above_200ma')
     ret_1yr       = item.get('return_1yr')
     vs_qqq        = item.get('return_vs_qqq')
+    qqq_ret       = (ret_1yr - vs_qqq) if (ret_1yr is not None and vs_qqq is not None) else None
     mkt_cap       = item.get('market_cap', 0) or 0
     roic          = item.get('roic')
     gm            = item.get('gross_margin')
@@ -757,14 +758,14 @@ def _action_card(item, kind):
     gm_str   = f'{gm*100:.0f}%'             if gm       else '—'
     r1y_str  = f'{ret_1yr:+.0f}%'           if ret_1yr is not None else '—'
     r1y_c    = '#15803d' if (ret_1yr or 0) >= 0 else '#b91c1c'
-    qqq_str  = f'{vs_qqq:+.0f}%'            if vs_qqq is not None else '—'
-    qqq_c    = '#15803d' if (vs_qqq or 0) >= 0 else '#b91c1c'
+    qqq_str  = f'{qqq_ret:+.0f}%'            if qqq_ret is not None else '—'
+    qqq_c    = '#6b7280'
 
     data_row = (
         _cell('Mkt Cap', mc_str) +
         _cell('ROIC', roic_str) +
         _cell('1yr Return', r1y_str, r1y_c) +
-        _cell('vs QQQ', qqq_str, qqq_c)
+        _cell('QQQ 1yr', qqq_str, qqq_c)
     )
 
     # ── News signal (1 line) ──────────────────────────────────────────────────
