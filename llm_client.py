@@ -111,6 +111,9 @@ def call_llm(prompt: str, system: str = None, max_tokens: int = 2000,
     Returns:
         {'success': bool, 'data': dict|None, 'error': str|None, 'provider': str}
     """
+    cfg = _load_llm_config()
+    fallback_provider = cfg.get('fallback_provider', 'anthropic')
+
     provider, model = get_active_provider()
     if model_override and provider == 'nvidia':
         model = model_override
@@ -124,63 +127,78 @@ def call_llm(prompt: str, system: str = None, max_tokens: int = 2000,
         "Return ONLY valid JSON. No preamble, no markdown, no code fences."
     )
 
-    try:
-        if provider == 'nvidia':
-            # Retry NVIDIA up to 3 times. Two distinct failure modes observed in
-            # practice: (1) HTTP 429 when the 40 req/min free-tier limit is hit —
-            # previously this raised straight out of the loop with zero retries;
-            # (2) a 200 OK with genuinely empty content, which free-tier NIM
-            # capacity produces under load even within the rate limit.
-            text = ''
-            for _attempt in range(3):
-                _throttle_nvidia_rpm()
-                try:
-                    text = _call_nvidia(prompt, system_msg, model, max_tokens, temperature)
-                except Exception as e:
-                    is_rate_limited = getattr(e, 'status_code', None) == 429 or '429' in str(e)
-                    if is_rate_limited and _attempt < 2:
-                        log.warning(f'  NVIDIA rate-limited (attempt {_attempt+1}/3) — backing off 15s...')
-                        time.sleep(15)
-                        continue
-                    raise
-                if text:
-                    break
-                if _attempt < 2:
-                    log.warning(f'  NVIDIA empty response (attempt {_attempt+1}/3) — retrying...')
-                    time.sleep(3)
-            if not text:
-                return {'success': False, 'data': None,
-                        'error': 'NVIDIA returned empty after 3 attempts',
-                        'provider': provider}
-        elif provider == 'anthropic':
-            text = _call_anthropic(prompt, system_msg, model, max_tokens, temperature)
-        else:
-            return {'success': False, 'data': None,
-                    'error': f'Unknown provider: {provider}',
-                    'provider': provider}
-    except Exception as e:
-        return {'success': False, 'data': None,
-                'error': str(e), 'provider': provider}
+    def _try_provider(prov: str, mdl: str) -> tuple:
+        """Attempt one provider end-to-end. Returns (text, error) — text is '' on failure."""
+        try:
+            if prov == 'nvidia':
+                # Retry up to 3 times. Two distinct failure modes observed in
+                # practice: (1) HTTP 429 when the 40 req/min free-tier limit is
+                # hit; (2) a 200 OK with genuinely empty content, which
+                # free-tier NIM capacity produces under load even within the
+                # rate limit — this turns out to be far more common for larger
+                # completions (long thesis/scenario JSON) than short ones.
+                text = ''
+                for _attempt in range(3):
+                    _throttle_nvidia_rpm()
+                    try:
+                        text = _call_nvidia(prompt, system_msg, mdl, max_tokens, temperature)
+                    except Exception as e:
+                        is_rate_limited = getattr(e, 'status_code', None) == 429 or '429' in str(e)
+                        if is_rate_limited and _attempt < 2:
+                            log.warning(f'  NVIDIA rate-limited (attempt {_attempt+1}/3) — backing off 15s...')
+                            time.sleep(15)
+                            continue
+                        return '', str(e)
+                    if text:
+                        return text, None
+                    if _attempt < 2:
+                        log.warning(f'  NVIDIA empty response (attempt {_attempt+1}/3) — retrying...')
+                        time.sleep(3)
+                return '', 'NVIDIA returned empty after 3 attempts'
+            elif prov == 'anthropic':
+                text = _call_anthropic(prompt, system_msg, mdl, max_tokens, temperature)
+                return text, (None if text else 'Anthropic returned an empty response')
+            return '', f'Unknown provider: {prov}'
+        except Exception as e:
+            return '', str(e)
 
-    # Parse JSON from response
-    try:
-        cleaned = text.strip()
-        # Strip code fences if model added them
-        if cleaned.startswith('```'):
-            lines = cleaned.split('\n')
-            cleaned = '\n'.join(lines[1:-1] if lines[-1].startswith('```') else lines[1:])
-        # Extract JSON object if there's surrounding text
-        if '{' in cleaned:
-            start = cleaned.find('{')
-            end   = cleaned.rfind('}') + 1
-            cleaned = cleaned[start:end]
-        data = json.loads(cleaned)
-        return {'success': True, 'data': data, 'error': None,
-                'provider': provider, 'model': model}
-    except json.JSONDecodeError as e:
-        return {'success': False, 'data': None,
-                'error': f'JSON parse failed: {e}. Response: {text[:200]}',
-                'provider': provider}
+    def _parse(text: str, prov: str, mdl: str) -> dict:
+        try:
+            cleaned = text.strip()
+            if cleaned.startswith('```'):
+                lines = cleaned.split('\n')
+                cleaned = '\n'.join(lines[1:-1] if lines[-1].startswith('```') else lines[1:])
+            if '{' in cleaned:
+                start = cleaned.find('{')
+                end   = cleaned.rfind('}') + 1
+                cleaned = cleaned[start:end]
+            data = json.loads(cleaned)
+            return {'success': True, 'data': data, 'error': None, 'provider': prov, 'model': mdl}
+        except json.JSONDecodeError as e:
+            return {'success': False, 'data': None,
+                    'error': f'JSON parse failed: {e}. Response: {text[:200]}', 'provider': prov}
+
+    text, err = _try_provider(provider, model)
+    result = _parse(text, provider, model) if text else {'success': False, 'data': None, 'error': err, 'provider': provider}
+
+    # Call-level fallback: if the primary provider failed (empty response OR
+    # unparseable JSON), automatically retry the same prompt on the configured
+    # fallback provider instead of giving up - the previous behavior only fell
+    # back when the primary's API key was entirely absent, not when individual
+    # calls failed. This is what actually determines whether new candidates
+    # get a real thesis or end up as ERROR/PARSE_ERROR and never join the
+    # portfolio.
+    if not result['success'] and fallback_provider and fallback_provider != provider and is_provider_available(fallback_provider):
+        log.warning(f'  {provider} failed ({result["error"]}) — falling back to {fallback_provider} for this call')
+        fb_model = cfg.get('fallback_model') or PROVIDERS[fallback_provider]['default_model']
+        fb_text, fb_err = _try_provider(fallback_provider, fb_model)
+        fb_result = _parse(fb_text, fallback_provider, fb_model) if fb_text else \
+            {'success': False, 'data': None, 'error': fb_err, 'provider': fallback_provider}
+        if fb_result['success']:
+            return fb_result
+        result['error'] = f'{result["error"]}; fallback {fallback_provider} also failed: {fb_result["error"]}'
+
+    return result
 
 
 # ── PROVIDER-SPECIFIC IMPLEMENTATIONS ─────────────────────────────────────────

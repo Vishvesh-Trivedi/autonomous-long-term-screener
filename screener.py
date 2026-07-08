@@ -1993,7 +1993,7 @@ def research_candidate(ticker: str, tier: str, info: dict, filing_text: str, sen
         )
 
     system = "You are a long-term investment analyst. Return ONLY valid JSON."
-    research = research_stock(prompt, system=system, max_tokens=800)
+    research = research_stock(prompt, system=system, max_tokens=1400)
 
     # Moat lie detector
     gm = info.get('grossMargins', 0) or 0
