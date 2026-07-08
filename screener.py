@@ -1590,48 +1590,95 @@ def fetch_congress_disclosures() -> dict:
     finally:
         _sock.getaddrinfo = _orig_getaddrinfo
 
-    # ── Senate EFTS fallback (official US Senate source) ──
-    # Runs whenever community Senate site returned nothing — works on GitHub Actions standard DNS
+    # ── Senate EFD fallback (official US Senate source) ──
+    # Runs whenever the community Senate site returned nothing. As of 2026 both
+    # community sites (housestockwatcher.com, senatestockwatcher.com) and their
+    # underlying GitHub data mirror (last updated 2021) appear defunct — dead
+    # DNS, no data. The previous fallback here pointed at efts.us.senate.gov,
+    # which is NXDOMAIN and never existed; the actual official disclosure
+    # system is a session/CSRF-protected search app at efdsearch.senate.gov,
+    # not a plain JSON API. This reverse-engineers that flow (verified against
+    # the documented approach used by github.com/neelsomani/senator-filings):
+    # accept the site's click-through agreement to get a session + CSRF token,
+    # POST to the search endpoint for PTR (Periodic Transaction Report)
+    # filings, then fetch each electronically-filed report's HTML for the
+    # actual per-transaction ticker/type/amount. Paper (scanned PDF) filings
+    # are skipped — they aren't structured data.
     senate_count = sum(1 for txs in by_ticker.values() for t in txs if t.get('chamber') == 'Senate')
     if senate_count == 0:
-        log.info('  Congress: Senate community site empty — trying official Senate EFTS...')
+        log.info('  Congress: Senate community site empty — trying official efdsearch.senate.gov...')
         try:
-            efts_url = (
-                f'https://efts.us.senate.gov/LATEST/search.json'
-                f'?q=&dateRange=custom&startdate={cutoff_str}&enddate={today_str}'
-            )
-            r = requests.get(efts_url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=20)
-            if r.ok:
-                hits = r.json().get('hits', {}).get('hits', [])
-                for hit in hits:
-                    src = hit.get('_source', {})
-                    tk = str(src.get('ticker', '')).upper().strip().replace('$', '')
-                    if not tk or tk in ('--', 'N/A', 'NONE', ''):
+            from bs4 import BeautifulSoup
+            sess = requests.Session()
+            sess.headers.update({'User-Agent': 'Mozilla/5.0', 'Referer': 'https://efdsearch.senate.gov/search/'})
+            home_url = 'https://efdsearch.senate.gov/search/home/'
+            home = sess.get(home_url, timeout=20)
+            token_tag = BeautifulSoup(home.text, 'html.parser').find(attrs={'name': 'csrfmiddlewaretoken'})
+            if not token_tag:
+                raise RuntimeError('csrfmiddlewaretoken not found on landing page')
+            csrf_token = token_tag['value']
+            sess.post(home_url, data={'csrfmiddlewaretoken': csrf_token, 'prohibition_agreement': '1'}, timeout=20)
+            csrf_token = sess.cookies.get('csrftoken', csrf_token)
+
+            resp = sess.post('https://efdsearch.senate.gov/search/report/data/', data={
+                'start': '0', 'length': '100',
+                'report_types': '[11]',   # 11 = Periodic Transaction Report
+                'filer_types': '[]',
+                'submitted_start_date': cutoff.strftime('%m/%d/%Y 00:00:00'),
+                'submitted_end_date': '',
+                'candidate_state': '', 'senator_state': '', 'office_id': '',
+                'first_name': '', 'last_name': '',
+                'csrfmiddlewaretoken': csrf_token,
+            }, timeout=20)
+            rows = resp.json().get('data', []) if resp.ok else []
+            log.info(f'  Congress Senate EFD: {len(rows)} PTR filings found since {cutoff_str}')
+
+            for row in rows[:100]:
+                try:
+                    first, last, _, link_html, _date_received = row
+                    link = BeautifulSoup(link_html, 'html.parser').a.get('href')
+                except Exception:
+                    continue
+                if not link or link.startswith('/search/view/paper/'):
+                    continue  # scanned PDF — not parseable as structured data
+                try:
+                    report = sess.get(f'https://efdsearch.senate.gov{link}', timeout=20)
+                    tbodies = BeautifulSoup(report.text, 'html.parser').find_all('tbody')
+                    if not tbodies:
                         continue
-                    raw_date = src.get('transaction_date', '') or src.get('transactionDate', '')
-                    try:
-                        tx_date = datetime.strptime(raw_date[:10], '%Y-%m-%d')
-                    except Exception:
-                        continue
-                    if tx_date < cutoff:
-                        continue
-                    tx_type_raw = str(src.get('type', '')).lower()
-                    tx_type = 'Purchase' if 'purchase' in tx_type_raw or 'buy' in tx_type_raw else ('Sale' if 'sale' in tx_type_raw else tx_type_raw.title())
-                    name = (src.get('name', '') or
-                            f"{src.get('first_name','')} {src.get('last_name','')}".strip())
-                    by_ticker.setdefault(tk, []).append({
-                        'name': name,
-                        'chamber': 'Senate',
-                        'type': tx_type,
-                        'amount': src.get('amount', ''),
-                        'date': raw_date[:10],
-                    })
-                new_senate = sum(1 for txs in by_ticker.values() for t in txs if t.get('chamber') == 'Senate')
-                log.info(f'  Congress Senate EFTS: {new_senate} Senate transactions added')
-            else:
-                log.warning(f'  Congress Senate EFTS returned HTTP {r.status_code}')
+                    for tr in tbodies[0].find_all('tr'):
+                        cols = [c.get_text(strip=True) for c in tr.find_all('td')]
+                        if len(cols) < 8:
+                            continue
+                        tx_date_raw, ticker, _asset_name, asset_type, order_type, tx_amount = \
+                            cols[1], cols[3], cols[4], cols[5], cols[6], cols[7]
+                        ticker = ticker.strip().upper()
+                        if asset_type.strip().lower() != 'stock' or not ticker or ticker in ('--', 'N/A'):
+                            continue
+                        try:
+                            tx_date = datetime.strptime(tx_date_raw.strip(), '%m/%d/%Y')
+                        except Exception:
+                            continue
+                        if tx_date < cutoff:
+                            continue
+                        order_lower = order_type.lower()
+                        tx_type = 'Purchase' if 'purchase' in order_lower or 'buy' in order_lower else \
+                                  ('Sale' if 'sale' in order_lower else order_type.title())
+                        by_ticker.setdefault(ticker, []).append({
+                            'name': f'{first} {last}'.strip(),
+                            'chamber': 'Senate',
+                            'type': tx_type,
+                            'amount': tx_amount,
+                            'date': tx_date.strftime('%Y-%m-%d'),
+                        })
+                    time.sleep(1)  # courtesy delay between filing detail fetches
+                except Exception as e:
+                    log.debug(f'  Senate EFD filing fetch failed for {link}: {e}')
+                    continue
+            new_senate = sum(1 for txs in by_ticker.values() for t in txs if t.get('chamber') == 'Senate')
+            log.info(f'  Congress Senate EFD: {new_senate} Senate transactions added')
         except Exception as e:
-            log.warning(f'  Congress Senate EFTS failed: {e}')
+            log.warning(f'  Congress Senate EFD failed: {e}')
 
     for tk in by_ticker:
         by_ticker[tk].sort(key=lambda x: x.get('date', ''), reverse=True)
