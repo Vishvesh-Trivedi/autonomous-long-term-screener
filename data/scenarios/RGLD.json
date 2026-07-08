@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "RGLD's revenue grows at 5% CAGR, driven by increasing gold prices and stable production levels, leading to a 10-year revenue of $2.35B and a market cap of $43.8B, with a 10-year average P/E multiple of 30.",
+    "revenue_10yr_b": 259.101130752,
+    "mktcap_10yr_b": 129.550565376,
+    "multiple": 30,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "RGLD's revenue grows at 2% CAGR, driven by stable gold prices and moderate production levels, leading to a 10-year revenue of $1.83B and a market cap of $29.4B, with a 10-year average P/E multiple of 25.",
+    "revenue_10yr_b": 155.4606784512,
+    "mktcap_10yr_b": 77.7303392256,
+    "multiple": 25,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "RGLD's revenue declines at 3% CAGR, driven by decreasing gold prices and reduced production levels, leading to a 10-year revenue of $1.13B and a market cap of $16.2B, with a 10-year average P/E multiple of 15.",
+    "mktcap_10yr_b": 38.8651696128,
+    "multiple": 15,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current market conditions and RGLD's fundamentals.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:06:00.429944",
+  "ticker": "RGLD"
+}

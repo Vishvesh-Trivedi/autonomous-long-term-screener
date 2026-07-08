@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "American Express maintains its customer base and loyalty, and the company's capital allocation skills remain strong, leading to a significant increase in revenue and market capitalization.",
+    "revenue_10yr_b": 123.92,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 7.68,
+    "probability": 0.2
+  },
+  "base": {
+    "narrative": "American Express maintains its customer base and loyalty, but the company's capital allocation skills decline slightly, leading to a moderate increase in revenue and market capitalization.",
+    "revenue_10yr_b": 94.51,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 6.64,
+    "probability": 0.6
+  },
+  "bear": {
+    "narrative": "American Express fails to maintain its customer base and loyalty, and the company's capital allocation skills decline significantly, leading to a decrease in revenue and market capitalization.",
+    "mktcap_10yr_b": 134.19,
+    "multiple": 4.52,
+    "probability": 0.2
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "If American Express fails to maintain its customer base and loyalty, or if the company's capital allocation skills decline.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:04:27.442486",
+  "ticker": "AXP"
+}

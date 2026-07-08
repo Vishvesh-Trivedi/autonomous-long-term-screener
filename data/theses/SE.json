@@ -1,0 +1,20 @@
+{
+  "moat_type": "Diversified online gaming and e-commerce platform",
+  "moat_durability_years": 10,
+  "management_grade": "B",
+  "growth_runway_years": 5,
+  "primary_risk": "Competition from established players in the online gaming and e-commerce space",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The sector has seen significant consolidation and disruption over the past 30 years, with many companies struggling to maintain their market share.",
+  "thesis_summary": "Sea Limited's online gaming and e-commerce platform rides the trend of increasing digitalization and adoption of online services in emerging markets.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise that do not structurally change the next decade.",
+  "sentiment_note": "Neutral",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 10,
+  "verdict": "MONITOR",
+  "position_size_pct": 2,
+  "long_term_alpha_pp": -32.9,
+  "long_term_note": "5yr CAGR lagged QQQ by 32.9pp \u2014 downgraded",
+  "research_date": "2026-07-08T16:03:29.680955",
+  "ticker": "SE"
+}

@@ -1,0 +1,23 @@
+{
+  "moat_type": "Financial advisory services with a strong network effect",
+  "moat_durability_years": 20,
+  "management_grade": "A",
+  "growth_runway_years": 10,
+  "primary_risk": "Regulatory changes affecting financial advisory services",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The financial advisory services sector has seen significant consolidation and disruption over the past 30 years, with many companies facing challenges from fintech and online platforms.",
+  "thesis_summary": "Ameriprise Financial's financial advisory services, with a strong network effect and high barriers to entry, ride the trend of increasing demand for professional financial advice.",
+  "thesis_breaks_if": "The company's ability to adapt to changing regulatory requirements and technological advancements in the financial services industry.",
+  "sentiment_note": "Positive sentiment from the company's strong track record and growing revenue, but caution is warranted due to the medium durability of the sector.",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 10,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company has a strong track record of revenue growth, with a 5-year compound annual growth rate (CAGR) of 40.7%.",
+    "The company's gross margin has been increasing over the past 5 years, from 54.6% to 57.0%.",
+    "The company has a strong balance sheet, with a cash runway of several years and a debt-to-equity ratio of 0.25."
+  ],
+  "research_date": "2026-07-08T16:02:17.661895",
+  "ticker": "AMP"
+}

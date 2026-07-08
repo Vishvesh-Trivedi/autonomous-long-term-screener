@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "ASML continues to dominate the lithography technology market, driving significant revenue growth and market capitalization expansion.",
+    "revenue_10yr_b": 53.49,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 35.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "ASML maintains its market leadership, but faces increasing competition and slower revenue growth.",
+    "revenue_10yr_b": 43.49,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 26.5,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "ASML faces significant challenges from competitors, leading to declining revenue and market capitalization.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 20.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current market conditions and ASML's leadership in lithography technology.",
+  "thesis_breaks_if": "If ASML's dependence on a few large customers leads to a significant decline in revenue or if a competitor develops a more cost-effective lithography technology.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:05:11.537162",
+  "ticker": "ASMLF"
+}

@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Ameriprise Financial's financial advisory services continue to grow at an accelerated rate, driven by increasing demand for professional financial advice and a strong network effect.",
+    "revenue_10yr_b": 1.15,
+    "mktcap_10yr_b": 1.35,
+    "multiple": 2.5,
+    "probability": 0.6
+  },
+  "base": {
+    "narrative": "Ameriprise Financial's financial advisory services continue to grow at a steady rate, driven by increasing demand for professional financial advice and a strong network effect.",
+    "revenue_10yr_b": 1.05,
+    "mktcap_10yr_b": 1.25,
+    "multiple": 2.2,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "Ameriprise Financial's financial advisory services experience a decline in growth, driven by increasing competition and regulatory challenges.",
+    "mktcap_10yr_b": 0.9,
+    "multiple": 1.8,
+    "probability": 0.0
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "The company's ability to adapt to changing regulatory requirements and technological advancements in the financial services industry.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:04:34.986780",
+  "ticker": "AMP"
+}

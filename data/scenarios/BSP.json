@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "BSP experiences strong growth in the technology sector, driven by its unique moat and ability to innovate.",
+    "revenue_10yr_b": 4.35,
+    "mktcap_10yr_b": 44.2,
+    "multiple": 20,
+    "probability": 0.2
+  },
+  "base": {
+    "narrative": "BSP experiences moderate growth in the technology sector, driven by its existing moat and ability to maintain market share.",
+    "revenue_10yr_b": 2.65,
+    "mktcap_10yr_b": 26.5,
+    "multiple": 15,
+    "probability": 0.6
+  },
+  "bear": {
+    "narrative": "BSP experiences decline in the technology sector, driven by erosion of its moat and inability to innovate.",
+    "mktcap_10yr_b": 14.8,
+    "multiple": 10,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Strong growth expected in the technology sector, driven by BSP's unique moat.",
+  "thesis_breaks_if": "Moat permanently eroded",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:03:55.595150",
+  "ticker": "BSP"
+}

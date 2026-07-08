@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "GRND achieves 20% YoY revenue growth, maintains 5x multiple, and expands market cap to $10B",
+    "revenue_10yr_b": 8.5,
+    "mktcap_10yr_b": 10.0,
+    "multiple": 5.0,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "GRND achieves 10% YoY revenue growth, maintains 4x multiple, and expands market cap to $4B",
+    "revenue_10yr_b": 5.0,
+    "mktcap_10yr_b": 4.0,
+    "multiple": 4.0,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "GRND experiences 10% YoY revenue decline, loses 50% of market cap, and trades at 2x multiple",
+    "mktcap_10yr_b": 1.4,
+    "multiple": 2.0,
+    "probability": 0.2
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "Current financials are used as a basis for the 10-year projections",
+  "thesis_breaks_if": "Moat permanently eroded",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:04:02.939373",
+  "ticker": "GRND"
+}

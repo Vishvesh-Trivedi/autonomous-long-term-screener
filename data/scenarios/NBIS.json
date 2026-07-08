@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Nebius Group's AI-driven cloud computing solutions experience rapid adoption and widespread market penetration, leading to significant revenue growth and a substantial increase in market capitalization.",
+    "revenue_10yr_b": 10.23,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 6.4,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "Nebius Group's AI-driven cloud computing solutions experience steady growth in adoption and market penetration, leading to moderate revenue growth and a modest increase in market capitalization.",
+    "revenue_10yr_b": 4.45,
+    "mktcap_10yr_b": 145.0,
+    "multiple": 4.2,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "Nebius Group's AI-driven cloud computing solutions experience limited adoption and market penetration, leading to stagnant revenue growth and a decline in market capitalization.",
+    "mktcap_10yr_b": 52.2,
+    "multiple": 2.5,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Short-term price moves, news cycles, and 8-K noise do not structurally change the next decade.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise do not structurally change the next decade.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:05:36.257753",
+  "ticker": "NBIS"
+}

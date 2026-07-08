@@ -1,0 +1,23 @@
+{
+  "moat_type": "Low-cost natural gas producer with a strong presence in the Marcellus and Utica shale plays",
+  "moat_durability_years": 15,
+  "management_grade": "B",
+  "growth_runway_years": 10,
+  "primary_risk": "Regulatory changes and shifts in global energy demand",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The energy sector is subject to significant disruptions and changes in global demand, which can impact the long-term viability of companies like EQT.",
+  "thesis_summary": "EQT's low-cost natural gas production capabilities ride the trend of increasing demand for natural gas as a cleaner-burning fuel source.",
+  "thesis_breaks_if": "A structural shift in global energy demand towards renewable energy sources or a significant increase in regulatory hurdles that impact EQT's operations",
+  "sentiment_note": "Neutral",
+  "decade_probability": 0.6,
+  "annual_alpha_estimate": 8,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "EQT Corporation is a leading independent natural gas production company with a strong presence in the Marcellus and Utica shale plays.",
+    "The company's revenue has been rising over the past 5 years, with a 182.1% increase in revenue growth.",
+    "EQT's gross margin has been insufficient over the past 5 years, but the company's ROIC has been rising, with a 200.4% increase in ROIC growth."
+  ],
+  "research_date": "2026-07-08T16:03:09.383973",
+  "ticker": "EQT"
+}

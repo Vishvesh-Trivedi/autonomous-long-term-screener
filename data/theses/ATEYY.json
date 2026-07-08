@@ -1,0 +1,23 @@
+{
+  "moat_type": "Highly specialized semiconductor equipment for complex chip testing",
+  "moat_durability_years": 20,
+  "management_grade": "A",
+  "growth_runway_years": 10,
+  "primary_risk": "Dependence on the semiconductor industry's growth and technological advancements",
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "Advantest's diversified product portfolio and strong brand presence in the semiconductor equipment industry contribute to its high durability and survival rate.",
+  "thesis_summary": "Advantest's highly specialized semiconductor equipment for complex chip testing rides the trend of increasing chip complexity.",
+  "thesis_breaks_if": "Short-term news cycles or 8-K noise that structurally change the next decade",
+  "sentiment_note": "Favorable short-to-long-term outlook",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 15,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The Company's business is subject to intense competition from other semiconductor equipment manufacturers.",
+    "The Company's revenue and profitability may be affected by the cyclical nature of the semiconductor industry.",
+    "The Company's ability to maintain its competitive position and adapt to changing market conditions is crucial to its success."
+  ],
+  "research_date": "2026-07-08T16:02:57.504045",
+  "ticker": "ATEYY"
+}

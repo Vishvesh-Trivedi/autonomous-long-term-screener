@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Strong growth in the healthcare sector drives NONOF's revenue and market capitalization to new heights over the next decade.",
+    "revenue_10yr_b": 3.0,
+    "mktcap_10yr_b": 1.5,
+    "multiple": 25,
+    "probability": 0.2
+  },
+  "base": {
+    "narrative": "NONOF's revenue and market capitalization grow at a moderate pace, driven by steady demand for healthcare services.",
+    "revenue_10yr_b": 2.4,
+    "mktcap_10yr_b": 1.2,
+    "multiple": 20,
+    "probability": 0.6
+  },
+  "bear": {
+    "narrative": "The erosion of NONOF's moat leads to declining revenue and market capitalization over the next decade.",
+    "mktcap_10yr_b": 0.8,
+    "multiple": 15,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL|BASE|BEAR",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "Moat permanently eroded",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:03:47.288769",
+  "ticker": "NONOF"
+}

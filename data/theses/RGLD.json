@@ -1,0 +1,23 @@
+{
+  "moat_type": "Contractual gold and silver royalties",
+  "moat_durability_years": 10,
+  "management_grade": "B",
+  "growth_runway_years": 5,
+  "primary_risk": "Dependence on a limited number of revenue-generating properties",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The gold mining sector is subject to fluctuations in gold prices and production costs, which may impact the company's revenue and profitability.",
+  "thesis_summary": "Royal Gold, Inc. is a gold and silver streaming company that generates revenue through contractual royalties on gold and silver production from a portfolio of mines.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "sentiment_note": "The company has a strong track record of revenue growth and has been able to maintain its gross margin despite a decline in ROIC.",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 8,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The Company's revenue has increased by 67.3% over the past five years.",
+    "The Company's gross margin has increased by 10.6% over the past five years.",
+    "The Company's net income has increased by 143% over the past five years."
+  ],
+  "research_date": "2026-07-08T16:03:23.105948",
+  "ticker": "RGLD"
+}

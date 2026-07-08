@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Apple's iPhone and ecosystem continue to dominate the mobile and personal technology space, driving revenue growth and market capitalization expansion.",
+    "revenue_10yr_b": 645.19,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 45.0,
+    "probability": 0.7
+  },
+  "base": {
+    "narrative": "Apple's iPhone and ecosystem maintain a strong position in the mobile and personal technology space, but growth slows due to increasing competition and saturation.",
+    "revenue_10yr_b": 525.19,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 35.0,
+    "probability": 0.2
+  },
+  "bear": {
+    "narrative": "Apple's iPhone and ecosystem face significant challenges in the mobile and personal technology space, leading to declining revenue and market capitalization.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 20.0,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Strong brand loyalty and innovative products drive growth, but short-term news items may represent noise.",
+  "thesis_breaks_if": "The 8-K/news items do not represent a structural change to the 10-15yr thesis.",
+  "natural_eval_window_days": 90,
+  "written_date": "2026-07-08T16:05:06.458400",
+  "ticker": "AAPL"
+}

@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "EQT's natural gas production capabilities continue to thrive as demand for cleaner-burning fuel sources increases.",
+    "revenue_10yr_b": 134.8,
+    "mktcap_10yr_b": 141.4,
+    "multiple": 15.5,
+    "probability": 0.6
+  },
+  "base": {
+    "narrative": "EQT's natural gas production capabilities maintain a stable market share as demand for cleaner-burning fuel sources grows moderately.",
+    "revenue_10yr_b": 43.2,
+    "mktcap_10yr_b": 47.8,
+    "multiple": 10.5,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "EQT's natural gas production capabilities decline as a structural shift in global energy demand towards renewable energy sources gains traction.",
+    "mktcap_10yr_b": 35.2,
+    "multiple": 5.5,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis, EQT is expected to outperform the market in the next 10 years.",
+  "thesis_breaks_if": "A structural shift in global energy demand towards renewable energy sources or a significant increase in regulatory hurdles that impact EQT's operations",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:05:44.487990",
+  "ticker": "EQT"
+}

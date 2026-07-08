@@ -1,0 +1,23 @@
+{
+  "moat_type": "Ecosystem and Brand Loyalty",
+  "moat_durability_years": 20,
+  "management_grade": "A",
+  "growth_runway_years": 10,
+  "primary_risk": "Dependence on Key Suppliers",
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "Apple's ecosystem and brand loyalty have allowed it to maintain a dominant position in the sector for over two decades, with a high likelihood of continued success.",
+  "thesis_summary": "Apple's iPhone and ecosystem, fueled by its strong brand loyalty and innovative products, ride the trend of increasing demand for mobile and personal technology.",
+  "thesis_breaks_if": "The 8-K/news items do not represent a structural change to the 10-15yr thesis, and can be ignored as short-term noise.",
+  "sentiment_note": "Positive sentiment from investors and analysts, with a strong track record of price appreciation.",
+  "decade_probability": 0.9,
+  "annual_alpha_estimate": 15,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 10,
+  "ten_k_highlights": [
+    "The Company's revenue growth rate has been driven by the increasing demand for personal technology products and services.",
+    "The Company's gross margin has been impacted by the increasing cost of components and the mix of products sold.",
+    "The Company's return on invested capital has been driven by the increasing efficiency of its operations and the return on its investments in research and development."
+  ],
+  "research_date": "2026-07-08T16:02:47.747208",
+  "ticker": "AAPL"
+}

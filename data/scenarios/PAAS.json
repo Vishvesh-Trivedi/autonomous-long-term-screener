@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "PAAS rides the silver trend with increasing demand in electronics and renewable energy, maintaining its moat in geological expertise and high-quality silver deposits.",
+    "revenue_10yr_b": 6.5,
+    "mktcap_10yr_b": 32.8,
+    "multiple": 8.2,
+    "probability": 0.6
+  },
+  "base": {
+    "narrative": "PAAS maintains its market position in the silver mining sector, but faces increasing competition and margin pressure.",
+    "revenue_10yr_b": 5.0,
+    "mktcap_10yr_b": 22.4,
+    "multiple": 5.6,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "A structural change in the gold mining sector or a shift to alternative energy sources leads to a decline in silver demand, breaking PAAS's thesis.",
+    "mktcap_10yr_b": 10.0,
+    "multiple": 3.2,
+    "probability": 0.0
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and market trends.",
+  "thesis_breaks_if": "A structural change in the gold mining sector, such as a significant increase in gold prices or a shift to alternative energy sources.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:05:49.786111",
+  "ticker": "PAAS"
+}

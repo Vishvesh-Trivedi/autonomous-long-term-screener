@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Lam Research Corporation's proprietary semiconductor manufacturing equipment expertise enables it to ride the big trend of increasing demand for semiconductors in the electronics industry, with revenue growing at a CAGR of 10% and market capitalization reaching $1.43T.",
+    "revenue_10yr_b": 34.93,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 6.6,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "Lam Research Corporation's proprietary semiconductor manufacturing equipment expertise enables it to maintain its market position, with revenue growing at a CAGR of 5% and market capitalization reaching $630B.",
+    "revenue_10yr_b": 24.19,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 4.5,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "A structural shift in the semiconductor industry, such as a significant decline in demand or a disruption in the company's supply chain, leads to a decline in revenue and market capitalization, with revenue shrinking by 5% and market capitalization reaching $200B.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 2.5,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "A structural shift in the semiconductor industry, such as a significant decline in demand or a disruption in the company's supply chain.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:05:02.000308",
+  "ticker": "LRCX"
+}

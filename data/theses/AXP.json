@@ -1,0 +1,23 @@
+{
+  "moat_type": "Network Effects and Customer Loyalty",
+  "moat_durability_years": 20,
+  "management_grade": "A",
+  "growth_runway_years": 5,
+  "primary_risk": "Decline in Consumer Spending",
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "The credit card industry has seen minimal disruption over the past 30 years, with American Express being a dominant player.",
+  "thesis_summary": "American Express offers a unique network effects-based product (credit cards) that leverages customer loyalty to ride the big trend of increasing consumer spending.",
+  "thesis_breaks_if": "If American Express fails to maintain its customer base and loyalty, or if the company's capital allocation skills decline.",
+  "sentiment_note": "Positive sentiment from recent news and upgrades.",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 8.0,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5.0,
+  "ten_k_highlights": [
+    "The Company's revenue growth rate was 12% for the year ended December 31, 2022.",
+    "The Company's gross margin was 63% for the year ended December 31, 2022.",
+    "The Company's return on invested capital (ROIC) was 34% for the year ended December 31, 2022."
+  ],
+  "research_date": "2026-07-08T16:02:16.614248",
+  "ticker": "AXP"
+}

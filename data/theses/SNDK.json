@@ -1,0 +1,23 @@
+{
+  "moat_type": "Flash Memory Technology",
+  "moat_durability_years": 10,
+  "management_grade": "C",
+  "growth_runway_years": 5,
+  "primary_risk": "Dependence on a few large customers",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The flash memory sector has seen significant consolidation and disruption over the past 30 years, with many companies failing to adapt to changing market conditions.",
+  "thesis_summary": "Sandisk's flash memory technology rides the trend of increasing demand for portable storage solutions.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "sentiment_note": "Neutral",
+  "decade_probability": 0.6,
+  "annual_alpha_estimate": 4,
+  "verdict": "MONITOR",
+  "position_size_pct": 0.5,
+  "ten_k_highlights": [
+    "The Company's revenue is derived from the sale of flash memory products, which are used in a variety of applications, including consumer electronics, enterprise storage, and industrial applications.",
+    "The Company's gross profit margin has been impacted by the increasing competition in the flash memory market, which has resulted in lower selling prices and higher production costs.",
+    "The Company's cash and cash equivalents balance has increased by $1.4 billion from $2.3 billion at December 31, 2019, to $3.7 billion at December 31, 2020."
+  ],
+  "research_date": "2026-07-08T16:03:08.663256",
+  "ticker": "SNDK"
+}

@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "ATLC achieves 10-year growth through expanding financial services offerings, increasing market share, and strategic acquisitions.",
+    "revenue_10yr_b": 6.3,
+    "mktcap_10yr_b": 15.0,
+    "multiple": 24.0,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "ATLC experiences steady growth through stable financial services offerings and moderate market share expansion.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 3.75,
+    "multiple": 6.0,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "ATLC faces significant headwinds due to a permanently eroded moat, leading to declining financial services offerings and market share.",
+    "mktcap_10yr_b": 0.75,
+    "multiple": 2.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis, the bull scenario is the most likely outcome.",
+  "thesis_breaks_if": "Moat permanently eroded",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:04:17.112705",
+  "ticker": "ATLC"
+}

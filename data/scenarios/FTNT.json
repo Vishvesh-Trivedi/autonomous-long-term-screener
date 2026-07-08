@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Fortinet's network security and firewall solutions continue to ride the trend of increasing cybersecurity demand, leveraging its moat in network security and firewall solutions, leading to significant growth in revenue and market capitalization.",
+    "revenue_10yr_b": 15.11,
+    "mktcap_10yr_b": 243.9,
+    "multiple": 35,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "Fortinet's network security and firewall solutions continue to grow at a steady pace, but at a slower rate than the bull scenario, with revenue and market capitalization increasing moderately.",
+    "revenue_10yr_b": 10.11,
+    "mktcap_10yr_b": 183.9,
+    "multiple": 25,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "Fortinet's network security and firewall solutions face increasing competition and declining demand, leading to a decline in revenue and market capitalization.",
+    "mktcap_10yr_b": 43.9,
+    "multiple": 15,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:05:16.357440",
+  "ticker": "FTNT"
+}

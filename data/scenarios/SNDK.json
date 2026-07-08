@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Sandisk's flash memory technology experiences explosive growth, leading to a 10-year revenue CAGR of 25% and a market capitalization of $1.3 trillion.",
+    "revenue_10yr_b": 1000.0,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 10,
+    "probability": 0.1
+  },
+  "base": {
+    "narrative": "Sandisk's flash memory technology maintains its market share, leading to a 10-year revenue CAGR of 5% and a market capitalization of $800 billion.",
+    "revenue_10yr_b": 600.0,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 8,
+    "probability": 0.6
+  },
+  "bear": {
+    "narrative": "Sandisk's flash memory technology faces significant disruption, leading to a 10-year market capitalization of $100 billion.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 2,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Monitor short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:05:40.613774",
+  "ticker": "SNDK"
+}

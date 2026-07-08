@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "LITE's revenue grows at 20% CAGR, driven by increasing demand for high-speed data transmission, with market capitalization reaching $150B by 2033.",
+    "revenue_10yr_b": 1.02,
+    "mktcap_10yr_b": 150.0,
+    "multiple": 10,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "LITE's revenue grows at 10% CAGR, driven by steady demand for high-speed data transmission, with market capitalization reaching $80B by 2033.",
+    "revenue_10yr_b": 1.01,
+    "mktcap_10yr_b": 80.0,
+    "multiple": 8,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "LITE's revenue declines by 10% CAGR, driven by a structural change in the demand for high-speed data transmission, with market capitalization reaching $20B by 2033.",
+    "mktcap_10yr_b": 20.0,
+    "multiple": 5,
+    "probability": 0.2
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "Current market conditions suggest a steady growth trajectory for LITE, but investors should be prepared for potential disruptions in the high-speed data transmission market.",
+  "thesis_breaks_if": "A structural change in the demand for high-speed data transmission, such as a shift to alternative technologies or a significant decline in demand.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:06:04.272802",
+  "ticker": "LITE"
+}

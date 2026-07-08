@@ -1,0 +1,23 @@
+{
+  "moat_type": "string",
+  "moat_durability_years": 10,
+  "management_grade": "A",
+  "growth_runway_years": 10,
+  "primary_risk": "string",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "Ascendis Pharma's durability is medium due to the high rate of disruption in the biotechnology sector.",
+  "thesis_summary": "Ascendis Pharma's specific competitive advantage is its proprietary long-acting human growth hormone (hGH) product, which rides the trend of innovative treatments for growth hormone deficiency.",
+  "thesis_breaks_if": "short-term price moves, news cycles, and 8-K noise",
+  "sentiment_note": "Strong buy recommendations from RBC Capital and MBX Biosciences support the thesis.",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 15,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "Ascendis Pharma's proprietary long-acting human growth hormone (hGH) product is a key driver of revenue growth.",
+    "The company has a strong cash runway with positive free cash flow.",
+    "Ascendis Pharma's management team has a track record of successful capital allocation, with a focus on research and development."
+  ],
+  "research_date": "2026-07-08T16:03:20.822145",
+  "ticker": "ASND"
+}

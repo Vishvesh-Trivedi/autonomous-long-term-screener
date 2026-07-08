@@ -1,0 +1,23 @@
+{
+  "moat_type": "Network Security and Firewall Solutions",
+  "moat_durability_years": 15,
+  "management_grade": "B",
+  "growth_runway_years": 5,
+  "primary_risk": "Intense Competition from Established Players",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The cybersecurity sector is rapidly evolving, with new technologies and players emerging, which may lead to disruption for established players.",
+  "thesis_summary": "Fortinet's network security and firewall solutions ride the trend of increasing cybersecurity demand, leveraging its moat in network security and firewall solutions.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "sentiment_note": "Strong revenue growth, rising gross margin, and ROIC, but severe dilution over the past 5 years.",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 15,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "Fortinet's revenue has risen by 103.4% over the past 5 years, driven by the increasing demand for network security and firewall solutions.",
+    "The company's gross margin has risen to 80%, indicating its ability to maintain pricing power in the face of intense competition.",
+    "Fortinet's return on invested capital (ROIC) has risen to 76%, indicating its ability to generate strong returns on its investments."
+  ],
+  "research_date": "2026-07-08T16:02:49.639414",
+  "ticker": "FTNT"
+}

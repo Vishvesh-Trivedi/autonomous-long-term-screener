@@ -1,0 +1,23 @@
+{
+  "moat_type": "Highly scalable and proprietary optical technology",
+  "moat_durability_years": 10,
+  "management_grade": "B",
+  "growth_runway_years": 5,
+  "primary_risk": "Dependence on a few large customers",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The optical communication equipment sector has seen significant consolidation and disruption over the past 30 years, with many companies failing to adapt to changing market conditions. Lumentum's ability to maintain its market share and profitability will depend on its ability to innovate and adapt to these changes.",
+  "thesis_summary": "Lumentum's highly scalable and proprietary optical technology enables it to ride the trend of increasing demand for high-speed data transmission.",
+  "thesis_breaks_if": "A structural change in the demand for high-speed data transmission, such as a shift to alternative technologies or a significant decline in demand.",
+  "sentiment_note": "The company's stock price has experienced significant volatility over the past year, driven by short-term market trends and news cycles.",
+  "decade_probability": 0.6,
+  "annual_alpha_estimate": 8,
+  "verdict": "MONITOR",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company's revenue has been declining over the past two years, with a 5-year CAGR of -67.6%",
+    "The company's gross margin has been increasing over the past two years, with a 5-year CAGR of 12.5%",
+    "The company's cash flow from operations has been positive over the past two years, with a 5-year CAGR of 10.3%"
+  ],
+  "research_date": "2026-07-08T16:03:24.175557",
+  "ticker": "LITE"
+}

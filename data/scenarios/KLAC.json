@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "KLAC rides the trend of increasing complexity and miniaturization of semiconductor devices, with revenue growth exceeding 10% YoY and market cap reaching $1.5T by 2033.",
+    "revenue_10yr_b": 1000.0,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 45,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "KLAC maintains its position as a leader in semiconductor inspection and metrology equipment, with revenue growth at 5% YoY and market cap reaching $800B by 2033.",
+    "revenue_10yr_b": 600.0,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 35,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "KLAC faces increasing competition and declining demand for semiconductor devices, with revenue shrinking by 5% YoY and market cap falling to $200B by 2033.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 20,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Short-term price moves, news cycles, and 8-K noise unless they structurally change the next decade.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise unless they structurally change the next decade.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:05:30.585249",
+  "ticker": "KLAC"
+}

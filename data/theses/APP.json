@@ -1,0 +1,24 @@
+{
+  "moat_type": "Data Monetization through Mobile Advertising",
+  "moat_durability_years": 10,
+  "management_grade": "A",
+  "growth_runway_years": 5,
+  "primary_risk": "Dependence on Mobile Advertising Trends",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The mobile advertising sector is expected to face disruption from emerging trends such as voice assistants and augmented reality, which may impact AppLovin's moat.",
+  "thesis_summary": "AppLovin's mobile advertising platform, with its specific moat in data monetization, rides the trend of increasing mobile app usage.",
+  "thesis_breaks_if": "A structural change in the mobile advertising landscape, such as a significant shift to voice assistants or augmented reality, could break the thesis.",
+  "sentiment_note": "Positive sentiment from the company's history and track record, with a notable mention of Congressman Ro Khanna's investment in the company.",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 12,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The Company's revenue from mobile advertising and in-app purchases has been increasing at a rate of 96.2% over the past five years.",
+    "The Company's gross margin has been increasing at a rate of 2479.7% over the past five years.",
+    "The Company's return on invested capital (ROIC) has been increasing at a rate of 64% over the past five years."
+  ],
+  "long_term_alpha_pp": 36.3,
+  "research_date": "2026-07-08T16:02:18.387598",
+  "ticker": "APP"
+}

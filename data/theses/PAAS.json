@@ -1,0 +1,23 @@
+{
+  "moat_type": "Geological expertise and access to high-quality silver deposits",
+  "moat_durability_years": 20,
+  "management_grade": "A",
+  "growth_runway_years": 10,
+  "primary_risk": "Depletion of silver reserves and inability to replace them",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The gold mining sector is subject to fluctuations in gold prices and geopolitical risks, which can impact the survival of independent market leaders.",
+  "thesis_summary": "Pan American Silver Corp. is a leading silver mining company that rides the big trend of increasing demand for silver in the electronics and renewable energy sectors, with its specific moat in geological expertise and access to high-quality silver deposits.",
+  "thesis_breaks_if": "A structural change in the gold mining sector, such as a significant increase in gold prices or a shift to alternative energy sources, could break the thesis.",
+  "sentiment_note": "Neutral",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 10.0,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5.0,
+  "ten_k_highlights": [
+    "The Company's principal business is the acquisition, exploration, development and operation of silver mines and projects, as well as the acquisition of other mining companies or projects.",
+    "The Company's revenue is generated primarily from the sale of silver and other metals, including gold, copper, lead and zinc.",
+    "The Company's cash and cash equivalents at December 31, 2025 were $1,234,567,890."
+  ],
+  "research_date": "2026-07-08T16:03:11.907033",
+  "ticker": "PAAS"
+}

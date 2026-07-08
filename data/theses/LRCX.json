@@ -1,0 +1,23 @@
+{
+  "moat_type": "Proprietary semiconductor manufacturing equipment expertise",
+  "moat_durability_years": 15,
+  "management_grade": "B",
+  "growth_runway_years": 5,
+  "primary_risk": "Dependence on the semiconductor industry's growth and cyclical fluctuations",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The semiconductor industry has seen significant consolidation and disruption over the past 30 years, with only a few companies remaining as independent market leaders.",
+  "thesis_summary": "Lam Research Corporation's proprietary semiconductor manufacturing equipment expertise enables it to ride the big trend of increasing demand for semiconductors in the electronics industry.",
+  "thesis_breaks_if": "A structural shift in the semiconductor industry, such as a significant decline in demand or a disruption in the company's supply chain.",
+  "sentiment_note": "The company's high growth rate and strong financial performance have led to a high valuation, which may make it more challenging to achieve returns in the future.",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 10,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The company's revenue growth rate has been driven by the increasing demand for semiconductors in the electronics industry.",
+    "The company has a strong track record of innovation, with a high percentage of revenue generated from new products and services.",
+    "The company's gross margin has been increasing over the past five years, driven by the company's ability to maintain high prices for its products despite increasing competition."
+  ],
+  "research_date": "2026-07-08T16:02:38.107605",
+  "ticker": "LRCX"
+}

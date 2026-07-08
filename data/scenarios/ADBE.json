@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Strong growth in Creative Cloud and Document Cloud drives ADBE's revenue and market capitalization to new heights.",
+    "revenue_10yr_b": 35.65,
+    "mktcap_10yr_b": 145.19,
+    "multiple": 4.05,
+    "probability": 0.2
+  },
+  "base": {
+    "narrative": "ADBE's revenue and market capitalization grow steadily, driven by the company's strong position in the creative and document cloud markets.",
+    "revenue_10yr_b": 28.43,
+    "mktcap_10yr_b": 115.19,
+    "multiple": 3.45,
+    "probability": 0.6
+  },
+  "bear": {
+    "narrative": "Moat permanently eroded, ADBE's revenue and market capitalization decline as competitors gain ground.",
+    "mktcap_10yr_b": 30.19,
+    "multiple": 2.15,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL|BASE|BEAR",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "Moat permanently eroded",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:03:41.702515",
+  "ticker": "ADBE"
+}

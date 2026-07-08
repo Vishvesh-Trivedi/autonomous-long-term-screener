@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "AAON (T3) maintains its market leadership in the industrial sector, with a strong moat and continued revenue growth.",
+    "revenue_10yr_b": 2.35,
+    "mktcap_10yr_b": 13.5,
+    "multiple": 25,
+    "probability": 0.6
+  },
+  "base": {
+    "narrative": "AAON (T3) experiences moderate growth in the industrial sector, with a stable moat and steady revenue growth.",
+    "revenue_10yr_b": 1.85,
+    "mktcap_10yr_b": 10.5,
+    "multiple": 20,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "AAON (T3) faces significant challenges in the industrial sector, with a weakened moat and declining revenue growth.",
+    "mktcap_10yr_b": 4.5,
+    "multiple": 15,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current market conditions and financials.",
+  "thesis_breaks_if": "Moat permanently eroded",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:04:22.112815",
+  "ticker": "AAON"
+}

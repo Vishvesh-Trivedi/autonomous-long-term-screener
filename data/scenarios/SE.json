@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Sea Limited's online gaming and e-commerce platform experiences exponential growth, capturing 20% of the global online gaming market and 15% of the global e-commerce market by 2033.",
+    "revenue_10yr_b": 101.19,
+    "mktcap_10yr_b": 250.0,
+    "multiple": 20,
+    "probability": 0.2
+  },
+  "base": {
+    "narrative": "Sea Limited's online gaming and e-commerce platform maintains steady growth, capturing 5% of the global online gaming market and 5% of the global e-commerce market by 2033.",
+    "revenue_10yr_b": 41.09,
+    "mktcap_10yr_b": 125.0,
+    "multiple": 15,
+    "probability": 0.6
+  },
+  "bear": {
+    "narrative": "Sea Limited's online gaming and e-commerce platform experiences significant decline due to increased competition and regulatory issues.",
+    "mktcap_10yr_b": 50.0,
+    "multiple": 10,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Short-term price moves, news cycles, and 8-K noise that do not structurally change the next decade.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise that do not structurally change the next decade.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:06:07.866129",
+  "ticker": "SE"
+}

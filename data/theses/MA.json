@@ -1,0 +1,23 @@
+{
+  "moat_type": "Network Effects and Brand Recognition",
+  "moat_durability_years": 15,
+  "management_grade": "A",
+  "growth_runway_years": 10,
+  "primary_risk": "Competition from Fintech and Digital Payment Companies",
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "Mastercard's moat is likely to last due to its strong brand recognition and network effects, which have been sustained over the past 13 years.",
+  "thesis_summary": "Mastercard's actual product/service is payment processing, its specific moat is network effects and brand recognition, and the big trend it rides is the shift to digital payments.",
+  "thesis_breaks_if": "A structural change in the payment processing industry, such as a major fintech company acquiring a significant market share.",
+  "sentiment_note": "Positive sentiment due to Mastercard's strong financial performance and growing market share.",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 8.5,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "Mastercard's revenue has been rising at a CAGR of 73.6% over the past 5 years.",
+    "The company's gross margin has been increasing over the past 13 years, from 85.6% in 2013 to 100% in 2025.",
+    "Mastercard's return on invested capital (ROIC) has been rising over the past 5 years, from 46.3% in 2020 to 59% in 2025."
+  ],
+  "research_date": "2026-07-08T16:02:32.310860",
+  "ticker": "MA"
+}

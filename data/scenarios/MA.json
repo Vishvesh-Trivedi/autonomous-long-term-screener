@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "MA continues to dominate the payment processing industry with increasing adoption of digital payments, leading to significant revenue growth and market capitalization expansion.",
+    "revenue_10yr_b": 69.38,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 35.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "MA maintains its market position in payment processing, with steady revenue growth and moderate market capitalization expansion.",
+    "revenue_10yr_b": 43.94,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 25.0,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "MA faces increased competition in the payment processing industry, leading to stagnant revenue growth and declining market capitalization.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 15.0,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current market conditions and financials.",
+  "thesis_breaks_if": "A structural change in the payment processing industry, such as a major fintech company acquiring a significant market share.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:04:48.919190",
+  "ticker": "MA"
+}

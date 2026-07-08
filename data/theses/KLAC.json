@@ -1,0 +1,23 @@
+{
+  "moat_type": "Leadership in Semiconductor Inspection and Metrology Equipment",
+  "moat_durability_years": 15,
+  "management_grade": "A",
+  "growth_runway_years": 5,
+  "primary_risk": "Dependence on a few large customers",
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "KLA Corporation has consistently demonstrated its ability to innovate and adapt to the rapidly changing semiconductor industry, with a long history of revenue growth and rising gross margins.",
+  "thesis_summary": "KLA Corporation's semiconductor inspection and metrology equipment rides the trend of increasing complexity and miniaturization of semiconductor devices.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise unless they structurally change the next decade.",
+  "sentiment_note": "Neutral",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 10.5,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5.0,
+  "ten_k_highlights": [
+    "The Company's revenue has been rising at a CAGR of 75.7% over the past 5 years.",
+    "The Company's gross margin has been rising over the past 7 years.",
+    "The Company's ROIC has been falling over the past 5 years, but remains at a high level of 41%."
+  ],
+  "research_date": "2026-07-08T16:02:59.773003",
+  "ticker": "KLAC"
+}

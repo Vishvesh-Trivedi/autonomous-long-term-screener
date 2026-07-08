@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "INIO achieves strong growth through expansion of its existing moat and successful entry into new markets.",
+    "revenue_10yr_b": 4.35,
+    "mktcap_10yr_b": 55.35,
+    "multiple": 20,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "INIO experiences steady growth, driven by its existing moat and moderate expansion into new markets.",
+    "revenue_10yr_b": 3.25,
+    "mktcap_10yr_b": 38.25,
+    "multiple": 15,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "INIO's moat is eroded, leading to significant revenue and market capitalization declines.",
+    "mktcap_10yr_b": 15.9,
+    "multiple": 5,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL|BASE|BEAR",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "Moat permanently eroded",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:04:09.117215",
+  "ticker": "INIO"
+}

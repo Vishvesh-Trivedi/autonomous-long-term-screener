@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "ASML's EUVL technology continues to provide a significant moat, driving strong growth in the semiconductor industry.",
+    "revenue_10yr_b": 58.19,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 24.5,
+    "probability": 0.7
+  },
+  "base": {
+    "narrative": "ASML's EUVL technology maintains its competitive advantage, but at a slower growth rate due to increasing competition.",
+    "revenue_10yr_b": 43.19,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 18.5,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "A structural change in the industry, such as a shift to alternative lithography technologies, significantly impacts ASML's business.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 12.5,
+    "probability": 0.0
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "A structural change in the industry, such as a significant shift to alternative lithography technologies or a major disruption to ASML's customer base.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:04:54.815342",
+  "ticker": "ASML"
+}

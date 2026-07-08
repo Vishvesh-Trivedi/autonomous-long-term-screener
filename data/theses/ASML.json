@@ -1,0 +1,23 @@
+{
+  "moat_type": "Leading-edge semiconductor equipment technology, particularly in extreme ultraviolet lithography (EUVL)",
+  "moat_durability_years": 15,
+  "management_grade": "A",
+  "growth_runway_years": 5,
+  "primary_risk": "Dependence on a limited number of large customers",
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "The semiconductor equipment industry has seen significant consolidation over the past 30 years, with many companies failing to survive. However, ASML's dominant market position and strong financials suggest that it is well-positioned to endure.",
+  "thesis_summary": "ASML's EUVL technology provides a significant moat, allowing it to ride the trend of increasing demand for semiconductors.",
+  "thesis_breaks_if": "A structural change in the industry, such as a significant shift to alternative lithography technologies or a major disruption to ASML's customer base.",
+  "sentiment_note": "The company's strong financials and dominant market position suggest a positive sentiment.",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 10,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "ASML's revenue grew 13% in the past year, driven by strong demand for its EUVL technology.",
+    "The company's gross margin was 53% in the past year, reflecting its high-end technology and strong pricing power.",
+    "ASML's cash runway is positive, with free cash flow of $4.3 billion in the past year."
+  ],
+  "research_date": "2026-07-08T16:02:35.531073",
+  "ticker": "ASML"
+}

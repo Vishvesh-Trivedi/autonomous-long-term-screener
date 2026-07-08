@@ -1,0 +1,23 @@
+{
+  "moat_type": "AI-driven cloud computing solutions",
+  "moat_durability_years": 10,
+  "management_grade": "B",
+  "growth_runway_years": 5,
+  "primary_risk": "Dependence on AI technology advancements",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The sector faces increasing competition from established players and new entrants, but Nebius' focus on AI-driven solutions provides a unique competitive advantage.",
+  "thesis_summary": "Nebius Group's AI-driven cloud computing solutions ride the trend of increasing adoption of cloud computing and AI technology.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise do not structurally change the next decade.",
+  "sentiment_note": "Positive sentiment due to recent AI deals and trend of increasing adoption of cloud computing and AI technology.",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 8,
+  "verdict": "ACCUMULATE",
+  "position_size_pct": 5,
+  "ten_k_highlights": [
+    "The Company's revenue growth rate was 684% for the period from [date] to [date].",
+    "The Company's gross margin was 72% for the period from [date] to [date].",
+    "The Company's cash and cash equivalents were $[amount] as of [date]."
+  ],
+  "research_date": "2026-07-08T16:03:00.531545",
+  "ticker": "NBIS"
+}

@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "APP's mobile advertising platform continues to ride the trend of increasing mobile app usage, with its data monetization moat remaining intact.",
+    "revenue_10yr_b": 1000.0,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 45.0,
+    "probability": 0.6
+  },
+  "base": {
+    "narrative": "APP's mobile advertising platform experiences steady growth, but faces increasing competition in the mobile advertising landscape.",
+    "revenue_10yr_b": 600.0,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 30.0,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "A structural change in the mobile advertising landscape, such as a shift to voice assistants or augmented reality, significantly impacts APP's data monetization moat.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 20.0,
+    "probability": 0.1
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "Current tracking is BASE due to the steady growth of APP's mobile advertising platform, but the potential for increased competition.",
+  "thesis_breaks_if": "A structural change in the mobile advertising landscape, such as a significant shift to voice assistants or augmented reality.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-08T16:04:43.473142",
+  "ticker": "APP"
+}
