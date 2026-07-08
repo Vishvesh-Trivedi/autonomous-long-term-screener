@@ -1,0 +1,6 @@
+{
+  "verdict": "PARSE_ERROR",
+  "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0). Response: {\n  \"moat_type\": \"Network effect and ecosystem integration as Japan's emerging financial super app\",\n  \"moat",
+  "research_date": "2026-07-08T02:12:06.064899",
+  "ticker": "PAYP"
+}

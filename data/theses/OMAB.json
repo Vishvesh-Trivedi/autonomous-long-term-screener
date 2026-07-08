@@ -1,0 +1,6 @@
+{
+  "verdict": "PARSE_ERROR",
+  "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0). Response: {\n  \"moat_type\": \"Regulatory monopoly and infrastructure ownership in Mexican airport concessions\",\n  \"moat_durability_years\": 20,\n  \"management_grade\": \"A\",\n  \"growth_runway_years\": 15,\n ",
+  "research_date": "2026-07-08T02:21:47.774868",
+  "ticker": "OMAB"
+}

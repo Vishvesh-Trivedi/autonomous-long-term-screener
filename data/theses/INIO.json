@@ -1,0 +1,6 @@
+{
+  "verdict": "PARSE_ERROR",
+  "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0). Response: {\n  \"category\": \"AI Infrastructure & Data Center Power Solutions\",\n  \"tam_estimate_b\": 50,\n  \"unfair_advantage\": \"Proprietary power management technology tailored for AI workloads, leveraging early-mo",
+  "research_date": "2026-07-08T02:39:11.277554",
+  "ticker": "INIO"
+}

@@ -1,0 +1,6 @@
+{
+  "verdict": "PARSE_ERROR",
+  "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0). Response: {\n  \"category\": \"HVAC and Building Systems Manufacturing\",\n  \"tam_estimate_b\": 150,\n  \"unfair_advantage\": \"Established operational scale with 5,897 employees and 10-year market presence, though no pro",
+  "research_date": "2026-07-08T02:40:20.646267",
+  "ticker": "AAON"
+}

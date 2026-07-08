@@ -1,0 +1,6 @@
+{
+  "verdict": "PARSE_ERROR",
+  "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0). Response: {\n  \"moat_type\": \"High-grade silver and gold reserves with low-cost production\",\n  \"moat_durability_years\": 15,\n  \"management_grade\": \"C\",\n  \"growth_runway_years",
+  "research_date": "2026-07-08T02:28:21.241864",
+  "ticker": "CDE"
+}
