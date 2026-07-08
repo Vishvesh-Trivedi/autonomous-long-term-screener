@@ -16,17 +16,19 @@
   },
   "llm": {
     "_comment": "LLM provider for stock research. NVIDIA NIM is free (40 req/min). Anthropic is paid. Set provider here, model here, fallback here \u2014 no hardcoding.",
+    "_model_change_note": "Switched to meta/llama-3.1-8b-instruct 2026-07-08 after live testing showed the larger free-tier models (49B nemotron-super, 70B llama-3.3, 70B llama-3.1) failing 50-100% of the time on this account (timeouts or empty responses) for the full research prompt, while the 8B model succeeded 4/4 in ~3.5s each. This is what was silently blocking every new candidate from getting a usable thesis.",
     "provider": "nvidia",
-    "model": "nvidia/llama-3.3-nemotron-super-49b-v1.5",
+    "model": "meta/llama-3.1-8b-instruct",
     "fallback_provider": "anthropic",
     "fallback_model": "claude-sonnet-4-5",
     "_alternative_models": {
-      "_comment": "Other free NVIDIA models you can switch to by changing model above",
+      "_comment": "Other free NVIDIA models you can switch to by changing model above. Re-test reliability before switching back to a larger model - see _model_change_note.",
       "reasoning_best": "deepseek-ai/deepseek-r1",
       "fast": "meta/llama-3.1-8b-instruct",
       "long_context": "meta/llama-3.3-70b-instruct",
       "ultra_flagship": "nvidia/nemotron-3-ultra-550b-a55b",
-      "previous": "meta/llama-3.3-70b-instruct",
+      "previous_49b": "nvidia/llama-3.3-nemotron-super-49b-v1.5",
+      "previous_70b": "meta/llama-3.3-70b-instruct",
       "nvidia_own": "nvidia/llama-3.1-nemotron-70b-instruct",
       "mistral": "mistralai/mixtral-8x22b-instruct-v0.1"
     }

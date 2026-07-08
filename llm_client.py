@@ -25,7 +25,11 @@ PROVIDERS = {
     'nvidia': {
         'base_url':    'https://integrate.api.nvidia.com/v1',
         'api_key_env': 'NVIDIA_API_KEY',
-        'default_model': 'meta/llama-3.3-70b-instruct',
+        # Larger free-tier models (49B/70B) were measured at 0-25% success rate
+        # for the full research prompt (timeouts / empty responses); the 8B
+        # model succeeded 4/4 in testing. See universe_config.json's
+        # llm._model_change_note. Only used if config doesn't specify a model.
+        'default_model': 'meta/llama-3.1-8b-instruct',
         'rate_limit_per_min': 40,
     },
     'anthropic': {
