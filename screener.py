@@ -488,13 +488,87 @@ def is_excluded_instrument(ticker: str, info: dict) -> tuple:
     return False, ''
 
 # ── JPM HELPERS ───────────────────────────────────────────────────────────────
-def compute_roic(info: dict) -> float:
+_FIN_STATEMENTS_CACHE: dict = {}
+
+def fetch_financial_statement_fields(ticker: str) -> dict:
+    """
+    Fallback for balance-sheet/income-statement/cash-flow line items yfinance's
+    '.info' endpoint no longer returns (confirmed 100% absent from .info across
+    8 diverse large-caps): operatingIncome, totalAssets, current assets/
+    liabilities, interestExpense, capitalExpenditures, researchAndDevelopment,
+    effective tax rate. '.info' still works for most other fields (marketCap,
+    grossMargins, totalRevenue, debtToEquity, etc.) - only these detailed
+    statement-level items moved to separate DataFrame properties.
+
+    Only call this lazily (after cheaper .info-based checks already ran) -
+    each call is 3 extra yfinance requests, and yfinance has no documented
+    rate limit but empirically throttles hard under sustained load (observed
+    YFRateLimitError repeatedly in this pipeline's own logs), same class of
+    restriction as any other free scraped endpoint here. Cached per ticker for
+    the run since T1 then T2 gates may both need the same ticker's data.
+    """
+    if ticker in _FIN_STATEMENTS_CACHE:
+        return _FIN_STATEMENTS_CACHE[ticker]
+
+    def _latest(df, label):
+        if df is None or df.empty or label not in df.index:
+            return None
+        v = df.loc[label, df.columns[0]]
+        if v is None or (isinstance(v, float) and v != v):  # v != v is the NaN check
+            return None
+        return float(v)
+
+    result = {}
+    for attempt in range(2):
+        try:
+            t = yf.Ticker(ticker)
+            bs, inc, cf = t.balance_sheet, t.income_stmt, t.cashflow
+            result = {
+                'totalAssets':             _latest(bs, 'Total Assets'),
+                'totalCurrentAssets':      _latest(bs, 'Current Assets'),
+                'totalCurrentLiabilities': _latest(bs, 'Current Liabilities'),
+                'investedCapital':         _latest(bs, 'Invested Capital'),
+                'operatingIncome':         _latest(inc, 'Operating Income'),
+                'interestExpense':         _latest(inc, 'Interest Expense'),
+                'effectiveTaxRate':        _latest(inc, 'Tax Rate For Calcs'),
+                'capitalExpenditures':     _latest(cf, 'Capital Expenditure'),
+                'researchAndDevelopment':  _latest(inc, 'Research And Development'),
+            }
+            time.sleep(1.2)  # Yahoo Finance courtesy delay, matching fetch_with_retry
+            break
+        except Exception as e:
+            if attempt == 0:
+                time.sleep(2.0)
+                continue
+            log.debug(f'  Financial statements fetch failed for {ticker}: {e}')
+            result = {}
+    _FIN_STATEMENTS_CACHE[ticker] = result
+    return result
+
+
+def compute_roic(info: dict, ticker: str = '') -> float:
     try:
         op_income  = info.get('operatingIncome', 0) or 0
-        tax_rate   = max(0.0, min(float(info.get('effectiveTaxRate', 0.25) or 0.25), 0.50))
+        tax_rate_raw = info.get('effectiveTaxRate')
         tot_assets = info.get('totalAssets', 0) or 0
         curr_liab  = info.get('totalCurrentLiabilities', 0) or 0
-        inv_cap    = tot_assets - curr_liab
+        inv_cap    = 0.0
+
+        # .info never has these (see fetch_financial_statement_fields docstring)
+        # so this fallback fires for essentially every ticker that reaches here.
+        if (not op_income or not tot_assets) and ticker:
+            fin = fetch_financial_statement_fields(ticker)
+            op_income  = op_income  or fin.get('operatingIncome') or 0
+            tot_assets = tot_assets or fin.get('totalAssets') or 0
+            curr_liab  = curr_liab  or fin.get('totalCurrentLiabilities') or 0
+            inv_cap    = fin.get('investedCapital') or 0
+            if tax_rate_raw is None:
+                tax_rate_raw = fin.get('effectiveTaxRate')
+
+        tax_rate = max(0.0, min(float(tax_rate_raw if tax_rate_raw is not None else 0.25), 0.50))
+        if not inv_cap:
+            # Fallback proxy when the direct 'Invested Capital' line is unavailable
+            inv_cap = tot_assets - curr_liab
         if inv_cap > 0 and op_income != 0:
             return (op_income * (1 - tax_rate)) / inv_cap
     except Exception:
@@ -532,6 +606,21 @@ def compute_debt_ratios(info: dict, ticker: str = '') -> dict:
         interest = abs(info.get('interestExpense', 0) or 0)
         c_assets = info.get('totalCurrentAssets', 0) or 0
         c_liab   = info.get('totalCurrentLiabilities', 0) or 0
+
+        # .info doesn't carry interestExpense or current assets/liabilities
+        # anymore either (see fetch_financial_statement_fields) - without this,
+        # 'coverage' always defaulted to the 999.0 "safe" sentinel and
+        # 'curr_ratio' always defaulted to 2.0, meaning those two gate checks
+        # could never actually fail for any ticker. Reuses the same cached
+        # fetch compute_roic may have already made for this ticker.
+        if (not interest or not c_liab) and ticker:
+            fin = fetch_financial_statement_fields(ticker)
+            if not interest:
+                interest = abs(fin.get('interestExpense') or 0)
+            if not c_assets:
+                c_assets = fin.get('totalCurrentAssets') or 0
+            if not c_liab:
+                c_liab = fin.get('totalCurrentLiabilities') or 0
 
         # yfinance no longer exposes 'totalStockholderEquity'. Prefer its own
         # 'debtToEquity' (reported as a percentage, e.g. 79.5 == 0.795x), then
@@ -741,7 +830,7 @@ def passes_t1_gate(info: dict, ticker: str = '') -> tuple:
     if ocf     < 0:                  return False, 'negative OCF'
     gm_min = get_sector_gm_threshold(info)
     if gm < gm_min:                  return False, f'GM {gm:.0%} < {gm_min:.0%}'
-    roic = compute_roic(info)
+    roic = compute_roic(info, ticker)
     if roic < _cs("t1","min_roic",0.10):                  return False, f'ROIC {roic:.0%} < 10%'
     debt = compute_debt_ratios(info, ticker)
     if debt['de_ratio']  > _cs("t1","max_de_ratio",3.0): return False, f'D/E {debt["de_ratio"]:.1f}x > 3x'
@@ -813,7 +902,7 @@ def passes_t3_gate(info: dict) -> tuple:
     return True, f'T3 PASS ({"pre-revenue" if pre_rev else "early-revenue"}){dil_note}{ins_note}'
 
 def compute_t1_score(info: dict, ticker: str = '') -> float:
-    roic  = compute_roic(info)
+    roic  = compute_roic(info, ticker)
     gm    = info.get('grossMargins', 0) or 0
     rev   = info.get('totalRevenue', 0) or 0
     ocf   = info.get('operatingCashflow', 0) or 0
@@ -1993,7 +2082,7 @@ def research_candidate(ticker: str, tier: str, info: dict, filing_text: str, sen
     revenue  = (info.get('totalRevenue', 0) or 0) / 1e6
     mkt_cap  = (info.get('marketCap', 0) or 0) / 1e9
     gm       = info.get('grossMargins', 0) or 0
-    roic     = compute_roic(info)
+    roic     = compute_roic(info, ticker)
     rev_grow = info.get('revenueGrowth', 0) or 0
     cash     = (info.get('totalCash', 0) or 0) / 1e6
     rd       = (info.get('researchAndDevelopment', 0) or 0) / 1e6
@@ -2404,7 +2493,7 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
             'status':             'ACTIVE',
             'verdict':            verdict,
             'decade_probability': research.get('decade_probability', 0),
-            'roic':               compute_roic(info),
+            'roic':               compute_roic(info, ticker),
             'gross_margin':       info.get('grossMargins', 0) or 0,
             'rev_growth':         info.get('revenueGrowth', 0) or 0,
             'de_ratio':           debt['de_ratio'],

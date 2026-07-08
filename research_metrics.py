@@ -158,7 +158,7 @@ def compute_megatrend_alignment(ticker: str, info: dict) -> dict:
     }
 
 # ── FCF & CAPITAL METRICS ─────────────────────────────────────────────────────
-def compute_fcf_metrics(info: dict) -> dict:
+def compute_fcf_metrics(info: dict, ticker: str = '') -> dict:
     """
     Free cash flow metrics — the most important valuation and quality check
     for a 20-year hold.
@@ -176,6 +176,23 @@ def compute_fcf_metrics(info: dict) -> dict:
         revenue  = max(info.get('totalRevenue', 1) or 1, 1)
         cash     = info.get('totalCash', 0) or 0
         debt     = info.get('totalDebt', 0) or 0
+
+        # .info never has capitalExpenditures or researchAndDevelopment (same
+        # gap as screener.py's compute_roic/compute_debt_ratios - see
+        # fetch_financial_statement_fields there). Without this, FCF was
+        # silently just OCF (capex never subtracted, overstating FCF Yield for
+        # every capital-intensive company) and capital_intensity/
+        # reinvestment_rate/rd_intensity were always 0. This function is only
+        # ever called for existing holdings + newly-added candidates (a few
+        # dozen tickers per run, not the full screened universe), so this
+        # lazy fetch is cheap enough to always attempt here.
+        if (not capex or not rd) and ticker:
+            from screener import fetch_financial_statement_fields
+            fin = fetch_financial_statement_fields(ticker)
+            if not capex:
+                capex = abs(fin.get('capitalExpenditures') or 0)
+            if not rd:
+                rd = fin.get('researchAndDevelopment') or 0
 
         fcf      = ocf - capex
         net_cash = cash - debt
@@ -384,7 +401,7 @@ def compute_all_metrics(ticker: str, info: dict) -> dict:
     Returns unified dict ready for email rendering.
     """
     megatrend  = compute_megatrend_alignment(ticker, info)
-    fcf        = compute_fcf_metrics(info)
+    fcf        = compute_fcf_metrics(info, ticker)
     rev_qual   = compute_revenue_quality(info)
     mgmt       = compute_management_quality(info)
     moat       = compute_moat_proxy(info)
