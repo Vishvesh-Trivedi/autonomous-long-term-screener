@@ -3082,6 +3082,27 @@ def run_longterm_screener():
             if 'reddit_mentions_30d' in _fresh:
                 _h['reddit_mentions'] = _fresh['reddit_mentions_30d']
 
+    # Refresh technicals on existing holdings too — this was missing entirely, so
+    # above_200ma/pct_from_high/return_1yr/return_vs_qqq/CAGR/max_drawdown/trend
+    # were frozen at whatever they were when a holding was first added, even
+    # though Step 3.5 recomputes fresh technicals for every existing holding
+    # every run. Only sentiment was ever being refreshed via _SENTIMENT_FIELDS.
+    _TECHNICALS_FIELDS = [
+        'above_200ma', 'pct_from_high', 'pct_from_200ma', 'return_1yr',
+        'return_3yr_cagr', 'return_5yr_cagr', 'return_10yr_cagr',
+        'max_drawdown', 'trend', 'years_listed', 'currency',
+    ]
+    for _h in portfolio.get('holdings', []):
+        _t = _h.get('ticker')
+        if _t in sent_tech_data:
+            _fresh_tech = sent_tech_data[_t].get('technicals', {})
+            for _f in _TECHNICALS_FIELDS:
+                if _f in _fresh_tech:
+                    _h[_f] = _fresh_tech[_f]
+            # return_vs_qqq is stored under a different key in the raw technicals dict
+            if 'return_vs_qqq_1yr' in _fresh_tech:
+                _h['return_vs_qqq'] = _fresh_tech['return_vs_qqq_1yr']
+
     # Congressional stock disclosures — fetch once, attach to all portfolio holdings
     log.info('  Fetching US Congressional stock disclosures (House + Senate)...')
     _congress_data = fetch_congress_disclosures()

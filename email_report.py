@@ -409,8 +409,8 @@ def _holding_card(h: dict) -> str:
         f'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>'
         + _stat('200-Day MA', above_str, above_c)
         + _stat('52w High', f'{_val(pct_high,"pct1") if pct_high else "—"} from high')
-        + _stat('Stock vs QQQ (1yr)',
-                (f'{ret_1yr:+.0f}% <span style="font-weight:400;color:#9ca3af">vs</span> {qqq_ret:+.0f}%'
+        + _stat('QQQ vs Stock (12 months)',
+                (f'QQQ {qqq_ret:+.0f}% <span style="font-weight:400;color:#9ca3af">||</span> Stock {ret_1yr:+.0f}%'
                  if (ret_1yr is not None and qqq_ret is not None) else '—'),
                 '#15803d' if (vs_qqq or 0) >= 0 else '#dc2626', last=True)
         + f'</tr></table>'
