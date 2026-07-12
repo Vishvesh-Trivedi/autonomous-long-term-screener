@@ -55,7 +55,6 @@ EMAIL_PASSWORD    = os.environ.get('GMAIL_PASSWORD', '')
 EMAIL_RECIPIENT   = os.environ.get('EMAIL_RECIPIENT', '')
 EMAIL_CC_LIST     = []   # loaded from config — see _load_screening_config()
 EMAIL_BCC_LIST    = []   # loaded from config — see _load_screening_config()
-CLAUDE_MODEL      = 'claude-sonnet-4-5'
 RUN_MODE          = os.environ.get('RUN_MODE', 'MONTHLY').upper()
 
 BASE_DIR         = Path(__file__).parent
@@ -292,7 +291,7 @@ def build_universe(config: dict) -> list:
     try:
         resp = requests.get(
             'https://www.sec.gov/files/company_tickers.json',
-            headers={'User-Agent': 'LongTermScreener contact@example.com'},
+            headers={'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'},
             timeout=30
         )
         if resp.status_code == 200:
@@ -1075,11 +1074,22 @@ def fetch_finnhub_news(ticker: str) -> dict:
         log.debug(f'  Finnhub failed for {ticker}: {e}')
         return {}
 
+_REDDIT_BLOCK_WARNED = False   # log the 403/blocked-source warning once per run, not once per ticker
+
 def fetch_reddit_mentions(ticker: str, company_name: str = '') -> dict:
     """
     Reddit mentions via public JSON API — no key required.
     Most useful for T3 moonshots where community tracks milestones.
+
+    Reddit tightened anti-scraping enforcement after its 2023 API pricing
+    changes and now returns 403 to unauthenticated .json requests from many
+    cloud/datacenter IP ranges (confirmed live — same class of block as the
+    Senate EFD source in fetch_congress_disclosures). This is a source-side
+    restriction, not a bug — logged once per run rather than raised, since
+    Reddit sentiment is a soft signal and the pipeline should keep going with
+    an empty result.
     """
+    global _REDDIT_BLOCK_WARNED
     headers    = {'User-Agent': 'LongTermScreener/2.0 (personal research tool)'}
     all_titles = []
     _posts_per_sub = _cn(15, 'sentiment_data', 'reddit_posts_per_subreddit')
@@ -1098,9 +1108,17 @@ def fetch_reddit_mentions(ticker: str, company_name: str = '') -> dict:
                     title = p['data'].get('title', '')
                     if ticker.upper() in title.upper():
                         all_titles.append(title)
+            elif resp.status_code == 403 and not _REDDIT_BLOCK_WARNED:
+                log.warning('  Reddit: HTTP 403 — this IP range is blocked by Reddit\'s '
+                            'anti-scraping policy, not a code issue. Reddit sentiment will '
+                            'be empty for this run (further 403s suppressed).')
+                _REDDIT_BLOCK_WARNED = True
+            elif resp.status_code not in (200, 403) and not _REDDIT_BLOCK_WARNED:
+                log.warning(f'  Reddit: unexpected HTTP {resp.status_code} for r/{sub} '
+                            f'(further non-200s this run logged at debug only)')
             time.sleep(0.6)
-        except Exception:
-            pass
+        except Exception as e:
+            log.debug(f'  Reddit fetch failed for r/{sub}/{ticker}: {e}')
     return {
         'reddit_mentions_30d': len(all_titles),
         'reddit_titles':       all_titles[:_titles_for_llm],
@@ -1138,7 +1156,7 @@ def _fetch_8k_text(cik: str, accession: str, primary_doc: str) -> str:
     Fetch 8-K text. For earnings filings, also fetches Exhibit 99.1 (press release)
     which contains the actual revenue/EPS numbers the main 8-K body only references.
     """
-    headers = {'User-Agent': 'LongTermScreener research@example.com'}
+    headers = {'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'}
     acc_nodash = accession.replace('-', '')
     base_url   = f'https://www.sec.gov/Archives/edgar/data/{cik}/{acc_nodash}'
 
@@ -1406,7 +1424,7 @@ def fetch_sec_8k(ticker: str) -> dict:
         cik_padded = str(cik).zfill(10)
         resp = requests.get(
             f'https://data.sec.gov/submissions/CIK{cik_padded}.json',
-            headers={'User-Agent': 'LongTermScreener research@example.com'},
+            headers={'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'},
             timeout=15
         )
         if resp.status_code != 200:
@@ -1574,10 +1592,19 @@ def fetch_congress_disclosures() -> dict:
     """
     Download House and Senate stock transaction disclosures.
     Sources tried in order:
-    1. housestockwatcher.com + senatestockwatcher.com (community aggregators, via DoH if needed)
-    2. efts.us.senate.gov (official US Senate EFTS, Senate fallback)
+    1. housestockwatcher.com + senatestockwatcher.com (community aggregators, via DoH if
+       needed). As of 2026 both are dead — verified via direct DoH query, they return
+       NOERROR with zero A records, i.e. genuinely abandoned, not just DNS-blocked here.
+    2. efdsearch.senate.gov (official Senate EFD search, Senate-only fallback — House has
+       no equivalent official structured-data source). This site is live and resolves
+       fine, but its Akamai WAF returns 403 "Access Denied" to traffic from cloud/
+       datacenter IP ranges (confirmed here even with full browser headers; a control
+       request to sec.gov from the same environment succeeds normally) — so this source
+       may also fail from GitHub Actions runners. This is a source-side access
+       restriction, not a bug in the request logic below.
     Returns {TICKER: [{"name","chamber","type","amount","date"}]} for the last 90 days.
-    Cached locally for CONGRESS_CACHE_TTL days.
+    Cached locally for CONGRESS_CACHE_TTL days. Returns {} (not an exception) if every
+    source is unavailable — callers already treat congressional data as optional.
     """
     if CONGRESS_CACHE_FILE.exists():
         age = (datetime.now() - datetime.fromtimestamp(CONGRESS_CACHE_FILE.stat().st_mtime)).days
@@ -1591,7 +1618,7 @@ def fetch_congress_disclosures() -> dict:
     cutoff     = datetime.now() - timedelta(days=90)
     cutoff_str = cutoff.strftime('%Y-%m-%d')
     today_str  = datetime.now().strftime('%Y-%m-%d')
-    hdrs       = {'User-Agent': 'LongTermScreener/2.0 research@example.com', 'Accept': 'application/json'}
+    hdrs       = {'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com', 'Accept': 'application/json'}
 
     # Pre-resolve community site hostnames via DoH before touching socket
     import socket as _sock
@@ -1702,6 +1729,12 @@ def fetch_congress_disclosures() -> dict:
             sess.headers.update({'User-Agent': 'Mozilla/5.0', 'Referer': 'https://efdsearch.senate.gov/search/'})
             home_url = 'https://efdsearch.senate.gov/search/home/'
             home = sess.get(home_url, timeout=20)
+            if home.status_code == 403:
+                raise RuntimeError(
+                    'Akamai WAF blocked this request (HTTP 403) — efdsearch.senate.gov '
+                    'is rejecting this IP range, not a code/header problem. Retrying '
+                    'will not help; this needs a different egress IP.'
+                )
             token_tag = BeautifulSoup(home.text, 'html.parser').find(attrs={'name': 'csrfmiddlewaretoken'})
             if not token_tag:
                 raise RuntimeError('csrfmiddlewaretoken not found on landing page')
@@ -1875,7 +1908,7 @@ def fetch_10k_targeted(ticker: str, tier: str = 'T3') -> str:
             f'https://efts.sec.gov/LATEST/search-index?q=%22{ticker}%22'
             f'&forms=10-K&dateRange=custom&startdt=2025-01-01&enddt=2026-12-31'
         )
-        resp = requests.get(search_url, headers={'User-Agent': 'LongTermScreener contact@example.com'}, timeout=20)
+        resp = requests.get(search_url, headers={'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'}, timeout=20)
         if resp.status_code != 200: return ''
         hits = resp.json().get('hits', {}).get('hits', [])
         if not hits: return ''
@@ -1883,7 +1916,7 @@ def fetch_10k_targeted(ticker: str, tier: str = 'T3') -> str:
         entity_id = filing.get('entity_id', '')
         sub_resp  = requests.get(
             f'https://data.sec.gov/submissions/CIK{entity_id.zfill(10)}.json',
-            headers={'User-Agent': 'LongTermScreener contact@example.com'}, timeout=20
+            headers={'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'}, timeout=20
         )
         if sub_resp.status_code != 200: return ''
         filings_data = sub_resp.json().get('filings', {}).get('recent', {})
@@ -1895,7 +1928,7 @@ def fetch_10k_targeted(ticker: str, tier: str = 'T3') -> str:
         accession = accessions[ten_k_idx].replace('-', '')
         doc_name  = docs[ten_k_idx]
         doc_url   = f'https://www.sec.gov/Archives/edgar/data/{int(entity_id)}/{accession}/{doc_name}'
-        doc_resp  = requests.get(doc_url, headers={'User-Agent': 'LongTermScreener contact@example.com'}, timeout=60)
+        doc_resp  = requests.get(doc_url, headers={'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'}, timeout=60)
         if doc_resp.status_code != 200: return ''
         extracted = extract_10k_sections(doc_resp.text, ticker)
         cache_file.write_text(extracted, encoding='utf-8')

@@ -21,7 +21,7 @@ import requests
 
 log = logging.getLogger('edgar')
 
-HEADERS = {'User-Agent': 'LongTermScreener research@example.com'}
+HEADERS = {'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'}
 
 BASE_DIR     = Path(__file__).parent
 CIK_MAP_FILE = BASE_DIR / 'data' / 'cik_map.json'

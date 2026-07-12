@@ -72,21 +72,26 @@ jobs:
           python -c "
           import requests, sys
           sources = [
-              ('Senate EFTS (official)', 'https://efts.us.senate.gov/LATEST/search.json?q=&type=PT'),
               ('House watcher (community)', 'https://housestockwatcher.com/api/transactions_flat.json'),
               ('Senate watcher (community)', 'https://www.senatestockwatcher.com/api/transactions'),
+              ('Senate EFD (official fallback)', 'https://efdsearch.senate.gov/search/home/'),
           ]
           ok = 0
           for name, url in sources:
               try:
-                  r = requests.get(url, timeout=10, headers={'User-Agent': 'LongTermScreener/2.0'})
-                  print(f'  [OK {r.status_code}] {name} ({len(r.content)} bytes)')
-                  ok += 1
+                  r = requests.get(url, timeout=10, headers={'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'})
+                  if r.status_code == 200:
+                      print(f'  [OK {r.status_code}] {name} ({len(r.content)} bytes)')
+                      ok += 1
+                  elif r.status_code == 403:
+                      print(f'  [BLOCKED 403] {name} — WAF/bot-protection rejected this runner\'s IP, not a code issue')
+                  else:
+                      print(f'  [FAIL {r.status_code}] {name}')
               except Exception as e:
                   print(f'  [FAIL] {name}: {e}')
           print(f'Congress feeds reachable: {ok}/{len(sources)}')
           if ok == 0:
-              print('WARNING: No congress feeds reachable — disclosures will be absent from this run')
+              print('WARNING: No congress feeds reachable — disclosures will be absent from this run (this is expected/degraded, not a pipeline failure)')
           "
       - name: Diagnose imports
         run: |
@@ -94,7 +99,7 @@ jobs:
           import sys
           print('Python:', sys.version)
           import pkg_resources
-          for pkg in ['anthropic','yfinance','pandas','numpy','requests','openai','vaderSentiment','praw','ta','python-dotenv']:
+          for pkg in ['anthropic','yfinance','pandas','numpy','requests','openai','vaderSentiment','ta','python-dotenv']:
               try:
                   v = pkg_resources.get_distribution(pkg).version
                   print(f'  {pkg}=={v}')

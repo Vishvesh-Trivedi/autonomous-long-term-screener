@@ -27,7 +27,7 @@ BASE_DIR      = Path(__file__).parent
 IPO_FILE      = BASE_DIR / 'data' / 'ipo_watchlist.json'
 IPO_FILE.parent.mkdir(parents=True, exist_ok=True)
 
-HEADERS = {'User-Agent': 'LongTermScreener contact@example.com'}
+HEADERS = {'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'}
 
 # ── MEGATREND DEFINITIONS ─────────────────────────────────────────────────────
 MEGATRENDS = {

@@ -142,12 +142,13 @@ def is_review_due() -> bool:
     return datetime.now() > last + timedelta(days=SCORE_TTL_DAYS)
 
 def save_scores(scores: dict, review_results: dict) -> None:
+    _, model = get_active_provider()
     data = {
         'last_reviewed': datetime.now().isoformat(),
         'next_review':   (datetime.now() + timedelta(days=SCORE_TTL_DAYS)).strftime('%Y-%m-%d'),
         'scores':        scores,
         'detail':        review_results,
-        'model_used':    model if (provider := get_active_provider()[0]) else 'unknown',
+        'model_used':    model or 'unknown',
     }
     with open(SCORES_FILE, 'w') as f:
         json.dump(data, f, indent=2)

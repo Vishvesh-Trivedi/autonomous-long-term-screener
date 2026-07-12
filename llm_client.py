@@ -34,7 +34,7 @@ PROVIDERS = {
     },
     'anthropic': {
         'api_key_env': 'ANTHROPIC_API_KEY',
-        'default_model': 'claude-sonnet-4-5',
+        'default_model': 'claude-sonnet-5',
     },
 }
 

@@ -15,7 +15,7 @@ from pathlib import Path
 
 log = logging.getLogger('metrics')
 
-HEADERS = {'User-Agent': 'LongTermScreener contact@example.com'}
+HEADERS = {'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'}
 
 # ── MEGATREND SCORING SYSTEM ─────────────────────────────────────────────────
 # ALL megatrend definitions live in universe_config.json → megatrends

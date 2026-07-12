@@ -20,7 +20,7 @@
     "provider": "nvidia",
     "model": "meta/llama-3.1-8b-instruct",
     "fallback_provider": "anthropic",
-    "fallback_model": "claude-sonnet-4-5",
+    "fallback_model": "claude-sonnet-5",
     "_alternative_models": {
       "_comment": "Other free NVIDIA models you can switch to by changing model above. Re-test reliability before switching back to a larger model - see _model_change_note.",
       "reasoning_best": "deepseek-ai/deepseek-r1",
@@ -493,8 +493,7 @@
     "ETF": 365
   },
   "quarterly_review": {
-    "ttl_days": 90,
-    "model": "claude-sonnet-4-5"
+    "ttl_days": 90
   },
   "sharesies_kiwisaver_available": {
     "_comment": "Tickers available in Sharesies KiwiSaver self-select. Update as Sharesies adds/removes options.",
