@@ -49,6 +49,16 @@ def _load_megatrend_definitions() -> dict:
                     'tailwind_years': int(v.get('tailwind_years', 15)),
                     'rationale':      v.get('rationale', ''),
                     'keywords':       [kw.lower() for kw in v.get('keywords', [])],
+                    # sic_codes: only the hand-curated original megatrends have these
+                    # (used by ipo_monitor.py's SIC-code match boost). LLM-discovered
+                    # megatrends deliberately get none — asking the LLM to guess SIC
+                    # codes risks silently misrouting IPOs on a hallucinated code.
+                    'sic_codes':      v.get('sic_codes', []),
+                    # deprecated: set by quarterly_review.py when the LLM's survival
+                    # review concludes this sector won't survive even a 10yr horizon.
+                    # Existing holdings keep their historical label — this only stops
+                    # NEW candidates from being classified into a dying sector.
+                    'deprecated':     bool(v.get('deprecated', False)),
                 }
             return result
     except Exception as e:
@@ -111,6 +121,21 @@ def _build_megatrends() -> dict:
 
 MEGATRENDS = _build_megatrends()
 
+def refresh_megatrends() -> dict:
+    """
+    Re-read universe_config.json + data/megatrend_scores.json and refresh the
+    MEGATRENDS dict in place (mutate, don't rebind — compute_megatrend_alignment
+    and every other reader in this module looks up the module-global MEGATRENDS
+    by name at call time, but a caller that did `from research_metrics import
+    MEGATRENDS` holds a reference to the dict object itself, which would go
+    stale on a plain reassignment). Call this after quarterly_review.py writes
+    new/deprecated megatrends so the same screener run sees them immediately
+    instead of waiting for the next process start.
+    """
+    MEGATRENDS.clear()
+    MEGATRENDS.update(_build_megatrends())
+    return MEGATRENDS
+
 
 # ── MEGATREND ALIGNMENT ───────────────────────────────────────────────────────
 
@@ -132,6 +157,8 @@ def compute_megatrend_alignment(ticker: str, info: dict) -> dict:
     best_hits  = 0
 
     for key, mt in MEGATRENDS.items():
+        if mt.get('deprecated'):
+            continue   # LLM survival review says this sector won't last — don't route new stocks here
         hits = sum(1 for kw in mt['keywords'] if kw in combined)
         if hits > best_hits or (hits == best_hits and mt['score'] > best_score):
             best_hits  = hits

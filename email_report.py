@@ -115,6 +115,7 @@ def _holding_card(h: dict) -> str:
     # Sector durability (20-yr)
     sect_dur  = h.get('sector_durability_20yr', '')
     sect_note = h.get('sector_survival_note', '')
+    sect_risk = h.get('sector_risk_note', '')   # set only when this downgraded the verdict — see screener.py research_candidate()
 
     # LLM news intelligence
     intel          = h.get('news_intelligence', {})
@@ -401,6 +402,7 @@ def _holding_card(h: dict) -> str:
         + f'</tr></table>'
         + (f'<div style="font-size:9.5px;margin-top:6px;font-weight:700;color:{"#15803d" if (lt_alpha or 0)>=0 else "#dc2626"}">vs QQQ: {lt_alpha:+}pp/yr long-term</div>' if lt_alpha is not None else '')
         + (f'<div style="font-size:9.5px;color:#b45309;border-left:3px solid #fde68a;padding:5px 10px;margin-top:6px;background:#fffbeb"><strong>Downgraded:</strong> {lt_note}</div>' if lt_note else '')
+        + (f'<div style="font-size:9.5px;color:#b45309;border-left:3px solid #fde68a;padding:5px 10px;margin-top:6px;background:#fffbeb"><strong>Downgraded (sector):</strong> {sect_risk}</div>' if sect_risk else '')
         + f'</td></tr>'
 
         # TECHNICAL POSITION
@@ -866,8 +868,82 @@ def _build_concentration_view(holdings: list, screened: list) -> str:
 </div>"""
 
 
+def _build_sector_outlook(megatrend_review: dict) -> str:
+    """
+    Surfaces the LLM's own sector-level decisions: any megatrend discovered,
+    deprecated, or restored this quarter (quarterly_review.py), plus the
+    current survival verdict for every tracked megatrend. Without this, that
+    review runs and changes what gets screened (research_metrics.py skips
+    deprecated sectors; screener.py's scoring nudges toward high-scoring
+    ones) but the reader never sees why — this makes the decision visible.
+    """
+    if not megatrend_review:
+        return ""
+    detail = megatrend_review.get('detail', {})
+    if not detail:
+        return ""
+    scores                 = megatrend_review.get('scores', {})
+    new_this_run           = megatrend_review.get('new_this_run', [])
+    new_keys                = {m.get('key') for m in new_this_run}
+    deprecated_this_run    = megatrend_review.get('deprecated_this_run', [])
+    undeprecated_this_run  = megatrend_review.get('undeprecated_this_run', [])
+    last_reviewed          = (megatrend_review.get('last_reviewed') or '')[:10]
+
+    changes_html = ""
+    if new_this_run:
+        names = ', '.join(m.get('label', m.get('key', '?')) for m in new_this_run)
+        changes_html += (f'<div style="font-size:10.5px;color:#15803d;margin-bottom:4px">'
+                          f'<strong>+ New sector{"s" if len(new_this_run) > 1 else ""} identified:</strong> {names}</div>')
+    if deprecated_this_run:
+        names = ', '.join(detail.get(k, {}).get('label', k) for k in deprecated_this_run)
+        changes_html += (f'<div style="font-size:10.5px;color:#b91c1c;margin-bottom:4px">'
+                          f'<strong>&minus; Sector{"s" if len(deprecated_this_run) > 1 else ""} downgraded (fails 10yr survival):</strong> {names}</div>')
+    if undeprecated_this_run:
+        names = ', '.join(detail.get(k, {}).get('label', k) for k in undeprecated_this_run)
+        changes_html += (f'<div style="font-size:10.5px;color:#15803d;margin-bottom:4px">'
+                          f'<strong>+ Sector{"s" if len(undeprecated_this_run) > 1 else ""} restored:</strong> {names}</div>')
+
+    rows = ""
+    for key, d in sorted(detail.items(), key=lambda kv: -scores.get(kv[0], 0)):
+        score  = scores.get(key, '—')
+        # A missing key means this entry predates the survival-verdict schema
+        # (or its review call failed) — that's "not yet assessed", never treat
+        # it as a pass or a fail.
+        surv10 = d.get('survives_10yr')
+        surv20 = d.get('survives_20yr')
+        if surv10 is False:
+            badge_color, surv_label = '#b91c1c', 'FAILS 10YR'
+        elif surv20 is False:
+            badge_color, surv_label = '#b45309', 'FAILS 20YR'
+        elif surv10 is None or surv20 is None:
+            badge_color, surv_label = '#9ca3af', 'NOT YET ASSESSED'
+        else:
+            badge_color, surv_label = '#15803d', 'SURVIVES 20YR'
+        new_tag = ' <span style="color:#9ca3af;font-weight:400">(new)</span>' if key in new_keys else ''
+        rows += f"""
+        <tr>
+          <td style="padding:4px 0">{d.get('label', key)}{new_tag}</td>
+          <td style="text-align:center;padding:4px 0">{score}/10</td>
+          <td style="text-align:right;padding:4px 0"><span style="color:{badge_color};font-weight:600;font-size:9px">{surv_label}</span></td>
+        </tr>"""
+
+    return f"""
+<div class="section">
+  <div class="section-hdr">Sector outlook — where the LLM thinks 10-20yr durability actually is</div>
+  {changes_html}
+  <div style="font-size:8.5px;color:#9ca3af;margin-bottom:8px">Last reviewed {last_reviewed or 'never'} &middot; re-reviewed quarterly</div>
+  <table style="width:100%;border-collapse:collapse;font-size:11px">
+    <tr><th style="text-align:left;font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">Megatrend</th>
+        <th style="font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">Score</th>
+        <th style="text-align:right;font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">Survival</th></tr>
+    {rows}
+  </table>
+</div>"""
+
+
 def generate_full_report(decisions: dict, portfolio: dict, researched: dict,
-                         ipo_watchlist: dict = None, fif_threshold: int = None) -> tuple:
+                         ipo_watchlist: dict = None, fif_threshold: int = None,
+                         megatrend_review: dict = None) -> tuple:
     """
     Email 2 — Full Research Brief.
     Professional, dense, analytical. Sunday reading standard.
@@ -929,6 +1005,9 @@ def generate_full_report(decisions: dict, portfolio: dict, researched: dict,
 </table>
 
 <div style="padding:12px">"""
+
+    html += _build_sector_outlook(megatrend_review)
+    html += _build_concentration_view(holdings, screened)
 
     # Holdings — sorted by tier then return descending
     def _sort_key(h):

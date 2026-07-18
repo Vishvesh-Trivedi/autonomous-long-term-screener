@@ -22,7 +22,7 @@ v2.0 additions:
 
 from email_builder import generate_action_email, generate_exit_email, generate_trial_email
 from email_report import generate_full_report
-from research_metrics import compute_all_metrics, MEGATRENDS
+from research_metrics import compute_all_metrics, compute_megatrend_alignment, refresh_megatrends, MEGATRENDS
 from edgar_fundamentals import compute_trajectory, cross_check_yahoo, fetch_customer_concentration, get_stockholders_equity
 from ipo_monitor import run_ipo_monitor, get_ipo_watchlist_summary, get_eligible_for_screening
 from quarterly_review import run_quarterly_review, print_score_report
@@ -900,6 +900,19 @@ def passes_t3_gate(info: dict) -> tuple:
     ins_note = f' | founders {get_insider_ownership(info):.0%}' if get_insider_ownership(info) > 0.03 else ''
     return True, f'T3 PASS ({"pre-revenue" if pre_rev else "early-revenue"}){dil_note}{ins_note}'
 
+def _megatrend_bonus(ticker: str, info: dict, cap: float) -> float:
+    """
+    Nudge (never gate) a candidate's ranking score by how strong a structural
+    tailwind the LLM's quarterly survival review currently assigns its sector.
+    compute_megatrend_alignment already skips `deprecated` megatrends (sectors
+    that failed 10yr survival review) when picking the best match, so a stock
+    in a dying sector simply gets no bonus here rather than a hard veto —
+    keyword-based classification is too crude to single-handedly disqualify an
+    otherwise excellent fundamental profile.
+    """
+    mt = compute_megatrend_alignment(ticker, info)
+    return (mt.get('megatrend_score', 0) / 10) * cap
+
 def compute_t1_score(info: dict, ticker: str = '') -> float:
     roic  = compute_roic(info, ticker)
     gm    = info.get('grossMargins', 0) or 0
@@ -907,17 +920,19 @@ def compute_t1_score(info: dict, ticker: str = '') -> float:
     ocf   = info.get('operatingCashflow', 0) or 0
     score = min(roic * 100, 35) + min(gm * 40, 20) + min(rev / 1e9, 15) + min((ocf / max(rev,1)) * 30, 15)
     score += min(get_insider_ownership(info) * 30, 5)
+    score += _megatrend_bonus(ticker, info, cap=8)
     if compute_debt_ratios(info, ticker)['de_ratio'] > 2.0: score -= 5
     return round(score, 2)
 
-def compute_t2_score(info: dict) -> float:
+def compute_t2_score(info: dict, ticker: str = '') -> float:
     score  = min((info.get('revenueGrowth', 0) or 0) * 60, 30)
     score += min((info.get('grossMargins', 0) or 0) * 40, 20)
     score += min(((info.get('marketCap', 0) or 0) / 1e9), 20)
     if (info.get('operatingCashflow', 0) or 0) > 0: score += 10
+    score += _megatrend_bonus(ticker, info, cap=6)
     return round(score, 2)
 
-def compute_t3_score(info: dict) -> float:
+def compute_t3_score(info: dict, ticker: str = '') -> float:
     mkt_cap      = info.get('marketCap', 0) or 0
     cash         = info.get('totalCash', 0) or 0
     ocf          = info.get('operatingCashflow', 0) or 0
@@ -929,6 +944,7 @@ def compute_t3_score(info: dict) -> float:
     rev_gr = info.get('revenueGrowth', 0) or 0
     if rev_gr > 0: score += min(rev_gr * 20, 15)
     score += min(get_insider_ownership(info) * 30, 10)
+    score += _megatrend_bonus(ticker, info, cap=6)
     score -= min(compute_dilution_rate(info) * 50, 20)
     return round(max(score, 0), 2)
 
@@ -945,11 +961,11 @@ def run_screening(fundamentals: dict) -> dict:
             continue
         t2_pass, t2_reason = passes_t2_gate(info, ticker)
         if t2_pass:
-            t2_cands[ticker] = {'tier':'T2','score':compute_t2_score(info),'reason':t2_reason,'info':info}
+            t2_cands[ticker] = {'tier':'T2','score':compute_t2_score(info, ticker),'reason':t2_reason,'info':info}
             continue
         t3_pass, t3_reason = passes_t3_gate(info)
         if t3_pass:
-            t3_cands[ticker] = {'tier':'T3','score':compute_t3_score(info),'reason':t3_reason,'info':info}
+            t3_cands[ticker] = {'tier':'T3','score':compute_t3_score(info, ticker),'reason':t3_reason,'info':info}
     log.info(f'  Excluded: {excl:,} | T1: {len(t1_cands)} | T2: {len(t2_cands)} | T3: {len(t3_cands)}')
     MAX = _cn(15, 'stock_screening', 'max_candidates_per_tier')
     def top_n(d, n): return dict(sorted(d.items(), key=lambda x: x[1]['score'], reverse=True)[:n])
@@ -2187,6 +2203,21 @@ def research_candidate(ticker: str, tier: str, info: dict, filing_text: str, sen
             research['position_size_pct'] = min(research.get('position_size_pct', 2) or 2, 2)
             research['long_term_note'] = f'{horizon}yr CAGR lagged QQQ by {abs(alpha)}pp — downgraded'
 
+    # Sector survival tilt: the LLM's own per-stock sector_durability_20yr call
+    # used to be recorded and then ignored — a stock could get CORE_HOLD while
+    # the same research prompt said its sector was unlikely to survive 20
+    # years. Make that verdict actually count, the same way long-term alpha
+    # lag already does above (soft downgrade + capped size, not an AVOID —
+    # this is one analyst's read on ONE stock's sector, not the quarterly
+    # cross-sector survival review in quarterly_review.py, so it shouldn't be
+    # able to hard-veto on its own).
+    if research.get('sector_durability_20yr') == 'LOW' and research.get('verdict') in ('CORE_HOLD', 'ACCUMULATE'):
+        research['verdict'] = 'MONITOR'
+        research['position_size_pct'] = min(research.get('position_size_pct', 2) or 2, 2)
+        research['sector_risk_note'] = (
+            research.get('sector_survival_note') or 'Sector durability rated LOW — downgraded'
+        )
+
     return research
 
 def run_research(candidates: dict) -> dict:
@@ -2569,6 +2600,7 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
             'news_intelligence':  sentiment.get('news_intelligence', {}),
             'sector_durability_20yr': research.get('sector_durability_20yr', ''),
             'sector_survival_note':   research.get('sector_survival_note', ''),
+            'sector_risk_note':       research.get('sector_risk_note', ''),
             'qqq_price_at_entry': None,
             'spy_price_at_entry': None,
             'usdnzd_at_entry':    None,
@@ -3196,6 +3228,27 @@ def run_longterm_screener():
         fundamentals = fetch_all_fundamentals(universe)
         save_checkpoint(2, fundamentals)
 
+    # Quarterly megatrend review — deliberately BEFORE Step 3 (Screening), not
+    # after. It discovers/deprecates megatrends and writes universe_config.json;
+    # compute_megatrend_alignment() (used inside compute_t1/t2/t3_score's ranking
+    # bonus, and by run_screening below) reads a module-level MEGATRENDS snapshot
+    # taken at import time, so without refresh_megatrends() here THIS run's
+    # screening would rank candidates against last quarter's sectors even though
+    # the review already ran. Skipped in TRIAL mode — a smoke test shouldn't
+    # mutate shared production config.
+    if RUN_MODE != 'TRIAL':
+        try:
+            from quarterly_review import is_review_due
+            if is_review_due():
+                log.info('  Quarterly megatrend review due — running...')
+                run_quarterly_review()
+                print_score_report()
+                refresh_megatrends()
+            else:
+                log.info('  Megatrend scores current — skipping quarterly review')
+        except Exception as e:
+            log.warning(f'  Quarterly review failed: {e}')
+
     # Step 3: Screening
     candidates = load_checkpoint(3)
     if not candidates:
@@ -3209,18 +3262,6 @@ def run_longterm_screener():
         send_email(th, ts)
         clear_checkpoints()
         return
-
-    # Quarterly megatrend review
-    try:
-        from quarterly_review import is_review_due
-        if is_review_due():
-            log.info('  Quarterly megatrend review due — running...')
-            run_quarterly_review()
-            print_score_report()
-        else:
-            log.info('  Megatrend scores current — skipping quarterly review')
-    except Exception as e:
-        log.warning(f'  Quarterly review failed: {e}')
 
     # IPO monitor
     try:
@@ -3423,7 +3464,8 @@ def run_longterm_screener():
 
     try:
         ipo_summary = get_ipo_watchlist_summary()
-        detail_html, detail_sub = generate_full_report(decisions, portfolio, researched, ipo_summary, FIF_THRESHOLD)
+        megatrend_review = load_json(BASE_DIR / 'data' / 'megatrend_scores.json')
+        detail_html, detail_sub = generate_full_report(decisions, portfolio, researched, ipo_summary, FIF_THRESHOLD, megatrend_review)
         if send_email(detail_html, detail_sub):
             log.info(f'  ✓ Email 2 sent: {detail_sub}')
         else:

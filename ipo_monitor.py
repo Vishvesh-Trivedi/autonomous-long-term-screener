@@ -20,6 +20,11 @@ import os, json, re, time, logging
 from datetime import datetime, timedelta
 from pathlib import Path
 import requests
+# Megatrend definitions live in universe_config.json (single source of truth —
+# see research_metrics.py). This used to be a second, independently hardcoded
+# copy that had drifted from it (different key spelling, no LLM-discovered or
+# deprecated entries); import the shared dict instead of maintaining our own.
+from research_metrics import MEGATRENDS
 
 log = logging.getLogger('ipo_monitor')
 
@@ -28,120 +33,6 @@ IPO_FILE      = BASE_DIR / 'data' / 'ipo_watchlist.json'
 IPO_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 HEADERS = {'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'}
-
-# ── MEGATREND DEFINITIONS ─────────────────────────────────────────────────────
-MEGATRENDS = {
-    'ai_infrastructure': {
-        'label':         'AI Infrastructure',
-        'score':         10,
-        'tailwind_years': 20,
-        'keywords': [
-            'artificial intelligence', 'machine learning', 'gpu', 'data center',
-            'cloud computing', 'semiconductor', 'networking', 'connectivity',
-            'inference', 'hyperscale', 'compute', 'cooling infrastructure'
-        ],
-        'sic_codes': ['3674', '3672', '7372', '3577', '3669'],
-    },
-    'nuclear_renaissance': {
-        'label':         'Nuclear Renaissance',
-        'score':         9,
-        'tailwind_years': 30,
-        'keywords': [
-            'nuclear', 'reactor', 'uranium', 'small modular', 'smr',
-            'advanced nuclear', 'molten salt', 'microreactor', 'fission',
-            'nuclear fuel', 'enrichment'
-        ],
-        'sic_codes': ['4911', '1094'],
-    },
-    'space_commercial': {
-        'label':         'Space Commercialisation',
-        'score':         9,
-        'tailwind_years': 25,
-        'keywords': [
-            'launch vehicle', 'rocket', 'satellite', 'orbit', 'space',
-            'propulsion', 'spacecraft', 'constellation', 'reusable',
-            'in-orbit', 'earth observation'
-        ],
-        'sic_codes': ['3812', '3761', '4812'],
-    },
-    'synthetic_biology': {
-        'label':         'Synthetic Biology',
-        'score':         9,
-        'tailwind_years': 25,
-        'keywords': [
-            'rna', 'mrna', 'gene therapy', 'gene editing', 'crispr',
-            'synthetic biology', 'biologics', 'cell therapy', 'immunotherapy',
-            'genomics', 'proteomics', 'base editing', 'prime editing'
-        ],
-        'sic_codes': ['2836', '2835', '8731'],
-    },
-    'critical_minerals': {
-        'label':         'Critical Minerals',
-        'score':         8,
-        'tailwind_years': 20,
-        'keywords': [
-            'tungsten', 'lithium', 'cobalt', 'rare earth', 'nickel',
-            'manganese', 'graphite', 'vanadium', 'gallium', 'germanium',
-            'critical mineral', 'strategic material', 'battery material'
-        ],
-        'sic_codes': ['1040', '1090', '1094', '2819'],
-    },
-    'defense_technology': {
-        'label':         'Defense Technology',
-        'score':         8,
-        'tailwind_years': 20,
-        'keywords': [
-            'autonomous', 'unmanned', 'drone', 'cyber security', 'defense',
-            'military', 'surveillance', 'counter-drone', 'electronic warfare',
-            'c4isr', 'hypersonic', 'directed energy', 'anduril', 'shield ai'
-        ],
-        'sic_codes': ['3812', '3761', '3489', '7382'],
-    },
-    'aging_demographics': {
-        'label':         'Aging Demographics',
-        'score':         8,
-        'tailwind_years': 25,
-        'keywords': [
-            'oncology', 'alzheimer', 'parkinson', 'cardiovascular', 'diabetes',
-            'chronic disease', 'longevity', 'age-related', 'elder care',
-            'therapeutics', 'precision medicine', 'rare disease', 'orphan drug'
-        ],
-        'sic_codes': ['2836', '2835', '8049', '8099'],
-    },
-    'energy_transition': {
-        'label':         'Energy Transition',
-        'score':         7,
-        'tailwind_years': 20,
-        'keywords': [
-            'solar', 'wind', 'battery storage', 'grid storage', 'ev charging',
-            'clean energy', 'renewable', 'hydrogen', 'fuel cell',
-            'energy storage', 'power electronics', 'grid modernization'
-        ],
-        'sic_codes': ['3674', '3559', '3621', '4911'],
-    },
-    'fintech_inclusion': {
-        'label':         'Fintech & Inclusion',
-        'score':         7,
-        'tailwind_years': 15,
-        'keywords': [
-            'digital payments', 'neobank', 'digital lending', 'insurtech',
-            'wealthtech', 'embedded finance', 'crypto infrastructure',
-            'remittance', 'financial inclusion', 'bnpl', 'open banking'
-        ],
-        'sic_codes': ['6022', '6159', '7372', '6199'],
-    },
-    'water_food_security': {
-        'label':         'Water & Food Security',
-        'score':         7,
-        'tailwind_years': 25,
-        'keywords': [
-            'water treatment', 'desalination', 'irrigation', 'precision agriculture',
-            'vertical farming', 'alternative protein', 'food security',
-            'agritech', 'water scarcity', 'drought', 'food waste reduction'
-        ],
-        'sic_codes': ['4941', '0100', '2040', '3589'],
-    },
-}
 
 # ── HELPERS ───────────────────────────────────────────────────────────────────
 def load_watchlist() -> dict:
@@ -165,8 +56,10 @@ def map_to_megatrend(description: str, sic: str = '') -> dict:
     best_score = 0
 
     for key, mt in MEGATRENDS.items():
+        if mt.get('deprecated'):
+            continue
         hits = sum(1 for kw in mt['keywords'] if kw in desc_lower)
-        sic_match = any(s in str(sic) for s in mt['sic_codes'])
+        sic_match = any(s in str(sic) for s in mt.get('sic_codes', []))
         score = hits * 2 + (3 if sic_match else 0)
         if score > best_score:
             best_score = score

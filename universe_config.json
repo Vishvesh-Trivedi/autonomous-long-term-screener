@@ -258,7 +258,8 @@
         "ai chip",
         "ai accelerator",
         "neural processing"
-      ]
+      ],
+      "sic_codes": ["3674", "3672", "7372", "3577", "3669"]
     },
     "nuclear_renaissance": {
       "label": "Nuclear Renaissance",
@@ -279,7 +280,8 @@
         "enrichment",
         "nuclear power",
         "baseload clean"
-      ]
+      ],
+      "sic_codes": ["4911", "1094"]
     },
     "space_commercial": {
       "label": "Space Commercialisation",
@@ -299,7 +301,8 @@
         "in-orbit services",
         "earth observation",
         "space infrastructure"
-      ]
+      ],
+      "sic_codes": ["3812", "3761", "4812"]
     },
     "synthetic_biology": {
       "label": "Synthetic Biology",
@@ -323,7 +326,8 @@
         "rna interference",
         "rnai",
         "gene silencing"
-      ]
+      ],
+      "sic_codes": ["2836", "2835", "8731"]
     },
     "critical_minerals": {
       "label": "Critical Minerals",
@@ -346,7 +350,8 @@
         "battery material",
         "rare earth element",
         "critical metal"
-      ]
+      ],
+      "sic_codes": ["1040", "1090", "1094", "2819"]
     },
     "defense_technology": {
       "label": "Defense Technology",
@@ -369,7 +374,8 @@
         "autonomous weapons",
         "defense technology",
         "defense contractor"
-      ]
+      ],
+      "sic_codes": ["3812", "3761", "3489", "7382"]
     },
     "aging_demographics": {
       "label": "Aging Demographics",
@@ -392,7 +398,8 @@
         "orphan drug",
         "geriatric",
         "senescence"
-      ]
+      ],
+      "sic_codes": ["2836", "2835", "8049", "8099"]
     },
     "energy_transition": {
       "label": "Energy Transition",
@@ -414,7 +421,8 @@
         "grid modernization",
         "smart grid",
         "clean power"
-      ]
+      ],
+      "sic_codes": ["3674", "3559", "3621", "4911"]
     },
     "fintech_inclusion": {
       "label": "Fintech and Inclusion",
@@ -434,7 +442,8 @@
         "digital banking",
         "payment infrastructure",
         "remittance"
-      ]
+      ],
+      "sic_codes": ["6022", "6159", "7372", "6199"]
     },
     "water_food_security": {
       "label": "Water and Food Security",
@@ -455,7 +464,8 @@
         "food waste",
         "crop science",
         "water technology"
-      ]
+      ],
+      "sic_codes": ["4941", "0100", "2040", "3589"]
     }
   },
   "megatrend_overrides": {
