@@ -175,6 +175,12 @@ def call_llm(prompt: str, system: str = None, max_tokens: int = 2000,
             if '{' in cleaned:
                 start = cleaned.find('{')
                 end   = cleaned.rfind('}') + 1
+                if end <= start:
+                    # No closing brace at all — the response was cut off by
+                    # max_tokens before finishing. Slicing to an empty string
+                    # here used to produce a misleading "char 0" parse error;
+                    # raise a truthful one instead.
+                    raise json.JSONDecodeError('Response truncated before closing brace (likely hit max_tokens)', cleaned, len(cleaned))
                 cleaned = cleaned[start:end]
             data = json.loads(cleaned)
             return {'success': True, 'data': data, 'error': None, 'provider': prov, 'model': mdl}

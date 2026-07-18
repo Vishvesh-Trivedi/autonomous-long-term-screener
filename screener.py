@@ -2162,7 +2162,11 @@ def research_candidate(ticker: str, tier: str, info: dict, filing_text: str, sen
         )
 
     system = "You are a long-term investment analyst. Return ONLY valid JSON."
-    research = research_stock(prompt, system=system, max_tokens=1400)
+    # 2200: the T1/T2 schema alone runs ~900-1200 tokens once the model adds any
+    # preamble despite "ONLY JSON" — 1400 was truncating responses before the
+    # closing brace, which _parse() then silently turned into an empty string
+    # (see llm_client.py) instead of a real truncation error.
+    research = research_stock(prompt, system=system, max_tokens=2200)
 
     # Moat lie detector
     gm = info.get('grossMargins', 0) or 0
@@ -2192,7 +2196,10 @@ def run_research(candidates: dict) -> dict:
     for ticker, cand in candidates.items():
         tier            = cand['tier']
         existing_thesis = load_thesis(ticker)
-        if existing_thesis:
+        # A failed call (ERROR/PARSE_ERROR/NO_API_KEY) is not a real thesis —
+        # caching it as one would strand good candidates for the full 90/180-day
+        # TTL every time the LLM has a bad day. Always retry these instead.
+        if existing_thesis and existing_thesis.get('verdict') not in ('ERROR', 'PARSE_ERROR', 'NO_API_KEY'):
             ttl_days = 90 if tier == 'T3' else 180
             if 'research_date' in existing_thesis:
                 age = (datetime.now() - datetime.fromisoformat(existing_thesis['research_date'])).days
