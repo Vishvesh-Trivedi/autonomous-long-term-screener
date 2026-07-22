@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Eli Lilly's patented and proprietary pharmaceutical products continue to dominate the market with increasing demand for innovative treatments in chronic diseases, leading to significant revenue and market capitalization growth.",
+    "revenue_10yr_b": 124.5,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 20,
+    "probability": 0.6
+  },
+  "base": {
+    "narrative": "Eli Lilly maintains its position in the healthcare sector with steady revenue growth and moderate market capitalization expansion, driven by its existing R&D pipeline and regulatory approvals.",
+    "revenue_10yr_b": 96.2,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 15,
+    "probability": 0.2
+  },
+  "bear": {
+    "narrative": "Eli Lilly's failure to maintain its R&D pipeline and regulatory approvals for its key products leads to a decline in revenue and market capitalization, resulting in a loss of market share to competitors.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 10,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current market trends and financials.",
+  "thesis_breaks_if": "If the company fails to maintain its R&D pipeline and regulatory approvals for its key products.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:07:46.632764",
+  "ticker": "LLY"
+}

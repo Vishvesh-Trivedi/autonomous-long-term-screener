@@ -1,0 +1,30 @@
+{
+  "moat_type": "Proprietary semiconductor test and measurement equipment",
+  "moat_durability_years": 10,
+  "management_grade": "B",
+  "growth_runway_years": 5,
+  "primary_risk": "Dependence on the semiconductor industry",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological change, which may lead to disruption of market leaders.",
+  "thesis_summary": "Advantest Corporation's proprietary semiconductor test and measurement equipment rides the trend of increasing chip complexity.",
+  "thesis_breaks_if": "News items represent a structural change to the 10-15yr thesis",
+  "sentiment_note": "Fairly valued for its growth",
+  "decade_probability": 0.6,
+  "annual_alpha_estimate": 8,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 1.0,
+  "ten_k_highlights": [
+    "The Company's business is subject to intense competition from other companies that design, manufacture, and sell semiconductor test and measurement equipment.",
+    "The Company's revenue is derived from the sale of semiconductor test and measurement equipment to a limited number of customers, which may expose the Company to risks associated with dependence on a few customers.",
+    "The Company's business is subject to intense competition from other companies that design, manufacture, and sell semiconductor test and measurement equipment."
+  ],
+  "valuation_label": "FAIR",
+  "valuation_note": "FCF yield 223.4%, PEG 2.1 \u2014 fairly valued for its growth.",
+  "valuation_multiplier": 1.0,
+  "val_pe": 58.0,
+  "val_ps": 0.1,
+  "val_ev_ebitda": -0.4,
+  "val_peg": 2.09,
+  "research_date": "2026-07-22T15:05:16.837993",
+  "ticker": "ADTTF"
+}

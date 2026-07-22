@@ -1,6 +1,30 @@
 {
-  "verdict": "PARSE_ERROR",
-  "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0). Response: {\n  \"moat_type\": \"Network Effect & Scale\",\n  \"moat_durability_years\": 20,\n  \"management_grade\": \"A\",\n  \"growth_runway_years\": 10",
-  "research_date": "2026-07-08T02:16:24.554882",
+  "moat_type": "Network Effects and Brand Recognition",
+  "moat_durability_years": 20,
+  "management_grade": "A",
+  "growth_runway_years": 10,
+  "primary_risk": "Regulatory Risks and Changes in Payment Systems",
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "The company's moat is well-established, and the sector has seen limited disruption over the past 30 years.",
+  "thesis_summary": "Visa Inc. provides payment processing services, leveraging its network effects and brand recognition to ride the trend of digital payments.",
+  "thesis_breaks_if": "Short-term noise, but no structural changes to the 10-15yr thesis.",
+  "sentiment_note": "Neutral",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 8.2,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 1.0,
+  "ten_k_highlights": [
+    "The company's revenue has been rising at a CAGR of 44.8% over the past 5 years.",
+    "Visa Inc. has a gross margin of 98% and a return on invested capital (ROIC) of 35%.",
+    "The company has a cash runway with positive free cash flow."
+  ],
+  "valuation_label": "FAIR",
+  "valuation_note": "FCF yield 3.1%, PEG 1.6, EV/EBITDA 23 \u2014 fairly valued for its growth.",
+  "valuation_multiplier": 1.0,
+  "val_pe": 23.9,
+  "val_ps": null,
+  "val_ev_ebitda": 22.6,
+  "val_peg": 1.58,
+  "research_date": "2026-07-22T15:03:26.967509",
   "ticker": "V"
 }

@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Ascendis Pharma's proprietary product pipeline experiences significant growth, leading to a substantial increase in revenue and market capitalization.",
+    "revenue_10yr_b": 9.4,
+    "mktcap_10yr_b": 83.3,
+    "multiple": 15,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "Ascendis Pharma's proprietary product pipeline experiences moderate growth, leading to a steady increase in revenue and market capitalization.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 22.2,
+    "multiple": 10,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "Ascendis Pharma's proprietary product pipeline experiences significant challenges, leading to a decline in revenue and market capitalization.",
+    "mktcap_10yr_b": 11.1,
+    "multiple": 5,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Short-term price moves, news cycles, and 8-K noise may cause deviations from the base case.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:08:04.789074",
+  "ticker": "ASND"
+}

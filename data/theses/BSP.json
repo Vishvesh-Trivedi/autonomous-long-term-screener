@@ -1,6 +1,30 @@
 {
-  "verdict": "PARSE_ERROR",
-  "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0). Response: {\n  \"moat_type\": \"Proprietary technology and network effects in AI/cloud platforms\",\n  \"moat_durability_years\": 15,\n  \"management_grade\": \"B\",\n  \"growth_runway_years\": 8,\n  \"primary_risk\": \"Intense co",
-  "research_date": "2026-07-08T02:26:35.904387",
+  "moat_type": "string",
+  "moat_durability_years": 0,
+  "management_grade": "C",
+  "growth_runway_years": 0,
+  "primary_risk": "string",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The company's track record is insufficient to make a judgment on durability.",
+  "thesis_summary": "Bending Spoons S.p.A. is a company that rides the big trend of technology, with a specific moat in its product/service.",
+  "thesis_breaks_if": "short-term price moves, news cycles, and 8-K noise",
+  "sentiment_note": "The company is very richly valued.",
+  "decade_probability": 0.5,
+  "annual_alpha_estimate": 0,
+  "verdict": "ACCUMULATE",
+  "position_size_pct": 0.2,
+  "ten_k_highlights": [
+    "The company has 2,187 employees.",
+    "The company has a revenue of $1649M.",
+    "The company has a gross margin of 67%."
+  ],
+  "valuation_label": "EXTREME",
+  "valuation_note": "FCF yield 1.6%, PEG 1.3, EV/EBITDA 33, P/S 13 \u2014 very richly valued \u2014 starter position only.",
+  "valuation_multiplier": 0.45,
+  "val_pe": 178.3,
+  "val_ps": 13.1,
+  "val_ev_ebitda": 32.8,
+  "val_peg": 1.35,
+  "research_date": "2026-07-22T15:04:31.748205",
   "ticker": "BSP"
 }

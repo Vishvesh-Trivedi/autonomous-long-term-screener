@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "nVent Electric plc experiences significant growth in revenue and market capitalization over the next 10 years, driven by its strong moat and durable business model.",
+    "revenue_10yr_b": 6.98,
+    "mktcap_10yr_b": 64.38,
+    "multiple": 15.0,
+    "probability": 0.2
+  },
+  "base": {
+    "narrative": "nVent Electric plc experiences moderate growth in revenue and market capitalization over the next 10 years, driven by its strong moat but with some challenges in the market.",
+    "revenue_10yr_b": 5.33,
+    "mktcap_10yr_b": 43.88,
+    "multiple": 10.0,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "nVent Electric plc experiences significant decline in revenue and market capitalization over the next 10 years, driven by its dependence on a limited number of customers.",
+    "mktcap_10yr_b": 26.0,
+    "multiple": 5.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "If the company's dependence on a limited number of customers leads to a significant decline in revenue or profitability.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:08:14.643106",
+  "ticker": "NVT"
+}

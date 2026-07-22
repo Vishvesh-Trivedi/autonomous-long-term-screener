@@ -1,0 +1,30 @@
+{
+  "moat_type": "Patented and proprietary pharmaceutical products",
+  "moat_durability_years": 20,
+  "management_grade": "A",
+  "growth_runway_years": 10,
+  "primary_risk": "Regulatory risks and patent expirations",
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "The pharmaceutical sector has seen significant consolidation and disruption over the past 30 years, but Eli Lilly has maintained its market position through strategic acquisitions and R&D investments.",
+  "thesis_summary": "Eli Lilly's patented and proprietary pharmaceutical products ride the big trend of increasing demand for innovative treatments in chronic diseases.",
+  "thesis_breaks_if": "If the company fails to maintain its R&D pipeline and regulatory approvals for its key products.",
+  "sentiment_note": "Neutral",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 7,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 0.5,
+  "ten_k_highlights": [
+    "Eli Lilly has a strong track record of generating free cash flow, with a cash runway of several years.",
+    "The company has a diverse portfolio of products, with a mix of established brands and newer products in development.",
+    "Eli Lilly has a significant presence in the global pharmaceutical market, with operations in over 125 countries."
+  ],
+  "valuation_label": "EXTREME",
+  "valuation_note": "FCF yield 0.9%, PEG 1.6, EV/EBITDA 30 \u2014 very richly valued \u2014 starter position only.",
+  "valuation_multiplier": 0.45,
+  "val_pe": 26.2,
+  "val_ps": null,
+  "val_ev_ebitda": 30.0,
+  "val_peg": 1.58,
+  "research_date": "2026-07-22T15:04:21.357182",
+  "ticker": "LLY"
+}

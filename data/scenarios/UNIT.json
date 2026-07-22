@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Uniti Group's fiber-optic network deployment gains significant traction, leading to a disruption in the telecommunications infrastructure market.",
+    "revenue_10yr_b": 34.5,
+    "mktcap_10yr_b": 27.5,
+    "multiple": 10,
+    "probability": 0.2
+  },
+  "base": {
+    "narrative": "Uniti Group's fiber-optic network deployment gains moderate traction, but faces stiff competition from established players.",
+    "revenue_10yr_b": 12.5,
+    "mktcap_10yr_b": 9.5,
+    "multiple": 5,
+    "probability": 0.6
+  },
+  "bear": {
+    "narrative": "Uniti Group's fiber-optic network deployment fails to gain significant traction, and the company struggles to compete with established players.",
+    "mktcap_10yr_b": 3.5,
+    "multiple": 2,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis, we are currently tracking the bull scenario.",
+  "thesis_breaks_if": "Failure to secure $500M in funding to support network expansion",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:08:53.121159",
+  "ticker": "UNIT"
+}

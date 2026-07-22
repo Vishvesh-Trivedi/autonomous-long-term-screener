@@ -1,0 +1,30 @@
+{
+  "moat_type": "Leading DRAM and NAND flash memory manufacturer with a strong market position",
+  "moat_durability_years": 10,
+  "management_grade": "B",
+  "growth_runway_years": 5,
+  "primary_risk": "Dependence on the volatile semiconductor industry",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The sector faces disruption from emerging technologies and changing market trends, but SK hynix has a strong market position and a history of adapting to changes in the industry.",
+  "thesis_summary": "SK hynix is a leading DRAM and NAND flash memory manufacturer that rides the big trend of increasing demand for memory chips in the digital age.",
+  "thesis_breaks_if": "A structural change in the industry, such as a significant shift to new memory technologies, that threatens SK hynix's market position.",
+  "sentiment_note": "The company's valuation is rich, but the entry multiple sets the starting yield of a 15-20yr hold.",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 10,
+  "verdict": "ACCUMULATE",
+  "position_size_pct": 0.5,
+  "ten_k_highlights": [
+    "The company's revenue growth rate has been increasing over the past five years, with a compound annual growth rate of 198%.",
+    "The company's gross margin has been relatively stable over the past five years, with an average gross margin of 68%.",
+    "The company has a strong cash position, with $1192.6B in market capitalization and a positive free cash flow."
+  ],
+  "valuation_label": "RICH",
+  "valuation_note": "FCF yield 3530.0%, PEG 3.2 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
+  "valuation_multiplier": 0.7,
+  "val_pe": 24.4,
+  "val_ps": 0.0,
+  "val_ev_ebitda": -0.3,
+  "val_peg": 3.23,
+  "research_date": "2026-07-22T15:04:05.784453",
+  "ticker": "SKHYV"
+}

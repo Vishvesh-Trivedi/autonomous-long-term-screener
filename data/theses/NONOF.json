@@ -1,6 +1,30 @@
 {
-  "verdict": "PARSE_ERROR",
-  "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0). Response: {\n  \"moat_type\": \"Intellectual Property / R&D Leadership\",\n  \"moat_durability_years\": 15,\n  \"management_grade\": \"A\",\n  \"growth_runway_years\": 10,\n  \"primary_risk\": \"Patent Expirations\",\n  \"sector_dura",
-  "research_date": "2026-07-08T02:23:42.805602",
+  "moat_type": "Patented and proprietary diabetes treatments, specifically Ozempic and Wegovy",
+  "moat_durability_years": 10,
+  "management_grade": "A",
+  "growth_runway_years": 5,
+  "primary_risk": "Intense competition from generic versions of diabetes treatments",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The diabetes treatment market is expected to face significant disruption from generic versions of popular treatments, but Novo Nordisk's strong brand and patent portfolio should help it maintain a competitive edge.",
+  "thesis_summary": "Novo Nordisk's patented and proprietary diabetes treatments, specifically Ozempic and Wegovy, ride the trend of increasing demand for effective diabetes management.",
+  "thesis_breaks_if": "If the company fails to maintain its patent portfolio and faces significant competition from generic versions of its treatments.",
+  "sentiment_note": "Neutral",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 8,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 1.0,
+  "ten_k_highlights": [
+    "The company's revenue growth is driven by the increasing demand for effective diabetes management, with Ozempic and Wegovy being key contributors to this growth.",
+    "The company has a strong brand and patent portfolio, which should help it maintain a competitive edge in the diabetes treatment market.",
+    "The company's cash runway is positive, with a strong cash position and a low debt-to-equity ratio."
+  ],
+  "valuation_label": "FAIR",
+  "valuation_note": "FCF yield 12.9%, PEG 3.8, EV/EBITDA 2 \u2014 fairly valued for its growth.",
+  "valuation_multiplier": 1.0,
+  "val_pe": 11.9,
+  "val_ps": 0.7,
+  "val_ev_ebitda": 2.0,
+  "val_peg": 3.75,
+  "research_date": "2026-07-22T15:04:14.902410",
   "ticker": "NONOF"
 }

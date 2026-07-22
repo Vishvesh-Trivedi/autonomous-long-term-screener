@@ -1,6 +1,30 @@
 {
-  "verdict": "ERROR",
-  "error": "NVIDIA returned empty after 3 attempts",
-  "research_date": "2026-07-08T02:26:04.880939",
+  "moat_type": "Network Effects and Scale",
+  "moat_durability_years": 20,
+  "management_grade": "A",
+  "growth_runway_years": 10,
+  "primary_risk": "Competition from Fintech and Digital Payments",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The sector is expected to experience moderate disruption due to the rise of fintech and digital payments, but Global Payments' scale and network effects will likely allow it to survive and thrive.",
+  "thesis_summary": "Global Payments' specific moat is its scale and network effects in the digital payments space, riding the big trend of increasing digital payments adoption.",
+  "thesis_breaks_if": "A structural change in the digital payments landscape, such as a major fintech player acquiring a significant market share.",
+  "sentiment_note": "The market is currently undervaluing Global Payments, with a growth-adjusted valuation that is considered cheap.",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 8,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 1.0,
+  "ten_k_highlights": [
+    "The company's revenue has been rising at a rate of 67.3% over the past 5 years.",
+    "Global Payments' gross margin has been insufficient, but has been improving over the past 5 years.",
+    "The company's return on invested capital (ROIC) has been rising at a rate of 14.9% over the past 5 years."
+  ],
+  "valuation_label": "CHEAP",
+  "valuation_note": "FCF yield 5.5%, PEG 0.2, EV/EBITDA 10 \u2014 attractive entry for the growth.",
+  "valuation_multiplier": 1.15,
+  "val_pe": 5.0,
+  "val_ps": null,
+  "val_ev_ebitda": 10.3,
+  "val_peg": 0.22,
+  "research_date": "2026-07-22T15:05:13.064401",
   "ticker": "GPN"
 }

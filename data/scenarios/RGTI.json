@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Rigetti Computing achieves 10% gross margin and becomes a leading player in the quantum computing market, with a strong patent portfolio and significant revenue growth.",
+    "revenue_10yr_b": 1.5,
+    "mktcap_10yr_b": 25.1,
+    "multiple": 20,
+    "probability": 0.2
+  },
+  "base": {
+    "narrative": "Rigetti Computing achieves 5% gross margin and experiences moderate revenue growth, but faces significant competition in the quantum computing market.",
+    "revenue_10yr_b": 0.5,
+    "mktcap_10yr_b": 10.1,
+    "multiple": 10,
+    "probability": 0.6
+  },
+  "bear": {
+    "narrative": "Rigetti Computing fails to achieve 5% gross margin and experiences significant revenue decline, with a weak patent portfolio and high competition in the quantum computing market.",
+    "mktcap_10yr_b": 2.1,
+    "multiple": 5,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Rigetti Computing's current financials and thesis suggest a high-risk, high-reward investment opportunity.",
+  "thesis_breaks_if": "Rigetti Computing fails to achieve 10% gross margin within the next 12 months.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:09:12.641196",
+  "ticker": "RGTI"
+}

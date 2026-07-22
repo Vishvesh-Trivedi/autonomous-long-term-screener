@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Advantest Corporation's proprietary semiconductor test and measurement equipment continues to ride the trend of increasing chip complexity, leading to sustained growth in the industry.",
+    "revenue_10yr_b": 1.5,
+    "mktcap_10yr_b": 2.5,
+    "multiple": 25,
+    "probability": 0.6
+  },
+  "base": {
+    "narrative": "Advantest Corporation's proprietary semiconductor test and measurement equipment continues to ride the trend of increasing chip complexity, but at a slower pace than the bull scenario.",
+    "revenue_10yr_b": 1.2,
+    "mktcap_10yr_b": 2.0,
+    "multiple": 20,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "The increasing complexity of chips leads to a decrease in demand for Advantest Corporation's proprietary semiconductor test and measurement equipment, causing a decline in the industry.",
+    "mktcap_10yr_b": 1.5,
+    "multiple": 15,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "The current tracking note is BULL, as the current market conditions and financials support a bull scenario.",
+  "thesis_breaks_if": "News items represent a structural change to the 10-15yr thesis",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:08:29.967211",
+  "ticker": "ADTTF"
+}

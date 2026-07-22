@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "CRISPR Therapeutics achieves significant growth in the biotechnology sector with its CRISPR/Cas9 gene editing technology, leading to multiple product approvals and a substantial increase in revenue and market capitalization.",
+    "revenue_10yr_b": 10.0,
+    "mktcap_10yr_b": 20.0,
+    "multiple": 10.0,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "CRISPR Therapeutics experiences moderate growth in the biotechnology sector with its CRISPR/Cas9 gene editing technology, leading to some product approvals and a moderate increase in revenue and market capitalization.",
+    "revenue_10yr_b": 2.0,
+    "mktcap_10yr_b": 6.0,
+    "multiple": 5.0,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "CRISPR Therapeutics faces significant challenges in the biotechnology sector with its CRISPR/Cas9 gene editing technology, leading to a decline in revenue and market capitalization.",
+    "mktcap_10yr_b": 1.0,
+    "multiple": 2.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "Failure to demonstrate efficacy and safety in clinical trials for CTX001.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:09:25.630635",
+  "ticker": "CRSP"
+}

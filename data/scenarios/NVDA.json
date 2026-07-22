@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "NVIDIA Corporation experiences a decade-long bull run, driven by the increasing demand for high-performance computing and AI technology. The company's leadership in GPU technology enables it to maintain a strong market position, and its revenue grows at a CAGR of 15%.",
+    "revenue_10yr_b": 1.15,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 25,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "NVIDIA Corporation experiences a decade-long base scenario, driven by steady growth in the demand for high-performance computing and AI technology. The company's revenue grows at a CAGR of 5%, and its market capitalization reaches $6.5 trillion.",
+    "revenue_10yr_b": 1.05,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 20,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "NVIDIA Corporation experiences a decade-long bear market, driven by a decline in the demand for high-performance computing and AI technology. The company's revenue grows at a CAGR of -5%, and its market capitalization falls to $2.5 trillion.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 10,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:07:10.309389",
+  "ticker": "NVDA"
+}

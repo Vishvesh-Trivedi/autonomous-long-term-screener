@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Seagate Technology Holdings plc experiences a decade-long growth in data storage needs, maintaining its competitive advantage through scale and brand. Revenue and market cap grow at a compound annual growth rate of 10%.",
+    "revenue_10yr_b": 34.51,
+    "mktcap_10yr_b": 433.19,
+    "multiple": 35,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "Seagate Technology Holdings plc experiences a decade-long stable growth in data storage needs, maintaining its competitive advantage through scale and brand. Revenue and market cap grow at a compound annual growth rate of 5%.",
+    "revenue_10yr_b": 23.01,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 25,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "Seagate Technology Holdings plc experiences a decade-long decline in data storage needs, losing its competitive advantage due to increased competition and technological advancements. Revenue and market cap decline at a compound annual growth rate of 10%.",
+    "mktcap_10yr_b": 20.177842995200002,
+    "multiple": 0,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Short-term price moves, news cycles, and 8-K noise will not structurally change the next decade.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise, unless they structurally change the next decade.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:08:37.575928",
+  "ticker": "STX"
+}

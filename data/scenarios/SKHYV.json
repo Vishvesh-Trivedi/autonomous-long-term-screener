@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "SK hynix continues to dominate the DRAM and NAND flash memory market, with increasing demand for memory chips driving revenue growth.",
+    "revenue_10yr_b": 243.19,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 20.0,
+    "probability": 0.7
+  },
+  "base": {
+    "narrative": "SK hynix maintains its market position in the DRAM and NAND flash memory market, with steady revenue growth and moderate market capitalization expansion.",
+    "revenue_10yr_b": 183.19,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 15.0,
+    "probability": 0.3
+  },
+  "bear": {
+    "narrative": "SK hynix faces increasing competition in the DRAM and NAND flash memory market, leading to stagnant revenue growth and declining market capitalization.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 10.0,
+    "probability": 0.0
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current market conditions and financials.",
+  "thesis_breaks_if": "A structural change in the industry, such as a significant shift to new memory technologies, that threatens SK hynix's market position.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:07:42.034247",
+  "ticker": "SKHYV"
+}

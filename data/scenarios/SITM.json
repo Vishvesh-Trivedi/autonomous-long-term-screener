@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "SiTime Corporation experiences significant growth in the timing solutions market, driven by increasing demand from various industries. The company's high-precision timing solutions become essential for emerging technologies such as 5G, IoT, and AI.",
+    "revenue_10yr_b": 4.8,
+    "mktcap_10yr_b": 34.2,
+    "multiple": 45,
+    "probability": 0.4
+  },
+  "base": {
+    "narrative": "SiTime Corporation experiences steady growth in the timing solutions market, driven by moderate demand from various industries. The company's high-precision timing solutions remain relevant for established technologies such as automotive and industrial control.",
+    "revenue_10yr_b": 1.9,
+    "mktcap_10yr_b": 20.8,
+    "multiple": 30,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "SiTime Corporation experiences declining demand for timing solutions, driven by industry disruptions and technological advancements. The company's high-precision timing solutions become less relevant for emerging technologies.",
+    "mktcap_10yr_b": 5.5,
+    "multiple": 20,
+    "probability": 0.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "The current market sentiment is positive, with the stock price increasing by 20% in the past quarter.",
+  "thesis_breaks_if": "News items represent short-term noise and do not structurally change the 10-15yr thesis.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:07:53.170038",
+  "ticker": "SITM"
+}

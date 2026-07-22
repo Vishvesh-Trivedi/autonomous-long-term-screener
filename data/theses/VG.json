@@ -1,6 +1,30 @@
 {
-  "verdict": "ERROR",
-  "error": "NVIDIA returned empty after 3 attempts",
-  "research_date": "2026-07-08T02:28:46.286262",
+  "moat_type": "Scale and Cost Advantages in the Midstream Energy Sector",
+  "moat_durability_years": 15,
+  "management_grade": "B",
+  "growth_runway_years": 10,
+  "primary_risk": "Regulatory and Environmental Risks",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The midstream energy sector is subject to disruption from technological advancements and shifting regulatory environments, which may impact the company's long-term survival.",
+  "thesis_summary": "Venture Global's scale and cost advantages in the midstream energy sector, combined with its growth runway in the liquefied natural gas (LNG) market, position it to benefit from the increasing demand for cleaner energy sources.",
+  "thesis_breaks_if": "A structural change in the midstream energy sector, such as a significant shift towards renewable energy sources, could break the thesis.",
+  "sentiment_note": "The company's valuation is considered rich, and a smaller starter position is recommended.",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 8,
+  "verdict": "ACCUMULATE",
+  "position_size_pct": 0.5,
+  "ten_k_highlights": [
+    "The company's revenue growth is driven by the increasing demand for liquefied natural gas (LNG) in the global market.",
+    "The company has a strong track record of capital discipline, with a history of generating positive free cash flow.",
+    "The company's management team has a proven track record of executing on its growth strategy and navigating the midstream energy sector."
+  ],
+  "valuation_label": "RICH",
+  "valuation_note": "FCF yield -20.0%, PEG 0.9, EV/EBITDA 12 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
+  "valuation_multiplier": 0.7,
+  "val_pe": 14.2,
+  "val_ps": 2.3,
+  "val_ev_ebitda": 12.3,
+  "val_peg": 0.88,
+  "research_date": "2026-07-22T15:04:42.964494",
   "ticker": "VG"
 }

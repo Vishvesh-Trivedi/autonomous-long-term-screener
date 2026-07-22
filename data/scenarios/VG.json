@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Venture Global's scale and cost advantages in the midstream energy sector, combined with its growth runway in the liquefied natural gas (LNG) market, position it to benefit from the increasing demand for cleaner energy sources, leading to a significant increase in revenue and market capitalization over the next 10 years.",
+    "revenue_10yr_b": 287.6,
+    "mktcap_10yr_b": 143.8,
+    "multiple": 22.5,
+    "probability": 0.8
+  },
+  "base": {
+    "narrative": "Venture Global's scale and cost advantages in the midstream energy sector, combined with its growth runway in the liquefied natural gas (LNG) market, position it to benefit from the increasing demand for cleaner energy sources, leading to a moderate increase in revenue and market capitalization over the next 10 years.",
+    "revenue_10yr_b": 20.4,
+    "mktcap_10yr_b": 10.2,
+    "multiple": 10.2,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "A structural change in the midstream energy sector, such as a significant shift towards renewable energy sources, could lead to a decline in Venture Global's revenue and market capitalization over the next 10 years.",
+    "mktcap_10yr_b": 4.3,
+    "multiple": 6.8,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current market conditions and financials.",
+  "thesis_breaks_if": "A structural change in the midstream energy sector, such as a significant shift towards renewable energy sources.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:07:57.913490",
+  "ticker": "VG"
+}

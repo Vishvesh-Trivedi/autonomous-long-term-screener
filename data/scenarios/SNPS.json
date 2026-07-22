@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "Synopsys continues to ride the trend of increasing demand for complex chips, with revenue growth exceeding 15% annually. The company expands its EDA software and IP offerings, solidifying its position as a leader in the semiconductor industry.",
+    "revenue_10yr_b": 1.35,
+    "mktcap_10yr_b": 143.5,
+    "multiple": 25,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "Synopsys experiences steady growth in the EDA software and IP market, with revenue increasing by 5-7% annually. The company maintains its market share and continues to innovate, but at a slower pace than the bull scenario.",
+    "revenue_10yr_b": 1.15,
+    "mktcap_10yr_b": 114.5,
+    "multiple": 18,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "Synopsys faces increased competition in the EDA software and IP market, leading to stagnant revenue growth. The company struggles to maintain its market share, and its stock price declines.",
+    "mktcap_10yr_b": 74.5,
+    "multiple": 12,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current market trends and financials.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-22T15:08:09.574109",
+  "ticker": "SNPS"
+}
