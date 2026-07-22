@@ -111,6 +111,56 @@ def _mt_tag(label: str, score: int) -> str:
     return f'<span style="background:#e8f0fe;color:#1a4ab5;padding:3px 8px;border-radius:12px;font-size:9px">{label} · {score}/10</span>'
 
 
+def _rating_style(verdict) -> tuple:
+    """Shared long-term rating colours/labels (15-20yr stance, not a trade)."""
+    v = str(verdict or '').upper()
+    return {
+        'CORE_HOLD':   ('#1d4ed8', '#eff4ff', 'CORE HOLD'),
+        'ACCUMULATE':  ('#15803d', '#f0fdf4', 'ACCUMULATE'),
+        'MOONSHOT':    ('#7c3aed', '#f5f3ff', 'MOONSHOT'),
+        'MONITOR':     ('#d97706', '#fffbeb', 'MONITOR'),
+        'SPECULATIVE': ('#d97706', '#fffbeb', 'SPECULATIVE'),
+        'TRIM':        ('#d97706', '#fffbeb', 'TRIM'),
+        'AVOID':       ('#dc2626', '#fef2f2', 'AVOID'),
+        'EXIT':        ('#dc2626', '#fef2f2', 'EXIT'),
+    }.get(v, ('#6b7280', '#f8f9fa', v or '\u2014'))
+
+
+def _action_call(h):
+    """
+    The honest 'what do I do this month' call = long-term rating x entry timing.
+    A dip never turns a MONITOR/AVOID name into a buy; technicals are only used
+    to time accumulation of names we already rate as accumulate-friendly.
+    Returns (label, color, bg, border, priority) where higher priority = more
+    actionable (used to pick the 'one thing this month').
+    """
+    verdict = str(h.get('verdict', '') or '').upper()
+    zone, reason = _entry_zone(h)
+
+    # Ratings we are willing to add to on weakness.
+    accumulate_ok = verdict in ('CORE_HOLD', 'ACCUMULATE', 'MOONSHOT')
+    small = ' (small)' if verdict == 'MOONSHOT' else ''
+
+    if verdict in ('AVOID', 'EXIT'):
+        return ('DO NOT ADD &mdash; thesis broken', '#b91c1c', '#fef2f2', '#fecaca', reason, 0)
+    if verdict in ('MONITOR', 'SPECULATIVE', 'TRIM'):
+        return ('HOLD &mdash; thesis under review, don&#39;t add', '#92400e', '#fffbeb', '#fcd34d', reason, 1)
+    if accumulate_ok:
+        if zone == 'buy':
+            return (f'ADD{small} &mdash; accumulation zone', '#166534', '#f0fdf4', '#86efac', reason, 3)
+        if zone == 'wait':
+            return ('HOLD &mdash; wait for a better entry', '#92400e', '#fffbeb', '#fcd34d', reason, 1)
+        return ('HOLD &mdash; no clear entry signal', '#374151', '#f3f4f6', '#d1d5db', reason, 1)
+
+    # Unknown/blank verdict — fall back to the neutral entry-zone read.
+    if zone == 'buy':
+        return ('YES &mdash; reasonable entry today', '#166534', '#f0fdf4', '#86efac', reason, 2)
+    if zone == 'wait':
+        return ('WAIT &mdash; near 52-week high', '#92400e', '#fffbeb', '#fcd34d', reason, 1)
+    return ('HOLD &mdash; no clear entry signal', '#374151', '#f3f4f6', '#d1d5db', reason, 1)
+
+
+
 def _entry_zone(h):
     """
     Returns ('buy'|'wait'|'monitor', reason_str) using stock-specific thesis + scenario data.
@@ -189,20 +239,54 @@ def _stock_row(h, show_hint=True):
     tier_c   = {'T1': '#15803d', 'T2': '#1d4ed8', 'T3': '#d97706'}.get(tier, '#9ca3af')
     border_c = tier_c
 
-    # Can I still enter?
-    zone, reason = _entry_zone(h)
-    if zone == 'buy':
-        sig_label = 'YES &mdash; Good entry at today\'s price'
-        sig_c, sig_bg, sig_bdr = '#166534', '#f0fdf4', '#86efac'
-    elif zone == 'wait':
-        sig_label = 'WAIT &mdash; Near 52-week high, hold off'
-        sig_c, sig_bg, sig_bdr = '#92400e', '#fffbeb', '#fcd34d'
-    else:
-        sig_label = 'HOLD &mdash; No clear entry signal'
-        sig_c, sig_bg, sig_bdr = '#374151', '#f3f4f6', '#d1d5db'
+    # Long-term rating badge (15-20yr stance) — shown alongside the tier so the
+    # action below connects to the committee's actual verdict.
+    _rc, _rbg, _rlbl = _rating_style(h.get('verdict'))
+    rating_badge = (
+        f'&nbsp;<span style="background:{_rbg};color:{_rc};font-size:8px;font-weight:700;'
+        f'padding:2px 6px;border-radius:2px;border:1px solid {_rc}33;vertical-align:middle;'
+        f'letter-spacing:.04em">{_rlbl}</span>'
+    ) if h.get('verdict') else ''
+
+    # What to do this month = rating x entry timing (a dip never buys a MONITOR/AVOID).
+    sig_label, sig_c, sig_bg, sig_bdr, reason, _prio = _action_call(h)
 
     reason_html = (f'<div style="font-size:10px;color:{sig_c};margin-top:5px;line-height:1.5">{reason}</div>'
                    if reason else '')
+
+    # Compact senior-analyst signals: valuation stance, insider net direction,
+    # and an honest 'partial data' flag when the call rests on incomplete inputs.
+    _sig_chips = []
+    _val = h.get('valuation_label')
+    if _val and _val not in ('—', 'FAIR'):
+        _vc = {'CHEAP': '#15803d', 'RICH': '#d97706', 'EXTREME': '#dc2626'}.get(_val, '#6b7280')
+        _sig_chips.append(f'<span style="color:{_vc};font-weight:700">{_val} valuation</span>')
+    _ins = h.get('insider_net_signal') or h.get('insider_signal')
+    if _ins == 'SELLING':
+        _sig_chips.append('<span style="color:#dc2626">insiders selling</span>')
+    elif _ins == 'BUYING':
+        _sig_chips.append('<span style="color:#15803d">insiders buying</span>')
+    _dil = h.get('dilution_trajectory')
+    if _dil in ('SEVERE', 'HIGH'):
+        _sig_chips.append('<span style="color:#dc2626">serial dilution</span>')
+    _csig = h.get('congress_signal')
+    if h.get('congress_source') == 'efd' and _csig in ('BUYING', 'SELLING', 'MIXED'):
+        _cc = {'BUYING': '#15803d', 'SELLING': '#dc2626', 'MIXED': '#d97706'}[_csig]
+        _clbl = {'BUYING': 'senators buying', 'SELLING': 'senators selling', 'MIXED': 'senators trading'}[_csig]
+        _sig_chips.append(f'<span style="color:{_cc}">{_clbl}</span>')
+    _dq = h.get('data_completeness') or {}
+    if _dq.get('band') == 'THIN':
+        _sig_chips.append('<span style="color:#b45309">partial data</span>')
+    chips_html = (f'<div style="font-size:9.5px;color:#6b7280;margin-top:6px">'
+                  + ' &middot; '.join(_sig_chips) + '</div>') if _sig_chips else ''
+
+    # Portfolio-action advisories on held names (drift trim / event re-research).
+    _adv = [x for x in (h.get('concentration_flag'), h.get('rerun_flag')) if x]
+    adv_html = ''
+    if _adv:
+        adv_html = (f'<div style="font-size:9.5px;color:#92400e;background:#fffbeb;'
+                    f'border:1px solid #fde68a;border-radius:3px;padding:5px 9px;margin-top:6px">'
+                    + '<br>'.join(f'&#9873; {a}' for a in _adv) + '</div>')
 
     return (
         f'<tr><td style="padding:0 0 10px 0">'
@@ -213,6 +297,7 @@ def _stock_row(h, show_hint=True):
         f'<tr>'
         f'<td style="padding:14px 16px 4px 14px;vertical-align:middle">'
         f'<span style="font-size:9px;font-weight:700;letter-spacing:.06em;color:{tier_c}">{tier}</span>'
+        f'{rating_badge}'
         f'&nbsp;&nbsp;<strong style="font-size:21px;color:#111827;letter-spacing:-.02em;vertical-align:middle">{ticker}</strong>'
         f'<div style="font-size:11px;color:#6b7280;margin-top:4px">{company}</div>'
         f'</td>'
@@ -244,6 +329,8 @@ def _stock_row(h, show_hint=True):
         f'<div style="background:{sig_bg};border:1px solid {sig_bdr};border-radius:4px;padding:10px 14px">'
         f'<div style="font-size:11px;font-weight:700;color:{sig_c}">{sig_label}</div>'
         f'{reason_html}'
+        f'{chips_html}'
+        f'{adv_html}'
         f'</div>'
         f'</td></tr>'
 
@@ -284,6 +371,19 @@ def _action_month_row(item, kind):
     note_html = (f'<div style="font-size:10px;color:#6b7280;margin-top:3px">{note[:60]}</div>'
                  if note else '')
 
+    # Committee self-review flag (advisory) — only shown when not OK.
+    rflag = str(item.get('review_flag', '') or '').upper()
+    review_html = ''
+    if rflag in ('REVIEW', 'OVERRIDE'):
+        rc = '#b45309' if rflag == 'REVIEW' else '#b91c1c'
+        rbg = '#fffbeb' if rflag == 'REVIEW' else '#fef2f2'
+        rnote = str(item.get('review_note', ''))[:90]
+        review_html = (
+            f'<div style="margin-top:5px;font-size:9.5px;color:{rc};background:{rbg};'
+            f'border:1px solid {rc}33;border-radius:3px;padding:3px 6px;display:inline-block">'
+            f'\u26a0 Committee {rflag}: {rnote}</div>'
+        )
+
     return (
         f'<tr><td style="padding:0 0 10px 0">'
         f'<table width="100%" border="0" cellpadding="0" cellspacing="0" '
@@ -311,6 +411,7 @@ def _action_month_row(item, kind):
         f'<div style="font-size:15px;font-weight:700;color:#111827">{date_s}</div>'
         f'<div style="font-size:10px;color:#6b7280;margin-top:3px">at entry price {ep_s}</div>'
         f'{note_html}'
+        f'{review_html}'
         f'</td>'
         f'<td style="padding:10px 14px 14px 8px;width:50%;text-align:right;vertical-align:top">'
         f'<div style="font-size:8px;font-weight:700;color:#9ca3af;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px">Today\'s Price</div>'
@@ -323,7 +424,7 @@ def _action_month_row(item, kind):
     )
 
 
-def generate_action_email(decisions: Dict, portfolio: Dict) -> tuple:
+def generate_action_email(decisions: Dict, portfolio: Dict, decision_review: Dict = None) -> tuple:
     """
     Action Brief — action-grouped layout.
     Holdings sorted into: ADD MORE / NEAR HIGH (WAIT) / MONITORING.
@@ -351,6 +452,45 @@ def generate_action_email(decisions: Dict, portfolio: Dict) -> tuple:
     n_neg     = len(returns) - n_pos
     avg_ret_s = f'{"+" if (avg_ret or 0) >= 0 else ""}{avg_ret:.1f}%' if avg_ret is not None else '—'
     avg_ret_c = '#15803d' if (avg_ret or 0) >= 0 else '#dc2626'
+
+    # Accumulation-oriented counts (matches the 15-20yr book, not a trading P&L):
+    # how many holdings are actionable-to-add now vs hold vs under review.
+    n_add = n_hold_act = n_review = 0
+    _top_add = None  # (priority, decade_prob, alpha, holding) for 'one thing this month'
+    for h in holdings:
+        _lbl, _c, _bg, _bdr, _rsn, _prio = _action_call(h)
+        v = str(h.get('verdict', '') or '').upper()
+        if _prio >= 2 and 'ADD' in _lbl.upper():
+            n_add += 1
+            key = (_prio,
+                   h.get('decade_probability') or 0,
+                   h.get('annual_alpha_estimate') or 0)
+            if _top_add is None or key > _top_add[0]:
+                _top_add = (key, h, _lbl)
+        elif v in ('MONITOR', 'SPECULATIVE', 'TRIM', 'AVOID', 'EXIT'):
+            n_review += 1
+        else:
+            n_hold_act += 1
+
+    # 'If you do one thing this month' — the single highest-conviction add.
+    priority_banner = ''
+    if _top_add is not None:
+        _, _ph, _plbl = _top_add
+        _pc, _pbg, _plrat = _rating_style(_ph.get('verdict'))
+        _pt = _ph.get('ticker', '')
+        _pco = _ph.get('company_name', _pt)
+        priority_banner = (
+            f'<div style="margin:0 12px 8px;padding:12px 14px;background:#f0fdf4;'
+            f'border:1px solid #bbf7d0;border-left:4px solid #15803d;border-radius:3px">'
+            f'<div style="font-size:8px;font-weight:700;color:#15803d;letter-spacing:.12em;'
+            f'text-transform:uppercase;margin-bottom:4px">If you do one thing this month</div>'
+            f'<div style="font-size:13px;color:#111827;font-weight:700">Add to {_pt} '
+            f'<span style="background:{_pbg};color:{_pc};font-size:8px;font-weight:700;'
+            f'padding:2px 6px;border-radius:2px;border:1px solid {_pc}33">{_plrat}</span></div>'
+            f'<div style="font-size:10px;color:#4b5563;margin-top:3px">{_pco} is in an '
+            f'accumulation zone &mdash; a chance to average in on a name we hold for the long run.</div>'
+            f'</div>'
+        )
 
     # Classify holdings into zones
     buy_zone, wait_zone, monitor_zone = [], [], []
@@ -393,12 +533,12 @@ def generate_action_email(decisions: Dict, portfolio: Dict) -> tuple:
             body_rows += _action_month_row(item, 'sell')
 
     if buy_zone:
-        body_rows += _divider(f'Can still enter &mdash; {len(buy_zone)} holdings')
+        body_rows += _divider(f'Accumulation zone &mdash; {len(buy_zone)} holdings')
         for h in buy_zone:
             body_rows += _stock_row(h)
 
     if wait_zone:
-        body_rows += _divider(f'Near highs, wait for pullback &mdash; {len(wait_zone)} holdings')
+        body_rows += _divider(f'Near highs, wait for a better entry &mdash; {len(wait_zone)} holdings')
         for h in wait_zone:
             body_rows += _stock_row(h)
 
@@ -406,6 +546,25 @@ def generate_action_email(decisions: Dict, portfolio: Dict) -> tuple:
         body_rows += _divider(f'Monitoring &mdash; {len(monitor_zone)} holdings')
         for h in monitor_zone:
             body_rows += _stock_row(h)
+
+    # Committee self-review banner (advisory). Shows the overall critique plus a
+    # count of decisions flagged for a second look.
+    review_banner = ''
+    dr = decision_review or {}
+    _p_note = str(dr.get('portfolio_note', '') or '').strip()
+    _n_flag = sum(1 for v in (dr.get('reviews') or {}).values()
+                  if str(v.get('flag', '')).upper() in ('REVIEW', 'OVERRIDE'))
+    if _p_note or _n_flag:
+        _flag_txt = (f'<span style="color:#b45309;font-weight:700">{_n_flag} flagged for review</span>'
+                     if _n_flag else '<span style="color:#15803d;font-weight:700">all decisions consistent</span>')
+        review_banner = (
+            f'<div style="margin:0 12px 4px;padding:11px 14px;background:#f8fafc;'
+            f'border:1px solid #e2e8f0;border-left:4px solid #475569;border-radius:3px">'
+            f'<div style="font-size:8px;font-weight:700;color:#475569;letter-spacing:.12em;'
+            f'text-transform:uppercase;margin-bottom:4px">Committee self-review &middot; {_flag_txt}</div>'
+            f'<div style="font-size:11px;color:#334155;line-height:1.5">{_p_note[:280]}</div>'
+            f'</div>'
+        )
 
     html = f'''<!DOCTYPE html><html><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -427,7 +586,7 @@ def generate_action_email(decisions: Dict, portfolio: Dict) -> tuple:
   </tr></table>
 </div>
 
-<!-- STATS BAR: avg return · gainers · laggards -->
+<!-- STATS BAR: avg return · accumulate now · under review -->
 <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-bottom:2px solid #eaecef">
   <tr>
     <td style="padding:14px 0;width:33%;text-align:center;border-right:1px solid #eaecef">
@@ -435,16 +594,18 @@ def generate_action_email(decisions: Dict, portfolio: Dict) -> tuple:
       <div style="font-size:20px;font-weight:800;color:{avg_ret_c};letter-spacing:-.02em">{avg_ret_s}</div>
     </td>
     <td style="padding:14px 0;width:33%;text-align:center;border-right:1px solid #eaecef">
-      <div style="font-size:8px;font-weight:600;color:#9ca3af;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px">Gainers</div>
-      <div style="font-size:20px;font-weight:800;color:#15803d;letter-spacing:-.02em">{n_pos}</div>
+      <div style="font-size:8px;font-weight:600;color:#9ca3af;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px">Accumulate Now</div>
+      <div style="font-size:20px;font-weight:800;color:{"#15803d" if n_add else "#9ca3af"};letter-spacing:-.02em">{n_add}</div>
     </td>
     <td style="padding:14px 0;width:34%;text-align:center">
-      <div style="font-size:8px;font-weight:600;color:#9ca3af;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px">Laggards</div>
-      <div style="font-size:20px;font-weight:800;color:{"#dc2626" if n_neg else "#9ca3af"};letter-spacing:-.02em">{n_neg}</div>
+      <div style="font-size:8px;font-weight:600;color:#9ca3af;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px">Under Review</div>
+      <div style="font-size:20px;font-weight:800;color:{"#d97706" if n_review else "#9ca3af"};letter-spacing:-.02em">{n_review}</div>
     </td>
   </tr>
 </table>
 
+{priority_banner}
+{review_banner}
 <!-- HOLDINGS GROUPED BY ZONE -->
 <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0 12px">
   {body_rows}
@@ -487,6 +648,9 @@ def generate_exit_email(exits: List[Dict], month_str: str) -> tuple:
 .b-loss{background:#e05555;color:#fff}
 .b-alpha{background:#1a4ab5;color:#fff}
 .b-lag{background:#6b7280;color:#fff}
+.b-t1{background:#0f5132;color:#fff}
+.b-t2{background:#1e40af;color:#fff}
+.b-t3{background:#9a3412;color:#fff}
 .returns-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
 .ret-cell{background:#f9fafb;border-radius:2px;padding:8px;text-align:center}
 .ret-k{font-size:7px;color:#a0a0aa}
@@ -570,7 +734,7 @@ def generate_exit_email(exits: List[Dict], month_str: str) -> tuple:
 </div>
 <div class="returns-grid" style="padding:12px 16px">
   <div class="ret-cell"><div class="ret-k">Your return</div><div class="ret-v {ret_cls}">{ret_str}</div></div>
-  <div class="ret-cell"><div class="ret-k">QQQ same period</div><div class="ret-v {'pos' if (qqq_ret or 0)>=0 else 'neg'}">{qqq_ret:+.1f}%' if qqq_ret else '—'</div></div>
+  <div class="ret-cell"><div class="ret-k">QQQ same period</div><div class="ret-v {'pos' if (qqq_ret or 0)>=0 else 'neg'}">{f"{qqq_ret:+.1f}%" if qqq_ret is not None else "—"}</div></div>
   <div class="ret-cell"><div class="ret-k">Alpha</div><div class="ret-v {'pos' if (alpha or 0)>=0 else 'neg'}">{alpha_str}</div></div>
 </div>
 <div class="journey-line" style="padding:6px 16px"><div class="j-date">{date_added}</div><div class="j-dot add"></div><div>Thesis: "{thesis[:80]}..."</div></div>

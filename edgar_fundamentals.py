@@ -33,8 +33,13 @@ CONCEPTS = {
                        'SalesRevenueNet'],
     'net_income':     ['NetIncomeLoss'],
     'operating_income': ['OperatingIncomeLoss'],
+    'operating_cashflow': ['NetCashProvidedByUsedInOperatingActivities',
+                       'NetCashProvidedByUsedInOperatingActivitiesContinuingOperations'],
     'total_assets':   ['Assets'],
+    'current_assets': ['AssetsCurrent'],
     'current_liab':   ['LiabilitiesCurrent'],
+    'interest_expense': ['InterestExpense', 'InterestExpenseDebt',
+                       'InterestIncomeExpenseNet'],
     'total_debt':     ['LongTermDebtNoncurrent', 'LongTermDebt'],
     'cash':           ['CashAndCashEquivalentsAtCarryingValue'],
     'shares':         ['CommonStockSharesOutstanding',
@@ -236,6 +241,90 @@ def compute_trajectory(ticker: str) -> dict:
         'dilution_trajectory': dilution_flag,
         'edgar_note':         f'{len(revenue)} years of filed data',
     }
+
+
+def compute_earnings_quality_trend(ticker: str) -> dict:
+    """
+    Multi-year (up to 3yr) earnings-quality trend from EDGAR filed data.
+
+    A single-year OCF/Net-Income ratio can be flattered by a one-off working
+    capital swing. Averaging the ratio across the last 3 filed years, and
+    checking whether it is improving or deteriorating, distinguishes durable
+    cash generation from an accounting one-off. Returns '' fields when EDGAR
+    has no usable data (caller falls back to the single-year yfinance flag).
+    """
+    facts = fetch_company_facts(ticker)
+    if not facts:
+        return {'eq_trend_available': False}
+
+    ocf = _extract_annual_series(facts, CONCEPTS['operating_cashflow'])
+    ni  = _extract_annual_series(facts, CONCEPTS['net_income'])
+    if not ocf or not ni:
+        return {'eq_trend_available': False}
+
+    ni_by_year = {n['fy']: n['val'] for n in ni}
+    ratios = []   # (fy, ocf/ni) newest-first, only where NI is meaningfully positive
+    for o in ocf:
+        n = ni_by_year.get(o['fy'])
+        if n and n > 0 and o['val'] is not None:
+            ratios.append((o['fy'], o['val'] / n))
+    ratios = ratios[:3]
+    if not ratios:
+        return {'eq_trend_available': False}
+
+    vals = [r[1] for r in ratios]
+    avg  = sum(vals) / len(vals)
+    latest = vals[0]
+
+    # Direction: compare newest year to the oldest available in the 3yr window.
+    if len(vals) >= 2:
+        oldest = vals[-1]
+        if latest > oldest + 0.10:   direction = 'IMPROVING'
+        elif latest < oldest - 0.10: direction = 'DETERIORATING'
+        else:                        direction = 'STABLE'
+    else:
+        direction = 'STABLE'
+
+    flag = ('CLEAN' if avg >= 1.1 else 'WATCH' if avg >= 0.8 else 'FLAG')
+    return {
+        'eq_trend_available':  True,
+        'eq_years':            len(vals),
+        'eq_ocf_ni_latest':    round(latest, 2),
+        'eq_ocf_ni_3yr_avg':   round(avg, 2),
+        'eq_trend_direction':  direction,
+        'earnings_quality_3yr': flag,
+    }
+
+
+def get_edgar_statement_fields(ticker: str) -> dict:
+    """
+    Statement-level line items pulled from EDGAR filed XBRL, as a free,
+    rate-limit-friendly fallback for the same fields yfinance's balance_sheet/
+    income_stmt/cashflow properties fail to return under throttling. Returns a
+    dict keyed the same way as screener.fetch_financial_statement_fields so it
+    can be merged in as a drop-in backstop. Missing concepts are simply absent.
+    """
+    facts = fetch_company_facts(ticker)
+    if not facts:
+        return {}
+
+    def _latest(key):
+        s = _extract_annual_series(facts, CONCEPTS.get(key, []))
+        return s[0]['val'] if s else None
+
+    ta = _latest('total_assets')
+    cl = _latest('current_liab')
+    inv_cap = (ta - cl) if (ta is not None and cl is not None) else None
+    out = {
+        'operatingIncome':         _latest('operating_income'),
+        'totalAssets':             ta,
+        'totalCurrentAssets':      _latest('current_assets'),
+        'totalCurrentLiabilities': cl,
+        'interestExpense':         _latest('interest_expense'),
+        'operatingCashflow':       _latest('operating_cashflow'),
+        'investedCapital':         inv_cap,
+    }
+    return {k: v for k, v in out.items() if v is not None}
 
 
 _EQUITY_CACHE: dict = {}

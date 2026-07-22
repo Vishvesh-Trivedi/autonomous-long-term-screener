@@ -22,10 +22,11 @@ v2.0 additions:
 
 from email_builder import generate_action_email, generate_exit_email, generate_trial_email
 from email_report import generate_full_report
-from research_metrics import compute_all_metrics, compute_megatrend_alignment, refresh_megatrends, MEGATRENDS
-from edgar_fundamentals import compute_trajectory, cross_check_yahoo, fetch_customer_concentration, get_stockholders_equity
+from research_metrics import compute_all_metrics, compute_megatrend_alignment, refresh_megatrends, MEGATRENDS, compute_valuation
+from edgar_fundamentals import compute_trajectory, cross_check_yahoo, fetch_customer_concentration, get_stockholders_equity, compute_earnings_quality_trend, get_edgar_statement_fields
 from ipo_monitor import run_ipo_monitor, get_ipo_watchlist_summary, get_eligible_for_screening
 from quarterly_review import run_quarterly_review, print_score_report
+from congress_trades import build_senate_index, congress_signal_for
 import os, json, time, pickle, logging, ssl, smtplib, re
 from dotenv import load_dotenv
 load_dotenv()
@@ -541,6 +542,26 @@ def fetch_financial_statement_fields(ticker: str) -> dict:
                 continue
             log.debug(f'  Financial statements fetch failed for {ticker}: {e}')
             result = {}
+
+    # EDGAR companyfacts fallback: yfinance's statement DataFrames throttle hard
+    # and return empty under sustained load (the exact failure this pipeline hits
+    # most). SEC filed XBRL is free, authoritative and rate-limit-friendly, so
+    # backfill any statement field yfinance left missing rather than screening the
+    # company out on absent data.
+    _missing = [k for k in ('operatingIncome', 'totalAssets',
+                            'totalCurrentLiabilities', 'interestExpense')
+                if not result.get(k)]
+    if _missing:
+        try:
+            _edgar = get_edgar_statement_fields(ticker)
+            for _k, _v in _edgar.items():
+                if not result.get(_k) and _v is not None:
+                    result[_k] = _v
+            if _edgar:
+                result['_statement_source'] = 'yfinance+edgar'
+        except Exception as e:
+            log.debug(f'  EDGAR statement fallback failed for {ticker}: {e}')
+
     _FIN_STATEMENTS_CACHE[ticker] = result
     return result
 
@@ -1092,25 +1113,98 @@ def fetch_finnhub_news(ticker: str) -> dict:
 
 _REDDIT_BLOCK_WARNED = False   # log the 403/blocked-source warning once per run, not once per ticker
 
+_REDDIT_TOKEN = {'token': None, 'exp': 0.0}
+
+def _get_reddit_token() -> str:
+    """
+    Obtain an app-only (userless) OAuth token via the client-credentials grant.
+
+    This is the *real* fix for the 403s the public .json endpoint returns from
+    cloud IPs: Reddit's data licensing changes closed unauthenticated scraping
+    but still permit free authenticated access. Requires two GitHub secrets /
+    env vars — REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET (create a 'script' or
+    'web app' at https://www.reddit.com/prefs/apps). Returns '' when creds are
+    absent so the caller degrades gracefully rather than failing.
+    """
+    cid  = os.environ.get('REDDIT_CLIENT_ID')
+    csec = os.environ.get('REDDIT_CLIENT_SECRET')
+    if not cid or not csec:
+        return ''
+    now = time.time()
+    if _REDDIT_TOKEN['token'] and _REDDIT_TOKEN['exp'] > now + 30:
+        return _REDDIT_TOKEN['token']
+    try:
+        resp = requests.post(
+            'https://www.reddit.com/api/v1/access_token',
+            auth=(cid, csec),
+            data={'grant_type': 'client_credentials'},
+            headers={'User-Agent': 'LongTermScreener/2.0 (research)'},
+            timeout=10,
+        )
+        if resp.status_code == 200:
+            j = resp.json()
+            _REDDIT_TOKEN['token'] = j.get('access_token', '')
+            _REDDIT_TOKEN['exp']   = now + int(j.get('expires_in', 3600) or 3600)
+            return _REDDIT_TOKEN['token']
+        log.debug(f'  Reddit OAuth token HTTP {resp.status_code}')
+    except Exception as e:
+        log.debug(f'  Reddit OAuth token error: {e}')
+    return ''
+
 def fetch_reddit_mentions(ticker: str, company_name: str = '') -> dict:
     """
-    Reddit mentions via public JSON API — no key required.
-    Most useful for T3 moonshots where community tracks milestones.
+    Reddit mentions for community-signal context (most useful for T3 moonshots).
 
-    Reddit tightened anti-scraping enforcement after its 2023 API pricing
-    changes and now returns 403 to unauthenticated .json requests from many
-    cloud/datacenter IP ranges (confirmed live — same class of block as the
-    Senate EFD source in fetch_congress_disclosures). This is a source-side
-    restriction, not a bug — logged once per run rather than raised, since
-    Reddit sentiment is a soft signal and the pipeline should keep going with
-    an empty result.
+    Primary path is the authenticated OAuth API (oauth.reddit.com) when
+    REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET are configured — this is the
+    supported, un-blocked route after Reddit's 2023 API changes. If no creds
+    are present we fall back to the public .json endpoint, which returns 403
+    from most cloud IPs; that failure is logged once and yields an empty result
+    (soft signal, pipeline keeps going). The response carries `reddit_source`
+    so the rest of the system can be honest about which path produced the data.
     """
     global _REDDIT_BLOCK_WARNED
-    headers    = {'User-Agent': 'LongTermScreener/2.0 (personal research tool)'}
-    all_titles = []
-    _posts_per_sub = _cn(15, 'sentiment_data', 'reddit_posts_per_subreddit')
+    _posts_per_sub  = _cn(15, 'sentiment_data', 'reddit_posts_per_subreddit')
     _titles_for_llm = _cn(15, 'sentiment_data', 'reddit_titles_for_llm')
     subreddits = ['investing', 'stocks', 'SecurityAnalysis']
+    all_titles = []
+
+    token = _get_reddit_token()
+    if token:
+        headers = {'Authorization': f'bearer {token}',
+                   'User-Agent': 'LongTermScreener/2.0 (research)'}
+        for sub in subreddits:
+            try:
+                resp = requests.get(
+                    f'https://oauth.reddit.com/r/{sub}/search',
+                    params={'q': ticker, 'sort': 'new', 'limit': _posts_per_sub,
+                            't': 'month', 'restrict_sr': 1},
+                    headers=headers, timeout=8
+                )
+                if resp.status_code == 200:
+                    posts = resp.json().get('data', {}).get('children', [])
+                    for p in posts:
+                        title = p['data'].get('title', '')
+                        if ticker.upper() in title.upper():
+                            all_titles.append(title)
+                else:
+                    log.debug(f'  Reddit OAuth search HTTP {resp.status_code} for r/{sub}')
+                time.sleep(0.6)
+            except Exception as e:
+                log.debug(f'  Reddit OAuth fetch failed for r/{sub}/{ticker}: {e}')
+        return {
+            'reddit_mentions_30d': len(all_titles),
+            'reddit_titles':       all_titles[:_titles_for_llm],
+            'reddit_source':       'oauth',
+        }
+
+    # ── Fallback: unauthenticated public endpoint ──
+    # Works from a residential IP (running locally) but Reddit blocks it (403)
+    # from most cloud/CI ranges. On the first 403 we stop trying the remaining
+    # subreddits — they will all fail the same way — so a blocked run costs one
+    # request, not one per subreddit per ticker.
+    headers = {'User-Agent': 'LongTermScreener/2.0 (personal research tool)'}
+    blocked = False
     for sub in subreddits:
         try:
             resp = requests.get(
@@ -1124,12 +1218,17 @@ def fetch_reddit_mentions(ticker: str, company_name: str = '') -> dict:
                     title = p['data'].get('title', '')
                     if ticker.upper() in title.upper():
                         all_titles.append(title)
-            elif resp.status_code == 403 and not _REDDIT_BLOCK_WARNED:
-                log.warning('  Reddit: HTTP 403 — this IP range is blocked by Reddit\'s '
-                            'anti-scraping policy, not a code issue. Reddit sentiment will '
-                            'be empty for this run (further 403s suppressed).')
-                _REDDIT_BLOCK_WARNED = True
-            elif resp.status_code not in (200, 403) and not _REDDIT_BLOCK_WARNED:
+            elif resp.status_code == 403:
+                blocked = True
+                if not _REDDIT_BLOCK_WARNED:
+                    log.warning('  Reddit: HTTP 403 — direct/unauthenticated access is blocked '
+                                'from this network (normal on cloud/CI). Reddit is an optional '
+                                'soft signal; the run continues using Finnhub news + SEC 8-K. '
+                                'Set REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET to enable the free '
+                                'OAuth API if you want Reddit back.')
+                    _REDDIT_BLOCK_WARNED = True
+                break  # every other subreddit will 403 too — don't waste time
+            elif not _REDDIT_BLOCK_WARNED:
                 log.warning(f'  Reddit: unexpected HTTP {resp.status_code} for r/{sub} '
                             f'(further non-200s this run logged at debug only)')
             time.sleep(0.6)
@@ -1138,6 +1237,7 @@ def fetch_reddit_mentions(ticker: str, company_name: str = '') -> dict:
     return {
         'reddit_mentions_30d': len(all_titles),
         'reddit_titles':       all_titles[:_titles_for_llm],
+        'reddit_source':       'blocked' if blocked else ('public' if all_titles else 'empty'),
     }
 
 _8K_ITEMS = {
@@ -1864,6 +1964,15 @@ def run_sentiment_technicals(candidates: dict, portfolio: dict) -> dict:
     total   = len(all_tickers)
     results = {}
 
+    # Build the Senate congressional-trading index ONCE per run (cached to disk,
+    # shared across every candidate). Degrades to source='unavailable' if the
+    # eFD feed is blocked — the run never breaks on it.
+    try:
+        senate_index = build_senate_index(days=120, max_filings=150)
+    except Exception as e:
+        log.warning(f'  Senate trades: build failed ({type(e).__name__}) — marking unavailable')
+        senate_index = {'source': 'unavailable', 'by_ticker': {}}
+
     # Pre-build thesis lookup from existing holdings (new candidates have no thesis yet)
     existing_thesis = {h.get('ticker', ''): h.get('thesis_summary', '') for h in portfolio.get('holdings', [])}
 
@@ -1883,6 +1992,7 @@ def run_sentiment_technicals(candidates: dict, portfolio: dict) -> dict:
         reddit  = fetch_reddit_mentions(ticker, company_name)
         sec_8k  = fetch_sec_8k(ticker)
         holders = fetch_institutional_holders(ticker)
+        congress = congress_signal_for(ticker, senate_index)
 
         # Classify combined sentiment
         all_headlines   = news.get('headlines', [])
@@ -1897,7 +2007,7 @@ def run_sentiment_technicals(candidates: dict, portfolio: dict) -> dict:
 
         results[ticker] = {
             'technicals': tech,
-            'sentiment':  {**news, **reddit, **sec_8k, **classification, 'news_intelligence': intelligence, **holders}
+            'sentiment':  {**news, **reddit, **sec_8k, **classification, 'news_intelligence': intelligence, **holders, **congress}
         }
         time.sleep(1.1)  # Finnhub rate limit
 
@@ -1983,6 +2093,7 @@ RESEARCH_PROMPT_T1_T2 = """You are a senior long‑term equity analyst. You must
 Ticker: {ticker} | Tier: {tier}
 Current Market Cap: ${mkt_cap:.1f}B | Revenue: ${revenue:.0f}M
 ROIC: {roic:.0%} | Gross Margin: {gm:.0%} | Revenue Growth: {rev_growth:.0%}
+Valuation (growth-adjusted, current multiple): {valuation_line}
 Cash Runway: {runway}
 
 COMPANY HISTORY & TRACK RECORD (use this to judge durability — this is what matters for a 10–15yr hold):
@@ -1994,6 +2105,8 @@ Short-term context (background only — DO NOT let this drive a 10–15yr decisi
 {filing_text}
 
 This is a 10–15 YEAR investment. Ignore short-term price moves, news cycles, and 8-K noise unless they structurally change the next decade. Weight company history and durability above all.
+
+PRICE PAID STILL MATTERS: we are not market timers, but the entry multiple sets the starting yield of a 15-20yr hold. If the valuation above reads RICH or EXTREME, prefer a smaller starter position (accumulate on weakness) and reflect that in position_size_pct — never reject a great company on valuation alone.
 
 Your job:
 1. MOAT: What is the company's specific competitive advantage? Quote a sentence from Item 1 that supports this.
@@ -2019,6 +2132,7 @@ RESEARCH_PROMPT_T3 = """You are a senior long‑term equity analyst evaluating a
 Ticker: {ticker} | PRE/EARLY-REVENUE Moonshot
 Market Cap: ${mkt_cap}B | Cash: ${cash}M | Cash Runway: {runway}
 R&D: ${rd}M | Revenue: ${revenue}M
+Valuation (growth-adjusted, current multiple): {valuation_line}
 
 COMPANY HISTORY & TRACK RECORD (judge survival and execution from this, not from short-term noise):
 {company_history}
@@ -2154,10 +2268,20 @@ def research_candidate(ticker: str, tier: str, info: dict, filing_text: str, sen
 
     company_history = build_company_history(ticker, info, technicals)
 
+    # Growth-adjusted valuation read (never a veto — tilts sizing + informs the LLM)
+    from research_metrics import compute_fcf_metrics
+    try:
+        _fcf_y = compute_fcf_metrics(info, ticker).get('fcf_yield')
+    except Exception:
+        _fcf_y = None
+    valuation = compute_valuation(info, _fcf_y)
+    valuation_line = f"{valuation['valuation_label']} — {valuation['valuation_note']}"
+
     if tier in ('T1', 'T2'):
         prompt = RESEARCH_PROMPT_T1_T2.format(
             ticker=ticker, tier=tier, revenue=revenue, roic=roic, gm=gm,
             rev_growth=rev_grow, mkt_cap=mkt_cap, runway=runway_str,
+            valuation_line=valuation_line,
             company_history=company_history,
             above_200ma=above_200ma, return_1yr=return_1yr, vs_qqq=vs_qqq,
             trend=trend, pct_from_high=pct_from_high,
@@ -2170,6 +2294,7 @@ def research_candidate(ticker: str, tier: str, info: dict, filing_text: str, sen
         prompt = RESEARCH_PROMPT_T3.format(
             ticker=ticker, mkt_cap=mkt_cap, cash=cash,
             runway=runway_str, rd=rd, revenue=revenue,
+            valuation_line=valuation_line,
             company_history=company_history,
             above_200ma=above_200ma, return_1yr=return_1yr, vs_qqq=vs_qqq, trend=trend,
             reddit_mentions=reddit_m, reddit_titles=reddit_t,
@@ -2183,6 +2308,16 @@ def research_candidate(ticker: str, tier: str, info: dict, filing_text: str, sen
     # closing brace, which _parse() then silently turned into an empty string
     # (see llm_client.py) instead of a real truncation error.
     research = research_stock(prompt, system=system, max_tokens=2200)
+
+    # Record the growth-adjusted valuation read on the thesis so downstream
+    # sizing, holds and both emails can surface it (see construct_portfolio).
+    research['valuation_label']      = valuation['valuation_label']
+    research['valuation_note']       = valuation['valuation_note']
+    research['valuation_multiplier'] = valuation['valuation_multiplier']
+    research['val_pe']               = valuation['val_pe']
+    research['val_ps']               = valuation['val_ps']
+    research['val_ev_ebitda']        = valuation['val_ev_ebitda']
+    research['val_peg']              = valuation['val_peg']
 
     # Moat lie detector
     gm = info.get('grossMargins', 0) or 0
@@ -2224,6 +2359,23 @@ def run_research(candidates: dict) -> dict:
     log.info(f'Step 4-5/7: Running research ({len(candidates)} candidates)...')
     results     = {}
     to_research = []
+
+    def _event_forces_refresh(cand: dict) -> str:
+        """
+        Return a short reason string when a material event should force a
+        re-research *before* the normal 90/180-day TTL expires, else ''. A
+        durable-compounder thesis rarely changes month to month, but a genuine
+        structural event (a material 8-K, or news the sentiment layer judges to
+        THREATEN the thesis) should not sit behind a stale cached verdict.
+        """
+        sent = cand.get('sentiment', {}) or {}
+        ni   = sent.get('news_intelligence', {}) or {}
+        if ni.get('thesis_impact') == 'THREATENS':
+            return 'news flagged as thesis-threatening'
+        if sent.get('sec_8k_count', 0) and sent.get('signal_or_noise') == 'SIGNAL':
+            return 'material 8-K filed since last research'
+        return ''
+
     for ticker, cand in candidates.items():
         tier            = cand['tier']
         existing_thesis = load_thesis(ticker)
@@ -2235,9 +2387,13 @@ def run_research(candidates: dict) -> dict:
             if 'research_date' in existing_thesis:
                 age = (datetime.now() - datetime.fromisoformat(existing_thesis['research_date'])).days
                 if age < ttl_days:
-                    log.info(f'  {ticker}: cache hit ({age}d old)')
-                    results[ticker] = {**cand, 'research': existing_thesis}
-                    continue
+                    _evt = _event_forces_refresh(cand)
+                    if _evt:
+                        log.info(f'  {ticker}: cache bypassed ({age}d old) — {_evt}')
+                    else:
+                        log.info(f'  {ticker}: cache hit ({age}d old)')
+                        results[ticker] = {**cand, 'research': existing_thesis}
+                        continue
         to_research.append((ticker, cand))
     log.info(f'  Cache hits: {len(results)}, New research: {len(to_research)}')
     for i in range(0, len(to_research), 3):
@@ -2362,6 +2518,283 @@ def run_scenario_modeling(researched: dict) -> dict:
             log.warning(f'  Scenario failed for {ticker}: {e}')
     return researched
 
+# ── SECTOR SURVIVAL MAP (LLM top-down, 1 call/run) ────────────────────────────
+SECTOR_SURVIVAL_FILE = BASE_DIR / 'data' / 'sector_survival.json'
+
+SECTOR_SURVIVAL_PROMPT = """You are the chief strategist of a long-term fund with a strict 15-20 year mandate.
+
+Today's date: {date}
+
+For EACH sector below decide, with a 15-20 year lens:
+  (a) whether the sector's business model, demand and competitive structure will
+      still be durable and investable in 15-20 years, and
+  (b) how many individual companies in that sector are realistically likely to
+      still be dominant, durable category leaders that far out.
+
+Sectors in play this run (Yahoo sector — associated themes — example tickers):
+{sector_block}
+
+Rules:
+- survives_20yr: HIGH (structurally durable, clear 20yr demand), MEDIUM (durable
+  but faces real disruption / regulation / substitution risk), LOW (likely
+  disrupted, commoditised, or in secular decline within 15-20yr).
+- max_survivors: integer 1-5 — how many companies in this sector realistically
+  stay durable leaders 15-20yr out. Be strict; most sectors have few true 20yr
+  survivors.
+- megatrend_context: one short clause tying the sector to the structural theme
+  driving or eroding it.
+- rationale: one specific sentence. No hedging.
+
+Return ONLY valid JSON, no prose:
+{{"sectors":[{{"sector":"<exact sector name>","survives_20yr":"HIGH|MEDIUM|LOW","max_survivors":<int>,"megatrend_context":"<clause>","rationale":"<one sentence>"}}]}}"""
+
+
+def build_sector_survival_map(researched: dict, portfolio: dict) -> dict:
+    """
+    Top-down sector survival decision — one LLM call per run.
+
+    Looks at every Yahoo sector present among this run's researched candidates and
+    active holdings and asks the LLM, with a 15-20 year lens, (a) whether the
+    sector survives and (b) how many companies in it stay leaders. The result is
+    consumed by construct_portfolio to HARD-VETO new buys in LOW-survival sectors,
+    flag existing holdings there for exit, and TIGHTEN the per-sector holdings cap
+    to min(hard_cap, max_survivors); it is also surfaced in the emails.
+
+    Returns {'as_of': iso, 'sectors': {'<sector>': {survives_20yr, max_survivors,
+    megatrend_context, rationale}}}. Returns {} if disabled or the call fails —
+    callers MUST treat an empty / missing map as "no opinion", never as a veto.
+    """
+    if not _cn(True, 'sector_survival', 'enabled'):
+        return {}
+
+    from collections import defaultdict
+    ctx = defaultdict(lambda: {'themes': set(), 'tickers': set()})
+    for tk, cand in (researched or {}).items():
+        info = cand.get('info', {}) if isinstance(cand, dict) else {}
+        sec  = (info.get('sector') or 'Unknown').strip() or 'Unknown'
+        ctx[sec]['tickers'].add(tk)
+    for h in portfolio.get('holdings', []):
+        if h.get('status') != 'ACTIVE':
+            continue
+        sec = (h.get('sector') or 'Unknown').strip() or 'Unknown'
+        ctx[sec]['tickers'].add(h.get('ticker', ''))
+        mt = h.get('megatrend_label') or ''
+        if mt:
+            ctx[sec]['themes'].add(mt)
+
+    sectors_now = {s for s in ctx.keys() if s and s != 'Unknown'}
+    if not sectors_now:
+        return {}
+
+    # Reuse a fresh cache that already covers every sector in play (verdicts move
+    # slowly; no need to spend an LLM call every run).
+    cache_days = _cn(30, 'sector_survival', 'cache_days') or 30
+    cached = load_json(SECTOR_SURVIVAL_FILE)
+    if cached.get('sectors'):
+        try:
+            age = (datetime.now() - datetime.fromisoformat(cached.get('as_of', '2000-01-01'))).days
+        except Exception:
+            age = 9999
+        if age <= cache_days and sectors_now.issubset(set(cached['sectors'].keys())):
+            log.info(f'  Sector survival map: reusing cached verdicts ({age}d old, {len(cached["sectors"])} sectors)')
+            return cached
+
+    sector_block = '\n'.join(
+        f"- {s} — themes: {', '.join(sorted(d['themes'])) or 'n/a'} — "
+        f"tickers: {', '.join(sorted(t for t in d['tickers'] if t)[:8]) or 'n/a'}"
+        for s, d in sorted(ctx.items()) if s and s != 'Unknown'
+    )
+    prompt = SECTOR_SURVIVAL_PROMPT.format(
+        date=datetime.now().strftime('%d %b %Y'), sector_block=sector_block
+    )
+    log.info(f'  Sector survival map: assessing {len(sectors_now)} sectors (1 LLM call)...')
+    try:
+        res = call_llm(prompt, system='Long-term sector strategist. Return ONLY valid JSON.',
+                       max_tokens=1200)
+    except Exception as e:
+        log.warning(f'  Sector survival map: LLM call failed ({e}) — no veto applied this run')
+        return cached if cached.get('sectors') else {}
+    if not res.get('success') or not isinstance(res.get('data'), dict):
+        log.warning(f'  Sector survival map: no usable output ({res.get("error")}) — no veto applied')
+        return cached if cached.get('sectors') else {}
+
+    sectors_out = {}
+    for row in (res['data'].get('sectors') or []):
+        if not isinstance(row, dict):
+            continue
+        name = (row.get('sector') or '').strip()
+        if not name:
+            continue
+        surv = str(row.get('survives_20yr', 'MEDIUM')).upper()
+        if surv not in ('HIGH', 'MEDIUM', 'LOW'):
+            surv = 'MEDIUM'
+        try:
+            mx = int(row.get('max_survivors', 3))
+        except (TypeError, ValueError):
+            mx = 3
+        mx = max(1, min(5, mx))
+        sectors_out[name] = {
+            'survives_20yr':     surv,
+            'max_survivors':     mx,
+            'megatrend_context': str(row.get('megatrend_context', ''))[:200],
+            'rationale':         str(row.get('rationale', ''))[:300],
+        }
+    if not sectors_out:
+        return cached if cached.get('sectors') else {}
+
+    # Merge onto any prior cache so sectors not assessed this run keep their verdict.
+    merged = dict(cached.get('sectors', {}))
+    merged.update(sectors_out)
+    result = {'as_of': datetime.now().isoformat(), 'sectors': merged}
+    save_json(SECTOR_SURVIVAL_FILE, result)
+    for s, d in sorted(sectors_out.items()):
+        log.info(f'    {s}: {d["survives_20yr"]} · max_survivors={d["max_survivors"]}')
+    return result
+
+
+# ── DECISION SELF-REVIEW (LLM, 1 call/run, ADVISORY) ──────────────────────────
+DECISION_REVIEW_PROMPT = """You are an independent investment-committee reviewer auditing decisions an
+automated screener just made for a 15-20 year portfolio. Be skeptical and terse.
+
+Look specifically for:
+- a verdict that contradicts the stock's own thesis or primary risk
+- a verdict that contradicts the recent-news signal (e.g. CORE_HOLD / ACCUMULATE
+  while news_impact=THREATENS, a fresh material 8-K, or an unaddressed watch flag)
+- CORE_HOLD / ACCUMULATE / MOONSHOT in a sector the survival map rates LOW
+- over-concentration in one sector or theme
+- a new buy that duplicates an existing holding's bet
+- an exit that looks premature versus the stated thesis
+
+Note: news_impact / news_sent / material_8K / watch are SHORT-TERM (30-day)
+signals. Use them to catch contradictions, not to justify abandoning an otherwise
+intact 15-20 year thesis on headlines alone.
+
+Sector survival map (this run):
+{sector_map_block}
+
+Decisions this run:
+{decisions_block}
+
+For every ticker return a flag:
+- OK: internally consistent, no action needed
+- REVIEW: worth a human second look (say why in the note)
+- OVERRIDE: strong evidence the decision is wrong (say why in the note)
+
+Return ONLY valid JSON, no prose:
+{{"reviews":[{{"ticker":"<t>","flag":"OK|REVIEW|OVERRIDE","note":"<one sentence>"}}],"portfolio_note":"<one sentence overall critique>"}}"""
+
+
+def review_decisions(decisions: dict, sector_map: dict, portfolio: dict) -> dict:
+    """
+    LLM self-review of this run's portfolio decisions — one LLM call, ADVISORY only.
+
+    Attaches review_flag (OK|REVIEW|OVERRIDE) + review_note onto each item in
+    decisions['new_additions'], ['exits'], ['hold'] and ['migrations'] in place,
+    and returns {'as_of', 'portfolio_note', 'reviews': {ticker: {...}}}. Changes
+    NO verdicts — the flags exist only to be shown in the emails. On failure it
+    returns {} and leaves every decision untouched.
+    """
+    if not _cn(True, 'decision_review', 'enabled'):
+        return {}
+
+    items = []  # (ticker, action, dict-ref)
+    for h in decisions.get('new_additions', []):
+        items.append((h.get('ticker', ''), 'NEW_BUY', h))
+    for h in decisions.get('exits', []):
+        items.append((h.get('ticker', ''), 'EXIT', h))
+    for h in decisions.get('migrations', []):
+        items.append((h.get('ticker', ''), 'TIER_MIGRATION', h))
+    for h in decisions.get('hold', []):
+        items.append((h.get('ticker', ''), 'HOLD', h))
+    items = [it for it in items if it[0]]
+    if not items:
+        return {}
+
+    smap = (sector_map or {}).get('sectors', {})
+
+    def _short(v, n=90):
+        return (str(v or '').replace('\n', ' ').strip())[:n]
+
+    lines = []
+    for tk, action, h in items:
+        sec  = h.get('sector', 'Unknown')
+        sv   = (smap.get(sec) or {}).get('survives_20yr', '—')
+        rsrch = h.get('research', {}) if isinstance(h.get('research'), dict) else {}
+        verdict = h.get('verdict') or rsrch.get('verdict') or h.get('status', '—')
+        thesis  = h.get('thesis_summary') or rsrch.get('thesis_summary', '')
+        risk    = h.get('primary_risk') or rsrch.get('primary_risk', '')
+        # Recent-news signal (from get_news_intelligence): lets the reviewer catch
+        # a verdict that contradicts what the last 30 days of news actually said.
+        intel  = h.get('news_intelligence') if isinstance(h.get('news_intelligence'), dict) else {}
+        impact = str(intel.get('thesis_impact', '') or '').upper()
+        watch  = _short(intel.get('watch_flag', ''), 55)
+        sec8k  = h.get('sec_8k_count', 0) or 0
+        news_bits = []
+        if impact:                       news_bits.append(f"news_impact={impact}")
+        if h.get('news_sentiment'):      news_bits.append(f"news_sent={h.get('news_sentiment')}")
+        if sec8k:                        news_bits.append(f"material_8K={sec8k}")
+        if watch:                        news_bits.append(f"watch={watch}")
+        news_frag = (' | ' + ' '.join(news_bits)) if news_bits else ''
+        extra   = ''
+        if action == 'EXIT':
+            extra = f" | exit_reason: {_short(h.get('exit_reason', ''), 70)}"
+        elif action == 'TIER_MIGRATION':
+            extra = f" | {h.get('from_tier','?')}->{h.get('to_tier','?')}"
+        lines.append(
+            f"- {tk} [{action}] tier={h.get('tier','?')} sector={sec} "
+            f"sector_survives={sv} verdict={verdict} pos={h.get('position_size_pct','?')}% "
+            f"| thesis: {_short(thesis)} | risk: {_short(risk, 60)}{news_frag}{extra}"
+        )
+    decisions_block = '\n'.join(lines)
+
+    if smap:
+        sector_map_block = '\n'.join(
+            f"- {s}: {d.get('survives_20yr','—')} (max_survivors {d.get('max_survivors','?')})"
+            for s, d in sorted(smap.items())
+        )
+    else:
+        sector_map_block = '(no sector survival map available this run)'
+
+    prompt = DECISION_REVIEW_PROMPT.format(
+        sector_map_block=sector_map_block, decisions_block=decisions_block
+    )
+    log.info(f'  Decision review: auditing {len(items)} decisions (1 LLM call)...')
+    try:
+        res = call_llm(prompt, system='Independent investment-committee reviewer. Return ONLY valid JSON.',
+                       max_tokens=1200)
+    except Exception as e:
+        log.warning(f'  Decision review: LLM call failed ({e}) — skipped')
+        return {}
+    if not res.get('success') or not isinstance(res.get('data'), dict):
+        log.warning(f'  Decision review: no usable output ({res.get("error")}) — skipped')
+        return {}
+
+    reviews = {}
+    for row in (res['data'].get('reviews') or []):
+        if not isinstance(row, dict):
+            continue
+        tk = (row.get('ticker') or '').strip().upper()
+        if not tk:
+            continue
+        flag = str(row.get('flag', 'OK')).upper()
+        if flag not in ('OK', 'REVIEW', 'OVERRIDE'):
+            flag = 'OK'
+        reviews[tk] = {'flag': flag, 'note': str(row.get('note', ''))[:300]}
+
+    # Attach flags onto the decision items in place (advisory, non-destructive).
+    flagged = 0
+    for tk, _action, h in items:
+        rv = reviews.get(tk.upper())
+        if rv:
+            h['review_flag'] = rv['flag']
+            h['review_note'] = rv['note']
+            if rv['flag'] != 'OK':
+                flagged += 1
+    portfolio_note = str(res['data'].get('portfolio_note', ''))[:400]
+    log.info(f'  Decision review: {flagged} flagged for attention · {portfolio_note[:80]}')
+    return {'as_of': datetime.now().isoformat(), 'portfolio_note': portfolio_note, 'reviews': reviews}
+
+
 # ── STEP 6: PORTFOLIO CONSTRUCTOR ─────────────────────────────────────────────
 def check_kiwisaver_availability(ticker: str, config: dict) -> dict:
     ks      = config.get('sharesies_kiwisaver_available', {})
@@ -2373,7 +2806,60 @@ def check_kiwisaver_availability(ticker: str, config: dict) -> dict:
     if ticker in nz:     return {'available': True,  'type': 'NZ_STOCK',         'route': 'KIWISAVER_OR_MANUAL'}
     return {'available': False, 'type': None, 'route': 'MANUAL_SHARESIES_ONLY'}
 
-def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict:
+def _concentration_flag(h: dict) -> str:
+    """
+    Advisory TRIM flag when a holding has drifted well above its target weight.
+
+    We can't recompute exact portfolio weights without live balances, so use an
+    honest proxy: implied weight = target size grown by the holding's own price
+    move since entry. A winner that has roughly doubled its intended share of the
+    book (or breached an absolute 12% single-name ceiling) is flagged for a trim
+    review — a discipline reminder, never an automatic trade.
+    """
+    tgt = h.get('position_size_pct') or 0
+    cp, ep = h.get('current_price'), h.get('entry_price')
+    if tgt and cp and ep and ep > 0:
+        implied = tgt * (cp / ep)
+        if implied >= max(12.0, tgt * 2):
+            return f'TRIM review — drifted to ~{implied:.0f}% of book (target {tgt:.0f}%)'
+    return ''
+
+def _rerun_flag(h: dict) -> str:
+    """Advisory RE-RESEARCH flag when a held name has a fresh material event."""
+    if h.get('sec_8k_count', 0) and h.get('signal_or_noise') == 'SIGNAL':
+        return 'RE-RESEARCH — material 8-K since last thesis'
+    ni = h.get('news_intelligence', {}) or {}
+    if ni.get('thesis_impact') == 'THREATENS':
+        return 'RE-RESEARCH — news flagged as thesis-threatening'
+    return ''
+
+def _compute_data_completeness(info: dict, technicals: dict, sentiment: dict,
+                               all_metrics: dict, traj: dict) -> dict:
+    """
+    How much of a decision rests on real data vs gaps. Returns a 0-100 score,
+    a band, and the list of missing inputs so the emails can be honest when a
+    call is built on partial data (the fallback for sources that stay blocked
+    after the recovery attempts). Not a quality judgement of the company — a
+    confidence measure of the evidence behind the recommendation.
+    """
+    checks = {
+        'fundamentals (ROIC)':   bool(all_metrics.get('roic')),
+        'valuation':             all_metrics.get('valuation_label') not in (None, '', '—'),
+        'FCF':                   all_metrics.get('fcf_yield') is not None,
+        'EDGAR filings':         bool(traj.get('edgar_available')),
+        'price/technicals':      technicals.get('current_price') is not None,
+        'news sentiment':        (sentiment.get('news_count', 0) or 0) > 0,
+        'insider data':          all_metrics.get('insider_signal') not in (None, '', 'UNKNOWN'),
+        'congressional trades':  sentiment.get('congress_source') == 'efd',
+    }
+    present = sum(1 for v in checks.values() if v)
+    total   = len(checks)
+    score   = round(present / total * 100)
+    missing = [k for k, v in checks.items() if not v]
+    band    = ('FULL' if score >= 85 else 'PARTIAL' if score >= 55 else 'THIN')
+    return {'score': score, 'band': band, 'missing': missing}
+
+def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_map: dict = None) -> dict:
     log.info('Step 6/7: Portfolio construction...')
     decisions = {
         'new_additions':       [],
@@ -2385,18 +2871,53 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
     }
     existing_tickers = {h['ticker'] for h in portfolio.get('holdings', [])}
 
+    # Top-down sector survival map (build_sector_survival_map). An empty map means
+    # "no opinion" — it must never trigger a veto. LOW verdicts are a HARD gate:
+    # new buys are blocked and existing holdings are recommended for exit.
+    _sectors_survival   = (sector_map or {}).get('sectors', {})
+    _veto_low           = bool(_cn(True, 'sector_survival', 'veto_low_survival'))
+    _exit_low           = bool(_cn(True, 'sector_survival', 'recommend_exit_low_survival'))
+    _sector_hard_cap    = _cu('max_holdings_per_sector', 3)
+    _survivor_cap_min   = _cn(1, 'sector_survival', 'survivor_cap_min') or 1
+
+    def _sector_survives(sec: str) -> str:
+        """HIGH | MEDIUM | LOW | '' (no opinion) for a Yahoo sector name."""
+        return (_sectors_survival.get(sec or '') or {}).get('survives_20yr', '')
+
+    def _sector_cap(sec: str) -> int:
+        """Effective per-sector holdings cap: the LLM survivor count can only
+        TIGHTEN the hardcoded ceiling, never loosen it above it."""
+        d = _sectors_survival.get(sec or '') or {}
+        mx = d.get('max_survivors')
+        if not isinstance(mx, int):
+            return _sector_hard_cap
+        return max(int(_survivor_cap_min), min(int(_sector_hard_cap), mx))
+
     for holding in portfolio.get('holdings', []):
         ticker   = holding['ticker']
         research = load_thesis(ticker)
         scenario = load_scenario(ticker)
         if not research:
-            decisions['hold'].append({**holding, 'status': 'HOLD', 'note': 'No research update this month'})
+            decisions['hold'].append({**holding, 'status': 'HOLD', 'note': 'No research update this month',
+                                      'concentration_flag': _concentration_flag(holding),
+                                      'rerun_flag': _rerun_flag(holding)})
             continue
         verdict = research.get('verdict', 'UNKNOWN')
         if verdict == 'AVOID':
             decisions['exits'].append({**holding, 'status': 'EXIT_RECOMMENDED',
                                        'exit_reason': f'Reassessment: AVOID — {research.get("primary_risk","")}',
                                        'research': research})
+        elif _exit_low and _sector_survives(holding.get('sector', '')) == 'LOW':
+            # Sector survival hard gate: the sector this holding sits in is now
+            # judged unlikely to survive 15-20yr, so recommend exiting regardless
+            # of the per-stock verdict.
+            _sec = holding.get('sector', 'Unknown')
+            _why = (_sectors_survival.get(_sec) or {}).get('rationale', '')
+            decisions['exits'].append({**holding, 'status': 'EXIT_RECOMMENDED',
+                                       'exit_reason': f'Sector survival: {_sec} rated LOW for 15-20yr — {_why}'.strip(' —'),
+                                       'sector_survival_verdict': 'LOW',
+                                       'research': research, 'scenario': scenario})
+            log.info(f'  EXIT (sector survival) {ticker}: {_sec} rated LOW')
         elif verdict in ('CORE_HOLD', 'ACCUMULATE', 'MOONSHOT'):
             current_tier = holding.get('tier', 'T3')
             new_tier     = None
@@ -2411,7 +2932,9 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
                                                 'research': research})
             else:
                 decisions['hold'].append({**holding, 'status': 'HOLD',
-                                          'research': research, 'scenario': scenario})
+                                          'research': research, 'scenario': scenario,
+                                          'concentration_flag': _concentration_flag(holding),
+                                          'rerun_flag': _rerun_flag(holding)})
 
     sector_count = {}
     for h in portfolio.get('holdings', []):
@@ -2466,9 +2989,15 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
                 'recurring_revenue_proxy': all_metrics.get('recurring_revenue_proxy','—'),
                 'insider_pct':        all_metrics.get('insider_pct'),
                 'insider_signal':     all_metrics.get('insider_signal','—'),
+                'insider_buys':       all_metrics.get('insider_buys', 0),
+                'insider_sells':      all_metrics.get('insider_sells', 0),
+                'insider_note':       all_metrics.get('insider_note', ''),
                 'dilution_rate':      all_metrics.get('dilution_rate'),
                 'dilution_flag':      all_metrics.get('dilution_flag','—'),
-                'insider_form4_90d':  all_metrics.get('insider_form4_90d', 0),
+                'valuation_label':    all_metrics.get('valuation_label','—'),
+                'valuation_note':     all_metrics.get('valuation_note',''),
+                'val_pe':             all_metrics.get('val_pe'),
+                'val_peg':            all_metrics.get('val_peg'),
                 'current_price':      tech.get('current_price'),
                 'entry_price':        tech.get('current_price'),
                 'above_200ma':        tech.get('above_200ma'),
@@ -2480,7 +3009,14 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
                 'news_count':         sent.get('news_count', 0),
                 'news_sentiment':     sent.get('news_sentiment','NEUTRAL'),
                 'reddit_mentions':    sent.get('reddit_mentions_30d', 0),
+                'reddit_source':      sent.get('reddit_source', 'unknown'),
                 'reddit_sentiment':   sent.get('reddit_sentiment','NEUTRAL'),
+                'congress_source':    sent.get('congress_source', 'unavailable'),
+                'congress_signal':    sent.get('congress_signal', 'UNAVAILABLE'),
+                'congress_trades':    sent.get('congress_trades', 0),
+                'congress_buys':      sent.get('congress_buys', 0),
+                'congress_sells':     sent.get('congress_sells', 0),
+                'congress_note':      sent.get('congress_note', ''),
                 'overall_sentiment':  sent.get('overall_sentiment','NEUTRAL'),
                 'signal_or_noise':    sent.get('signal_or_noise','NOISE'),
                 'key_themes':         sent.get('key_themes', []),
@@ -2506,18 +3042,38 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
             continue
 
         sector = info.get('sector', 'Unknown')
-        if sector_count.get(sector, 0) >= 3:
+        # Sector survival HARD VETO: block new buys in any sector the top-down
+        # survival map rates LOW for a 15-20yr horizon.
+        if _veto_low and _sector_survives(sector) == 'LOW':
+            _why = (_sectors_survival.get(sector) or {}).get('rationale', '')
             decisions['avoided'].append({'ticker': ticker, 'tier': tier, 'verdict': verdict,
-                                         'reason': f'Sector concentration: already 3 {sector} holdings'})
+                                         'reason': f'Sector survival: {sector} rated LOW for 15-20yr — new buys vetoed. {_why}'.strip()})
+            log.info(f'  VETO (sector survival) {ticker}: {sector} rated LOW')
             continue
 
+        _eff_cap = _sector_cap(sector)
+        if sector_count.get(sector, 0) >= _eff_cap:
+            _cap_src = ('LLM survivor cap' if _eff_cap < _sector_hard_cap else 'concentration limit')
+            decisions['avoided'].append({'ticker': ticker, 'tier': tier, 'verdict': verdict,
+                                         'reason': f'Sector cap ({_cap_src}): already {sector_count.get(sector, 0)} {sector} holdings (max {_eff_cap})'})
+            continue
+
+        factor_group = get_t3_factor_group(ticker, info) if tier == 'T3' else None
         if tier == 'T3':
-            factor_group = get_t3_factor_group(ticker, info)
             if factor_group != 'other':
+                # Classify each EXISTING holding by ITS OWN factor group — either the
+                # value stored when it was added, or (for legacy holdings that predate
+                # that field) recomputed from the holding's own company name. Passing
+                # the incoming candidate's `info` here was a bug: get_t3_factor_group
+                # ignores the ticker and classifies purely from the info dict, so every
+                # existing T3 holding was being classified as the candidate's group,
+                # making the factor cap fire against unrelated holdings.
                 existing_factor_count = sum(
                     1 for h in portfolio.get('holdings', [])
                     if h.get('tier') == 'T3' and h.get('status') == 'ACTIVE'
-                    and get_t3_factor_group(h['ticker'], info) == factor_group
+                    and (h.get('factor_group')
+                         or get_t3_factor_group(h.get('ticker', ''),
+                                                {'longName': h.get('company_name', '')})) == factor_group
                 )
                 if existing_factor_count >= _cu("max_same_factor_t3_holdings", 3):
                     decisions['avoided'].append({'ticker': ticker, 'tier': tier, 'verdict': verdict,
@@ -2537,12 +3093,36 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
         debt        = compute_debt_ratios(info, ticker)
         all_metrics = compute_all_metrics(ticker, info)
 
+        # Valuation discipline: a richly-valued entry gets a smaller starter
+        # position (accumulate on weakness), never a hard rejection. The research
+        # dict already carries the same read from the LLM prompt; use whichever
+        # multiplier is present.
+        _val_mult  = (research.get('valuation_multiplier')
+                      or all_metrics.get('valuation_multiplier') or 1.0)
+        _val_label = research.get('valuation_label') or all_metrics.get('valuation_label', '—')
+        if _val_mult < 1.0:
+            position_pct = round(max(1.0, position_pct * _val_mult), 1)
+
+        # 3-year earnings-quality trend + dilution trajectory from EDGAR filings
+        # (multi-year, so it captures realised option/convert dilution the
+        # point-in-time shares-outstanding proxy misses).
+        try:
+            eq_trend = compute_earnings_quality_trend(ticker)
+        except Exception:
+            eq_trend = {}
+        try:
+            _traj = compute_trajectory(ticker)
+        except Exception:
+            _traj = {}
+        data_completeness = _compute_data_completeness(info, technicals, sentiment, all_metrics, _traj)
+
         new_holding = {
             'ticker':             ticker,
             'company_name':       company_name,
             'tier':               tier,
             'date_added':         datetime.now().strftime('%Y-%m-%d'),
             'sector':             sector,
+            'factor_group':       factor_group,
             'market_cap':         info.get('marketCap', 0) or 0,
             'revenue':            info.get('totalRevenue', 0) or 0,
             'sentiment_confidence': research.get('sentiment_confidence', '—'),
@@ -2572,6 +3152,22 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
             'dilution_rate':      compute_dilution_rate(info),
             'insider_ownership':  get_insider_ownership(info),
             'earnings_quality':   eq_flag,
+            'valuation_label':    _val_label,
+            'valuation_note':     research.get('valuation_note') or all_metrics.get('valuation_note', ''),
+            'val_pe':             research.get('val_pe', all_metrics.get('val_pe')),
+            'val_ps':             research.get('val_ps', all_metrics.get('val_ps')),
+            'val_ev_ebitda':      research.get('val_ev_ebitda', all_metrics.get('val_ev_ebitda')),
+            'val_peg':            research.get('val_peg', all_metrics.get('val_peg')),
+            'insider_buys':       all_metrics.get('insider_buys', 0),
+            'insider_sells':      all_metrics.get('insider_sells', 0),
+            'insider_net_signal': all_metrics.get('insider_signal', '—'),
+            'insider_note':       all_metrics.get('insider_note', ''),
+            'earnings_quality_3yr': eq_trend.get('earnings_quality_3yr', eq_flag),
+            'eq_trend_direction':   eq_trend.get('eq_trend_direction', '—'),
+            'eq_ocf_ni_3yr_avg':    eq_trend.get('eq_ocf_ni_3yr_avg'),
+            'dilution_trajectory':  _traj.get('dilution_trajectory', all_metrics.get('dilution_flag', '—')),
+            'share_5yr_change':     _traj.get('share_5yr_change'),
+            'data_completeness':    data_completeness,
             'entry_price':        technicals.get('current_price'),
             'current_price':      technicals.get('current_price'),
             'above_200ma':        technicals.get('above_200ma'),
@@ -2589,7 +3185,14 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
             'news_count':         sentiment.get('news_count', 0),
             'news_sentiment':     sentiment.get('news_sentiment', 'NEUTRAL'),
             'reddit_mentions':    sentiment.get('reddit_mentions_30d', 0),
+            'reddit_source':      sentiment.get('reddit_source', 'unknown'),
             'reddit_sentiment':   sentiment.get('reddit_sentiment', 'NEUTRAL'),
+            'congress_source':    sentiment.get('congress_source', 'unavailable'),
+            'congress_signal':    sentiment.get('congress_signal', 'UNAVAILABLE'),
+            'congress_trades':    sentiment.get('congress_trades', 0),
+            'congress_buys':      sentiment.get('congress_buys', 0),
+            'congress_sells':     sentiment.get('congress_sells', 0),
+            'congress_note':      sentiment.get('congress_note', ''),
             'overall_sentiment':  sentiment.get('overall_sentiment', 'NEUTRAL'),
             'signal_or_noise':    sentiment.get('signal_or_noise', 'NOISE'),
             'key_themes':         sentiment.get('key_themes', []),
@@ -2601,6 +3204,9 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict) -> dict
             'sector_durability_20yr': research.get('sector_durability_20yr', ''),
             'sector_survival_note':   research.get('sector_survival_note', ''),
             'sector_risk_note':       research.get('sector_risk_note', ''),
+            'sector_survival_verdict':   _sector_survives(sector),
+            'sector_survival_max':       (_sectors_survival.get(sector) or {}).get('max_survivors'),
+            'sector_survival_rationale': (_sectors_survival.get(sector) or {}).get('rationale', ''),
             'qqq_price_at_entry': None,
             'spy_price_at_entry': None,
             'usdnzd_at_entry':    None,
@@ -3283,7 +3889,8 @@ def run_longterm_screener():
 
     # Refresh sentiment on existing portfolio holdings so 8-K and news counts are current
     _SENTIMENT_FIELDS = [
-        'news_count', 'news_sentiment', 'reddit_mentions', 'reddit_sentiment',
+        'news_count', 'news_sentiment', 'reddit_mentions', 'reddit_sentiment', 'reddit_source',
+        'congress_source', 'congress_signal', 'congress_trades', 'congress_buys', 'congress_sells', 'congress_note',
         'overall_sentiment', 'signal_or_noise', 'key_themes',
         'sec_8k_count', 'sec_8k_events', 'sec_8k_highlights', 'sec_8k_latest_date',
         'news_intelligence', 'institutional_holders', 'mutualfund_holders',
@@ -3417,7 +4024,10 @@ def run_longterm_screener():
             time.sleep(1)
 
     # Step 6: Portfolio construction
-    decisions = construct_portfolio(researched, portfolio, config)
+    # Top-down sector survival map first (1 LLM call) — gates new buys, flags
+    # existing holdings in doomed sectors for exit, and tightens the per-sector cap.
+    sector_map = build_sector_survival_map(researched, portfolio)
+    decisions = construct_portfolio(researched, portfolio, config, sector_map)
 
     for new in decisions['new_additions']:
         portfolio['holdings'].append(new)
@@ -3447,6 +4057,10 @@ def run_longterm_screener():
     save_portfolio(portfolio)
     log.info(f'  Portfolio saved: {len(portfolio["holdings"])} holdings')
 
+    # Self-review of this run's decisions (1 LLM call, advisory). Attaches
+    # review_flag + review_note onto the decision items in place for the emails.
+    decision_review = review_decisions(decisions, sector_map, portfolio)
+
     # Step 7: Emails
     log.info('Step 7/7: Generating and sending emails...')
     month_str = datetime.now().strftime('%B %Y')
@@ -3458,14 +4072,14 @@ def run_longterm_screener():
         clear_checkpoints()
         return
 
-    action_html, action_subject = generate_action_email(decisions, portfolio)
+    action_html, action_subject = generate_action_email(decisions, portfolio, decision_review)
     send_email(action_html, action_subject)
     time.sleep(5)
 
     try:
         ipo_summary = get_ipo_watchlist_summary()
         megatrend_review = load_json(BASE_DIR / 'data' / 'megatrend_scores.json')
-        detail_html, detail_sub = generate_full_report(decisions, portfolio, researched, ipo_summary, FIF_THRESHOLD, megatrend_review)
+        detail_html, detail_sub = generate_full_report(decisions, portfolio, researched, ipo_summary, FIF_THRESHOLD, megatrend_review, sector_map, decision_review)
         if send_email(detail_html, detail_sub):
             log.info(f'  ✓ Email 2 sent: {detail_sub}')
         else:

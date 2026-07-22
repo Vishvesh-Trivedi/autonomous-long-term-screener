@@ -91,6 +91,13 @@ def _holding_card(h: dict) -> str:
     news_n    = h.get('news_count', 0) or 0
     news_sent = h.get('news_sentiment','NEUTRAL')
     reddit_n  = h.get('reddit_mentions', 0) or 0
+    reddit_src= h.get('reddit_source','')
+    reddit_disp = 'n/a' if reddit_src == 'blocked' else f'{reddit_n}'
+    # Congress (Senate eFD) trading signal
+    cong_src  = h.get('congress_source','unavailable')
+    cong_sig  = h.get('congress_signal','UNAVAILABLE')
+    cong_buys = h.get('congress_buys', 0) or 0
+    cong_sells= h.get('congress_sells', 0) or 0
     sec_8k    = h.get('sec_8k_count',0) or 0
     signal    = h.get('signal_or_noise','NOISE')
     sent_note = h.get('sentiment_note','')
@@ -116,6 +123,20 @@ def _holding_card(h: dict) -> str:
     sect_dur  = h.get('sector_durability_20yr', '')
     sect_note = h.get('sector_survival_note', '')
     sect_risk = h.get('sector_risk_note', '')   # set only when this downgraded the verdict — see screener.py research_candidate()
+
+    # Senior-analyst signals (valuation, insider net, multi-year integrity, data quality)
+    val_label  = h.get('valuation_label', '—')
+    val_note   = h.get('valuation_note', '')
+    val_peg    = h.get('val_peg')
+    ins_net    = h.get('insider_net_signal') or h.get('insider_signal', '—')
+    ins_note   = h.get('insider_note', '')
+    eq3        = h.get('earnings_quality_3yr', eq)
+    eq3_dir    = h.get('eq_trend_direction', '—')
+    dil_traj   = h.get('dilution_trajectory', '—')
+    share5     = h.get('share_5yr_change')
+    dq         = h.get('data_completeness') or {}
+    conc_flag  = h.get('concentration_flag', '')
+    rerun_flag = h.get('rerun_flag', '')
 
     # LLM news intelligence
     intel          = h.get('news_intelligence', {})
@@ -234,6 +255,16 @@ def _holding_card(h: dict) -> str:
     else:
         intel_html = f'<div style="font-size:10px;color:#9ca3af;font-style:italic">No recent news to analyze.</div>'
 
+    # ── RAW NEWS (Finnhub + Reddit — counts & sentiment only, no AI) ───────
+    _news_sent_c = {'POSITIVE': '#15803d', 'NEGATIVE': '#dc2626'}.get(str(news_sent).upper(), '#4b5563')
+    news_raw_html = (
+        f'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>'
+        + _stat('Finnhub articles', f'{news_n} &middot; <span style="color:{_news_sent_c}">{news_sent}</span>')
+        + _stat('Reddit mentions', reddit_disp)
+        + _stat('Signal / noise', signal, last=True)
+        + f'</tr></table>'
+    )
+
     # ── SEC / NEWS BLOCK (existing colour-coding logic, clean table) ───────
     _news_hl = h.get('news_highlights', [])
     if sec_highlights:
@@ -307,6 +338,103 @@ def _holding_card(h: dict) -> str:
 
     # ── BUILD CARD ────────────────────────────────────────────────────────
     thesis_html = thesis if thesis else '<em style="color:#9ca3af">Thesis pending</em>'
+
+    # Long-term rating header (firm-style). No 12-month price target — a 15-20yr
+    # note points to the 10-year scenario instead. Conviction is driven by the
+    # model's decade probability (odds the thesis actually plays out).
+    _rc, _rbg, _rlbl = _rating_style(h.get('verdict'))
+    if isinstance(decade_p, (int, float)):
+        _conv = 'High' if decade_p >= 0.6 else ('Medium' if decade_p >= 0.4 else 'Low')
+        _conv_s = f'Conviction: {_conv}'
+    else:
+        _conv_s = ''
+    # Band the model's alpha estimate rather than print false-precision decimals.
+    # It is a single free-model estimate, so a directional band is the honest unit.
+    if isinstance(alpha_est, (int, float)):
+        _ab = ('Ahead of QQQ' if alpha_est >= 2
+               else 'Behind QQQ' if alpha_est <= -2
+               else 'In line with QQQ')
+        _alpha_s = f'Est. {_ab}'
+    else:
+        _alpha_s = ''
+    _moat_s  = f'moat {moat_dur}+ yrs' if moat_dur else ''
+    _meta    = ' &middot; '.join([s for s in (_conv_s, _alpha_s, _moat_s) if s])
+    if _conv_s or _alpha_s:
+        _meta += ' &middot; <span style="color:#9ca3af">model est.</span>'
+    _call    = (thesis[:150] + '…') if (thesis and len(thesis) > 150) else (thesis or 'Thesis pending')
+    rating_header = (
+        f'<tr><td style="padding:0 14px 12px">'
+        f'<div style="border:1px solid {_rc}33;background:{_rbg};border-radius:3px;padding:10px 12px">'
+        f'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>'
+        f'<td style="vertical-align:middle;white-space:nowrap">'
+        f'<span style="background:{_rc};color:#fff;font-size:12px;font-weight:800;'
+        f'letter-spacing:.04em;padding:4px 11px;border-radius:3px">{_rlbl}</span>'
+        f'<span style="font-size:8px;color:#9ca3af;margin-left:8px;text-transform:uppercase;'
+        f'letter-spacing:.08em">15-20yr stance</span></td>'
+        f'<td style="vertical-align:middle;text-align:right;font-size:9.5px;color:#4b5563">{_meta or "&mdash;"}</td>'
+        f'</tr></table>'
+        f'<div style="font-size:10px;color:#4b5563;line-height:1.5;font-style:italic;margin-top:8px">'
+        f'The call: {_call}</div>'
+        f'</div>'
+        f'</td></tr>'
+    )
+
+    # ── Advisory flags for held names: concentration drift + event re-research ──
+    _adv_items = [x for x in (conc_flag, rerun_flag) if x]
+    advisory_html = ''
+    if _adv_items:
+        _adv_rows = ''.join(
+            f'<div style="font-size:10px;color:#92400e;margin-top:2px">&#9873; {a}</div>'
+            for a in _adv_items)
+        advisory_html = (
+            f'<tr><td style="padding:0 14px 10px">'
+            f'<div style="border:1px solid #fde68a;background:#fffbeb;border-radius:3px;padding:8px 12px">'
+            f'<div style="font-size:8px;font-weight:800;letter-spacing:.08em;color:#b45309;'
+            f'text-transform:uppercase">Portfolio action</div>{_adv_rows}</div></td></tr>'
+        )
+
+    # ── Valuation & multi-year integrity block ──
+    _val_c = {'CHEAP':'#15803d','FAIR':'#4b5563','RICH':'#d97706','EXTREME':'#dc2626'}.get(val_label, '#4b5563')
+    _ins_c = {'BUYING':'#15803d','SELLING':'#dc2626'}.get(ins_net, '#4b5563')
+    _dil_c = {'SEVERE':'#dc2626','HIGH':'#dc2626','MODERATE':'#d97706'}.get(dil_traj, '#15803d')
+    _eq3_c = ('#15803d' if eq3=='CLEAN' else '#d97706' if eq3=='WATCH'
+              else '#dc2626' if eq3=='FLAG' else '#4b5563')
+    _share5_s   = f' ({share5:+.0f}%/5yr)' if isinstance(share5, (int, float)) else ''
+    _peg_s      = f' &middot; PEG {val_peg}' if isinstance(val_peg, (int, float)) else ''
+    _val_note_s = f' &middot; <span style="color:#6b7280">{val_note}</span>' if val_note else ''
+    _ins_note_s = f' &middot; <span style="color:#6b7280">{ins_note}</span>' if ins_note else ''
+    _eq3_dir_s  = f' &middot; {eq3_dir}' if (eq3_dir and eq3_dir != '—') else ''
+    _dq_band    = dq.get('band'); _dq_score = dq.get('score'); _dq_missing = dq.get('missing') or []
+    _dq_c       = {'FULL':'#15803d','PARTIAL':'#d97706','THIN':'#dc2626'}.get(_dq_band, '#9ca3af')
+    _dq_miss_s  = (' &middot; missing: ' + ', '.join(_dq_missing)) if _dq_missing else ''
+    _dq_html    = (f'<div style="font-size:9.5px;color:{_dq_c};margin-top:8px">'
+                   f'<strong>Evidence base: {_dq_band} ({_dq_score}%)</strong>{_dq_miss_s}</div>'
+                   if (_dq_band and _dq_band != 'FULL') else '')
+    # Congress (Senate) — only render when the feed worked; stay silent (honest) otherwise
+    _cong_c = {'BUYING':'#15803d','SELLING':'#dc2626','MIXED':'#d97706'}.get(cong_sig, '#4b5563')
+    _cong_txt = (f'{cong_sig.title()} &middot; {cong_buys} buy / {cong_sells} sell'
+                 if cong_sig in ('BUYING','SELLING','MIXED')
+                 else 'No trades in 120d' if cong_sig == 'NONE' else '')
+    _cong_row = (f'<div><span style="color:#9ca3af">Congress (Senate 120d)</span> '
+                 f'<strong style="color:{_cong_c}">{_cong_txt}</strong></div>'
+                 if (cong_src == 'efd' and _cong_txt) else '')
+    integrity_html = (
+        f'<tr><td style="padding:0">{_sec_label("Valuation &amp; Integrity", "Growth-adjusted &middot; SEC EDGAR multi-year")}</td></tr>'
+        f'<tr><td style="padding:10px 14px">'
+        f'<div style="font-size:10px;color:#374151;line-height:1.8">'
+        f'<div><span style="color:#9ca3af">Valuation</span> '
+        f'<strong style="color:{_val_c}">{val_label}</strong>{_peg_s}{_val_note_s}</div>'
+        f'<div><span style="color:#9ca3af">Insider (6m)</span> '
+        f'<strong style="color:{_ins_c}">{ins_net}</strong>{_ins_note_s}</div>'
+        f'<div><span style="color:#9ca3af">Dilution (filed, 5yr)</span> '
+        f'<strong style="color:{_dil_c}">{dil_traj}</strong>{_share5_s}</div>'
+        f'<div><span style="color:#9ca3af">Earnings quality (3yr)</span> '
+        f'<strong style="color:{_eq3_c}">{eq3}</strong>{_eq3_dir_s}</div>'
+        f'{_cong_row}'
+        f'</div>'
+        f'{_dq_html}'
+        f'</td></tr>'
+    )
     card = (
         f'<table id="{ticker}" width="100%" border="0" cellpadding="0" cellspacing="0" '
         f'style="margin-bottom:14px;border:1px solid #e5e7eb;border-left:4px solid {border_c};background:#fff">'
@@ -333,8 +461,11 @@ def _holding_card(h: dict) -> str:
         f'</tr></table>'
         f'</td></tr>'
 
+        + rating_header
+        + advisory_html
+
         # INVESTMENT THESIS
-        f'<tr><td style="padding:0">{_sec_label("Investment Thesis", "NVIDIA Llama · 20-year view")}</td></tr>'
+        + f'<tr><td style="padding:0">{_sec_label("Investment Thesis", "20-year view")}</td></tr>'
         f'<tr><td style="padding:12px 14px 10px">'
         f'<div style="font-size:11px;color:#1a1d23;line-height:1.65">'
         f'{thesis_html}'
@@ -391,6 +522,8 @@ def _holding_card(h: dict) -> str:
         + f'</tr></table>'
         f'</td></tr>'
 
+        + integrity_html
+
         # TRACK RECORD (10yr) — long-term compounding, what matters most
         + f'<tr><td style="padding:0">{_sec_label("Track Record", "Compounding vs QQQ &middot; 10-15yr lens")}</td></tr>'
         f'<tr><td style="padding:10px 14px">'
@@ -418,12 +551,17 @@ def _holding_card(h: dict) -> str:
         + f'</tr></table>'
         f'</td></tr>'
 
-        # MARKET INTELLIGENCE
-        + f'<tr><td style="padding:0">{_sec_label("Market Intelligence", f"{news_n} articles &middot; {reddit_n} community posts &middot; 30 days")}</td></tr>'
+        # NEWS — raw Finnhub + Reddit (no AI)
+        + f'<tr><td style="padding:0">{_sec_label("News", f"Raw feed &middot; Finnhub + Reddit &middot; 30 days")}</td></tr>'
+        f'<tr><td style="padding:10px 14px">{news_raw_html}</td></tr>'
+
+        # AI INSIGHTS — the model's read of the news above
+        + f'<tr><td style="padding:0">{_sec_label("AI insights &middot; news", "LLM&#39;s read of the news above &middot; paraphrased, not verbatim")}</td></tr>'
         f'<tr><td style="padding:10px 14px">{intel_html}</td></tr>'
 
-        # SEC FILINGS & NEWS
-        + f'<tr><td style="padding:10px 14px 14px">{sec_8k_html}</td></tr>'
+        # 8-K FILING INSIGHTS
+        + f'<tr><td style="padding:0">{_sec_label("AI insights &middot; 8-K filings", "LLM-extracted from the SEC 8-K filing text &middot; EDGAR")}</td></tr>'
+        f'<tr><td style="padding:10px 14px 14px">{sec_8k_html}</td></tr>'
 
         + f'</table>'
     )
@@ -666,6 +804,23 @@ def _screened_card(s: dict) -> str:
     pp      = s.get('pricing_power','—')
     reinv   = s.get('reinvestment_rate')
     recur   = s.get('recurring_revenue_proxy','—')
+    val_lbl = s.get('valuation_label','—')
+    val_peg = s.get('val_peg')
+    _val_cls = {'CHEAP':'pos','FAIR':'neu','RICH':'neg','EXTREME':'neg'}.get(val_lbl,'neu')
+    _val_peg_s = f' &middot; PEG {val_peg}' if isinstance(val_peg,(int,float)) else ''
+    _ins_cls = {'BUYING':'pos','SELLING':'neg'}.get(ins_sig,'neu')
+    # Congress (Senate eFD)
+    cong_src  = s.get('congress_source','unavailable')
+    cong_sig  = s.get('congress_signal','UNAVAILABLE')
+    cong_buys = s.get('congress_buys', 0) or 0
+    cong_sells= s.get('congress_sells', 0) or 0
+    _cong_cls = {'BUYING':'pos','SELLING':'neg','MIXED':'neu'}.get(cong_sig,'neu')
+    if cong_src != 'efd':
+        _cong_disp = 'unavailable'
+    elif cong_sig in ('BUYING','SELLING','MIXED'):
+        _cong_disp = f'{cong_sig.title()} · {cong_buys} buy / {cong_sells} sell'
+    else:
+        _cong_disp = 'no trades (120d)'
 
     # Technicals
     above200= s.get('above_200ma')
@@ -679,6 +834,7 @@ def _screened_card(s: dict) -> str:
     news_n  = s.get('news_count', 0) or 0
     news_s  = s.get('news_sentiment','NEUTRAL')
     reddit_n= s.get('reddit_mentions', 0) or 0
+    reddit_src = s.get('reddit_source','')
     sec_8k  = s.get('sec_8k_count',0) or 0
     signal  = s.get('signal_or_noise','NOISE')
     themes  = s.get('key_themes',[])
@@ -758,8 +914,12 @@ def _screened_card(s: dict) -> str:
         <td class="k">Moat proxy</td><td>{moat_p}</td>
       </tr>
       <tr>
-        <td class="k">Insider ownership</td><td>{_pct(insider)} ({ins_sig})</td>
+        <td class="k">Insider ownership</td><td>{_pct(insider)}</td>
         <td class="k">Dilution rate</td><td class="{'neg' if (dilution or 0)>0.15 else 'neu'}">{_pct(dilution)}</td>
+      </tr>
+      <tr>
+        <td class="k">Valuation</td><td class="{_val_cls}">{val_lbl}{_val_peg_s}</td>
+        <td class="k">Insider (6m)</td><td class="{_ins_cls}">{ins_sig}</td>
       </tr>
     </table>
 
@@ -791,7 +951,10 @@ def _screened_card(s: dict) -> str:
         <td class="k">Finnhub news</td><td>{_sent_badge(news_s)}</td><td style="color:#6a6a6a">{news_n} articles</td>
       </tr>
       <tr>
-        <td class="k">Reddit</td><td></td><td style="color:#6a6a6a">{reddit_n} mentions</td>
+        <td class="k">Reddit</td><td></td><td style="color:#6a6a6a">{'unavailable' if reddit_src == 'blocked' else f'{reddit_n} mentions'}</td>
+      </tr>
+      <tr>
+        <td class="k">Congress (Senate)</td><td class="{_cong_cls}"></td><td style="color:#6a6a6a">{_cong_disp}</td>
       </tr>
       <tr>
         <td class="k">SEC 8-K</td>
@@ -807,6 +970,99 @@ def _screened_card(s: dict) -> str:
   </div>
 </div>"""
     return card
+
+
+def _rating_style(verdict) -> tuple:
+    """Shared long-term rating colours/labels (15-20yr stance, not a trade)."""
+    v = str(verdict or '').upper()
+    return {
+        'CORE_HOLD':   ('#1d4ed8', '#eff4ff', 'CORE HOLD'),
+        'ACCUMULATE':  ('#15803d', '#f0fdf4', 'ACCUMULATE'),
+        'MOONSHOT':    ('#7c3aed', '#f5f3ff', 'MOONSHOT'),
+        'MONITOR':     ('#d97706', '#fffbeb', 'MONITOR'),
+        'SPECULATIVE': ('#d97706', '#fffbeb', 'SPECULATIVE'),
+        'TRIM':        ('#d97706', '#fffbeb', 'TRIM'),
+        'AVOID':       ('#dc2626', '#fef2f2', 'AVOID'),
+        'EXIT':        ('#dc2626', '#fef2f2', 'EXIT'),
+    }.get(v, ('#6b7280', '#f8f9fa', v or '\u2014'))
+
+
+def _build_exec_summary(holdings: list) -> str:
+    """
+    Front-page analyst summary table \u2014 the whole book at a 15-20 year glance,
+    the way a long-horizon research firm opens a note. No price targets: rating
+    is the multi-decade stance, and the return columns are probabilistic.
+    """
+    if not holdings:
+        return ''
+
+    def _sort_key(h):
+        t_order = {'T1': 0, 'T2': 1, 'T3': 2}.get(h.get('tier', 'T9'), 9)
+        ep, cp = h.get('entry_price'), h.get('current_price')
+        ret = ((cp - ep) / ep) if (ep and cp) else 0
+        return (t_order, -ret)
+
+    def _th(label, center=False):
+        align = 'text-align:center;' if center else ''
+        return (f'<td style="padding:6px 6px;font-size:8px;font-weight:700;color:#9ca3af;'
+                f'text-transform:uppercase;letter-spacing:.06em;{align}">{label}</td>')
+
+    rows = ''
+    for h in sorted(holdings, key=_sort_key):
+        tk   = h.get('ticker', '')
+        tier = h.get('tier', '')
+        rc, rbg, rlbl = _rating_style(h.get('verdict'))
+        sect_dur = str(h.get('sector_durability_20yr', '') or '')
+        sc = {'HIGH': '#15803d', 'MEDIUM': '#d97706', 'LOW': '#dc2626'}.get(sect_dur, '#9ca3af')
+        moat = h.get('moat_durability_years')
+        moat_s = f'{moat}y' if moat else '\u2014'
+        dp = h.get('decade_probability')
+        if isinstance(dp, (int, float)):
+            dp_s = 'High' if dp >= 0.65 else ('Medium' if dp >= 0.45 else 'Lower')
+            dp_c = '#15803d' if dp >= 0.65 else ('#d97706' if dp >= 0.45 else '#9ca3af')
+        else:
+            dp_s, dp_c = '\u2014', '#9ca3af'
+        al = h.get('annual_alpha_estimate')
+        al_num = isinstance(al, (int, float))
+        if al_num:
+            al_s = 'Ahead' if al >= 2 else ('Behind' if al <= -2 else 'In line')
+            al_c = '#15803d' if al >= 2 else ('#dc2626' if al <= -2 else '#6b7280')
+        else:
+            al_s, al_c = '\u2014', '#9ca3af'
+        thesis = (h.get('thesis_summary', '') or '')
+        thesis_s = (thesis[:70] + '\u2026') if len(thesis) > 70 else (thesis or '\u2014')
+        rows += (
+            f'<tr style="border-bottom:1px solid #eef0f2">'
+            f'<td style="padding:7px 6px;vertical-align:top;white-space:nowrap">'
+            f'<strong style="font-size:12px;color:#111827">{tk}</strong>'
+            f'<span style="font-size:8px;color:#9ca3af;margin-left:4px">{tier}</span></td>'
+            f'<td style="padding:7px 6px;vertical-align:top;white-space:nowrap">'
+            f'<span style="background:{rbg};color:{rc};font-size:8.5px;font-weight:700;'
+            f'padding:2px 6px;border-radius:2px;border:1px solid {rc}33">{rlbl}</span></td>'
+            f'<td style="padding:7px 6px;vertical-align:top;text-align:center;'
+            f'font-size:10px;font-weight:700;color:{sc}">{sect_dur or "\u2014"}</td>'
+            f'<td style="padding:7px 6px;vertical-align:top;text-align:center;font-size:10px;color:#374151">{moat_s}</td>'
+            f'<td style="padding:7px 6px;vertical-align:top;text-align:center;font-size:10px;font-weight:700;color:{dp_c}">{dp_s}</td>'
+            f'<td style="padding:7px 6px;vertical-align:top;text-align:center;font-size:10px;font-weight:700;color:{al_c}">{al_s}</td>'
+            f'<td style="padding:7px 6px;vertical-align:top;font-size:9.5px;color:#6b7280;line-height:1.45">{thesis_s}</td>'
+            f'</tr>'
+        )
+
+    return (
+        '<div class="section" style="margin-bottom:14px">'
+        '<div class="section-hdr">Executive summary &mdash; the book at a 15-20 year glance</div>'
+        '<table style="width:100%;border-collapse:collapse">'
+        '<tr style="border-bottom:2px solid #e5e7eb">'
+        + _th('Stock') + _th('Rating') + _th('Sector 20y', True) + _th('Moat', True)
+        + _th('Conviction', True) + _th('vs QQQ', True) + _th('Thesis') +
+        '</tr>'
+        f'{rows}'
+        '</table>'
+        '<div style="font-size:8.5px;color:#9ca3af;margin-top:8px">'
+        'Rating = 15-20yr stance, not a trade. Decade odds &amp; vs-QQQ are the model\'s '
+        'probabilistic estimates \u2014 not price targets.</div>'
+        '</div>'
+    )
 
 
 def _build_concentration_view(holdings: list, screened: list) -> str:
@@ -941,9 +1197,215 @@ def _build_sector_outlook(megatrend_review: dict) -> str:
 </div>"""
 
 
+def _build_sector_survival_map(sector_survival: dict, holdings: list) -> str:
+    """
+    Surfaces the top-down sector survival decision (screener.build_sector_survival_map):
+    for every Yahoo sector in play this run, the LLM's 15-20yr verdict, how many
+    companies it thinks stay leaders, and how many the book currently holds. LOW
+    verdicts hard-veto new buys and flag existing holdings for exit, so this is
+    the "why" behind those actions.
+    """
+    sectors = (sector_survival or {}).get('sectors', {})
+    if not sectors:
+        return ""
+    as_of = (sector_survival.get('as_of') or '')[:10]
+
+    from collections import Counter
+    held = Counter((h.get('sector') or 'Unknown') for h in holdings)
+
+    order = {'LOW': 0, 'MEDIUM': 1, 'HIGH': 2}
+    rows = ""
+    for sec, d in sorted(sectors.items(), key=lambda kv: (order.get(str(kv[1].get('survives_20yr', 'MEDIUM')).upper(), 1), kv[0])):
+        surv = str(d.get('survives_20yr', 'MEDIUM')).upper()
+        color = {'HIGH': '#15803d', 'MEDIUM': '#b45309', 'LOW': '#b91c1c'}.get(surv, '#6b7280')
+        mx  = d.get('max_survivors', '—')
+        n_h = held.get(sec, 0)
+        rationale = (d.get('rationale') or '')[:140]
+        mt_ctx    = (d.get('megatrend_context') or '')[:90]
+        rows += f"""
+        <tr>
+          <td style="padding:6px 0;vertical-align:top">
+            <div style="font-weight:600;color:#111827">{sec}</div>
+            <div style="font-size:9.5px;color:#6b7280;margin-top:1px">{rationale}</div>
+            {f'<div style="font-size:9px;color:#9ca3af;margin-top:1px">Theme: {mt_ctx}</div>' if mt_ctx else ''}
+          </td>
+          <td style="padding:6px 0;text-align:center;vertical-align:top;white-space:nowrap">
+            <span style="color:{color};font-weight:700;font-size:9px">{surv}</span>
+          </td>
+          <td style="padding:6px 0;text-align:center;vertical-align:top;white-space:nowrap;color:#374151">{n_h} / {mx}</td>
+        </tr>"""
+
+    return f"""
+<div class="section">
+  <div class="section-hdr">Sector survival map — will this sector still be here in 15-20 years?</div>
+  <div style="font-size:8.5px;color:#9ca3af;margin-bottom:8px">LLM top-down verdict &middot; LOW vetoes new buys and flags existing holdings for exit &middot; survivor count caps holdings per sector &middot; assessed {as_of or 'this run'}</div>
+  <table style="width:100%;border-collapse:collapse;font-size:11px">
+    <tr>
+      <th style="text-align:left;font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">Sector</th>
+      <th style="font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">20yr</th>
+      <th style="font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">Held / Survivors</th>
+    </tr>
+    {rows}
+  </table>
+</div>"""
+
+
+def _build_decision_review(decision_review: dict) -> str:
+    """
+    Surfaces the LLM's advisory self-review of this run's decisions
+    (screener.review_decisions): the overall critique plus any ticker it flagged
+    REVIEW or OVERRIDE. Advisory only — nothing here changed a verdict.
+    """
+    dr = decision_review or {}
+    reviews = dr.get('reviews', {})
+    note    = (dr.get('portfolio_note') or '').strip()
+    flagged = {tk: v for tk, v in reviews.items()
+               if str(v.get('flag', '')).upper() in ('REVIEW', 'OVERRIDE')}
+    if not note and not flagged:
+        return ""
+
+    rows = ""
+    for tk, v in sorted(flagged.items(), key=lambda kv: 0 if str(kv[1].get('flag')).upper() == 'OVERRIDE' else 1):
+        flag = str(v.get('flag', '')).upper()
+        color = '#b91c1c' if flag == 'OVERRIDE' else '#b45309'
+        rows += f"""
+        <tr>
+          <td style="padding:5px 0;vertical-align:top;white-space:nowrap"><strong style="color:#111827">{tk}</strong></td>
+          <td style="padding:5px 0 5px 8px;vertical-align:top"><span style="color:{color};font-weight:700;font-size:9px">{flag}</span>
+            <span style="color:#374151"> &mdash; {(v.get('note') or '')[:180]}</span></td>
+        </tr>"""
+
+    summary = (f'<span style="color:#b45309;font-weight:600">{len(flagged)} decision{"s" if len(flagged) != 1 else ""} flagged for a second look</span>'
+               if flagged else '<span style="color:#2a7a4a;font-weight:600">✓ All decisions internally consistent</span>')
+    note_html = (f'<div style="font-size:11px;color:#334155;line-height:1.6;margin-bottom:{"10px" if flagged else "0"}">{note[:400]}</div>'
+                 if note else '')
+    table_html = (f'<table style="width:100%;border-collapse:collapse;font-size:11px">{rows}</table>'
+                  if flagged else '')
+
+    return f"""
+<div class="section">
+  <div class="section-hdr">Decision self-review — the model checking its own work</div>
+  <div style="font-size:11px;margin-bottom:8px">{summary}</div>
+  {note_html}
+  {table_html}
+  <div style="font-size:8.5px;color:#9ca3af;margin-top:8px">Advisory only &middot; flags do not change any verdict automatically</div>
+</div>"""
+
+
+def _build_whats_changed(decisions: dict, decision_review: dict) -> str:
+    """
+    'What changed this quarter' — the structural moves a long-horizon desk cares
+    about: new positions, exits, and tier migrations. Steady-state is the norm
+    for a 15-20yr book, so an empty quarter is reported as a feature, not a gap.
+    """
+    d = decisions or {}
+    adds  = d.get('new_additions', []) or []
+    exits = d.get('exits', []) or []
+    migs  = d.get('migrations', []) or []
+
+    dr = decision_review or {}
+    flagged = {tk: v for tk, v in (dr.get('reviews', {}) or {}).items()
+               if str(v.get('flag', '')).upper() in ('REVIEW', 'OVERRIDE')}
+
+    if not (adds or exits or migs or flagged):
+        return (
+            '<div class="section" style="margin-bottom:14px">'
+            '<div class="section-hdr">What changed this quarter</div>'
+            '<div style="font-size:11px;color:#15803d;font-weight:600">'
+            '&#10003; No structural changes &mdash; the book held steady. '
+            '<span style="color:#6b7280;font-weight:400">For a 15-20 year strategy, '
+            'inaction is usually the correct action.</span></div>'
+            '</div>'
+        )
+
+    def _chip(label, color, bg):
+        return (f'<span style="background:{bg};color:{color};font-size:8.5px;font-weight:700;'
+                f'padding:2px 7px;border-radius:2px;margin-right:6px;white-space:nowrap">{label}</span>')
+
+    rows = ''
+    for it in adds:
+        tk = it.get('ticker', ''); co = it.get('company_name', tk); tier = it.get('tier', '')
+        rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
+                 f'{_chip("NEW POSITION", "#15803d", "#f0fdf4")}</td>'
+                 f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong> '
+                 f'<span style="color:#9ca3af;font-size:9px">{tier}</span>'
+                 f'<span style="color:#6b7280;font-size:10px"> &middot; {co}</span></td></tr>')
+    for it in migs:
+        tk = it.get('ticker', ''); ft = it.get('from_tier', '?'); tt = it.get('to_tier', '?')
+        rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
+                 f'{_chip("TIER MOVE", "#1d4ed8", "#eff4ff")}</td>'
+                 f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong>'
+                 f'<span style="color:#6b7280;font-size:10px"> &middot; {ft} &rarr; {tt}</span></td></tr>')
+    for it in exits:
+        tk = it.get('ticker', ''); note = (it.get('exit_reason', '') or '')[:80]
+        note_html = f'<span style="color:#6b7280;font-size:10px"> &middot; {note}</span>' if note else ''
+        rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
+                 f'{_chip("EXITED", "#dc2626", "#fef2f2")}</td>'
+                 f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong>'
+                 f'{note_html}</td></tr>')
+    for tk, v in sorted(flagged.items(), key=lambda kv: 0 if str(kv[1].get('flag')).upper() == 'OVERRIDE' else 1):
+        flag = str(v.get('flag', '')).upper(); note = (v.get('note', '') or '')[:80]
+        note_html = f'<span style="color:#6b7280;font-size:10px"> &middot; {note}</span>' if note else ''
+        rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
+                 f'{_chip("COMMITTEE " + flag, "#b45309", "#fffbeb")}</td>'
+                 f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong>'
+                 f'{note_html}</td></tr>')
+
+    parts = []
+    if adds:  parts.append(f'{len(adds)} new')
+    if migs:  parts.append(f'{len(migs)} tier move{"s" if len(migs) != 1 else ""}')
+    if exits: parts.append(f'{len(exits)} exit{"s" if len(exits) != 1 else ""}')
+    if flagged: parts.append(f'{len(flagged)} flagged')
+    summary = ' &middot; '.join(parts)
+
+    return (
+        '<div class="section" style="margin-bottom:14px">'
+        '<div class="section-hdr">What changed this quarter</div>'
+        f'<div style="font-size:10px;color:#6b7280;margin-bottom:8px">{summary}</div>'
+        '<table style="width:100%;border-collapse:collapse;font-size:11px">'
+        f'{rows}</table>'
+        '</div>'
+    )
+
+
+def _build_disclosures() -> str:
+    """Methodology & disclosures — what the ratings mean and their limits."""
+    def _row(term, body):
+        return (f'<tr><td style="padding:5px 10px 5px 0;vertical-align:top;white-space:nowrap;'
+                f'font-size:9.5px;font-weight:700;color:#374151">{term}</td>'
+                f'<td style="padding:5px 0;vertical-align:top;font-size:9.5px;color:#6b7280;'
+                f'line-height:1.6">{body}</td></tr>')
+    return (
+        '<div class="section" style="margin-bottom:6px">'
+        '<div class="section-hdr">Methodology &amp; disclosures</div>'
+        '<div style="font-size:10px;color:#4b5563;line-height:1.6;margin-bottom:10px">'
+        'Every position is assessed for a <strong>15-20 year</strong> hold. We do not set price '
+        'targets or trade on momentum; the figures below are probabilistic estimates of how a '
+        'business compounds over a decade-plus, not forecasts of next quarter.</div>'
+        '<table style="width:100%;border-collapse:collapse">'
+        + _row('Rating', 'A multi-decade stance &mdash; CORE HOLD, ACCUMULATE, MONITOR, AVOID '
+               '(or MOONSHOT for T3). It is <em>not</em> a buy/sell trade signal.')
+        + _row('Decade odds', 'The model&#39;s estimated probability that the investment thesis '
+               'plays out over the next 10+ years. Subjective and model-generated.')
+        + _row('vs QQQ/yr', 'Estimated annualised excess return versus the Nasdaq-100 over the hold. '
+               'An expectation, not a promise; wide error bars apply.')
+        + _row('Moat / Sector 20y', 'Durability of the competitive advantage and of the sector&#39;s '
+               'relevance over a 15-20 year horizon.')
+        + _row('News / 8-K / AI insights', 'Short-term (30-day) context only. These do <em>not</em> '
+               'override a long-term thesis; they are background colour.')
+        + '</table>'
+        '<div style="font-size:8.5px;color:#9ca3af;margin-top:10px;line-height:1.6">'
+        'Generated by an autonomous model (NVIDIA NIM) using Finnhub, SEC EDGAR and Yahoo Finance data. '
+        'AI-written insights may contain errors &mdash; verify independently. '
+        'For informational purposes only; not personalised financial advice.</div>'
+        '</div>'
+    )
+
+
 def generate_full_report(decisions: dict, portfolio: dict, researched: dict,
                          ipo_watchlist: dict = None, fif_threshold: int = None,
-                         megatrend_review: dict = None) -> tuple:
+                         megatrend_review: dict = None, sector_survival: dict = None,
+                         decision_review: dict = None) -> tuple:
     """
     Email 2 — Full Research Brief.
     Professional, dense, analytical. Sunday reading standard.
@@ -1006,7 +1468,11 @@ def generate_full_report(decisions: dict, portfolio: dict, researched: dict,
 
 <div style="padding:12px">"""
 
+    html += _build_exec_summary(holdings)
+    html += _build_whats_changed(decisions, decision_review)
     html += _build_sector_outlook(megatrend_review)
+    html += _build_sector_survival_map(sector_survival, holdings)
+    html += _build_decision_review(decision_review)
     html += _build_concentration_view(holdings, screened)
 
     # Holdings — sorted by tier then return descending
@@ -1031,6 +1497,7 @@ def generate_full_report(decisions: dict, portfolio: dict, researched: dict,
         for s in screened:
             html += _screened_card(s)
 
+    html += _build_disclosures()
     html += '</div>'  # padding:12px wrapper
 
     # FOOTER

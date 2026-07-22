@@ -328,50 +328,159 @@ def compute_management_quality(info: dict) -> dict:
                              else 'MINIMAL'),
     }
 
-# ── INSIDER TRANSACTIONS (SEC Form 4 — FREE) ──────────────────────────────────
+# ── INSIDER TRANSACTIONS (buy vs sell — FREE via yfinance) ────────────────────
 def fetch_insider_transactions(ticker: str) -> dict:
     """
-    Fetch recent Form 4 insider transactions from SEC EDGAR.
-    Insider buying is a strong bullish signal for long-term investors.
-    Insider selling is routine (options, diversification) — less informative.
+    Net insider buying vs selling over the last ~6 months.
+
+    The previous implementation counted Form 4 *filings* but explicitly could
+    not tell a purchase from a sale, so a cluster of routine option-exercise
+    sales looked identical to conviction buying. yfinance exposes the SEC Form 4
+    data already parsed into buy/sell share counts (Ticker.insider_purchases /
+    insider_transactions), which lets us surface the signal that actually
+    matters to a long-term owner: are insiders net buyers or net sellers.
+    Falls back to UNKNOWN (never fabricates) when the data is unavailable.
     """
     try:
-        from_date = (datetime.now() - timedelta(days=90)).strftime('%Y-%m-%d')
-        to_date   = datetime.now().strftime('%Y-%m-%d')
+        import yfinance as yf   # lazy import; heavy dependency
+        tk = yf.Ticker(ticker)
 
-        resp = requests.get(
-            'https://efts.sec.gov/LATEST/search-index',
-            params={
-                'q':         f'"{ticker}"',
-                'forms':     '4',
-                'dateRange': 'custom',
-                'startdt':   from_date,
-                'enddt':     to_date,
-            },
-            headers=HEADERS,
-            timeout=12
-        )
-        if resp.status_code != 200:
-            return {'insider_buys': 0, 'insider_sells': 0, 'insider_signal': 'UNKNOWN'}
+        buy_shares = sell_shares = None
+        try:
+            ip = tk.insider_purchases     # small summary DataFrame
+            if ip is not None and not ip.empty:
+                label_col = ip.columns[0]
+                shares_col = next((c for c in ip.columns if 'Shares' in str(c)), None)
+                if shares_col is not None:
+                    for _, row in ip.iterrows():
+                        lbl = str(row[label_col]).strip().lower()
+                        val = row[shares_col]
+                        try:
+                            val = float(val)
+                        except Exception:
+                            continue
+                        if lbl.startswith('purchase'):
+                            buy_shares = val
+                        elif lbl.startswith('sale'):
+                            sell_shares = val
+        except Exception:
+            pass
 
-        hits = resp.json().get('hits', {}).get('hits', [])
-        if not hits:
-            return {'insider_buys': 0, 'insider_sells': 0, 'insider_signal': 'NEUTRAL'}
+        if buy_shares is None and sell_shares is None:
+            return {'insider_buys': 0, 'insider_sells': 0,
+                    'insider_signal': 'UNKNOWN', 'insider_note': 'No insider data'}
 
-        # Form 4 hits indicate recent insider activity — we can't easily
-        # distinguish buys from sells without parsing the actual form,
-        # but the count and recency are informative signals
-        recent_filings = len(hits)
+        buy_shares  = buy_shares  or 0.0
+        sell_shares = sell_shares or 0.0
+        net = buy_shares - sell_shares
+        total = buy_shares + sell_shares
+
+        if total <= 0:
+            signal, note = 'NONE', 'No insider transactions (6m)'
+        elif net > 0 and buy_shares >= sell_shares * 1.2:
+            signal = 'BUYING'
+            note   = f'Net insider BUYING (6m): {buy_shares:,.0f} bought vs {sell_shares:,.0f} sold'
+        elif net < 0 and sell_shares >= buy_shares * 1.2:
+            signal = 'SELLING'
+            note   = f'Net insider SELLING (6m): {sell_shares:,.0f} sold vs {buy_shares:,.0f} bought'
+        else:
+            signal = 'BALANCED'
+            note   = f'Insider activity balanced (6m): {buy_shares:,.0f} bought / {sell_shares:,.0f} sold'
+
         return {
-            'insider_form4_90d': recent_filings,
-            'insider_signal':    ('ACTIVE' if recent_filings > 3
-                                  else 'SOME' if recent_filings > 0
-                                  else 'NONE'),
-            'insider_note':      f'{recent_filings} Form 4 filings in 90 days',
+            'insider_buys':   int(buy_shares),
+            'insider_sells':  int(sell_shares),
+            'insider_signal': signal,
+            'insider_note':   note,
         }
     except Exception as e:
-        log.debug(f'Form 4 fetch failed for {ticker}: {e}')
-        return {'insider_form4_90d': 0, 'insider_signal': 'UNKNOWN', 'insider_note': ''}
+        log.debug(f'Insider transaction fetch failed for {ticker}: {e}')
+        return {'insider_buys': 0, 'insider_sells': 0,
+                'insider_signal': 'UNKNOWN', 'insider_note': ''}
+
+# ── VALUATION DISCIPLINE (growth-adjusted, current-multiple) ──────────────────
+def compute_valuation(info: dict, fcf_yield=None) -> dict:
+    """
+    Valuation discipline for a 15-20yr buyer.
+
+    We are not market timers, but the price paid sets the starting cash yield of
+    a two-decade hold, so an 'expensive' entry still deserves a smaller, slower
+    accumulation. Free data does not include a clean decade of historical
+    multiples, so we classify the CURRENT multiple on a GROWTH-ADJUSTED basis
+    (a high multiple is only 'rich' if growth doesn't justify it). This is an
+    honest current-multiple read, deliberately NOT presented as a historical
+    percentile. Never hard-vetoes — it only tilts position size.
+    """
+    def _f(*keys):
+        for k in keys:
+            v = info.get(k)
+            if v not in (None, 0, ''):
+                try:
+                    return float(v)
+                except Exception:
+                    pass
+        return None
+
+    pe        = _f('forwardPE', 'trailingPE')
+    ps        = _f('priceToSalesTrailing12Months')
+    ev_ebitda = _f('enterpriseToEbitda')
+    peg       = _f('pegRatio', 'trailingPegRatio')
+    growth    = float(info.get('revenueGrowth', 0) or 0) * 100   # percent
+
+    score = 0
+    parts = []
+
+    if fcf_yield is not None:
+        if   fcf_yield >= 6: score -= 1
+        elif fcf_yield >= 3: pass
+        elif fcf_yield >= 1: score += 1
+        else:                score += 2
+        parts.append(f'FCF yield {fcf_yield:.1f}%')
+
+    # Growth-adjusted P/E (PEG-style). Prefer a provider PEG, else derive it.
+    peg_use = peg if (peg is not None and peg > 0) else \
+              (pe / growth if (pe is not None and growth > 3) else None)
+    if peg_use is not None:
+        if   peg_use < 1.0: score -= 1
+        elif peg_use <= 2.0: pass
+        elif peg_use <= 3.0: score += 1
+        else:                score += 2
+        parts.append(f'PEG {peg_use:.1f}')
+    elif pe is not None:
+        parts.append(f'P/E {pe:.0f}')
+
+    if ev_ebitda is not None and ev_ebitda > 0:
+        if   ev_ebitda > 40: score += 2
+        elif ev_ebitda > 25: score += 1
+        elif ev_ebitda < 12: score -= 1
+        parts.append(f'EV/EBITDA {ev_ebitda:.0f}')
+
+    if ps is not None:
+        if   ps > 25: score += 2
+        elif ps > 12: score += 1
+        if ps > 12:
+            parts.append(f'P/S {ps:.0f}')
+
+    label = ('CHEAP'   if score <= -2 else
+             'FAIR'    if score <=  0 else
+             'RICH'    if score <=  2 else
+             'EXTREME')
+    # Position-size multiplier applied downstream (never a hard veto).
+    mult = {'CHEAP': 1.15, 'FAIR': 1.0, 'RICH': 0.70, 'EXTREME': 0.45}[label]
+    tone = {'CHEAP':   'attractive entry for the growth',
+            'FAIR':    'fairly valued for its growth',
+            'RICH':    'priced ahead of fundamentals — accumulate slowly',
+            'EXTREME': 'very richly valued — starter position only'}[label]
+    metrics_str = ', '.join(parts) if parts else 'limited valuation data'
+    return {
+        'valuation_label':      label,
+        'valuation_multiplier': mult,
+        'valuation_note':       f'{metrics_str} — {tone}.',
+        'val_pe':               round(pe, 1) if pe is not None else None,
+        'val_ps':               round(ps, 1) if ps is not None else None,
+        'val_ev_ebitda':        round(ev_ebitda, 1) if ev_ebitda is not None else None,
+        'val_peg':              round(peg_use, 2) if peg_use is not None else None,
+    }
 
 # ── MOAT PROXY SCORING ────────────────────────────────────────────────────────
 def compute_moat_proxy(info: dict) -> dict:
@@ -432,6 +541,7 @@ def compute_all_metrics(ticker: str, info: dict) -> dict:
     rev_qual   = compute_revenue_quality(info)
     mgmt       = compute_management_quality(info)
     moat       = compute_moat_proxy(info)
+    valuation  = compute_valuation(info, fcf.get('fcf_yield'))
     insiders   = fetch_insider_transactions(ticker)
     time.sleep(0.3)  # SEC rate limit courtesy
 
@@ -441,5 +551,6 @@ def compute_all_metrics(ticker: str, info: dict) -> dict:
         **rev_qual,
         **mgmt,
         **moat,
+        **valuation,
         **insiders,
     }
