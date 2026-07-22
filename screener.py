@@ -27,7 +27,7 @@ from edgar_fundamentals import compute_trajectory, cross_check_yahoo, fetch_cust
 from ipo_monitor import run_ipo_monitor, get_ipo_watchlist_summary, get_eligible_for_screening
 from quarterly_review import run_quarterly_review, print_score_report
 from congress_trades import build_senate_index, congress_signal_for
-import os, json, time, pickle, logging, ssl, smtplib, re
+import os, json, time, pickle, logging, ssl, smtplib, re, random
 from dotenv import load_dotenv
 load_dotenv()
 from datetime import datetime, timedelta, date
@@ -47,6 +47,54 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 log = logging.getLogger('longterm')
+
+# ── YAHOO FINANCE SESSION + RATE-LIMIT DEFENCE ──────────────────────────────
+# Yahoo aggressively throttles datacenter IPs (GitHub Actions runners) with
+# YFRateLimitError. Two defences:
+#   1) curl_cffi browser-impersonation session — a real Chrome TLS fingerprint,
+#      which Yahoo's limiter treats far more leniently than plain urllib.
+#   2) Adaptive exponential backoff whenever a rate-limit IS detected, plus a
+#      cooldown streak so repeated hits back off progressively (not a flat wait).
+# Both degrade gracefully: if curl_cffi is missing, we fall back to default yf.
+try:
+    from curl_cffi import requests as _cffi_requests
+    _YF_SESSION = _cffi_requests.Session(impersonate='chrome')
+    log.info('  yfinance: using curl_cffi browser-impersonation session')
+except Exception as _e:   # pragma: no cover - optional dependency
+    _YF_SESSION = None
+    log.info(f'  yfinance: curl_cffi unavailable ({_e}); using default session')
+
+# Streak of consecutive rate-limit hits — drives exponential backoff length.
+_RL_STATE = {'consec': 0}
+
+def _yf_ticker(ticker: str):
+    """yf.Ticker bound to the impersonation session when available."""
+    if _YF_SESSION is not None:
+        return yf.Ticker(ticker, session=_YF_SESSION)
+    return yf.Ticker(ticker)
+
+def _is_rate_limited(err) -> bool:
+    """True if an exception looks like a Yahoo rate-limit / 429."""
+    name = type(err).__name__.lower()
+    msg  = str(err).lower()
+    return ('ratelimit' in name or 'too many requests' in msg
+            or 'rate limit' in msg or 'rate limited' in msg or '429' in msg)
+
+def _rate_limit_backoff(where: str) -> None:
+    """Exponential backoff with jitter after a detected rate-limit hit."""
+    _RL_STATE['consec'] += 1
+    base = _cn(30,  'sentiment_data', 'rate_limit_base_sleep_seconds')
+    cap  = _cn(600, 'sentiment_data', 'rate_limit_max_sleep_seconds')
+    wait = min(base * (2 ** (_RL_STATE['consec'] - 1)), cap)
+    wait += random.uniform(0, wait * 0.25)   # jitter to de-sync from the limiter
+    log.warning(f'  Yahoo rate limit ({where}) — backing off {wait:.0f}s '
+                f'(streak {_RL_STATE["consec"]})')
+    time.sleep(wait)
+
+def _rate_limit_ok() -> None:
+    """Reset the backoff streak after a clean call."""
+    _RL_STATE['consec'] = 0
+
 
 # ── CONFIGURATION ──────────────────────────────────────────────────────────────
 ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
@@ -335,10 +383,10 @@ def _log_bad_symbol(ticker: str, reason: str) -> None:
     except Exception:
         pass
 
-def fetch_with_retry(ticker: str, retries: int = 3) -> tuple:
+def fetch_with_retry(ticker: str, retries: int = 4) -> tuple:
     for attempt in range(retries):
         try:
-            data  = yf.Ticker(ticker).info
+            data  = _yf_ticker(ticker).info
             price = data.get('regularMarketPrice') or data.get('currentPrice') or data.get('previousClose')
             qt    = data.get('quoteType', '')
             if not data or price is None or price <= 0:
@@ -347,10 +395,17 @@ def fetch_with_retry(ticker: str, retries: int = 3) -> tuple:
             if qt not in ('EQUITY', 'ETF', ''):
                 _log_bad_symbol(ticker, f'quoteType={qt}')
                 return ticker, {}, 'FAILED'
-            time.sleep(1.2)   # Yahoo Finance courtesy delay
+            _rate_limit_ok()
+            time.sleep(_cn(1.2, 'sentiment_data', 'info_fetch_sleep_seconds'))   # Yahoo courtesy delay
             return ticker, data, 'OK'
         except Exception as e:
             err = str(e)
+            if _is_rate_limited(e):
+                if attempt < retries - 1:
+                    _rate_limit_backoff('info')
+                    continue
+                _log_bad_symbol(ticker, 'rate limited (gave up)')
+                return ticker, {}, 'FAILED'
             if '404' in err or 'Not Found' in err or 'not found' in err.lower():
                 _log_bad_symbol(ticker, f'404: {err[:120]}')
                 return ticker, {}, 'FAILED'
@@ -363,15 +418,25 @@ def fetch_with_retry(ticker: str, retries: int = 3) -> tuple:
 
 def _batch_download_prices(batch: list):
     """Download prices for a batch of tickers. Returns (hist, survivors_count)."""
-    try:
-        hist = yf.download(
-            ' '.join(batch), period='5d', interval='1d',
-            progress=False, auto_adjust=True, threads=True
-        )
-        return hist
-    except Exception as e:
-        log.debug(f'  Batch download error: {e}')
-        return None
+    for attempt in range(2):
+        try:
+            kwargs = dict(
+                tickers=' '.join(batch), period='5d', interval='1d',
+                progress=False, auto_adjust=True, threads=False,
+            )
+            # curl_cffi sessions aren't thread-safe, so threads stays off when set.
+            if _YF_SESSION is not None:
+                kwargs['session'] = _YF_SESSION
+            hist = yf.download(**kwargs)
+            _rate_limit_ok()
+            return hist
+        except Exception as e:
+            if _is_rate_limited(e) and attempt == 0:
+                _rate_limit_backoff('batch')
+                continue
+            log.debug(f'  Batch download error: {e}')
+            return None
+    return None
 
 
 def _tickers_from_hist(hist, batch: list) -> list:
@@ -437,37 +502,90 @@ def pre_filter_universe(universe: list) -> list:
     return survivors
 
 
+# ── PERSISTENT FUNDAMENTALS CACHE ───────────────────────────────────────────
+# Survives across runs (committed by the workflow). Lets a throttled or
+# timed-out run resume next time instead of refetching everything from Yahoo.
+FUND_CACHE_FILE = BASE_DIR / 'data' / 'cache' / 'fundamentals.json.gz'
+
+def _load_fund_cache() -> dict:
+    """Load the persisted {ticker: {'ts': epoch, 'info': {...}}} cache."""
+    try:
+        import gzip
+        if FUND_CACHE_FILE.exists():
+            with gzip.open(FUND_CACHE_FILE, 'rt', encoding='utf-8') as f:
+                data = json.load(f)
+            if isinstance(data, dict):
+                return data
+    except Exception as e:
+        log.debug(f'  fund cache load failed: {e}')
+    return {}
+
+def _save_fund_cache(cache: dict) -> None:
+    """Atomically write the fundamentals cache (gzip JSON)."""
+    try:
+        import gzip
+        FUND_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        tmp = FUND_CACHE_FILE.with_suffix('.tmp')
+        with gzip.open(tmp, 'wt', encoding='utf-8') as f:
+            json.dump(cache, f, default=str)
+        tmp.replace(FUND_CACHE_FILE)
+    except Exception as e:
+        log.debug(f'  fund cache save failed: {e}')
+
 def fetch_all_fundamentals(universe: list) -> dict:
     """
-    Two-pass fundamentals fetch.
-    Pass 1: Fast batch price check — eliminates shells and dead tickers (~25 min)
-    Pass 2: Slow .info fetch for viable tickers only — 1 worker, 1.2s delay (~1.5 hrs)
-    Total: ~1.75 hours. Well within 3-hour GitHub Actions timeout.
+    Two-pass fundamentals fetch with a persistent disk cache.
+    Pass 1: Fast batch price check — eliminates shells and dead tickers.
+    Pass 2: Slow .info fetch for viable tickers only — 1 worker, courtesy delay.
+
+    Reliability model (favour completeness over speed):
+      - Every successful .info is written to data/cache/fundamentals.json.gz.
+      - On each run, cache entries fresher than fundamentals_cache_ttl_days are
+        reused with NO network call. Only stale/missing tickers are fetched.
+      - Tickers lost to a rate-limit stay uncached and are retried next run, so
+        across 1-2 runs the cache converges to full coverage even if a single
+        run is throttled or hits the GitHub 6-hour job cap.
     """
-    log.info(f'Step 2/7: Fetching fundamentals — {len(universe):,} tickers (two-pass)')
+    log.info(f'Step 2/7: Fetching fundamentals — {len(universe):,} tickers (two-pass + cache)')
 
     viable = pre_filter_universe(universe)
     log.info(f'  Viable after pre-filter: {len(viable):,} — saving {len(universe)-len(viable):,} slow fetches')
 
-    results = {}
-    failed  = 0
-    total   = len(viable)
+    cache   = _load_fund_cache()
+    ttl_sec = _cn(25, 'sentiment_data', 'fundamentals_cache_ttl_days') * 86400
+    now     = time.time()
 
-    with ThreadPoolExecutor(max_workers=1) as executor:
-        futures = {executor.submit(fetch_with_retry, t): t for t in viable}
-        for i, future in enumerate(as_completed(futures)):
-            ticker, info, status = future.result()
-            if status == 'OK':
-                results[ticker] = info
-            else:
-                failed += 1
-            completed = i + 1
-            if completed % 500 == 0 or completed == total:
-                log.info(f'  Progress: {completed:,}/{total:,} ({completed/total*100:.1f}%) — {len(results):,} valid, {failed:,} skipped')
-            if completed % 2000 == 0:
-                save_checkpoint(2, results)
+    results  = {}
+    to_fetch = []
+    for t in viable:
+        entry = cache.get(t)
+        if entry and entry.get('info') and (now - entry.get('ts', 0)) < ttl_sec:
+            results[t] = entry['info']
+        else:
+            to_fetch.append(t)
 
-    log.info(f'  COMPLETE: {len(results):,} valid from {total:,} viable ({len(universe):,} universe)')
+    log.info(f'  Cache: {len(results):,} fresh hits | {len(to_fetch):,} to fetch (TTL '
+             f'{ttl_sec/86400:.0f}d)')
+
+    failed     = 0
+    total      = len(to_fetch)
+    save_every = _cn(500, 'sentiment_data', 'cache_save_every')
+    for i, ticker in enumerate(to_fetch):
+        _, info, status = fetch_with_retry(ticker)
+        if status == 'OK':
+            results[ticker] = info
+            cache[ticker]   = {'ts': time.time(), 'info': info}
+        else:
+            failed += 1
+        completed = i + 1
+        if completed % save_every == 0 or completed == total:
+            log.info(f'  Progress: {completed:,}/{total:,} ({completed/max(total,1)*100:.1f}%) — '
+                     f'{len(results):,} valid, {failed:,} skipped')
+            _save_fund_cache(cache)
+            save_checkpoint(2, results)
+
+    _save_fund_cache(cache)
+    log.info(f'  COMPLETE: {len(results):,} valid from {len(viable):,} viable ({len(universe):,} universe)')
     return results
 
 def is_excluded_instrument(ticker: str, info: dict) -> tuple:

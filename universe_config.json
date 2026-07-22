@@ -10,7 +10,8 @@
       "aakash.modi@hotmail.com",
       "Akshaykadidal@gmail.com",
       "danninamanoj123@gmail.com",
-      "investing101.unifier546@passmail.com"
+      "investing101.unifier546@passmail.com",
+      "neelam.kabra@ymail.com"
     ],
     "sender_name": "Autonomous Capital"
   },
@@ -19,6 +20,14 @@
     "_model_change_note": "Switched to meta/llama-3.1-8b-instruct 2026-07-08 after live testing showed the larger free-tier models (49B nemotron-super, 70B llama-3.3, 70B llama-3.1) failing 50-100% of the time on this account (timeouts or empty responses) for the full research prompt, while the 8B model succeeded 4/4 in ~3.5s each. This is what was silently blocking every new candidate from getting a usable thesis.",
     "provider": "nvidia",
     "model": "meta/llama-3.1-8b-instruct",
+    "_nvidia_models_comment": "Automatic NVIDIA fallback chain, tried top-to-bottom on a single call: if a model is down/at capacity/returns empty after its own retries, the next free model is attempted before giving up. Primary (8B) is most reliable on this account; the rest are free endpoints. Edit this list to change the chain \u2014 no code change needed.",
+    "nvidia_models": [
+      "meta/llama-3.1-8b-instruct",
+      "meta/llama-3.3-70b-instruct",
+      "nvidia/llama-3.1-nemotron-70b-instruct",
+      "mistralai/mixtral-8x22b-instruct-v0.1",
+      "deepseek-ai/deepseek-r1"
+    ],
     "fallback_provider": "anthropic",
     "fallback_model": "claude-sonnet-5",
     "_alternative_models": {
@@ -79,7 +88,24 @@
     "pre_filter_batch_size": 50,
     "pre_filter_sleep_seconds": 2.0,
     "pre_filter_retry_sleep_seconds": 45,
-    "pre_filter_rate_limit_threshold": 0.70
+    "pre_filter_rate_limit_threshold": 0.70,
+    "info_fetch_sleep_seconds": 1.2,
+    "rate_limit_base_sleep_seconds": 30,
+    "rate_limit_max_sleep_seconds": 600,
+    "fundamentals_cache_ttl_days": 25,
+    "cache_save_every": 500
+  },
+  "sector_survival": {
+    "_comment": "LLM-driven top-down sector survival map (screener.build_sector_survival_map). One extra LLM call per run. For each Yahoo sector present among this run's candidates + holdings, the LLM decides survives_20yr (HIGH|MEDIUM|LOW) and max_survivors (how many companies stay leaders 15-20yr). HARD VETO: LOW-survival sectors block new buys and recommend exiting existing holdings. The survivor count can only TIGHTEN the per-sector holdings cap, never loosen it above stock_screening.universal.max_holdings_per_sector.",
+    "enabled": true,
+    "veto_low_survival": true,
+    "recommend_exit_low_survival": true,
+    "survivor_cap_min": 1,
+    "cache_days": 30
+  },
+  "decision_review": {
+    "_comment": "LLM self-review of this run's portfolio decisions (screener.review_decisions). One extra LLM call per run. ADVISORY ONLY: attaches review_flag (OK|REVIEW|OVERRIDE) + review_note per ticker and an overall portfolio_note, surfaced in the emails. Changes no verdicts automatically.",
+    "enabled": true
   },
   "stock_screening": {
     "t1": {
@@ -118,7 +144,8 @@
     },
     "universal": {
       "min_market_cap_absolute": 50000000,
-      "max_same_factor_t3_holdings": 3
+      "max_same_factor_t3_holdings": 3,
+      "max_holdings_per_sector": 3
     },
     "sector_gm_thresholds": {
       "_comment": "Sector-adjusted gross margin minimums for T1 gate. Costco has 13% GM and is a T1 compounder.",
