@@ -1031,6 +1031,7 @@ def _build_exec_summary(holdings: list) -> str:
             al_s, al_c = '\u2014', '#9ca3af'
         thesis = (h.get('thesis_summary', '') or '')
         thesis_s = (thesis[:70] + '\u2026') if len(thesis) > 70 else (thesis or '\u2014')
+        sect_dur_s = sect_dur or '\u2014'
         rows += (
             f'<tr style="border-bottom:1px solid #eef0f2">'
             f'<td style="padding:7px 6px;vertical-align:top;white-space:nowrap">'
@@ -1040,7 +1041,7 @@ def _build_exec_summary(holdings: list) -> str:
             f'<span style="background:{rbg};color:{rc};font-size:8.5px;font-weight:700;'
             f'padding:2px 6px;border-radius:2px;border:1px solid {rc}33">{rlbl}</span></td>'
             f'<td style="padding:7px 6px;vertical-align:top;text-align:center;'
-            f'font-size:10px;font-weight:700;color:{sc}">{sect_dur or "\u2014"}</td>'
+            f'font-size:10px;font-weight:700;color:{sc}">{sect_dur_s}</td>'
             f'<td style="padding:7px 6px;vertical-align:top;text-align:center;font-size:10px;color:#374151">{moat_s}</td>'
             f'<td style="padding:7px 6px;vertical-align:top;text-align:center;font-size:10px;font-weight:700;color:{dp_c}">{dp_s}</td>'
             f'<td style="padding:7px 6px;vertical-align:top;text-align:center;font-size:10px;font-weight:700;color:{al_c}">{al_s}</td>'
