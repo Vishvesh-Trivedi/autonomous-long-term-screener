@@ -139,6 +139,7 @@ jobs:
           git add data/theses/               || true
           git add data/scenarios/            || true
           git add data/checkpoints/          || true
+          git add data/cache/fundamentals.json.gz || true
           git add data/congress_disclosures_cache.json || true
           git diff --staged --quiet || git commit -m "Auto: screener run $(date +'%Y-%m-%d')"
           git push
