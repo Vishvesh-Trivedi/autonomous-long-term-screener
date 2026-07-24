@@ -90,6 +90,8 @@
     "pre_filter_retry_sleep_seconds": 45,
     "pre_filter_rate_limit_threshold": 0.70,
     "info_fetch_sleep_seconds": 1.2,
+    "info_fetch_timeout_seconds": 30,
+    "batch_download_timeout_seconds": 30,
     "rate_limit_base_sleep_seconds": 30,
     "rate_limit_max_sleep_seconds": 600,
     "fundamentals_cache_ttl_days": 25,

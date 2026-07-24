@@ -31,7 +31,7 @@ import os, json, time, pickle, logging, ssl, smtplib, re, random
 from dotenv import load_dotenv
 load_dotenv()
 from datetime import datetime, timedelta, date
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError as FuturesTimeout
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from pathlib import Path
@@ -386,7 +386,7 @@ def _log_bad_symbol(ticker: str, reason: str) -> None:
 def fetch_with_retry(ticker: str, retries: int = 4) -> tuple:
     for attempt in range(retries):
         try:
-            data  = _yf_ticker(ticker).info
+            data  = _fetch_info_guarded(ticker)
             price = data.get('regularMarketPrice') or data.get('currentPrice') or data.get('previousClose')
             qt    = data.get('quoteType', '')
             if not data or price is None or price <= 0:
@@ -398,6 +398,14 @@ def fetch_with_retry(ticker: str, retries: int = 4) -> tuple:
             _rate_limit_ok()
             time.sleep(_cn(1.2, 'sentiment_data', 'info_fetch_sleep_seconds'))   # Yahoo courtesy delay
             return ticker, data, 'OK'
+        except FuturesTimeout:
+            # A stalled Yahoo connection — treat as transient, retry a couple times.
+            log.debug(f'  {ticker}: .info timed out (attempt {attempt+1}/{retries})')
+            if attempt < retries - 1:
+                time.sleep(2.0)
+                continue
+            _log_bad_symbol(ticker, 'info fetch timed out')
+            return ticker, {}, 'FAILED'
         except Exception as e:
             err = str(e)
             if _is_rate_limited(e):
@@ -416,6 +424,26 @@ def fetch_with_retry(ticker: str, retries: int = 4) -> tuple:
             return ticker, {}, 'FAILED'
     return ticker, {}, 'FAILED'
 
+def _fetch_info_guarded(ticker: str) -> dict:
+    """
+    Fetch yf.Ticker(...).info under a HARD wall-clock timeout.
+
+    yfinance's .info makes a network request with no timeout of its own, so a
+    stalled Yahoo connection would otherwise block the single-threaded fetch
+    loop forever (the classic "run went silent for hours" hang). We run the
+    call in a throwaway worker thread and abandon it if it overruns, letting
+    the main loop move on to the next ticker. Raises FuturesTimeout on overrun.
+    """
+    timeout = _cn(30, 'sentiment_data', 'info_fetch_timeout_seconds')
+    ex = ThreadPoolExecutor(max_workers=1)
+    try:
+        fut = ex.submit(lambda: _yf_ticker(ticker).info)
+        return fut.result(timeout=timeout)
+    finally:
+        # wait=False so a genuinely hung socket thread can't block us; it dies
+        # on its own when the connection eventually errors out.
+        ex.shutdown(wait=False)
+
 def _batch_download_prices(batch: list):
     """Download prices for a batch of tickers. Returns (hist, survivors_count)."""
     for attempt in range(2):
@@ -423,6 +451,7 @@ def _batch_download_prices(batch: list):
             kwargs = dict(
                 tickers=' '.join(batch), period='5d', interval='1d',
                 progress=False, auto_adjust=True, threads=False,
+                timeout=_cn(30, 'sentiment_data', 'batch_download_timeout_seconds'),
             )
             # curl_cffi sessions aren't thread-safe, so threads stays off when set.
             if _YF_SESSION is not None:
