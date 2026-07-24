@@ -1,28 +1,28 @@
 {
   "bull": {
     "narrative": "ASML's EUVL technology continues to dominate the industry, driving significant growth in demand for semiconductors.",
-    "revenue_10yr_b": 59.11,
+    "revenue_10yr_b": 63.41,
     "mktcap_10yr_b": 500.0,
     "multiple": 0.7,
     "probability": 0.6
   },
   "base": {
-    "narrative": "ASML's EUVL technology maintains its market share, but growth slows due to increasing competition and market saturation.",
-    "revenue_10yr_b": 43.45,
+    "narrative": "ASML's EUVL technology maintains its market position, but growth slows due to increasing competition and industry saturation.",
+    "revenue_10yr_b": 41.19,
     "mktcap_10yr_b": 300.0,
     "multiple": 0.4,
     "probability": 0.3
   },
   "bear": {
-    "narrative": "A structural change in the industry leads to a significant decline in demand for semiconductors, and ASML's EUVL technology is unable to adapt.",
+    "narrative": "A structural change in the industry leads to a decline in demand for semiconductors, and ASML's EUVL technology is unable to adapt.",
     "mktcap_10yr_b": 150.0,
     "multiple": 0.2,
     "probability": 0.1
   },
   "current_tracking": "BULL",
-  "tracking_note": "Based on current market trends and ASML's strong position in the industry.",
+  "tracking_note": "Based on current financials and thesis.",
   "thesis_breaks_if": "A structural change in the industry, such as a significant shift to alternative lithography technologies or a major disruption to ASML's customer base.",
   "natural_eval_window_days": 365,
-  "written_date": "2026-07-22T15:10:18.410714",
+  "written_date": "2026-07-24T05:28:38.991586",
   "ticker": "ASML"
 }

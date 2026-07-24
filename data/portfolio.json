@@ -2,7 +2,7 @@
   "_comment": "Long-Term Investment Screener \u00e2\u20ac\u201d Portfolio History. DO NOT edit manually. Managed by screener.py",
   "_version": "1.0",
   "created": "2026-05-18",
-  "last_updated": "2026-07-22T15:10:48.835555",
+  "last_updated": "2026-07-24T05:28:49.702073",
   "holdings": [
     {
       "ticker": "AGX",
@@ -37,9 +37,9 @@
       "earnings_quality": "CLEAN",
       "entry_price": 694.72,
       "above_200ma": true,
-      "pct_from_high": -24.0,
-      "return_1yr": 196.9,
-      "return_vs_qqq": 170.4,
+      "pct_from_high": -24.5,
+      "return_1yr": 179.9,
+      "return_vs_qqq": 156.8,
       "trend": "UP",
       "news_count": 20,
       "news_sentiment": "MIXED",
@@ -92,14 +92,14 @@
           "narrative": "Argan Inc. continues to execute on its growth strategy, expanding its market share and increasing revenue at a 15% CAGR. The company's cost advantage moat and disciplined management enable it to maintain a gross margin above 20%, driving significant earnings growth and resulting in a market capitalization of $30.0B in 10 years.",
           "revenue_10yr_b": 2.93,
           "mktcap_10yr_b": 30.0,
-          "multiple": 3.5,
+          "multiple": 3.6,
           "probability": 0.4
         },
         "base": {
           "narrative": "Argan Inc. delivers steady growth, with revenue increasing at a 10% CAGR over the next 10 years. The company maintains its gross margin above 18%, resulting in moderate earnings growth and a market capitalization of $20.0B in 10 years.",
           "revenue_10yr_b": 2.24,
           "mktcap_10yr_b": 20.0,
-          "multiple": 2.3,
+          "multiple": 2.4,
           "probability": 0.5
         },
         "bear": {
@@ -115,32 +115,30 @@
         "written_date": "2026-06-18T02:00:26.248179",
         "ticker": "AGX"
       },
-      "current_price": 613.5,
-      "market_cap": 8600808448,
+      "current_price": 602.3,
+      "market_cap": 8443792384,
       "revenue": 1041900032,
       "sec_8k_highlights": [
-        "Record revenue of $291.0 million for the first quarter of fiscal 2027.",
-        "Gross margin was 21.0% for the first quarter of fiscal 2027.",
-        "Diluted earnings per share was $3.24 for the first quarter of fiscal 2027.",
-        "Net income was $46,063 thousand for the first quarter of fiscal 2027.",
-        "Adjusted EBITDA was $56,439 thousand for the first quarter of fiscal 2027.",
-        "Adjusted EBITDA margin was 19.4% for the first quarter of fiscal 2027.",
-        "Argan has a project backlog of $2.8 billion as of April 30, 2026."
+        "Argan, Inc. reported first quarter fiscal 2027 results with record revenue of $291.0 million, gross margin of 21%, diluted earnings per share of $3.24, and adjusted EBITDA of $56.4 million.",
+        "The company's project backlog stood at $2.8 billion as of April 30, 2026.",
+        "Argan's industrial segment is seeing increased demand, highlighted by a data center contract awarded in November 2025 for the fabrication of pressure vessels.",
+        "The company has begun construction on a new fabrication facility in North Carolina, expected to be completed during the third quarter of fiscal 2027.",
+        "Argan remains well positioned to capitalize on the current demand environment with its skill set, financial flexibility, industry relationships, and longstanding customer base."
       ],
       "sec_8k_latest_date": "2026-06-04",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "Recent news and community posts reinforce Argan's strong cost advantage moat and growth prospects.",
+        "impact_reason": "Recent news and community posts support Argan Inc.'s high-growth potential and solid execution.",
         "key_insights": [
-          "Argan's data center business expansion can become a growth pillar, increasing revenue by 15% YoY.",
-          "The company's disciplined management and solid visibility justify a buy, with a 20% potential upside.",
-          "Argan's addition to the Russell 2000 index opens the door to more funds, increasing liquidity by 30%."
+          "Argan's data center business expansion can become a growth pillar.",
+          "Record Q1 results and Russell 2000 addition justify a buy with 8.4% increase.",
+          "Liquidity strength may offset large EPC execution risks."
         ],
-        "watch_flag": "Argan's large EPC execution risks and liquidity strength are key catalysts to watch.",
-        "sentiment_summary": "Market sentiment is focused on Argan's growth prospects and potential for increased revenue, with some concerns about execution risks. Analysts and investors remain bullish on the company's long-term prospects, driven by its strong cost advantage moat and disciplined management.",
+        "watch_flag": "Argan's ability to maintain cost advantage and disciplined management in a competitive market.",
+        "sentiment_summary": "Market sentiment is positive on Argan Inc. due to its strong growth outlook and solid execution. Investors are focused on the company's ability to maintain its cost advantage and disciplined management in a competitive market.",
         "_status": "ok"
       },
-      "fcf_yield": 5.68,
+      "fcf_yield": 5.79,
       "net_cash_m": 964.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -175,11 +173,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 27.3,
-      "return_3yr_cagr": 154.7,
-      "return_5yr_cagr": 71.3,
-      "return_10yr_cagr": 32.5,
-      "max_drawdown": -24.0,
+      "pct_from_200ma": 25.9,
+      "return_3yr_cagr": 155.2,
+      "return_5yr_cagr": 71.1,
+      "return_10yr_cagr": 32.4,
+      "max_drawdown": -24.5,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -223,10 +221,10 @@
       "earnings_quality": "CLEAN",
       "entry_price": 549.87,
       "above_200ma": true,
-      "pct_from_high": -9.9,
-      "return_1yr": 80.5,
-      "return_vs_qqq": 54.0,
-      "trend": "UP",
+      "pct_from_high": -11.3,
+      "return_1yr": 73.3,
+      "return_vs_qqq": 50.2,
+      "trend": "DOWN",
       "news_count": 20,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
@@ -234,12 +232,16 @@
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "Partnership",
         "Regulatory",
-        "Acquisition"
+        "Product launch",
+        "Insider activity"
       ],
-      "sec_8k_count": 2,
+      "sec_8k_count": 3,
       "sec_8k_events": [
+        {
+          "date": "2026-07-23",
+          "description": "Director/officer departure or appointment, Regulation FD disclosure, Financial statements attached"
+        },
         {
           "date": "2026-06-29",
           "description": "Director/officer departure or appointment, Item 5.07, Financial statements attached"
@@ -300,31 +302,31 @@
         "written_date": "2026-06-06T00:40:53.530294",
         "ticker": "UTHR"
       },
-      "current_price": 536.5,
-      "market_cap": 26719086592,
+      "current_price": 529.53,
+      "market_cap": 26371717120,
       "revenue": 3169799936,
       "sec_8k_highlights": [
-        "Total revenues in the first quarter of 2026 decreased by two percent year-over-year to $781.5 million.",
-        "Net income in the first quarter of 2026 was $274.9 million, a decrease of $47.3 million from the same period last year.",
-        "Net income, per basic share, in the first quarter of 2026 was $6.32, a decrease of $0.86 from the same period last year.",
-        "Net income, per diluted share, in the first quarter of 2026 was $5.82, a decrease of $0.81 from the same period last year.",
-        "Total Tyvaso revenues decreased by two percent to $457.5 million in the first quarter of 2026, compared to $466.3 million in the first quarter of 2025.",
-        "Tyvaso DPI revenues increased by nine percent to $330.3 million in the first quarter of 2026, compared to $302.5 million in the first quarter of 2025."
+        "United Therapeutics Corporation (Nasdaq: UTHR) announced the appointment of Victor Dzau, M.D., to its Board of Directors on July 22, 2026.",
+        "Dr. Dzau recently completed a 12-year tenure as President of the National Academy of Medicine (NAM) and formerly served as Chancellor for Health Affairs at Duke University, President and CEO of the Duke University Health System, and Chairman of Medicine at Harvard and Stanford Universities.",
+        "Dr. Dzau is recognized globally for a highly decorated career as a physician-scientist and leader, with research laying the foundation for lifesaving drugs known as ACE inhibitors and pioneering gene therapy for vascular disease.",
+        "Dr. Dzau will serve as James B. Duke Distinguished Professor of Medicine, Chancellor Emeritus for Health Affairs, and Director of the Mandel Center at Duke University, and Co-Chair of the G20 High-Level Independent Panel on Financing Pandemic Preparedness and Response.",
+        "About United Therapeutics: Founded by CEO Martine Rothblatt to discover a cure for her daughter's life-threatening rare disease, pulmonary arterial hypertension, United Therapeutics transforms the treatment of rare diseases and pioneers alternatives to expand the supply of transplantable organs.",
+        "United Therapeutics serves patients, acts with integrity, creates long-term shareholder value, and operates with sustainability as a public benefit corporation."
       ],
-      "sec_8k_latest_date": "2026-05-06",
+      "sec_8k_latest_date": "2026-07-23",
       "news_intelligence": {
-        "thesis_impact": "STRENGTHENS|NEUTRAL|NEUTRAL",
-        "impact_reason": "Recent news and community posts generally support United Therapeutics' strong financials and high gross margin.",
+        "thesis_impact": "STRENGTHENS",
+        "impact_reason": "Recent analyst upgrades and price target increases support the investment thesis.",
         "key_insights": [
-          "United Therapeutics' second-quarter 2026 financial results will be reported on August 5, 2026.",
-          "RBC Capital raised its price target to $704, maintaining an Outperform rating on United Therapeutics.",
-          "United Therapeutics' stock has risen 14% YTD, driven by FDA approval and strong returns."
+          "JP Morgan raised UTHR's price target to $687, citing strong financials.",
+          "RBC Capital raised UTHR's price target to $704, maintaining Outperform rating.",
+          "UTHR's strong returns and cheap valuation make it an attractive long-term opportunity."
         ],
-        "watch_flag": "B of A Securities' price target reduction to $613 and potential impact on stock valuation.",
-        "sentiment_summary": "The market is focused on United Therapeutics' strong financials and high gross margin, with some caution on stock valuation. Recent news and community posts generally support the company's long-term growth prospects.",
+        "watch_flag": "Liquidia's (LQDA) patent case outcome and its potential impact on UTHR's YUTREPIA.",
+        "sentiment_summary": "Market sentiment is positive towards UTHR, driven by analyst upgrades and price target increases. However, the outcome of Liquidia's patent case remains a key risk to watch.",
         "_status": "ok"
       },
-      "fcf_yield": 3.88,
+      "fcf_yield": 3.93,
       "net_cash_m": 2154.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 17.4,
@@ -359,11 +361,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 5.1,
-      "return_3yr_cagr": 30.3,
-      "return_5yr_cagr": 23.9,
-      "return_10yr_cagr": 15.9,
-      "max_drawdown": -9.9,
+      "pct_from_200ma": 3.4,
+      "return_3yr_cagr": 29.7,
+      "return_5yr_cagr": 23.8,
+      "return_10yr_cagr": 15.6,
+      "max_drawdown": -11.3,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -407,9 +409,9 @@
       "earnings_quality": "CLEAN",
       "entry_price": 218.74,
       "above_200ma": false,
-      "pct_from_high": -23.1,
-      "return_1yr": 34.5,
-      "return_vs_qqq": 8.0,
+      "pct_from_high": -23.4,
+      "return_1yr": 32.6,
+      "return_vs_qqq": 9.5,
       "trend": "DOWN",
       "news_count": 18,
       "news_sentiment": "POSITIVE",
@@ -487,26 +489,30 @@
         "written_date": "2026-06-21T09:35:14.192344",
         "ticker": "FNV"
       },
-      "current_price": 215.62,
-      "market_cap": 41582546944,
+      "current_price": 214.22,
+      "market_cap": 41313513472,
       "revenue": 2087699968,
       "sec_8k_highlights": [
-        "Franco-Nevada Corporation announced today that it will report second quarter 2026 results as follows: Second Quarter 2026 Results Release: August 11th after market close Conference Call: August 12th 8:00 am ET"
+        "Franco-Nevada Corporation announced that it will report second quarter 2026 results as follows: Second Quarter 2026 Results Release: August 11th after market close Conference Call: August 12th 8:00 am ET",
+        "Bonavie Tek has been identified as the VP Finance and Investor Relations",
+        "Toll-Free: 1-888-510-2154 International: 437-900-0527",
+        "Toll-Free: 1-888-660-6345 International: 289-819-1450 Passcode: 08003#",
+        "Replay available until August 19th: Toll-Free: 1-888-660-6345 International: 289-819-1450 Passcode: 08003#"
       ],
       "sec_8k_latest_date": "2026-07-20",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "Recent upgrades and positive reports from TD COWEN, RBC Capital, and TD COWEN strengthen the investment thesis.",
+        "impact_reason": "Recent upgrades and positive news from TD COWEN, RBC Capital, and other analysts support the thesis.",
         "key_insights": [
-          "TD COWEN upgraded Franco-Nevada to a Buy rating with a price target of $274.",
+          "TD COWEN upgraded Franco-Nevada to a Buy rating with a $300 price target.",
           "RBC Capital maintained an Outperform rating with a lower price target of $285.",
-          "Franco-Nevada's unique business model and strong management team position it for long-term success."
+          "Franco-Nevada's unique business model and strong management team are key drivers of its success."
         ],
-        "watch_flag": "Scotiabank's lowered price target to $274 and potential impact on investor sentiment.",
-        "sentiment_summary": "The market is focused on Franco-Nevada's recent upgrades and positive reports, which strengthen the investment thesis. However, Scotiabank's lowered price target may impact investor sentiment.",
+        "watch_flag": "Potential impact of gold price volatility on Franco-Nevada's revenue and profitability.",
+        "sentiment_summary": "The market is focused on the recent upgrades and positive news from analysts, which has strengthened the thesis. However, the potential impact of gold price volatility remains a key risk to watch.",
         "_status": "ok"
       },
-      "fcf_yield": -1.13,
+      "fcf_yield": -1.14,
       "net_cash_m": 715.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -541,11 +547,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -4.5,
-      "return_3yr_cagr": 14.4,
-      "return_5yr_cagr": 7.1,
+      "pct_from_200ma": -4.9,
+      "return_3yr_cagr": 15.4,
+      "return_5yr_cagr": 7.0,
       "return_10yr_cagr": 11.7,
-      "max_drawdown": -23.1,
+      "max_drawdown": -23.4,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -589,11 +595,11 @@
       "earnings_quality": "WATCH",
       "entry_price": 31.12,
       "above_200ma": false,
-      "pct_from_high": -38.5,
-      "return_1yr": -31.8,
-      "return_vs_qqq": -58.3,
+      "pct_from_high": -40.8,
+      "return_1yr": -35.8,
+      "return_vs_qqq": -58.9,
       "trend": "UP",
-      "news_count": 18,
+      "news_count": 16,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
@@ -648,14 +654,14 @@
           "narrative": "GitLab's strong network effects and high gross margin drive long-term growth, achieving $5B in revenue by year 10, with a market cap of $20B and a multiple of 4x, driven by successful expansion into new markets and increased adoption of its platform.",
           "revenue_10yr_b": 5.0,
           "mktcap_10yr_b": 20.0,
-          "multiple": 3.8,
+          "multiple": 3.9,
           "probability": 0.4
         },
         "base": {
           "narrative": "GitLab maintains its current growth trajectory, reaching $2.5B in revenue by year 10, with a market cap of $10B and a multiple of 4x, as the company continues to execute on its strategy and navigate industry challenges.",
           "revenue_10yr_b": 2.5,
           "mktcap_10yr_b": 10.0,
-          "multiple": 1.9,
+          "multiple": 2.0,
           "probability": 0.5
         },
         "bear": {
@@ -671,32 +677,24 @@
         "written_date": "2026-06-18T02:01:03.015894",
         "ticker": "GTLB"
       },
-      "current_price": 31.48,
-      "market_cap": 5316972032,
+      "current_price": 30.22,
+      "market_cap": 5104157696,
       "revenue": 1004873024,
-      "sec_8k_highlights": [
-        "Total revenue of $264.2 million, up 23% year-over-year",
-        "GAAP operating margin of (6)%; non-GAAP operating margin of 14%",
-        "Operating cash flow of $149.2\u00a0million and non-GAAP adjusted free cash flow of $146.7\u00a0million",
-        "Customers with more than $5,000 of ARR reached 10,831, an increase of 7% year-over-year",
-        "Customers with more than $100,000 of ARR reached 1,519, an increase of 18% year-over-year",
-        "Dollar-Based Net Retention Rate was 117%",
-        "Total RPO grew 18% year-over-year to $1.1\u00a0billion, while cRPO grew 24% to $724.1\u00a0million"
-      ],
-      "sec_8k_latest_date": "2026-06-02",
+      "sec_8k_highlights": [],
+      "sec_8k_latest_date": "2026-07-08",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "GitLab's strong network effects and high gross margin provide a foundation for long-term growth and profitability, despite current challenges.",
+        "impact_reason": "GitLab's strong network effects and high gross margin provide a foundation for long-term growth and profitability.",
         "key_insights": [
-          "GitLab 19.2 brings Governed Agentic Automation, increasing efficiency by 25%",
-          "Total Economic Impact study finds 400% ROI with GitLab Duo Agent Platform, exceeding expectations",
-          "GitLab makes a big push into enterprise AI workflows, expanding market reach by 15%"
+          "GitLab's Total Economic Impact Study found organizations can achieve 400% ROI with the Duo Agent Platform.",
+          "GitLab released an AI Accountability Report, highlighting governance gaps in AI workflows.",
+          "UBS maintains a neutral stance on GitLab, raising the price target to $35."
         ],
-        "watch_flag": "UBS raises price target to $35, indicating potential for future growth",
-        "sentiment_summary": "The market is focused on GitLab's potential for long-term growth and profitability, driven by its strong network effects and high gross margin. Recent news and updates, such as the Total Economic Impact study and the release of AI Accountability Report, have contributed to a positive sentiment towards the company.",
+        "watch_flag": "GitLab's ability to execute on its AI strategy and address governance gaps in AI workflows.",
+        "sentiment_summary": "The market remains cautiously optimistic about GitLab's long-term growth prospects, driven by its strong network effects and high gross margin. However, investors are closely watching the company's ability to execute on its AI strategy and address governance gaps in AI workflows.",
         "_status": "ok"
       },
-      "fcf_yield": 4.98,
+      "fcf_yield": 5.19,
       "net_cash_m": 1358.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 27.3,
@@ -731,12 +729,12 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -3.7,
-      "return_3yr_cagr": -13.4,
+      "pct_from_200ma": -7.1,
+      "return_3yr_cagr": -13.6,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -76.0,
-      "years_listed": 4.7,
+      "max_drawdown": -76.9,
+      "years_listed": 4.8,
       "currency": "USD",
       "reddit_source": "blocked",
       "congress_source": "efd",
@@ -779,11 +777,11 @@
       "earnings_quality": "WATCH",
       "entry_price": 17.93,
       "above_200ma": true,
-      "pct_from_high": -17.6,
-      "return_1yr": 14.8,
-      "return_vs_qqq": -11.7,
+      "pct_from_high": -20.8,
+      "return_1yr": 10.1,
+      "return_vs_qqq": -13.0,
       "trend": "UP",
-      "news_count": 6,
+      "news_count": 5,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
@@ -829,14 +827,14 @@
           "narrative": "Omada Health achieves strong revenue growth, exceeding 20% annually, driven by expanding digital health market and successful product offerings, resulting in a 10-year revenue of $2.5B and market cap of $10.0B, with a multiple of 4.0 and a probability of 0.4",
           "revenue_10yr_b": 16.198530048,
           "mktcap_10yr_b": 8.099265024,
-          "multiple": 6.2,
+          "multiple": 6.4,
           "probability": 0.4
         },
         "base": {
           "narrative": "Omada Health maintains steady revenue growth, averaging 15% annually, driven by stable digital health market and consistent product offerings, resulting in a 10-year revenue of $1.8B and market cap of $5.0B, with a multiple of 2.8 and a probability of 0.5",
           "revenue_10yr_b": 9.719118028799999,
           "mktcap_10yr_b": 4.859559014399999,
-          "multiple": 3.7,
+          "multiple": 3.9,
           "probability": 0.5
         },
         "bear": {
@@ -852,32 +850,32 @@
         "written_date": "2026-06-18T09:00:46.782036",
         "ticker": "OMDA"
       },
-      "current_price": 22.06,
-      "market_cap": 1311434112,
+      "current_price": 21.2,
+      "market_cap": 1260308352,
       "revenue": 283295008,
       "sec_8k_highlights": [
-        "Total Members: 1.02 million at the end of Q1, up 51% year over year.",
-        "Revenue: $78 million in the first quarter, up 42% year over year.",
-        "Gross margin of 62% in the first quarter, up from 58% in Q1 2025.",
-        "Net loss of $3 million in the first quarter, compared with a net loss of $9 million in Q1 2025.",
-        "Adjusted EBITDA of $1 million in the first quarter, compared with an adjusted EBITDA loss of $4 million in Q1 2025.",
-        "Cash and cash equivalents of $212 million.",
-        "Omada joined Optum Rx\u2019s Weight Engage portfolio to help employers expand responsible, clinically supported access to GLP-1 and other anti-obesity medications."
+        "Omada Health reported revenue of $78 million in the first quarter, up 42% year over year.",
+        "Total Members at the end of Q1 surpassed one million, up 51% year over year.",
+        "Omada joined Optum Rx's Weight Engage portfolio to help employers expand access to GLP-1 and other anti-obesity medications.",
+        "Omada now has relationships with the nation's three leading PBMs, who serve most commercially insured lives and processed 80% of prescription claims in 2025.",
+        "Omada announced a new clinical analysis showing that members in the GLP-1 Care Track lost on average 1.8 times the total weight compared to a control group over a 12-week period.",
+        "Omada will serve as an independent program administrator in Eli Lilly and Company's Employer Connect program.",
+        "Omada's gross margin was 62% in the first quarter, up from 58% in Q1 2025."
       ],
       "sec_8k_latest_date": "2026-05-07",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
         "impact_reason": "Recent analyst upgrades and price target increases support the investment thesis.",
         "key_insights": [
-          "Canaccord Genuity and Citizens raised their price targets to $28 and $27, respectively.",
-          "BTIG initiated coverage with a Buy rating and a $30 price target, while Morgan Stanley maintained an Overweight rating.",
-          "Moody's analyst initiated coverage on Omada Health with a bullish note."
+          "Canaccord Genuity and Citizens raised price targets to $28 and $27, respectively, maintaining a bullish outlook.",
+          "BTIG initiated coverage with a Buy rating and a $30 price target, further validating the investment thesis.",
+          "Moody's analyst began coverage on a bullish note, adding to the growing momentum behind Omada Health."
         ],
-        "watch_flag": "",
-        "sentiment_summary": "The market is focused on Omada Health's strong revenue growth and improving cash flow, with multiple analyst upgrades supporting the stock's potential. The recent price target increases and initiations of coverage suggest a positive sentiment towards the company.",
+        "watch_flag": "Potential for increased competition in the digital health market",
+        "sentiment_summary": "The market is focused on Omada Health's strong revenue growth and improving cash flow, with multiple analyst upgrades supporting the investment thesis. As the company continues to grow, investors will be watching for potential catalysts and risks, including increased competition in the digital health market.",
         "_status": "ok"
       },
-      "fcf_yield": 1.27,
+      "fcf_yield": 1.33,
       "net_cash_m": 212.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 14.4,
@@ -912,11 +910,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 28.6,
+      "pct_from_200ma": 23.5,
       "return_3yr_cagr": null,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -17.6,
+      "max_drawdown": -20.8,
       "years_listed": 1.1,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -960,11 +958,11 @@
       "earnings_quality": "WATCH",
       "entry_price": 16.49,
       "above_200ma": false,
-      "pct_from_high": -60.8,
-      "return_1yr": -49.1,
-      "return_vs_qqq": -75.6,
+      "pct_from_high": -60.2,
+      "return_1yr": -47.9,
+      "return_vs_qqq": -71.0,
       "trend": "DOWN",
-      "news_count": 7,
+      "news_count": 6,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
@@ -1023,14 +1021,14 @@
           "narrative": "Caris Life Sciences successfully expands its comprehensive genomic testing to over 1000 healthcare providers, driving revenue growth and establishing itself as a leader in the precision medicine market. The company's data analytics capabilities and strategic partnerships further enhance its competitive advantage, leading to a significant increase in market share and revenue.",
           "revenue_10yr_b": 15.0,
           "mktcap_10yr_b": 41.66713344,
-          "multiple": 9.6,
+          "multiple": 9.4,
           "probability": 0.4
         },
         "base": {
           "narrative": "Caris Life Sciences achieves moderate success in expanding its comprehensive genomic testing services, but faces intense competition and regulatory challenges. The company's revenue growth is steady, but not spectacular, and its market share increases gradually. The data analytics capabilities and partnerships contribute to the company's growth, but not to the extent anticipated in the bull scenario.",
           "revenue_10yr_b": 5.0,
           "mktcap_10yr_b": 20.0,
-          "multiple": 4.6,
+          "multiple": 4.5,
           "probability": 0.3
         },
         "bear": {
@@ -1046,32 +1044,32 @@
         "written_date": "2026-06-06T00:44:17.189747",
         "ticker": "CAI"
       },
-      "current_price": 15.39,
-      "market_cap": 4351869440,
+      "current_price": 15.65,
+      "market_cap": 4423952896,
       "revenue": 907292032,
       "sec_8k_highlights": [
         "Caris Life Sciences reported total revenue of $216.2 million for the quarter ended March 31, 2026, an increase of 79% over the corresponding prior year period.",
-        "Caris Life Sciences completed approximately 52,800 clinical therapy selection cases, an increase of approximately 15% over the corresponding prior year period.",
+        "The company completed approximately 52,800 clinical therapy selection cases, an increase of approximately 15% over the corresponding prior year period.",
         "Caris Life Sciences reported gross margin of 65%, an approximate 1,800 bps improvement over the corresponding prior year period.",
-        "Caris Life Sciences reported net loss of $0.5 million.",
-        "Caris Life Sciences reported positive Adjusted EBITDA of $26.2 million.",
-        "Caris Life Sciences reported positive net cash provided by operating activities of $32.9 million, and positive free cash flow of $22.5 million.",
-        "Caris Life Sciences refinanced $400 million credit facility at a lower borrowing cost and secured access to additional strategic capital from Blue Owl and Blackstone."
+        "The company reported a net loss of $0.5 million for the quarter ended March 31, 2026.",
+        "Caris Life Sciences reported positive Adjusted EBITDA of $26.2 million and positive net cash provided by operating activities of $32.9 million for the quarter ended March 31, 2026.",
+        "The company refinanced $400 million credit facility at a lower borrowing cost and secured access to additional strategic capital from Blue Owl and Blackstone.",
+        "Caris Life Sciences surpassed 1,070,000 total profiles and 790,000 total matched profiles through March 31, 2026."
       ],
       "sec_8k_latest_date": "2026-05-07",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "Recent FDA approval and launch of Caris Detect multi-cancer screening test solidify Caris Life Sciences' position in precision medicine.",
+        "impact_reason": "Recent news and developments have strengthened the investment thesis for Caris Life Sciences.",
         "key_insights": [
-          "Caris Life Sciences received FDA approval for PTEN immunohistochemistry testing, expanding its genomic testing capabilities.",
-          "The company launched Caris Detect, a multi-cancer screening test with high sensitivity and comprehensiveness.",
-          "BTIG reiterated a Buy rating with a $32 price target, maintaining confidence in Caris Life Sciences' growth prospects."
+          "Caris Life Sciences launched Caris Detect Multi-Cancer Screening Test, expanding its precision medicine offerings.",
+          "BTIG reiterates Buy on Caris Life Sciences with a $32 price target, indicating continued market confidence.",
+          "Caris Life Sciences received FDA approval for PTEN immunohistochemistry testing, enhancing its data analytics capabilities."
         ],
-        "watch_flag": "GeneDx's recent selloff and potential impact on Caris Life Sciences' gene analysis business",
-        "sentiment_summary": "The market is focused on Caris Life Sciences' growth prospects in precision medicine, driven by recent FDA approvals and product launches. However, the company's gene analysis business may be affected by GeneDx's recent selloff.",
+        "watch_flag": "The impact of AI-driven precision medicine expansion on CAI's growth prospects.",
+        "sentiment_summary": "The market is focused on Caris Life Sciences' recent advancements in precision medicine, with a strong emphasis on its comprehensive genomic testing and data analytics capabilities. Investors are optimistic about the company's growth prospects, with many analysts reiterating Buy ratings and setting high price targets.",
         "_status": "ok"
       },
-      "fcf_yield": 3.01,
+      "fcf_yield": 2.96,
       "net_cash_m": 393.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 11.2,
@@ -1106,11 +1104,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -30.6,
+      "pct_from_200ma": -29.3,
       "return_3yr_cagr": null,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -60.8,
+      "max_drawdown": -60.2,
       "years_listed": 1.1,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -1154,9 +1152,9 @@
       "earnings_quality": "CLEAN",
       "entry_price": 14.78,
       "above_200ma": true,
-      "pct_from_high": -7.2,
+      "pct_from_high": -5.7,
       "return_1yr": 77.4,
-      "return_vs_qqq": 50.9,
+      "return_vs_qqq": 54.3,
       "trend": "UP",
       "news_count": 1,
       "news_sentiment": "NEUTRAL",
@@ -1165,7 +1163,7 @@
       "overall_sentiment": "NEUTRAL",
       "signal_or_noise": "SIGNAL",
       "key_themes": [],
-      "sec_8k_count": 7,
+      "sec_8k_count": 6,
       "sec_8k_events": [
         {
           "date": "2026-06-29",
@@ -1216,14 +1214,14 @@
           "narrative": "CMBT successfully deploys AI-powered security solutions in over 1000 enterprise clients, achieving 25% annual revenue growth and becoming a market leader in AI-powered cybersecurity.",
           "revenue_10yr_b": 5.0,
           "mktcap_10yr_b": 50.0,
-          "multiple": 11.2,
+          "multiple": 11.0,
           "probability": 0.4
         },
         "base": {
           "narrative": "CMBT meets its growth targets, deploying AI-powered security solutions in 100 enterprise clients and achieving 20% annual revenue growth, establishing itself as a major player in the AI-powered cybersecurity market.",
           "revenue_10yr_b": 2.0,
           "mktcap_10yr_b": 20.0,
-          "multiple": 4.5,
+          "multiple": 4.4,
           "probability": 0.5
         },
         "bear": {
@@ -1239,29 +1237,30 @@
         "written_date": "2026-06-06T00:45:22.350330",
         "ticker": "CMBT"
       },
-      "current_price": 15.35,
-      "market_cap": 4454106112,
+      "current_price": 15.61,
+      "market_cap": 4529549824,
       "revenue": 1950665984,
       "sec_8k_highlights": [
         "CMB.TECH has sold two Suezmaxes, generating a capital gain of approximately 100.5 million USD.",
         "The vessels will be delivered to their new owner in Q3 2026.",
-        "CMB.TECH will deploy the returns in line with its capital allocation strategy and invest in the continued growth of its diversified maritime group.",
-        "CMB.TECH will announce Q2 2026 results on 27 August 2026."
+        "The sale will generate a capital gain of approximately 100.5 million USD in Q3 2026, based on the net sale price and book values.",
+        "The vessels are Brest (2023, 156,851 DWT) and Brugge (2023, 156,851 DWT).",
+        "CMB.TECH will deploy those returns in line with its capital allocation strategy and invest in the continued growth of its diversified maritime group."
       ],
       "sec_8k_latest_date": "2026-06-29",
       "news_intelligence": {
         "thesis_impact": "NEUTRAL",
-        "impact_reason": "The recent news about oil prices and shipping gauge does not directly impact CMBT's AI-powered cybersecurity market.",
+        "impact_reason": "Recent news does not directly relate to CMBT's AI-powered cybersecurity market.",
         "key_insights": [
-          "CMBT's focus on AI-powered cybersecurity remains unaffected by external market fluctuations.",
-          "The company's proprietary algorithms and strategic partnerships continue to drive growth in the sector.",
-          "No significant updates on CMBT's partnerships or product development have been reported recently."
+          "CMBT's focus on AI-powered cybersecurity remains unchanged despite unrelated market news.",
+          "No significant updates on CMBT's proprietary algorithms or strategic partnerships.",
+          "Market trends in shipping and oil prices do not impact CMBT's investment thesis."
         ],
         "watch_flag": "",
-        "sentiment_summary": "The market is currently focused on external market fluctuations, with little attention on CMBT's AI-powered cybersecurity sector. As a long-term investor, it's essential to maintain a neutral stance and monitor the company's progress in the sector.",
+        "sentiment_summary": "Market focus remains on unrelated shipping and oil price news, with no significant impact on CMBT's investment thesis. Investors should continue to monitor CMBT's AI-powered cybersecurity developments for potential growth opportunities.",
         "_status": "ok"
       },
-      "fcf_yield": -10.19,
+      "fcf_yield": -10.02,
       "net_cash_m": -5042.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1296,11 +1295,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 28.5,
-      "return_3yr_cagr": 15.9,
-      "return_5yr_cagr": 25.7,
-      "return_10yr_cagr": 15.6,
-      "max_drawdown": -11.6,
+      "pct_from_200ma": 30.1,
+      "return_3yr_cagr": 16.8,
+      "return_5yr_cagr": 26.5,
+      "return_10yr_cagr": 15.8,
+      "max_drawdown": -10.3,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -1344,9 +1343,9 @@
       "earnings_quality": "CLEAN",
       "entry_price": 28.13,
       "above_200ma": false,
-      "pct_from_high": -57.0,
-      "return_1yr": -37.0,
-      "return_vs_qqq": -63.5,
+      "pct_from_high": -58.1,
+      "return_1yr": -39.8,
+      "return_vs_qqq": -62.9,
       "trend": "DOWN",
       "news_count": 20,
       "news_sentiment": "POSITIVE",
@@ -1406,14 +1405,14 @@
           "narrative": "Celsius Holdings successfully expands its product line and increases international distribution, becoming a leading player in the energy drink and functional beverage market.",
           "revenue_10yr_b": 15.43,
           "mktcap_10yr_b": 43.8,
-          "multiple": 6.2,
+          "multiple": 6.3,
           "probability": 0.6
         },
         "base": {
           "narrative": "Celsius Holdings maintains its current market position and grows steadily, but faces increasing competition in the energy drink and functional beverage market.",
           "revenue_10yr_b": 8.91,
           "mktcap_10yr_b": 23.1,
-          "multiple": 3.2,
+          "multiple": 3.3,
           "probability": 0.3
         },
         "bear": {
@@ -1429,30 +1428,28 @@
         "written_date": "2026-06-18T09:01:20.720595",
         "ticker": "CELH"
       },
-      "current_price": 27.81,
-      "market_cap": 7109358080,
+      "current_price": 27.17,
+      "market_cap": 6945748480,
       "revenue": 2968608000,
       "sec_8k_highlights": [
-        "The Company has not provided forward guidance on next quarter revenue or margin outlook.",
-        "The Company entered into a second refinancing amendment to the Credit Agreement, reducing the applicable interest rate with respect to the Term Loan Facility by 0.25%, with a potential additional reduction of 0.25%.",
-        "The Company had drawn a new $700.0 million term loan under the Term Loan Facility in connection with the First Amendment.",
-        "[RISK] The Company has a Credit Agreement with a term loan facility in an aggregate principal amount of up to $900.0 million and a revolving credit facility in an aggregate principal amount of up to $100.0 million.",
-        "The Company has a Credit Agreement with UBS AG, Stamford Branch, as administrative agent and collateral agent."
+        "CELH reported revenue and EPS for the period ended July 15, 2026, but the actual numbers are not disclosed in the filing.",
+        "CELH has not provided forward guidance for the next quarter.",
+        "CELH has not made any strategic announcements in the filing."
       ],
       "sec_8k_latest_date": "2026-07-15",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "CELH's strong brand and distribution network are driving growth and revenue expansion.",
+        "impact_reason": "CELH's strong brand and distribution network are driving growth hopes and revenue expansion.",
         "key_insights": [
-          "CELH's revenue growth is expected to reach 20% YoY, driven by brand expansion and distribution partnerships.",
-          "Stifel maintains a Buy rating on CELH with a lowered price target of $45, citing revenue growth hopes.",
-          "CELH's market share in the energy drink market is expected to increase by 10% in the next quarter, driven by brand awareness and distribution efforts."
+          "CELH's revenue growth hopes are driven by its brand expansion into new markets, with a 10-year investment of $1000 now worth $10,000.",
+          "The UK ban on high-caffeine energy drinks for children under 16 in England may pose a threat to CELH's sales, but Stifel maintains a Buy rating with a lowered price target to $45.",
+          "CELH's consumer staple status and brand expansion into new markets make it a promising investment opportunity, with a 2-year low in McDonald's stock highlighting the potential for growth in the energy drink market."
         ],
-        "watch_flag": "UK ban on high-caffeine energy drinks to children under 16 in England, potential impact on CELH's sales",
-        "sentiment_summary": "The market is focused on CELH's growth prospects and revenue expansion, with some concerns about the impact of the UK ban on high-caffeine energy drinks. Analysts remain bullish on CELH, with a Buy rating and a lowered price target of $45.",
+        "watch_flag": "UK ban on high-caffeine energy drinks for children under 16 in England",
+        "sentiment_summary": "The market is focused on CELH's growth prospects and potential risks, with a mix of positive and negative sentiment driven by the UK ban and revenue growth hopes.",
         "_status": "ok"
       },
-      "fcf_yield": 4.13,
+      "fcf_yield": 4.23,
       "net_cash_m": -127.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1487,11 +1484,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -33.6,
-      "return_3yr_cagr": -17.2,
-      "return_5yr_cagr": 3.8,
-      "return_10yr_cagr": 44.5,
-      "max_drawdown": -71.0,
+      "pct_from_200ma": -35.1,
+      "return_3yr_cagr": -17.4,
+      "return_5yr_cagr": 3.5,
+      "return_10yr_cagr": 43.8,
+      "max_drawdown": -71.7,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -1535,8 +1532,8 @@
       "earnings_quality": "WATCH",
       "entry_price": 35.17,
       "above_200ma": true,
-      "pct_from_high": -11.0,
-      "return_1yr": 124.8,
+      "pct_from_high": -9.4,
+      "return_1yr": 121.4,
       "return_vs_qqq": 98.3,
       "trend": "UP",
       "news_count": 12,
@@ -1589,14 +1586,14 @@
           "narrative": "Frontline successfully expands its fleet and diversifies its services, capturing a significant share of the marine transportation and energy market, leading to a substantial increase in revenue and market capitalization.",
           "revenue_10yr_b": 10.5,
           "mktcap_10yr_b": 35.0,
-          "multiple": 4.1,
+          "multiple": 4.0,
           "probability": 0.4
         },
         "base": {
           "narrative": "Frontline maintains its current market position and continues to operate efficiently, with moderate growth in revenue and market capitalization.",
           "revenue_10yr_b": 4.5,
           "mktcap_10yr_b": 15.0,
-          "multiple": 1.8,
+          "multiple": 1.7,
           "probability": 0.3
         },
         "bear": {
@@ -1612,26 +1609,26 @@
         "written_date": "2026-06-18T02:02:59.818624",
         "ticker": "FRO"
       },
-      "current_price": 38.06,
-      "market_cap": 8474140160,
+      "current_price": 38.85,
+      "market_cap": 8648899584,
       "revenue": 2251480064,
       "sec_8k_highlights": [
-        "Attached hereto as Exhibit 1 is a copy of the press release issued by Frontline plc (the \u201cCompany\u201d) on May 22, 2026, reporting the Company\u2019s results for the first quarter and three months ended March 31, 2026."
+        "Annual meeting: routine director elections and auditor ratification only."
       ],
       "sec_8k_latest_date": "2026-05-26",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "Recent news and analyst reports have reaffirmed Frontline's growth prospects and strategic expansions.",
+        "impact_reason": "Recent news and analyst reports suggest Frontline's strategic expansions and diversification are on track.",
         "key_insights": [
-          "BTIG raised Frontline's price target to $55, citing strong growth prospects and undervalued stock.",
-          "Frontline's vessels avoiding the Strait of Hormuz may impact earnings, but the company's diversification efforts are expected to mitigate this risk.",
-          "Oil prices have increased by 5%, and a shipping gauge has moved four times as much, potentially benefiting Frontline's operations."
+          "BTIG maintains Buy on Frontline with a raised price target to $55.",
+          "Oil prices are up 5%, and a shipping gauge has moved four times as much.",
+          "Frontline's Q2 earnings are already in the bank, maintaining a strong buy rating."
         ],
-        "watch_flag": "Frontline's ability to navigate the Strait of Hormuz and potential impact on earnings.",
-        "sentiment_summary": "The market is focused on Frontline's growth prospects and strategic expansions, with analysts maintaining a strong buy rating. However, concerns about the Strait of Hormuz and potential earnings impact remain a key risk to watch.",
+        "watch_flag": "Potential impact of Trump's Hormuz bypass plan on Frontline's operations.",
+        "sentiment_summary": "Market sentiment is cautiously optimistic about Frontline's growth prospects, driven by analyst buy ratings and positive earnings news. However, concerns about the company's operations in the Strait of Hormuz remain a key risk factor.",
         "_status": "ok"
       },
-      "fcf_yield": 10.79,
+      "fcf_yield": 10.57,
       "net_cash_m": -2159.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1666,11 +1663,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 30.5,
-      "return_3yr_cagr": 46.7,
-      "return_5yr_cagr": 47.3,
+      "pct_from_200ma": 32.4,
+      "return_3yr_cagr": 47.7,
+      "return_5yr_cagr": 47.9,
       "return_10yr_cagr": 24.9,
-      "max_drawdown": -11.0,
+      "max_drawdown": -9.4,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -1714,9 +1711,9 @@
       "earnings_quality": "WATCH",
       "entry_price": 81.07,
       "above_200ma": true,
-      "pct_from_high": -1.2,
-      "return_1yr": 160.0,
-      "return_vs_qqq": 133.5,
+      "pct_from_high": 0.0,
+      "return_1yr": 154.1,
+      "return_vs_qqq": 131.0,
       "trend": "UP",
       "news_count": 7,
       "news_sentiment": "POSITIVE",
@@ -1785,7 +1782,7 @@
           "narrative": "International Seaways maintains its established position in the maritime shipping industry, with moderate revenue growth and stable market share.",
           "revenue_10yr_b": 1.5,
           "mktcap_10yr_b": 6.0,
-          "multiple": 1.4,
+          "multiple": 1.3,
           "probability": 0.3
         },
         "bear": {
@@ -1801,29 +1798,28 @@
         "written_date": "2026-06-18T02:03:33.403956",
         "ticker": "INSW"
       },
-      "current_price": 89.01,
-      "market_cap": 4406413312,
+      "current_price": 91.35,
+      "market_cap": 4522253824,
       "revenue": 987283968,
       "sec_8k_highlights": [
-        "International Seaways, Inc. entered into an Equity Distribution Agreement with BTIG, LLC, B. Riley Securities, Inc., Clarksons Securities, Inc. and Fearnleys Securities, Inc. to issue up to $200,000,000 of Common Stock.",
+        "International Seaways, Inc. entered into an Equity Distribution Agreement with BTIG, LLC, B. Riley Securities, Inc., Clarksons Securities, Inc. and Fearnleys Securities, Inc. to issue and sell up to $200,000,000 of Common Stock.",
         "Each Sales Agent will receive a commission of up to 3.0% of the gross sales price of all common shares sold through it as sales agent under the Distribution Agreement.",
-        "As of the date hereof, the Company has neither sold nor undertaken to sell any shares pursuant to the Distribution Agreement.",
-        "The Company has filed its prospectus supplement dated May 11, 2026 with the SEC."
+        "The Company has neither sold nor undertaken to sell any shares pursuant to the Distribution Agreement as of the date hereof."
       ],
       "sec_8k_latest_date": "2026-05-11",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "Recent news and analyst updates support International Seaways' established position and growth potential.",
+        "impact_reason": "Recent news and analyst reports support International Seaways' investment thesis with positive price target adjustments.",
         "key_insights": [
           "BTIG raises price target to $100, maintaining a 'Buy' rating on International Seaways.",
-          "Growing demand for global trade and rising tensions in the Strait of Hormuz may benefit International Seaways.",
-          "International Seaways' high-yield dividend stock and strong fundamentals make it an attractive investment opportunity."
+          "Growing demand for global trade and potential expansion of services may drive INSW's growth.",
+          "Oil price increase and related shipping gauge movement suggest a positive market trend for INSW."
         ],
-        "watch_flag": "Rising tensions in the Strait of Hormuz and potential changes in global trade policies.",
-        "sentiment_summary": "Market sentiment is positive towards International Seaways due to strong fundamentals and growth potential. Analysts are optimistic about the company's ability to capitalize on rising demand for global trade.",
+        "watch_flag": "Escalating tensions in the Strait of Hormuz and potential impact on global trade routes.",
+        "sentiment_summary": "Market sentiment is cautiously optimistic about International Seaways, driven by positive analyst reports and growing demand for global trade. However, escalating tensions in the Strait of Hormuz pose a potential risk to the company's operations and growth prospects.",
         "_status": "ok"
       },
-      "fcf_yield": 2.48,
+      "fcf_yield": 2.42,
       "net_cash_m": -233.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1858,12 +1854,12 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 43.3,
-      "return_3yr_cagr": 48.0,
-      "return_5yr_cagr": 53.8,
+      "pct_from_200ma": 45.9,
+      "return_3yr_cagr": 48.3,
+      "return_5yr_cagr": 55.0,
       "return_10yr_cagr": null,
-      "max_drawdown": -1.2,
-      "years_listed": 9.6,
+      "max_drawdown": 0.0,
+      "years_listed": 9.7,
       "currency": "USD",
       "reddit_source": "blocked",
       "congress_source": "efd",
@@ -1902,13 +1898,13 @@
       "de_ratio": 545629825.93,
       "interest_coverage": 999.0,
       "dilution_rate": 0.0,
-      "insider_ownership": 0.46095002,
+      "insider_ownership": 0.4611,
       "earnings_quality": "CLEAN",
       "entry_price": 82.66,
       "above_200ma": true,
-      "pct_from_high": 0.0,
-      "return_1yr": 162.5,
-      "return_vs_qqq": 136.0,
+      "pct_from_high": -2.4,
+      "return_1yr": 147.4,
+      "return_vs_qqq": 124.3,
       "trend": "UP",
       "news_count": 1,
       "news_sentiment": "NEUTRAL",
@@ -1968,7 +1964,7 @@
           "narrative": "TIGO expands its digital services and strengthens its presence in Latin America, leading to significant revenue growth and increased market capitalization.",
           "revenue_10yr_b": 15.63,
           "mktcap_10yr_b": 44.85,
-          "multiple": 2.7,
+          "multiple": 2.8,
           "probability": 0.4
         },
         "base": {
@@ -1981,7 +1977,7 @@
         "bear": {
           "narrative": "TIGO fails to maintain positive free cash flow, leading to a decline in its market capitalization and revenue growth.",
           "mktcap_10yr_b": 7.42,
-          "multiple": 0.4,
+          "multiple": 0.5,
           "probability": 0.3
         },
         "current_tracking": "BULL",
@@ -1991,31 +1987,26 @@
         "written_date": "2026-06-18T02:04:25.038127",
         "ticker": "TIGO"
       },
-      "current_price": 99.44,
-      "market_cap": 16660304896,
+      "current_price": 96.25,
+      "market_cap": 16125863936,
       "revenue": 6435999744,
       "sec_8k_highlights": [
-        "The AGM set the number of directors at eight and re-elected eight directors, including Maxime Lombardini as Chair of the Board of Directors.",
-        "The annual accounts and the consolidated accounts for the year ended December 31, 2025, were approved.",
-        "A dividend distribution of USD 3 per share to be paid in four equal installments on or around July 15, 2026, October 15, 2026, January 15, 2027, and April 15, 2027, was approved.",
-        "The discharge of all the current and former Directors of Millicom who served at any point in time during the financial year ended December 31, 2025, for the performance of their mandates, was approved.",
-        "The re-election of KPMG as the external auditor of Millicom, was approved.",
-        "The remuneration to the Board and external auditor, was approved."
+        "Millicom distributed a dividend of USD 3 per share to be paid in four equal installments."
       ],
       "sec_8k_latest_date": "2026-05-21",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "TIGO's recent expansion into digital services has strengthened its position in Latin America.",
+        "impact_reason": "TIGO's established presence in Latin America and expanding digital services support long-term growth prospects.",
         "key_insights": [
-          "TIGO's revenue increased by 15% YoY, driven by growth in mobile data services.",
-          "The company has invested $100M in expanding its 4G network in key markets.",
-          "TIGO's subscriber base has grown by 20% in the past quarter, driven by its affordable plans."
+          "TIGO's revenue grew 15% YoY in Q1, driven by strong performance in digital services.",
+          "The company expanded its 4G network to 80% of its population, enhancing customer experience.",
+          "TIGO's digital services, including mobile payments and financial services, reached 10 million users."
         ],
-        "watch_flag": "Regulatory risks in key markets, such as Brazil and Colombia.",
-        "sentiment_summary": "Market sentiment remains positive on TIGO, driven by its expanding digital services and growing subscriber base. Investors are watching for further expansion into new markets and potential partnerships.",
+        "watch_flag": "",
+        "sentiment_summary": "Market sentiment remains positive on TIGO's long-term growth prospects, driven by its expanding digital services. ValuEngine's analysis suggests a 'buy' rating for the stock.",
         "_status": "ok"
       },
-      "fcf_yield": 6.97,
+      "fcf_yield": 7.21,
       "net_cash_m": -10709.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -2050,11 +2041,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 47.4,
-      "return_3yr_cagr": 91.5,
-      "return_5yr_cagr": 24.2,
+      "pct_from_200ma": 42.6,
+      "return_3yr_cagr": 95.0,
+      "return_5yr_cagr": 23.6,
       "return_10yr_cagr": null,
-      "max_drawdown": 0.0,
+      "max_drawdown": -2.4,
       "years_listed": 7.5,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -2099,9 +2090,9 @@
       "earnings_quality": "FLAG",
       "entry_price": 206.89,
       "above_200ma": true,
-      "pct_from_high": -25.6,
-      "return_1yr": 142.1,
-      "return_vs_qqq": 115.6,
+      "pct_from_high": -21.8,
+      "return_1yr": 140.3,
+      "return_vs_qqq": 117.2,
       "trend": "UP",
       "news_count": 20,
       "news_sentiment": "POSITIVE",
@@ -2109,7 +2100,9 @@
       "reddit_sentiment": "NEUTRAL",
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
-      "key_themes": [],
+      "key_themes": [
+        "AI demand"
+      ],
       "sec_8k_count": 1,
       "sec_8k_events": [
         {
@@ -2153,7 +2146,7 @@
           "narrative": "CRDO achieves significant market share gains, driven by successful product qualification with major cloud providers and a strong product roadmap, leading to revenue growth of 30% per annum and a market capitalization of $200B in 10 years.",
           "revenue_10yr_b": 13.4,
           "mktcap_10yr_b": 200.0,
-          "multiple": 4.7,
+          "multiple": 4.5,
           "probability": 0.4
         },
         "base": {
@@ -2176,32 +2169,32 @@
         "written_date": "2026-06-17T16:06:07.502351",
         "ticker": "CRDO"
       },
-      "current_price": 229.52,
-      "market_cap": 42800410624,
+      "current_price": 236.5,
+      "market_cap": 44102025216,
       "revenue": 1335116032,
       "sec_8k_highlights": [
         "Revenue for the fourth quarter of fiscal year 2026 was $437.0 million, growing by 7.4% quarter over quarter and 157.0% year over year.",
-        "GAAP gross margin for the fourth quarter of fiscal year 2026 was 68.2% and non-GAAP gross margin was 68.3%",
-        "GAAP operating expenses for the fourth quarter of fiscal year 2026 were $142.2 million and non-GAAP operating expenses were $81.7 million",
-        "GAAP net income for the fourth quarter of fiscal year 2026 was $169.1 million and non-GAAP net income was $226.7 million",
-        "GAAP diluted net income per share for the fourth quarter of fiscal year 2026 was $0.88 and non-GAAP diluted net income per share was $1.16",
-        "The ending cash and short-term investment balance as of May 2, 2026, was $1.4 billion",
-        "For the fiscal year 2026, revenue more than tripled to $1.3 billion and non-GAAP net income increased more than five times to $662 million"
+        "GAAP gross margin for the fourth quarter of fiscal year 2026 was 68.2%, and non-GAAP gross margin was 68.3%",
+        "GAAP operating expenses for the fourth quarter of fiscal year 2026 were $142.2 million, and non-GAAP operating expenses were $81.7 million",
+        "GAAP net income for the fourth quarter of fiscal year 2026 was $169.1 million, and non-GAAP net income was $226.7 million",
+        "GAAP diluted net income per share for the fourth quarter of fiscal year 2026 was $0.88, and non-GAAP diluted net income per share was $1.16",
+        "Revenue for fiscal year 2026 was $1.3 billion, and non-GAAP net income increased more than five times to $662 million",
+        "Revenue for the first quarter of fiscal year 2027 is expected to be between $465.0 million and $475.0 million, with GAAP gross margin expected to be between 66.9% and 68.9% and non-GAAP gross margin expected to be between 67.0% and 69.0%"
       ],
       "sec_8k_latest_date": "2026-06-01",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
         "impact_reason": "Recent news and analyst upgrades have strengthened the investment thesis for Credo Technology Group Holding Ltd.",
         "key_insights": [
-          "Susquehanna and Barclays upgraded Credo Technology Group with new price targets of $250 and $300, respectively.",
-          "Credo's proprietary technology and strategic partnerships position it to dominate the high-speed semiconductor solutions market.",
-          "Analysts are optimistic about Credo's revenue growth as it transitions from copper to optical networking."
+          "Susquehanna raised price target to $250, and Barclays raised price target to $300, indicating strong analyst support.",
+          "Credo is entering phase two, which could be a critical revenue pivot from copper to optical networking.",
+          "The company has strategic partnerships and proprietary technology that could help it dominate the high-speed semiconductor solutions market."
         ],
-        "watch_flag": "Credo's ability to execute on its revenue growth strategy and maintain its competitive edge in the market.",
-        "sentiment_summary": "The market is focused on Credo Technology Group Holding Ltd's potential for growth and dominance in the high-speed semiconductor solutions market. Analysts are optimistic about the company's revenue growth and strategic partnerships, but investors should monitor its ability to execute on its growth strategy.",
+        "watch_flag": "Credo's ability to execute on its phase two plan and deliver revenue growth from optical networking",
+        "sentiment_summary": "The market is focused on the recent analyst upgrades and the potential for Credo to dominate the high-speed semiconductor solutions market. However, the recent downturn in the chip stocks sector is a risk to watch.",
         "_status": "ok"
       },
-      "fcf_yield": 0.95,
+      "fcf_yield": 0.92,
       "net_cash_m": 1418.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 20.9,
@@ -2236,11 +2229,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 37.2,
-      "return_3yr_cagr": 137.9,
+      "pct_from_200ma": 43.8,
+      "return_3yr_cagr": 140.6,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -25.6,
+      "max_drawdown": -21.8,
       "years_listed": 4.5,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -2257,7 +2250,7 @@
       "tier": "T2",
       "date_added": "2026-06-07",
       "sector": "Financial Services",
-      "market_cap": 2801277440,
+      "market_cap": 2723929600,
       "revenue": 384672000,
       "sentiment_confidence": 2,
       "megatrend": "general",
@@ -2287,9 +2280,9 @@
       "earnings_quality": "CLEAN",
       "entry_price": 122.79,
       "above_200ma": false,
-      "pct_from_high": -34.6,
-      "return_1yr": 50.9,
-      "return_vs_qqq": 24.4,
+      "pct_from_high": -36.3,
+      "return_1yr": 48.5,
+      "return_vs_qqq": 25.4,
       "trend": "DOWN",
       "news_count": 1,
       "news_sentiment": "NEUTRAL",
@@ -2348,14 +2341,14 @@
           "narrative": "Sprott Inc. successfully rides the commodity cycle growth trend, leveraging its brand and expertise to increase market share and revenue. Commodity prices rise, driving demand for precious metals and commodity investments.",
           "revenue_10yr_b": 1.52,
           "mktcap_10yr_b": 8.5,
-          "multiple": 3.0,
+          "multiple": 3.1,
           "probability": 0.4
         },
         "base": {
           "narrative": "Sprott Inc. maintains its current market position, with steady demand for precious metals and commodity investments. The company adapts to market changes, but commodity prices remain relatively stable.",
           "revenue_10yr_b": 0.76,
           "mktcap_10yr_b": 4.8,
-          "multiple": 1.7,
+          "multiple": 1.8,
           "probability": 0.5
         },
         "bear": {
@@ -2371,27 +2364,27 @@
         "written_date": "2026-06-18T02:07:43.320924",
         "ticker": "SII"
       },
-      "current_price": 108.65,
+      "current_price": 105.65,
       "sec_8k_highlights": [
-        "Sprott\u2019s Assets Under Management (\u201cAUM\u201d) were $65.1 billion as at March 31, 2026, up 9% from $59.6 billion as at December 31, 2025.",
         "Net income for the quarter was $29.2 million ($1.13 per share), up $17.3 million from $12 million ($0.46 per share) for the quarter ended March 31, 2025.",
         "Adjusted EBITDA was $57.9 million ($2.25 per share) for the quarter, up $36 million from $21.9 million ($0.85 per share) for the quarter ended March 31, 2025.",
-        "Subsequent to quarter-end, as at May 1, 2026, AUM was $65.5 billion, up 1% from March 31, 2026."
+        "Sprott\u2019s Assets Under Management (\u201cAUM\u201d) were $65.1 billion as at March 31, 2026, up 9% from $59.6 billion as at December 31, 2025.",
+        "Sprott reported $1.7 billion in net sales during the quarter."
       ],
       "sec_8k_latest_date": "2026-05-06",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "Recent news on PSLV highlights Sprott's expertise in silver investments, supporting its investment thesis.",
+        "impact_reason": "Recent news on PSLV highlights the growing interest in silver, supporting Sprott's precious metals investments.",
         "key_insights": [
-          "Sprott's PSLV fund has seen significant growth, with a 10% increase in assets under management in the last quarter.",
-          "The fund's success is attributed to Sprott's experienced management team, led by President and CEO, Peter Grosskopf.",
-          "Sprott's brand and expertise in precious metals investments are expected to continue driving growth in the commodity cycle."
+          "Sprott's expertise in precious metals investments is gaining traction with the rise of silver prices.",
+          "PSLV's success may attract more investors to Sprott's silver-focused funds, increasing its market share.",
+          "Sprott's brand reputation and expertise in the commodity market are expected to benefit from the growing interest in precious metals."
         ],
-        "watch_flag": "Commodity price volatility and potential regulatory changes in the precious metals market",
-        "sentiment_summary": "Market sentiment is focused on Sprott's expertise in silver investments and its potential to ride the commodity cycle growth. Investors are closely watching the company's performance and its ability to maintain its market share in the precious metals sector.",
+        "watch_flag": "Silver price volatility and potential market fluctuations in the commodity cycle.",
+        "sentiment_summary": "Market sentiment is optimistic about Sprott's precious metals investments, driven by the growing interest in silver. Investors are closely watching the silver price and its impact on Sprott's funds.",
         "_status": "ok"
       },
-      "fcf_yield": 4.5,
+      "fcf_yield": 4.63,
       "net_cash_m": 175.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -2426,11 +2419,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -7.0,
-      "return_3yr_cagr": 52.9,
-      "return_5yr_cagr": 26.8,
-      "return_10yr_cagr": 22.4,
-      "max_drawdown": -34.6,
+      "pct_from_200ma": -9.5,
+      "return_3yr_cagr": 51.8,
+      "return_5yr_cagr": 26.3,
+      "return_10yr_cagr": 22.1,
+      "max_drawdown": -36.3,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -2447,7 +2440,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Basic Materials",
-      "market_cap": 1060926720,
+      "market_cap": 1002287872,
       "revenue": 55275000,
       "sentiment_confidence": 1,
       "megatrend": "nuclear_renaissance",
@@ -2477,9 +2470,9 @@
       "earnings_quality": "WATCH",
       "entry_price": 12.12,
       "above_200ma": false,
-      "pct_from_high": -27.5,
-      "return_1yr": -1.6,
-      "return_vs_qqq": -28.1,
+      "pct_from_high": -31.8,
+      "return_1yr": -7.4,
+      "return_vs_qqq": -30.5,
       "trend": "DOWN",
       "news_count": 0,
       "news_sentiment": "NEUTRAL",
@@ -2546,14 +2539,14 @@
           "narrative": "VMET successfully capitalizes on the growing demand for precious metals royalty and streaming, achieving significant revenue growth and expanding its market share.",
           "revenue_10yr_b": 1.5,
           "mktcap_10yr_b": 15.0,
-          "multiple": 14.1,
+          "multiple": 15.0,
           "probability": 0.4
         },
         "base": {
           "narrative": "VMET experiences steady growth, meeting industry expectations and maintaining its current market position.",
           "revenue_10yr_b": 0.5,
           "mktcap_10yr_b": 5.0,
-          "multiple": 4.7,
+          "multiple": 5.0,
           "probability": 0.3
         },
         "bear": {
@@ -2569,18 +2562,15 @@
         "written_date": "2026-06-18T02:07:55.710032",
         "ticker": "VMET"
       },
-      "current_price": 9.77,
+      "current_price": 9.23,
       "sec_8k_highlights": [
-        "The Company hereby gives notice pursuant to Section 4.11 of NI 51-102 as follows: Effective May 15, 2026, KPMG has resigned as the auditor of the Company at the Company\u2019s request.",
-        "PwC has been appointed as auditor of the Company to fill the vacancy, to hold office commencing on the Effective Date until the close of the next annual meeting of shareholders of the Company.",
-        "[RISK] There have been no modified opinions in the reports from KPMG on the Company\u2019s financial statements relating to the \u201crelevant period\u201d (as that term is defined in Section 4.11 of NI 51-102).",
-        "[RISK] In the opinion of the Company, as at the date hereof, there have been no \u201creportable events\u201d (as that term is defined in Section 4.11 of NI 51-102)."
+        "Versamet Royalties Corporation (\u201cVersamet\u201d or the \u201cCompany\u201d) (NASDAQ: VMET, TSX: VMET) is pleased to announce that all matters presented for approval at Versamet\u2019s annual general and special meeting of shareholders held today, as more particularly set out in the Company\u2019s Management Information Circular dated May 19, 2026 (the \u201cCircular\u201d), have been approved."
       ],
-      "sec_8k_latest_date": "2026-05-20",
+      "sec_8k_latest_date": "2026-06-30",
       "news_intelligence": {
         "_status": "no_data"
       },
-      "fcf_yield": 2.99,
+      "fcf_yield": 3.16,
       "net_cash_m": -39.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.3,
@@ -2615,11 +2605,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -12.9,
+      "pct_from_200ma": -17.9,
       "return_3yr_cagr": null,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -27.5,
+      "max_drawdown": -31.8,
       "years_listed": 0.4,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -2636,7 +2626,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Basic Materials",
-      "market_cap": 5705368576,
+      "market_cap": 5556107776,
       "revenue": 705900992,
       "sentiment_confidence": 1,
       "megatrend": "synthetic_biology",
@@ -2666,9 +2656,9 @@
       "earnings_quality": "WATCH",
       "entry_price": 30.16,
       "above_200ma": true,
-      "pct_from_high": -7.5,
-      "return_1yr": 108.2,
-      "return_vs_qqq": 81.7,
+      "pct_from_high": -9.8,
+      "return_1yr": 100.6,
+      "return_vs_qqq": 77.5,
       "trend": "UP",
       "news_count": 4,
       "news_sentiment": "POSITIVE",
@@ -2733,7 +2723,7 @@
           "narrative": "Perimeter Solutions achieves significant revenue growth through expansion of its fire safety and specialty chemicals market, driven by increasing demand for patented products and a solid customer base.",
           "revenue_10yr_b": 2.5,
           "mktcap_10yr_b": 20.0,
-          "multiple": 3.5,
+          "multiple": 3.6,
           "probability": 0.4
         },
         "base": {
@@ -2756,29 +2746,30 @@
         "written_date": "2026-06-18T02:08:01.639687",
         "ticker": "PRM"
       },
-      "current_price": 34.98,
+      "current_price": 34.06,
       "sec_8k_highlights": [
-        "Net sales increased 74% to $125.1 million in the first quarter.",
         "Net income during the first quarter was $72.9 million, or $0.44 earnings per diluted share.",
+        "First quarter non-GAAP adjusted earnings per diluted share was $0.06.",
         "Adjusted EBITDA increased 128% to $41.2 million in the first quarter.",
-        "Entered into key five-year contracts with the United States Defense Logistics Agency for suppressants and with California Department of Forestry for retardants in April 2026.",
-        "Acquired Medical Manufacturing Technologies, LLC for a total cash purchase price, net of cash acquired of $682.3 million.",
-        "Will hold a conference call at 8:30 a.m. ET on Wednesday, May 6, 2026 to discuss financial results for the first quarter 2026."
+        "Fire Safety Segment Adjusted EBITDA increased 85% to $18.7 million.",
+        "Specialty Products Segment Adjusted EBITDA increased 181% to $22.5 million.",
+        "The Company acquired the outstanding capital stock of Medical Manufacturing Technologies, LLC for a total cash purchase price, net of cash acquired of $682.3 million.",
+        "Entered into key five-year contracts with the United States Defense Logistics Agency for suppressants and with California Department of Forestry for retardants in April 2026."
       ],
       "sec_8k_latest_date": "2026-05-06",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "Recent news and analyst coverage have positively impacted the investment thesis.",
+        "impact_reason": "Recent analyst coverage and news further validate the investment thesis.",
         "key_insights": [
-          "JP Morgan initiated coverage with an Overweight recommendation and a $50 price target.",
-          "Perimeter Solutions passed the Minervini Trend Template, indicating strong growth momentum.",
-          "The company is 'heating up' with more deals, expanding its customer base and market presence."
+          "JP Morgan initiates coverage with an Overweight recommendation and a $50 price target.",
+          "Perimeter Solutions passes the Minervini Trend Template, indicating high growth momentum.",
+          "The company is 'heating up' with more deals, expanding its presence in the market."
         ],
-        "watch_flag": "JP Morgan's price target and potential impact on stock price volatility.",
-        "sentiment_summary": "Market sentiment is positive, driven by analyst coverage and company growth. Investors are focusing on the company's potential for long-term success.",
+        "watch_flag": "Potential risks associated with the company's reliance on patented products.",
+        "sentiment_summary": "Market sentiment is positive, driven by analyst coverage and news of the company's growth momentum. Investors are focusing on the company's potential to continue delivering strong results.",
         "_status": "ok"
       },
-      "fcf_yield": 1.41,
+      "fcf_yield": 1.45,
       "net_cash_m": -1282.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -2813,11 +2804,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 25.3,
-      "return_3yr_cagr": 83.3,
+      "pct_from_200ma": 21.9,
+      "return_3yr_cagr": 83.2,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -7.5,
+      "max_drawdown": -9.8,
       "years_listed": 4.7,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -2834,7 +2825,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Industrials",
-      "market_cap": 1566086912,
+      "market_cap": 1540666880,
       "revenue": 1784109952,
       "sentiment_confidence": 5,
       "megatrend": "general",
@@ -2864,9 +2855,9 @@
       "earnings_quality": "WATCH",
       "entry_price": 8.38,
       "above_200ma": false,
-      "pct_from_high": -51.5,
-      "return_1yr": -40.5,
-      "return_vs_qqq": -67.0,
+      "pct_from_high": -51.9,
+      "return_1yr": -41.0,
+      "return_vs_qqq": -64.1,
       "trend": "DOWN",
       "news_count": 3,
       "news_sentiment": "POSITIVE",
@@ -2935,14 +2926,14 @@
           "narrative": "TIC Solutions achieves significant revenue growth through successful implementation of its patented technology and strategic partnerships, becoming a leader in the oil and gas technology market.",
           "revenue_10yr_b": 10.0,
           "mktcap_10yr_b": 20.0,
-          "multiple": 12.8,
+          "multiple": 13.0,
           "probability": 0.4
         },
         "base": {
           "narrative": "TIC Solutions experiences steady growth, with moderate success in its technology and partnerships, resulting in a stable market position.",
           "revenue_10yr_b": 5.0,
           "mktcap_10yr_b": 10.0,
-          "multiple": 6.4,
+          "multiple": 6.5,
           "probability": 0.3
         },
         "bear": {
@@ -2958,24 +2949,29 @@
         "written_date": "2026-06-18T02:08:13.869179",
         "ticker": "TIC"
       },
-      "current_price": 7.08,
+      "current_price": 6.97,
       "sec_8k_highlights": [
-        "The stockholders approved the ratification of the appointment of PricewaterhouseCoopers LLP as the Company\u2019s independent registered public accounting firm for the fiscal year ending December 31, 2026."
+        "TIC Solutions, Inc. entered into the Third Amendment to Credit Agreement on June 2, 2026.",
+        "The Amendment reduced the stated rate of interest of the Amendment No. 3 Term Loans by 25.0 basis points.",
+        "The Amendment increased the Letter of Credit Sublimit to $50.0 million.",
+        "The Company amended the Credit Agreement to allow the Amendment No. 3 Term Loans to bear interest at either Term SOFR plus 2.50% per annum or the Base Rate plus 1.50% per annum.",
+        "Principal payments on the Amendment No. 3 Term Loans will commence on September 30, 2026, and will be made in quarterly installments.",
+        "The Company and certain of its affiliates have previously entered into commercial financial arrangements with Acuren Delaware Holdco, Inc. and Acuren Holdings, Inc."
       ],
-      "sec_8k_latest_date": "2026-07-01",
+      "sec_8k_latest_date": "2026-06-05",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "Recent news and community posts have positively impacted the investment thesis by highlighting the company's potential in the oil and gas technology market.",
+        "impact_reason": "Recent news and rating upgrades strengthen the investment thesis for TIC Solutions.",
         "key_insights": [
-          "TIC Solutions' patented technology has the potential to disrupt the oil and gas industry, with a recent rating upgrade indicating increased valuation.",
-          "The company's strategic partnerships are expected to drive growth, with a focus on data center cooling services and loan repricing.",
-          "Investors are optimistic about TIC Solutions' future prospects, with a recent article suggesting it's a good stock to buy now."
+          "TIC Solutions' patented technology and strategic partnerships position it for leadership in the oil and gas technology market.",
+          "The loan repricing and data center cooling services play highlight TIC's diversified revenue streams.",
+          "Rating upgrades indicate a cheaper valuation for TIC Solutions, making it an attractive investment opportunity."
         ],
-        "watch_flag": "Loan repricing and data center cooling services partnerships",
-        "sentiment_summary": "Market sentiment is positive towards TIC Solutions, driven by its potential in the oil and gas technology market and strategic partnerships. Investors are optimistic about the company's future prospects, with a focus on its patented technology and valuation.",
+        "watch_flag": "Potential risks associated with the oil and gas industry's volatility and regulatory changes.",
+        "sentiment_summary": "Market sentiment is positive towards TIC Solutions due to recent upgrades and its potential for growth. Investors are focusing on the company's unique technology and strategic partnerships.",
         "_status": "ok"
       },
-      "fcf_yield": 2.45,
+      "fcf_yield": 2.49,
       "net_cash_m": -1276.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -3010,11 +3006,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -25.7,
+      "pct_from_200ma": -26.1,
       "return_3yr_cagr": null,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -51.5,
+      "max_drawdown": -51.9,
       "years_listed": 1.4,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -3031,7 +3027,7 @@
       "tier": "T1",
       "date_added": "2026-06-07",
       "sector": "Communication Services",
-      "market_cap": 11875866624,
+      "market_cap": 11357905920,
       "revenue": 2874144000,
       "sentiment_confidence": 1,
       "megatrend": "general",
@@ -3060,10 +3056,10 @@
       "insider_ownership": 0.109060004,
       "earnings_quality": "CLEAN",
       "entry_price": 76.88,
-      "above_200ma": true,
-      "pct_from_high": -13.9,
-      "return_1yr": 39.6,
-      "return_vs_qqq": 13.1,
+      "above_200ma": false,
+      "pct_from_high": -18.0,
+      "return_1yr": 34.4,
+      "return_vs_qqq": 11.3,
       "trend": "DOWN",
       "news_count": 20,
       "news_sentiment": "MIXED",
@@ -3072,15 +3068,11 @@
       "overall_sentiment": "MIXED",
       "signal_or_noise": "SIGNAL",
       "key_themes": [],
-      "sec_8k_count": 2,
+      "sec_8k_count": 1,
       "sec_8k_events": [
         {
           "date": "2026-05-06",
           "description": "Results of operations / earnings, Financial statements attached"
-        },
-        {
-          "date": "2026-04-23",
-          "description": "Item 5.07"
         }
       ],
       "qqq_price_at_entry": NaN,
@@ -3118,14 +3110,14 @@
           "narrative": "The New York Times continues to thrive as a trusted news source, with increasing demand for high-quality journalism driving subscription growth and revenue expansion.",
           "revenue_10yr_b": 15.0,
           "mktcap_10yr_b": 20.0,
-          "multiple": 1.7,
+          "multiple": 1.8,
           "probability": 0.4
         },
         "base": {
           "narrative": "The New York Times maintains its current market position, with steady revenue growth and moderate market capitalization expansion, as the company adapts to changing consumer preferences.",
           "revenue_10yr_b": 8.0,
           "mktcap_10yr_b": 10.0,
-          "multiple": 0.8,
+          "multiple": 0.9,
           "probability": 0.5
         },
         "bear": {
@@ -3141,30 +3133,29 @@
         "written_date": "2026-06-07T13:16:22.456153",
         "ticker": "NYT"
       },
-      "current_price": 73.37,
+      "current_price": 70.17,
       "sec_8k_highlights": [
-        "Digital-only subscription revenues grew 16.1 percent year-over-year, driven by growth in both digital-only subscribers and digital-only average revenue per user (\u201cARPU\u201d).",
+        "Digital-only subscription revenues grew 16.1 percent year-over-year, driven by growth in both digital-only subscribers and digital-only average revenue per user.",
         "Digital advertising revenues increased 31.6 percent year-over-year primarily due to strong marketer demand and growth in advertising supply.",
         "Operating profit increased 54.5 percent year-over-year to $90.6 million, while adjusted operating profit increased 27.2 percent year-over-year to $117.9 million.",
         "Operating profit margin increased to 12.7 percent, while adjusted operating profit margin increased to 16.6 percent, a year-over-year increase of approximately 350 and 200 basis points, respectively.",
         "Diluted earnings per share for the quarter was $0.54, a $0.24 increase year-over-year and adjusted diluted earnings per share was $0.61, a $0.20 increase year-over-year.",
-        "The Company added approximately 310,000 net digital-only subscribers compared with the end of the fourth quarter of 2025, bringing the total number of subscribers to 13.08 million.",
-        "Digital-only ARPU increased 2.4 percent year-over-year to $9.77."
+        "CEO Meredith Kopit Levien stated, 'Q1 was another great quarter, and our results reflect strong demand for the uncompromised journalism and premium lifestyle content that The Times is uniquely capable of delivering.'"
       ],
       "sec_8k_latest_date": "2026-05-06",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "The New York Times' high-quality journalism and brand recognition continue to attract subscribers amidst market volatility.",
+        "impact_reason": "The New York Times' high-quality journalism and brand recognition continue to provide a competitive advantage.",
         "key_insights": [
-          "The company's strong brand recognition and high-quality journalism provide a competitive advantage in the market.",
-          "Subscriber growth remains a key focus area, with the company's strong run raising questions about its valuation.",
-          "The recent news on Iran-US tensions and market volatility may impact the company's financial results, but its long-term thesis remains intact."
+          "The recent news of Trump's lawsuits reaching key stages after a pair of recent setbacks may impact NYT's stock price.",
+          "The announcement of The New York Times Company's second-quarter financial results on August 5, 2026, is a key catalyst to watch.",
+          "The increasing demand for trustworthy news sources, driven by the trend of increasing market volatility, is a positive trend for NYT."
         ],
-        "watch_flag": "The New York Times' second-quarter financial results announcement on August 5, 2026, is a key catalyst to watch.",
-        "sentiment_summary": "Market sentiment remains focused on the ongoing Iran-US conflict and its impact on global markets, with investors closely watching the New York Times' financial results. The company's strong brand recognition and high-quality journalism continue to attract subscribers, providing a competitive advantage in the market.",
+        "watch_flag": "The New York Times Company's second-quarter financial results on August 5, 2026",
+        "sentiment_summary": "The market is focused on the impact of increasing market volatility on NYT's stock price and the company's ability to maintain its competitive advantage. The recent news of Trump's lawsuits and the upcoming financial results are key catalysts to watch.",
         "_status": "ok"
       },
-      "fcf_yield": 4.58,
+      "fcf_yield": 4.79,
       "net_cash_m": 595.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 9.2,
@@ -3199,11 +3190,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 3.2,
-      "return_3yr_cagr": 23.2,
-      "return_5yr_cagr": 12.1,
-      "return_10yr_cagr": 20.3,
-      "max_drawdown": -13.9,
+      "pct_from_200ma": -1.9,
+      "return_3yr_cagr": 22.1,
+      "return_5yr_cagr": 11.1,
+      "return_10yr_cagr": 19.7,
+      "max_drawdown": -18.0,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -3220,7 +3211,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Financial Services",
-      "market_cap": 10186710016,
+      "market_cap": 9835268096,
       "revenue": 1634574976,
       "sentiment_confidence": 5,
       "megatrend": "general",
@@ -3250,9 +3241,9 @@
       "earnings_quality": "CLEAN",
       "entry_price": 148.51,
       "above_200ma": true,
-      "pct_from_high": -15.5,
-      "return_1yr": -3.4,
-      "return_vs_qqq": -29.9,
+      "pct_from_high": -18.8,
+      "return_1yr": -8.8,
+      "return_vs_qqq": -31.9,
       "trend": "UP",
       "news_count": 9,
       "news_sentiment": "POSITIVE",
@@ -3324,20 +3315,20 @@
           "narrative": "Freedom Holding Corp dominates the financial services market with established relationships and increasing revenue, leading to significant revenue growth and market capitalization expansion.",
           "revenue_10yr_b": 162.881355776,
           "mktcap_10yr_b": 81.440677888,
-          "multiple": 8.0,
+          "multiple": 8.3,
           "probability": 0.6
         },
         "base": {
           "narrative": "Freedom Holding Corp maintains its position in the financial services market with steady revenue growth and moderate market capitalization expansion.",
           "revenue_10yr_b": 97.7288134656,
           "mktcap_10yr_b": 48.8644067328,
-          "multiple": 4.8,
+          "multiple": 5.0,
           "probability": 0.3
         },
         "bear": {
           "narrative": "Freedom Holding Corp struggles to maintain its position in the financial services market with slow revenue growth and declining market capitalization.",
           "mktcap_10yr_b": 24.4322033664,
-          "multiple": 2.4,
+          "multiple": 2.5,
           "probability": 0.1
         },
         "current_tracking": "BULL",
@@ -3347,25 +3338,25 @@
         "written_date": "2026-07-13T03:24:29.031084",
         "ticker": "FRHC"
       },
-      "current_price": 160.0,
+      "current_price": 154.48,
       "sec_8k_highlights": [
-        "Kairat Kelimbetov resigned from the Board of Directors of Freedom Holding Corp. on July 8, 2026, effective immediately.",
+        "Kairat Kelimbetov resigned from the Board of Directors of Freedom Holding Corp., effective July 8, 2026.",
         "Dr. Kelimbetov's resignation was not related to any disagreement with the Company on any matter relating to the Company's operations, policies or practices."
       ],
       "sec_8k_latest_date": "2026-07-10",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "Recent news supports Freedom Holding Corp's potential to dominate the financial services market with its established relationships and increasing revenue.",
+        "impact_reason": "Recent news supports Freedom Holding Corp's potential to dominate the financial services market with established relationships and increasing revenue.",
         "key_insights": [
-          "Freedom Holding Corp. raised $300 million through an ordinary share offering, strengthening its financial position.",
+          "Freedom Holding Corp. completed a US$300 million ordinary share offering, increasing its capital base.",
           "The company received regulatory approval to acquire a Turkish bank, expanding its presence in the region.",
           "S&P upgraded ratings on Freedom Holding Corp. subsidiaries to 'BB-', indicating improved creditworthiness."
         ],
-        "watch_flag": "Turkish bank acquisition and its potential impact on Freedom Holding Corp's financial performance.",
-        "sentiment_summary": "The market is focused on Freedom Holding Corp's strategic moves to expand its presence in the financial services market. The company's recent news and upgrades in credit ratings have boosted investor confidence.",
+        "watch_flag": "Turkish bank acquisition and its potential impact on Freedom Holding Corp's financials",
+        "sentiment_summary": "The market is focused on Freedom Holding Corp's growth prospects and increasing revenue, with recent news supporting its potential to dominate the financial services market. However, the Turkish bank acquisition poses a risk to watch, as its impact on the company's financials is uncertain.",
         "_status": "ok"
       },
-      "fcf_yield": 1.82,
+      "fcf_yield": 1.88,
       "net_cash_m": 874.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -3400,11 +3391,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 14.2,
-      "return_3yr_cagr": 25.9,
-      "return_5yr_cagr": 20.5,
+      "pct_from_200ma": 9.9,
+      "return_3yr_cagr": 25.2,
+      "return_5yr_cagr": 19.6,
       "return_10yr_cagr": null,
-      "max_drawdown": -15.5,
+      "max_drawdown": -18.8,
       "years_listed": 8.4,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -3421,7 +3412,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Utilities",
-      "market_cap": 3632476160,
+      "market_cap": 3546497280,
       "revenue": 1005929024,
       "sentiment_confidence": 1,
       "megatrend": "energy_transition",
@@ -3450,21 +3441,19 @@
       "insider_ownership": 0.62538,
       "earnings_quality": "CLEAN",
       "entry_price": 75.1,
-      "above_200ma": true,
-      "pct_from_high": -27.0,
-      "return_1yr": 55.4,
-      "return_vs_qqq": 28.9,
+      "above_200ma": false,
+      "pct_from_high": -28.8,
+      "return_1yr": 43.7,
+      "return_vs_qqq": 20.6,
       "trend": "DOWN",
-      "news_count": 1,
-      "news_sentiment": "POSITIVE",
+      "news_count": 0,
+      "news_sentiment": "NEUTRAL",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "POSITIVE",
+      "overall_sentiment": "NEUTRAL",
       "signal_or_noise": "SIGNAL",
-      "key_themes": [
-        "Regulatory"
-      ],
-      "sec_8k_count": 9,
+      "key_themes": [],
+      "sec_8k_count": 8,
       "sec_8k_events": [
         {
           "date": "2026-06-29",
@@ -3522,14 +3511,14 @@
           "narrative": "Kenon Holdings achieves consistent 20% YoY revenue growth, driven by successful diversification and strategic investments, leading to a significant increase in market capitalization.",
           "revenue_10yr_b": 5.12,
           "mktcap_10yr_b": 23.21,
-          "multiple": 6.4,
+          "multiple": 6.5,
           "probability": 0.4
         },
         "base": {
           "narrative": "Kenon Holdings maintains a steady 10% YoY revenue growth, with moderate expansion of its diversified portfolio, resulting in a stable increase in market capitalization.",
           "revenue_10yr_b": 2.59,
           "mktcap_10yr_b": 9.21,
-          "multiple": 2.5,
+          "multiple": 2.6,
           "probability": 0.3
         },
         "bear": {
@@ -3545,29 +3534,20 @@
         "written_date": "2026-06-18T02:08:26.040404",
         "ticker": "KEN"
       },
-      "current_price": 69.71,
+      "current_price": 68.06,
       "sec_8k_highlights": [
-        "Kenon's share of the Award, including interest and net of certain outstanding arbitration costs, is approximately $93 million, subject to tax.",
-        "As of June 29, 2026, pre- and post-award interest on the Award is approximately $86 million.",
+        "ICSID ad hoc Committee Finds in favor of Kenon against the Republic of Peru in annulment application.",
+        "Kenon and IC Power have been awarded approximately $1.3 million, which amounts to approximately 50% of their legal fees incurred in defending the annulment application.",
+        "As of June 29, 2026, the total amount of the Award, together with awarded fees, costs and accrued interest, was approximately $200 million, with Kenon\u2019s estimated share of the Award approximately $93 million, subject to tax.",
+        "[RISK] Interest will continue to accrue until the Award is paid.",
         "Kenon and IC Power have entered into an agreement with a capital provider to provide capital for expenses in relation to the pursuit of their arbitration claims against Peru and other costs.",
-        "In the event that Kenon or IC Power receives proceeds in connection with the Award or settlement thereof, the capital provider will be entitled to be repaid the amount committed by the capital provider (which, to date, has equaled $12 million) and to receive up to approximately 55% of the net claim proceeds, subject to the terms of the agreement among Kenon, IC Power and the capital provider.",
-        "The Award, the ICSID annulment application and related proceedings are described in Kenon's annual report on Form 20-F for the year ended December 31, 2025.",
-        "Kenon announces that an ad hoc committee has issued a decision in favor of Kenon and its wholly-owned subsidiary IC Power Ltd., rejecting all of the Republic of Peru's arguments and dismissing Peru's application for partial annulment in relation to the arbitration award issued by ICSID in October 2023 against Peru in favor of Kenon and IC Power."
+        "The capital provider will be entitled to be repaid the amount committed by the capital provider ($12 million) and to receive up to approximately 55% of the net claim proceeds."
       ],
       "sec_8k_latest_date": "2026-06-29",
       "news_intelligence": {
-        "thesis_impact": "STRENGTHENS",
-        "impact_reason": "The recent approval for the Israel power plant expansion strengthens Kenon's diversified energy portfolio.",
-        "key_insights": [
-          "Kenon's energy division receives key approval for Israel power plant expansion, valued at $500M.",
-          "The expansion is expected to increase Kenon's revenue by 15% YoY, driven by growing energy demand.",
-          "Kenon's management team, led by CEO, Yoav Tzruya, has a proven track record of executing successful expansion projects."
-        ],
-        "watch_flag": "Potential regulatory risks associated with the expansion project.",
-        "sentiment_summary": "The market is focused on Kenon's strong revenue growth and diversified energy portfolio, driven by the recent approval for the Israel power plant expansion. Investors are optimistic about the company's long-term prospects, but are also cautious about potential regulatory risks.",
-        "_status": "ok"
+        "_status": "no_data"
       },
-      "fcf_yield": 2.41,
+      "fcf_yield": 2.46,
       "net_cash_m": -593.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -3602,11 +3582,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 0.4,
-      "return_3yr_cagr": 58.3,
-      "return_5yr_cagr": 35.7,
-      "return_10yr_cagr": 54.8,
-      "max_drawdown": -27.0,
+      "pct_from_200ma": -2.1,
+      "return_3yr_cagr": 57.5,
+      "return_5yr_cagr": 35.2,
+      "return_10yr_cagr": 54.1,
+      "max_drawdown": -28.8,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -3623,7 +3603,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Industrials",
-      "market_cap": 64858894336,
+      "market_cap": 61809655808,
       "revenue": 2449027072,
       "sentiment_confidence": 1,
       "megatrend": "energy_transition",
@@ -3653,15 +3633,15 @@
       "earnings_quality": "CLEAN",
       "entry_price": 263.61,
       "above_200ma": true,
-      "pct_from_high": -34.7,
-      "return_1yr": 770.5,
-      "return_vs_qqq": 744.0,
+      "pct_from_high": -37.2,
+      "return_1yr": 708.1,
+      "return_vs_qqq": 685.0,
       "trend": "UP",
       "news_count": 20,
-      "news_sentiment": "MIXED",
+      "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "MIXED",
+      "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
         "AI demand"
@@ -3724,14 +3704,14 @@
           "narrative": "BE achieves significant revenue growth through innovative products and strategic expansion, leading to a market capitalization of $250B in 10 years.",
           "revenue_10yr_b": 15.0,
           "mktcap_10yr_b": 250.0,
-          "multiple": 3.9,
+          "multiple": 4.0,
           "probability": 0.4
         },
         "base": {
           "narrative": "BE maintains steady growth, driven by its strong financial position and industry demand, resulting in a market capitalization of $150B in 10 years.",
           "revenue_10yr_b": 8.0,
           "mktcap_10yr_b": 150.0,
-          "multiple": 2.3,
+          "multiple": 2.4,
           "probability": 0.5
         },
         "bear": {
@@ -3747,28 +3727,29 @@
         "written_date": "2026-06-18T09:02:09.967610",
         "ticker": "BE"
       },
-      "current_price": 228.02,
+      "current_price": 217.3,
       "sec_8k_highlights": [
-        "Bloom Energy categorically rejects the Report's claims regarding the Company's financial results and accounting, which are false and misleading.",
-        "We stand behind the accuracy and integrity of our audited financial statements and financial reporting, and we refer investors to the disclosures in our most recent Forms 10-K and 10-Q filed with the U.S. Securities and Exchange Commission.",
-        "[RISK] We have sufficient supply of scandium oxide to meet our current fuel cell demand and backlog, and our supply is not dependent on China.",
-        "[RISK] We are also not dependent on China to scale scandium oxide to meet future demand growth.",
-        "[RISK] We have clear visibility into our supply chain to support production of 25GW of fuel cells per year, and we will continue to expand this capacity."
+        "Bloom Energy categorically rejects claims regarding the Company's financial results and accounting in a report published by Hunterbrook Media LLC on July 8, 2026.",
+        "Bloom Energy has sufficient supply of scandium oxide to meet its current fuel cell demand and backlog, and its supply is not dependent on China.",
+        "Bloom Energy is not dependent on China to scale scandium oxide to meet future demand growth.",
+        "Bloom Energy has clear visibility into its supply chain to support production of 25GW of fuel cells per year.",
+        "Bloom Energy will continue to expand its fuel cell capacity.",
+        "[RISK] Bloom Energy rejects the conclusions of a report regarding scandium oxide, implying potential material risks related to scandium oxide supply or demand."
       ],
       "sec_8k_latest_date": "2026-07-09",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "Recent news and analyst reports have reaffirmed Bloom Energy's strong financial position and innovative capabilities.",
+        "impact_reason": "JP Morgan Maintains Overweight on Bloom Energy, Raises Price Target to $346",
         "key_insights": [
-          "TD Cowen maintains a $235 price target for Bloom Energy, indicating confidence in the company's growth prospects.",
-          "Bloom Energy's innovative capabilities in the fuel cell industry are expected to drive long-term growth and market share gains.",
-          "The company's strong financial position, including a solid balance sheet and cash reserves, provides a solid foundation for future investments."
+          "JP Morgan raised Bloom Energy's price target to $346, indicating strong market confidence",
+          "Bloom Energy's innovative capabilities and strong financial position support long-term growth",
+          "Recent price increase of 5% on Tuesday suggests growing investor interest"
         ],
-        "watch_flag": "The impact of the chip industry's recent selloff on Bloom Energy's stock price and revenue growth is a key risk to watch.",
-        "sentiment_summary": "The market is focused on the chip industry's recent selloff and its potential impact on Bloom Energy's stock price and revenue growth. Despite this, analyst reports and recent news have reaffirmed the company's strong financial position and innovative capabilities, which are expected to drive long-term growth and market share gains.",
+        "watch_flag": "Potential for further price increases if market sentiment continues to favor Bloom Energy",
+        "sentiment_summary": "The market is focused on Bloom Energy's recent price increase and JP Morgan's positive rating, indicating growing confidence in the company's long-term prospects.",
         "_status": "ok"
       },
-      "fcf_yield": 0.37,
+      "fcf_yield": 0.39,
       "net_cash_m": -461.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 7.6,
@@ -3803,11 +3784,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 28.8,
-      "return_3yr_cagr": 132.8,
-      "return_5yr_cagr": 59.8,
+      "pct_from_200ma": 23.6,
+      "return_3yr_cagr": 132.5,
+      "return_5yr_cagr": 58.4,
       "return_10yr_cagr": null,
-      "max_drawdown": -34.7,
+      "max_drawdown": -37.2,
       "years_listed": 8.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -3824,7 +3805,7 @@
       "tier": "T1",
       "date_added": "2026-07-08",
       "sector": "Financial Services",
-      "market_cap": 236555763712,
+      "market_cap": 232564146176,
       "revenue": 68811997184,
       "sentiment_confidence": 4,
       "megatrend": "synthetic_biology",
@@ -3858,16 +3839,16 @@
       "insider_ownership": 0.22326,
       "earnings_quality": "CLEAN",
       "entry_price": 338.67,
-      "current_price": 346.69,
+      "current_price": 340.84,
       "above_200ma": true,
-      "pct_from_high": -9.5,
-      "pct_from_200ma": 2.4,
-      "return_1yr": 14.8,
-      "return_vs_qqq": -11.7,
-      "return_3yr_cagr": 28.7,
-      "return_5yr_cagr": 16.4,
-      "return_10yr_cagr": 19.9,
-      "max_drawdown": -9.5,
+      "pct_from_high": -10.7,
+      "pct_from_200ma": 1.0,
+      "return_1yr": 11.6,
+      "return_vs_qqq": -11.5,
+      "return_3yr_cagr": 29.2,
+      "return_5yr_cagr": 16.3,
+      "return_10yr_cagr": 19.6,
+      "max_drawdown": -10.7,
       "long_term_alpha_pp": null,
       "long_term_note": "",
       "trend": "UP",
@@ -3879,11 +3860,9 @@
       "signal_or_noise": "SIGNAL",
       "key_themes": [
         "Revenue beat",
-        "Partnership",
-        "Product launch",
-        "Space/Launch"
+        "Partnership"
       ],
-      "sec_8k_count": 9,
+      "sec_8k_count": 8,
       "sec_8k_events": [
         {
           "date": "2026-07-15",
@@ -3899,24 +3878,22 @@
         }
       ],
       "sec_8k_highlights": [
-        "American Express Company reported U.S. Consumer and U.S. Small Business Card balances held for investment as of and for the months ended June 30, May 31, and April 30, 2026, and the three months ended June 30, 2026.",
-        "U.S. Consumer Card balances were $113.8 billion as of June 30, 2026.",
-        "U.S. Small Business Card balances were $45.9 billion as of June 30, 2026.",
-        "The net write-off rate for U.S. Consumer Card balances was 1.4% as of June 30, 2026.",
-        "The net write-off rate for U.S. Small Business Card balances was 2.3% as of June 30, 2026.",
-        "Total Card balances held for investment \u2013 U.S. Consumer and U.S. Small Business were $159.7 billion as of June 30, 2026."
+        "Actual reported results: American Express Company reported $113.8 billion in U.S. Consumer Card balances as of June 30, 2026.",
+        "Actual reported results: American Express Company reported a net write-off rate of 1.4% for U.S. Consumer Card balances as of June 30, 2026.",
+        "Actual reported results: American Express Company reported $159.7 billion in total Card balances held for investment \u2013 U.S. Consumer and U.S. Small Business as of June 30, 2026.",
+        "Strategic announcement: American Express Company is furnishing delinquency and write-off statistics for its U.S. Consumer and U.S. Small Business Card balances held for investment."
       ],
       "sec_8k_latest_date": "2026-07-15",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "American Express expands its B2B payments tools and partnerships, solidifying its network effects-based product.",
+        "impact_reason": "American Express expands its network effects-based product through new partnerships.",
         "key_insights": [
-          "American Express expands B2B payments tools to increase network volumes and interest income.",
-          "Partnership with ALL Accor and Bottomline expands B2B payment connectivity and streamlines buyer and supplier payments.",
-          "Increased consumer spending trend is leveraged by American Express's customer loyalty and network effects-based product."
+          "American Express expands Accor Rewards and Paymode B2B partnerships to strengthen its B2B payments.",
+          "Walmart plans to take down Amazon, but American Express's focus on customer loyalty remains strong.",
+          "American Express's Q2 earnings are expected to be strong, with potential for increased consumer credit demand."
         ],
-        "watch_flag": "Q2 earnings and potential impact of increasing consumer spending trend on network volumes and interest income.",
-        "sentiment_summary": "The market is focused on American Express's recent partnerships and expansion of B2B payments tools, which are expected to drive growth and increase network volumes. However, investors are also awaiting Q2 earnings and the potential impact of the increasing consumer spending trend on the company's performance.",
+        "watch_flag": "Visa's Q3 Earnings Could be a Catalyst",
+        "sentiment_summary": "The market is focused on American Express's strong earnings and expanding partnerships, while also keeping an eye on Visa's Q3 earnings as a potential catalyst.",
         "_status": "ok"
       },
       "sector_durability_20yr": "HIGH",
@@ -4012,7 +3989,7 @@
       "years_listed": 10.0,
       "currency": "USD",
       "congress_disclosures": [],
-      "fcf_yield": 6.36,
+      "fcf_yield": 6.47,
       "net_cash_m": -6592.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -4031,7 +4008,7 @@
       "tier": "T1",
       "date_added": "2026-07-08",
       "sector": "Communication Services",
-      "market_cap": 139918802944,
+      "market_cap": 133992833024,
       "revenue": 6164192256,
       "sentiment_confidence": 5,
       "megatrend": "ai_infrastructure",
@@ -4065,27 +4042,29 @@
       "insider_ownership": 0.14319,
       "earnings_quality": "CLEAN",
       "entry_price": 508.8,
-      "current_price": 416.5,
+      "current_price": 398.86,
       "above_200ma": false,
-      "pct_from_high": -43.2,
-      "pct_from_200ma": -21.0,
-      "return_1yr": 19.0,
-      "return_vs_qqq": -7.5,
-      "return_3yr_cagr": 140.5,
-      "return_5yr_cagr": 44.9,
+      "pct_from_high": -45.6,
+      "pct_from_200ma": -24.2,
+      "return_1yr": 10.1,
+      "return_vs_qqq": -13.0,
+      "return_3yr_cagr": 137.0,
+      "return_5yr_cagr": 45.4,
       "return_10yr_cagr": null,
-      "max_drawdown": -43.2,
+      "max_drawdown": -45.6,
       "long_term_alpha_pp": 36.3,
       "long_term_note": "",
       "trend": "DOWN",
       "news_count": 20,
-      "news_sentiment": "POSITIVE",
+      "news_sentiment": "MIXED",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "POSITIVE",
+      "overall_sentiment": "MIXED",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "AI demand"
+        "AI demand",
+        "Partnership",
+        "Competition"
       ],
       "sec_8k_count": 2,
       "sec_8k_events": [
@@ -4099,25 +4078,25 @@
         }
       ],
       "sec_8k_highlights": [
-        "AppLovin reported revenue of $1,842 million for the quarter ended March 31, 2026, a 59% increase from $1,159 million in the same period last year.",
-        "Net income was $1,206 million for the quarter ended March 31, 2026, a 109% increase from $576 million in the same period last year.",
-        "AppLovin repurchased and withheld 2.2 million shares of its Class A common stock for a total cost of $1.0 billion during the first quarter 2026.",
+        "AppLovin Corporation announced financial results for the quarter ended March 31, 2026, with revenue of $1,842 million, net income of $1,206 million, and adjusted EBITDA of $1,557 million.",
+        "Basic and Diluted earnings per share were $3.57 and $3.56, respectively, for the first quarter 2026.",
+        "Net cash from operating activities was $1.3 billion and Free Cash Flow was $1.3 billion for the first quarter 2026.",
+        "During the first quarter 2026, AppLovin repurchased and withheld 2.2 million shares of its Class A common stock, for a total cost of $1.0 billion.",
+        "AppLovin had 336 million shares of its Class A and Class B common stock outstanding at the end of 1Q 2026.",
         "AppLovin will host a webinar today at 2:00 PM PT / 5:00 PM ET to discuss its first quarter 2026 results and provide commentary on its business performance.",
-        "AppLovin provided second quarter 2026 financial guidance with revenue expected to be between $1,915 million and $1,945 million, and Adjusted EBITDA expected to be between $1,615 million and $1,645 million.",
-        "AppLovin had 336 million shares of its Class A and Class B common stock outstanding at the end of the first quarter 2026.",
-        "Basic and Diluted earnings per share were $3.57 and $3.56, respectively, for the first quarter 2026."
+        "AppLovin provided second quarter 2026 financial guidance, with revenue expected to be between $1,915 million and $1,945 million, and adjusted EBITDA margin expected to be between 84% and 85%."
       ],
       "sec_8k_latest_date": "2026-05-06",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "AppLovin's AI expansion and data monetization moat solidify its position in the mobile advertising market.",
+        "impact_reason": "Recent news highlights AppLovin's data monetization moat and growing mobile app usage trend.",
         "key_insights": [
-          "AppLovin's AI expansion is expected to drive 20% revenue growth in the next quarter.",
-          "The company's data monetization moat is valued at $10 billion, a significant increase from last year.",
-          "AppLovin's partnership with top gaming companies will drive 30% of its revenue in the next year."
+          "AppLovin's mobile advertising platform rides the trend of increasing mobile app usage.",
+          "The Bull Case For AppLovin (APP) Could Change Following AI Expansion And Short-Seller Rebuttal.",
+          "AppLovin Corporation (APP) Is a Trending Stock: Facts to Know Before Betting on It."
         ],
-        "watch_flag": "Upcoming Q2 earnings report and potential short-seller rebuttal",
-        "sentiment_summary": "Market sentiment remains bullish on AppLovin, driven by its strong fundamentals and AI expansion. However, some investors are cautious due to the recent 24% stock price decline.",
+        "watch_flag": "AI disruption concerns and potential impact on AppLovin's growth story.",
+        "sentiment_summary": "Market sentiment is mixed, with some investors concerned about AI disruption, while others see AppLovin's data monetization moat as a strength. Recent news highlights the company's growth potential and increasing mobile app usage trend.",
         "_status": "ok"
       },
       "sector_durability_20yr": "MEDIUM",
@@ -4160,14 +4139,14 @@
           "narrative": "APP's mobile advertising platform continues to ride the trend of increasing mobile app usage, with its data monetization moat remaining intact.",
           "revenue_10yr_b": 1000.0,
           "mktcap_10yr_b": 500.0,
-          "multiple": 3.6,
+          "multiple": 3.7,
           "probability": 0.6
         },
         "base": {
           "narrative": "APP's mobile advertising platform experiences steady growth, but faces increasing competition in the mobile advertising landscape.",
           "revenue_10yr_b": 600.0,
           "mktcap_10yr_b": 300.0,
-          "multiple": 2.1,
+          "multiple": 2.2,
           "probability": 0.3
         },
         "bear": {
@@ -4211,10 +4190,10 @@
           "pct": 0.0212
         }
       ],
-      "years_listed": 5.2,
+      "years_listed": 5.3,
       "currency": "USD",
       "congress_disclosures": [],
-      "fcf_yield": 3.15,
+      "fcf_yield": 3.29,
       "net_cash_m": -1091.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 3.7,
@@ -4233,7 +4212,7 @@
       "tier": "T1",
       "date_added": "2026-07-08",
       "sector": "Technology",
-      "market_cap": 692662894592,
+      "market_cap": 692532281344,
       "revenue": 35327500288,
       "sentiment_confidence": 5,
       "megatrend": "ai_infrastructure",
@@ -4267,16 +4246,16 @@
       "insider_ownership": 0.00013,
       "earnings_quality": "WATCH",
       "entry_price": 1740.58,
-      "current_price": 1803.34,
+      "current_price": 1803.0,
       "above_200ma": true,
-      "pct_from_high": -10.0,
-      "pct_from_200ma": 31.1,
-      "return_1yr": 155.9,
-      "return_vs_qqq": 129.4,
-      "return_3yr_cagr": 39.0,
-      "return_5yr_cagr": 19.6,
-      "return_10yr_cagr": 33.5,
-      "max_drawdown": -10.0,
+      "pct_from_high": -9.4,
+      "pct_from_200ma": 31.6,
+      "return_1yr": 153.5,
+      "return_vs_qqq": 130.4,
+      "return_3yr_cagr": 37.7,
+      "return_5yr_cagr": 19.7,
+      "return_10yr_cagr": 33.4,
+      "max_drawdown": -9.4,
       "long_term_alpha_pp": null,
       "long_term_note": "",
       "trend": "UP",
@@ -4288,17 +4267,12 @@
       "signal_or_noise": "SIGNAL",
       "key_themes": [
         "AI demand",
-        "Product launch",
         "Guidance"
       ],
-      "sec_8k_count": 2,
+      "sec_8k_count": 1,
       "sec_8k_events": [
         {
           "date": "2026-07-15",
-          "description": "Material event filed"
-        },
-        {
-          "date": "2026-04-23",
           "description": "Material event filed"
         }
       ],
@@ -4306,22 +4280,22 @@
         "ASML reports \u20ac9.3 billion total net sales and \u20ac2.9 billion net income in Q2 2026.",
         "ASML increases outlook, expects 2026 total net sales to be between \u20ac43 billion and \u20ac45 billion, with a gross margin between 54% and 56%.",
         "ASML expects Q3 2026 total net sales between \u20ac11.0 billion and \u20ac12.0 billion, and a gross margin between 55% and 57%.",
-        "ASML now expects 2026 total net sales to be between \u20ac43 billion and \u20ac45 billion, with a gross margin between 54% and 56%.",
-        "ASML purchased around \u20ac1.1 billion worth of shares under the current 2026\u20132028 share buyback program in the second quarter.",
+        "Christophe Fouchet is ASML President and Chief Executive Officer.",
+        "ASML purchased around \u20ac1.1 billion worth of shares under the current 2026\u20132028 share buyback program.",
         "An interim dividend over 2026 of \u20ac1.88 per ordinary share will be made.",
-        "ASML plans to add 30% to its 2026 low NA EUV capacity of around 65 for 2027, and is investigating to increase capacity with another 30% for 2028."
+        "ASML is planning to add 30% to its 2026 low NA EUV capacity for 2027, and investigating to increase capacity with another 30% for 2028."
       ],
       "sec_8k_latest_date": "2026-07-15",
       "news_intelligence": {
         "thesis_impact": "STRENGTHENS",
-        "impact_reason": "ASML's recent news and guidance strengthen its position as a leader in EUVL technology, supporting its moat.",
+        "impact_reason": "Recent news highlights ASML's EUVL technology leadership and increasing demand for semiconductors.",
         "key_insights": [
-          "ASML lifted its 2026 outlook as high NA EUV enters Intel production, indicating strong demand for its technology.",
-          "ASML's \u20ac13 billion memory bet is seen as a strategic move to secure its position in the semiconductor industry.",
-          "Micron's stock is near bear-market territory, but ASML's guidance suggests buying the dip, indicating a potential opportunity for investors."
+          "ASML's EUV leadership strengthens long-term growth, with surging AI CapEx as a catalyst.",
+          "Chipmaking equipment stocks, including ASML, AMAT, KLAC, and LRCX, rise on Intel's CapEx bump.",
+          "Established firm Harding Loevner enters the ETF market with LOEV for international investors, potentially impacting ASML's growth."
         ],
-        "watch_flag": "Intel's earnings and guidance, as well as the broader semiconductor industry's growth prospects, are key catalysts to watch.",
-        "sentiment_summary": "The market is focused on ASML's strong guidance and the potential for its EUVL technology to drive growth in the semiconductor industry. However, investors are also cautious about the company's valuation and the broader industry's growth prospects.",
+        "watch_flag": "Intel's CapEx bump and potential price dispute with Taiwan Semiconductor",
+        "sentiment_summary": "The market is focused on the increasing demand for semiconductors and the potential impact of Intel's CapEx bump on ASML's growth. However, the recent price dispute with Taiwan Semiconductor is a risk to watch.",
         "_status": "ok"
       },
       "sector_durability_20yr": "HIGH",
@@ -4361,29 +4335,29 @@
       "scenario": {
         "bull": {
           "narrative": "ASML's EUVL technology continues to dominate the industry, driving significant growth in demand for semiconductors.",
-          "revenue_10yr_b": 59.11,
+          "revenue_10yr_b": 63.41,
           "mktcap_10yr_b": 500.0,
           "multiple": 0.7,
           "probability": 0.6
         },
         "base": {
-          "narrative": "ASML's EUVL technology maintains its market share, but growth slows due to increasing competition and market saturation.",
-          "revenue_10yr_b": 43.45,
+          "narrative": "ASML's EUVL technology maintains its market position, but growth slows due to increasing competition and industry saturation.",
+          "revenue_10yr_b": 41.19,
           "mktcap_10yr_b": 300.0,
           "multiple": 0.4,
           "probability": 0.3
         },
         "bear": {
-          "narrative": "A structural change in the industry leads to a significant decline in demand for semiconductors, and ASML's EUVL technology is unable to adapt.",
+          "narrative": "A structural change in the industry leads to a decline in demand for semiconductors, and ASML's EUVL technology is unable to adapt.",
           "mktcap_10yr_b": 150.0,
           "multiple": 0.2,
           "probability": 0.1
         },
         "current_tracking": "BULL",
-        "tracking_note": "Based on current market trends and ASML's strong position in the industry.",
+        "tracking_note": "Based on current financials and thesis.",
         "thesis_breaks_if": "A structural change in the industry, such as a significant shift to alternative lithography technologies or a major disruption to ASML's customer base.",
         "natural_eval_window_days": 365,
-        "written_date": "2026-07-22T15:10:18.410714",
+        "written_date": "2026-07-24T05:28:38.991586",
         "ticker": "ASML"
       },
       "institutional_holders": [
@@ -4437,7 +4411,7 @@
       "date_added": "2026-07-22",
       "sector": "Real Estate",
       "factor_group": "other",
-      "market_cap": 2687969024,
+      "market_cap": 2675828480,
       "revenue": 2928100096,
       "sentiment_confidence": 1,
       "megatrend": "ai_infrastructure",
@@ -4493,16 +4467,16 @@
         ]
       },
       "entry_price": 11.19,
-      "current_price": 11.19,
+      "current_price": 11.02,
       "above_200ma": true,
-      "pct_from_high": -12.3,
-      "pct_from_200ma": 28.5,
-      "return_1yr": 24.2,
-      "return_vs_qqq": -2.3,
+      "pct_from_high": -13.6,
+      "pct_from_200ma": 26.3,
+      "return_1yr": 16.8,
+      "return_vs_qqq": -6.3,
       "return_3yr_cagr": 13.1,
-      "return_5yr_cagr": -4.6,
-      "return_10yr_cagr": -7.3,
-      "max_drawdown": -56.9,
+      "return_5yr_cagr": -5.3,
+      "return_10yr_cagr": -7.5,
+      "max_drawdown": -57.5,
       "long_term_alpha_pp": null,
       "long_term_note": "",
       "trend": "UP",
@@ -4520,8 +4494,12 @@
       "overall_sentiment": "NEUTRAL",
       "signal_or_noise": "SIGNAL",
       "key_themes": [],
-      "sec_8k_count": 5,
+      "sec_8k_count": 6,
       "sec_8k_events": [
+        {
+          "date": "2026-07-23",
+          "description": "Other material event"
+        },
         {
           "date": "2026-07-17",
           "description": "Material agreement entered, Direct financial obligation created, Financial statements attached"
@@ -4529,28 +4507,28 @@
         {
           "date": "2026-06-05",
           "description": "Other material event, Financial statements attached"
-        },
-        {
-          "date": "2026-06-01",
-          "description": "Other material event, Financial statements attached"
         }
       ],
       "sec_8k_highlights": [
-        "Uniti Group Inc. completed a private offering of $1,140,710,000 aggregate principal amount of secured fiber network revenue term notes.",
-        "The Term Notes were issued at an issue price of 100% of their respective principal amounts.",
-        "The Term Notes have an anticipated repayment date in June of 2033."
+        "Uniti Group Inc. completed a private offering of $1.1 billion aggregate principal amount of secured fiber network revenue term notes.",
+        "The Company intends to use a portion of the net cash provided by the Kinetic ABS Asset Sale for reinvestments in the business, including to fund growth capital expenditures, and $500 million of such net cash proceeds to repay senior secured indebtedness of the Company.",
+        "Uniti Services issued a prepayment notice to the lenders of its senior secured term loan due 2032 to prepay up to $167,791,000 principal amount of Term Loan on July 30, 2026.",
+        "The Company intends to use a portion of the net cash provided by the Kinetic ABS Asset Sale for reinvestments in the business, including to fund growth capital expenditures.",
+        "[RISK] The Company has senior secured indebtedness that will be repaid with $500 million of net cash proceeds from the Kinetic ABS Asset Sale.",
+        "Uniti Services, Uniti Group Finance 2019 Inc. and CSL Capital, LLC commenced asset sale offers.",
+        "The Company has completed a private offering of secured fiber network revenue term notes, and intends to use a portion of the net cash provided by the Kinetic ABS Asset Sale for reinvestments in the business."
       ],
-      "sec_8k_latest_date": "2026-07-17",
+      "sec_8k_latest_date": "2026-07-23",
       "news_intelligence": {
-        "thesis_impact": "STRENGTHENS",
-        "impact_reason": "Barclays maintains a positive stance on Uniti Group with a raised price target to $13.",
+        "thesis_impact": "NEUTRAL",
+        "impact_reason": "Recent price target increase by Barclays does not significantly alter the investment thesis.",
         "key_insights": [
-          "Barclays maintains Equal-Weight on Uniti Group, raising price target to $13.",
-          "The price target increase suggests a positive outlook on the company's growth prospects.",
-          "Uniti Group's financial performance and market trends will be crucial in determining its future growth."
+          "Barclays raised Uniti Group's price target to $13, maintaining an Equal-Weight rating.",
+          "The scalable and cost-effective fiber-optic network deployment remains a key driver of Uniti Group's growth.",
+          "The company's focus on expanding its network infrastructure continues to attract investor attention."
         ],
         "watch_flag": "",
-        "sentiment_summary": "The market is focused on Uniti Group's potential for growth, with Barclays maintaining a positive stance. The raised price target to $13 indicates a positive outlook on the company's financial performance.",
+        "sentiment_summary": "The market is cautiously optimistic about Uniti Group's growth prospects, driven by its scalable fiber-optic network deployment. However, the recent price target increase by Barclays has not significantly altered the investment thesis.",
         "_status": "ok"
       },
       "sector_durability_20yr": "",
@@ -4609,20 +4587,20 @@
           "narrative": "Uniti Group's fiber-optic network deployment gains significant traction, leading to a disruption in the telecommunications infrastructure market.",
           "revenue_10yr_b": 34.5,
           "mktcap_10yr_b": 27.5,
-          "multiple": 10,
+          "multiple": 10.3,
           "probability": 0.2
         },
         "base": {
           "narrative": "Uniti Group's fiber-optic network deployment gains moderate traction, but faces stiff competition from established players.",
           "revenue_10yr_b": 12.5,
           "mktcap_10yr_b": 9.5,
-          "multiple": 5,
+          "multiple": 3.6,
           "probability": 0.6
         },
         "bear": {
           "narrative": "Uniti Group's fiber-optic network deployment fails to gain significant traction, and the company struggles to compete with established players.",
           "mktcap_10yr_b": 3.5,
-          "multiple": 2,
+          "multiple": 1.3,
           "probability": 0.2
         },
         "current_tracking": "BULL",
@@ -4631,7 +4609,43 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-07-22T15:08:53.121159",
         "ticker": "UNIT"
-      }
+      },
+      "institutional_holders": [
+        {
+          "name": "Elliott Investment Management L.P.",
+          "pct": 0.24299999
+        },
+        {
+          "name": "Blackrock Inc.",
+          "pct": 0.1114
+        },
+        {
+          "name": "T. Rowe Price Investment Management, Inc.",
+          "pct": 0.074
+        }
+      ],
+      "mutualfund_holders": [
+        {
+          "name": "iShares Trust-iShares Core S&P Small-Cap ETF",
+          "pct": 0.0448
+        },
+        {
+          "name": "GLOBAL X FUNDS-Global X Data Center & Digital Infrastructure ETF",
+          "pct": 0.031600002
+        },
+        {
+          "name": "VANGUARD INDEX FUNDS-Vanguard Total Stock Market Index Fund",
+          "pct": 0.031400003
+        }
+      ],
+      "years_listed": 10.0,
+      "currency": "USD",
+      "congress_disclosures": [],
+      "fcf_yield": -7.75,
+      "net_cash_m": -10129.0,
+      "net_cash_flag": "LEVERAGED",
+      "rd_intensity": 0.0,
+      "moat_proxy_label": "MODERATE"
     }
   ],
   "exited": [
@@ -5293,6 +5307,13 @@
       "migrations": [
         "TIGO:T3->T2"
       ],
+      "holdings_count": 24
+    },
+    {
+      "date": "2026-07-24",
+      "new_additions": [],
+      "exits": [],
+      "migrations": [],
       "holdings_count": 24
     }
   ],

@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "SK hynix Inc. experiences significant growth in demand for memory in AI and data centers, leading to a substantial increase in revenue and market capitalization.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 3.5,
+    "multiple": 4.2,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "SK hynix Inc. maintains its market position as a leading manufacturer of DRAM and NAND flash memory, with steady growth in revenue and market capitalization.",
+    "revenue_10yr_b": 1.8,
+    "mktcap_10yr_b": 2.3,
+    "multiple": 3.1,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "SK hynix Inc. faces increased competition and declining demand for memory, leading to a decrease in revenue and market capitalization.",
+    "mktcap_10yr_b": 1.1,
+    "multiple": 2.5,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise",
+  "natural_eval_window_days": 90,
+  "written_date": "2026-07-24T05:27:31.160418",
+  "ticker": "SKHY"
+}

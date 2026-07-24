@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "MRX achieves $10M in revenue within the next 12 months and continues to grow at a rate of 20% YoY, with a market capitalization of $30B and a price multiple of 10x.",
+    "revenue_10yr_b": 75.78636288,
+    "mktcap_10yr_b": 37.89318144,
+    "multiple": 10.0,
+    "probability": 0.2
+  },
+  "base": {
+    "narrative": "MRX achieves $10M in revenue within the next 12 months but grows at a rate of 5% YoY, with a market capitalization of $10B and a price multiple of 5x.",
+    "revenue_10yr_b": 45.471817728,
+    "mktcap_10yr_b": 22.735908864,
+    "multiple": 5.0,
+    "probability": 0.5
+  },
+  "bear": {
+    "narrative": "MRX fails to achieve $10M in revenue within the next 12 months and grows at a rate of -5% YoY, with a market capitalization of $2B and a price multiple of 2x.",
+    "mktcap_10yr_b": 11.367954432,
+    "multiple": 2.0,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Strong growth potential in digital financial infrastructure market, but significant competition and cash burn risks.",
+  "thesis_breaks_if": "Failure to achieve $10M in revenue within the next 12 months",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-24T05:27:43.900622",
+  "ticker": "MRX"
+}

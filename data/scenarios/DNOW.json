@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "DNOW Inc. achieves 20% YoY revenue growth for 10 consecutive years, driven by strong brand and customer relationships, and successful adaptation to changes in the industrial sector.",
+    "revenue_10yr_b": 52.48,
+    "mktcap_10yr_b": 26.24,
+    "multiple": 9.8,
+    "probability": 0.2
+  },
+  "base": {
+    "narrative": "DNOW Inc. achieves 10% YoY revenue growth for 5 consecutive years, driven by steady customer relationships and moderate adaptation to changes in the industrial sector.",
+    "revenue_10yr_b": 27.2,
+    "mktcap_10yr_b": 13.6,
+    "multiple": 6.2,
+    "probability": 0.6
+  },
+  "bear": {
+    "narrative": "DNOW Inc. fails to achieve revenue growth, driven by loss of market share and inability to adapt to changes in the industrial sector.",
+    "mktcap_10yr_b": 2.6,
+    "multiple": 1.0,
+    "probability": 0.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Strong brand and customer relationships, but challenges in the industrial sector.",
+  "thesis_breaks_if": "Failure to achieve revenue growth of at least 10% YoY for 3 consecutive years.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-24T05:27:49.615228",
+  "ticker": "DNOW"
+}

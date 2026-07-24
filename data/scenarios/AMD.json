@@ -1,0 +1,28 @@
+{
+  "bull": {
+    "narrative": "AMD's leading-edge semiconductor technology and strong partnerships in the gaming and datacenter segments drive significant growth in high-performance computing demand.",
+    "revenue_10yr_b": 73.45,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 48,
+    "probability": 0.3
+  },
+  "base": {
+    "narrative": "AMD maintains its position in the semiconductor market, but growth is driven by steady demand in the gaming and datacenter segments.",
+    "revenue_10yr_b": 54.45,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 36,
+    "probability": 0.4
+  },
+  "bear": {
+    "narrative": "A structural shift in the industry towards alternative technologies or business models leads to a decline in demand for AMD's products.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 24,
+    "probability": 0.3
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis, the current tracking is set to BULL.",
+  "thesis_breaks_if": "A structural shift in the industry towards alternative technologies or business models.",
+  "natural_eval_window_days": 365,
+  "written_date": "2026-07-24T05:27:35.431512",
+  "ticker": "AMD"
+}
