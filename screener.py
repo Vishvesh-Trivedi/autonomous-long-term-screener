@@ -27,7 +27,7 @@ from edgar_fundamentals import compute_trajectory, cross_check_yahoo, fetch_cust
 from ipo_monitor import run_ipo_monitor, get_ipo_watchlist_summary, get_eligible_for_screening
 from quarterly_review import run_quarterly_review, print_score_report
 from congress_trades import build_senate_index, congress_signal_for
-import os, json, time, pickle, logging, ssl, smtplib, re, random
+import os, json, time, pickle, logging, ssl, smtplib, re, random, threading
 from dotenv import load_dotenv
 load_dotenv()
 from datetime import datetime, timedelta, date
@@ -259,6 +259,16 @@ def sanitize_scenario(scenario: dict, ticker: str, current_mkt_cap_b: float, tie
 
         scenario[case]['mktcap_10yr_b'] = proj
 
+        # Expected annual return (IRR) this case implies over the 10yr horizon:
+        # the compound growth from today's market cap to the projected one. This
+        # is the plain "~X%/yr if this plays out" number the emails surface, and
+        # the base case feeds the priced-for-perfection sizing check. Price-only
+        # (dividends excluded), so it is a conservative floor for total return.
+        if current_mkt_cap_b > 0 and proj > 0:
+            scenario[case]['irr_10yr_pct'] = round(((proj / current_mkt_cap_b) ** (1 / 10) - 1) * 100, 1)
+        else:
+            scenario[case]['irr_10yr_pct'] = None
+
         # --- Revenue (if present) ---
         if 'revenue_10yr_b' in scenario[case]:
             rev_raw = scenario[case]['revenue_10yr_b']
@@ -269,6 +279,24 @@ def sanitize_scenario(scenario: dict, ticker: str, current_mkt_cap_b: float, tie
             if rev > proj * 2:
                 rev = proj * 2
             scenario[case]['revenue_10yr_b'] = rev
+
+    # Probability-weighted expected return across the three cases — the single
+    # "blended expected return" figure. Falls back to the base case alone when
+    # probabilities are missing so there is always an honest number to show.
+    _w_sum = 0.0
+    _p_sum = 0.0
+    for case in ['bull', 'base', 'bear']:
+        c = scenario.get(case) or {}
+        irr = c.get('irr_10yr_pct')
+        prob = c.get('probability')
+        if isinstance(irr, (int, float)) and isinstance(prob, (int, float)) and prob > 0:
+            _w_sum += irr * prob
+            _p_sum += prob
+    if _p_sum > 0:
+        scenario['expected_irr_pct'] = round(_w_sum / _p_sum, 1)
+    else:
+        _base_irr = (scenario.get('base') or {}).get('irr_10yr_pct')
+        scenario['expected_irr_pct'] = _base_irr if isinstance(_base_irr, (int, float)) else None
 
     return scenario
 
@@ -431,18 +459,26 @@ def _fetch_info_guarded(ticker: str) -> dict:
     yfinance's .info makes a network request with no timeout of its own, so a
     stalled Yahoo connection would otherwise block the single-threaded fetch
     loop forever (the classic "run went silent for hours" hang). We run the
-    call in a throwaway worker thread and abandon it if it overruns, letting
-    the main loop move on to the next ticker. Raises FuturesTimeout on overrun.
+    call in a DAEMON worker thread and abandon it if it overruns, letting the
+    main loop move on to the next ticker. Daemon threads never block process
+    exit, so even a pile of stalled sockets can't hang the run or its shutdown.
+    Raises FuturesTimeout on overrun.
     """
     timeout = _cn(30, 'sentiment_data', 'info_fetch_timeout_seconds')
-    ex = ThreadPoolExecutor(max_workers=1)
-    try:
-        fut = ex.submit(lambda: _yf_ticker(ticker).info)
-        return fut.result(timeout=timeout)
-    finally:
-        # wait=False so a genuinely hung socket thread can't block us; it dies
-        # on its own when the connection eventually errors out.
-        ex.shutdown(wait=False)
+    box = {}
+    def _worker():
+        try:
+            box['info'] = _yf_ticker(ticker).info
+        except Exception as exc:   # captured, re-raised on the main thread
+            box['err'] = exc
+    t = threading.Thread(target=_worker, name=f'info-{ticker}', daemon=True)
+    t.start()
+    t.join(timeout)
+    if t.is_alive():
+        raise FuturesTimeout(f'{ticker}: .info exceeded {timeout}s')
+    if 'err' in box:
+        raise box['err']
+    return box.get('info') or {}
 
 def _batch_download_prices(batch: list):
     """Download prices for a batch of tickers. Returns (hist, survivors_count)."""
@@ -2416,12 +2452,14 @@ def research_candidate(ticker: str, tier: str, info: dict, filing_text: str, sen
     company_history = build_company_history(ticker, info, technicals)
 
     # Growth-adjusted valuation read (never a veto — tilts sizing + informs the LLM)
-    from research_metrics import compute_fcf_metrics
+    from research_metrics import compute_fcf_metrics, compute_implied_expectations
     try:
-        _fcf_y = compute_fcf_metrics(info, ticker).get('fcf_yield')
+        _fcf_m = compute_fcf_metrics(info, ticker)
     except Exception:
-        _fcf_y = None
+        _fcf_m = {}
+    _fcf_y = _fcf_m.get('fcf_yield')
     valuation = compute_valuation(info, _fcf_y)
+    implied   = compute_implied_expectations(info, _fcf_m.get('fcf'))
     valuation_line = f"{valuation['valuation_label']} — {valuation['valuation_note']}"
 
     if tier in ('T1', 'T2'):
@@ -2466,6 +2504,12 @@ def research_candidate(ticker: str, tier: str, info: dict, filing_text: str, sen
     research['val_ev_ebitda']        = valuation['val_ev_ebitda']
     research['val_peg']              = valuation['val_peg']
 
+    # Reverse-DCF: what growth is the current price already assuming? Recorded on
+    # the thesis so both emails can show it and the sizing gate below can act.
+    research['implied_growth_pct']   = implied['implied_growth_pct']
+    research['implied_growth_label'] = implied['implied_growth_label']
+    research['implied_growth_note']  = implied['implied_growth_note']
+
     # Moat lie detector
     gm = info.get('grossMargins', 0) or 0
     moat = research.get('moat_type', '').lower()
@@ -2498,6 +2542,25 @@ def research_candidate(ticker: str, tier: str, info: dict, filing_text: str, sen
         research['position_size_pct'] = min(research.get('position_size_pct', 2) or 2, 2)
         research['sector_risk_note'] = (
             research.get('sector_survival_note') or 'Sector durability rated LOW — downgraded'
+        )
+
+    # Priced-for-perfection sizing gate: when the reverse-DCF says the market is
+    # already assuming near-perfect growth for a decade AND the growth-adjusted
+    # valuation is rich, a 15-20yr buyer should start small and accumulate on
+    # weakness rather than pay full price up front. Soft downgrade + capped size
+    # (never an AVOID), mirroring the sector/alpha tilts above — the business
+    # can be excellent; this is purely about the entry price.
+    _impl = research.get('implied_growth_pct')
+    if (research.get('implied_growth_label') == 'PRICED_FOR_PERFECTION'
+            and research.get('valuation_label') in ('RICH', 'EXTREME')
+            and research.get('verdict') in ('CORE_HOLD', 'ACCUMULATE')):
+        research['priced_for_perfection'] = True
+        research['verdict'] = 'MONITOR'
+        research['position_size_pct'] = min(research.get('position_size_pct', 2) or 2, 2)
+        research['priced_for_perfection_note'] = (
+            f'Price already assumes ~{_impl:.0f}%/yr growth for a decade — '
+            f'start small, add on weakness' if isinstance(_impl, (int, float))
+            else 'Price assumes near-perfect execution — start small, add on weakness'
         )
 
     return research
@@ -3173,6 +3236,13 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
                 'revenue_5yr_change': edgar_traj.get('revenue_5yr_change'),
                 'roic_trend':         edgar_traj.get('roic_trend'),
                 'roic_5yr_change':    edgar_traj.get('roic_5yr_change'),
+                'roiic':              edgar_traj.get('roiic'),
+                'roiic_pct':          edgar_traj.get('roiic_pct'),
+                'roiic_label':        edgar_traj.get('roiic_label'),
+                'roiic_note':         edgar_traj.get('roiic_note'),
+                'implied_growth_pct':   all_metrics.get('implied_growth_pct'),
+                'implied_growth_label': all_metrics.get('implied_growth_label'),
+                'implied_growth_note':  all_metrics.get('implied_growth_note'),
                 'gross_margin_trend': edgar_traj.get('gross_margin_trend'),
                 'dilution_trajectory': edgar_traj.get('dilution_trajectory'),
                 'share_5yr_change':   edgar_traj.get('share_5yr_change'),
@@ -3314,6 +3384,15 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
             'eq_ocf_ni_3yr_avg':    eq_trend.get('eq_ocf_ni_3yr_avg'),
             'dilution_trajectory':  _traj.get('dilution_trajectory', all_metrics.get('dilution_flag', '—')),
             'share_5yr_change':     _traj.get('share_5yr_change'),
+            'roiic':                _traj.get('roiic'),
+            'roiic_pct':            _traj.get('roiic_pct'),
+            'roiic_label':          _traj.get('roiic_label'),
+            'roiic_note':           _traj.get('roiic_note'),
+            'implied_growth_pct':   research.get('implied_growth_pct'),
+            'implied_growth_label': research.get('implied_growth_label'),
+            'implied_growth_note':  research.get('implied_growth_note'),
+            'priced_for_perfection': research.get('priced_for_perfection', False),
+            'priced_for_perfection_note': research.get('priced_for_perfection_note', ''),
             'data_completeness':    data_completeness,
             'entry_price':        technicals.get('current_price'),
             'current_price':      technicals.get('current_price'),
@@ -4073,6 +4152,21 @@ def run_longterm_screener():
             # return_vs_qqq is stored under a different key in the raw technicals dict
             if 'return_vs_qqq_1yr' in _fresh_tech:
                 _h['return_vs_qqq'] = _fresh_tech['return_vs_qqq_1yr']
+
+    # Backfill ROIIC (return on new invested capital) onto existing holdings that
+    # predate this metric. EDGAR annual data moves slowly, so this is a one-time
+    # fill guarded on the field being absent — it persists to portfolio.json and
+    # won't refetch next run. New buys already get it via construct_portfolio.
+    for _h in portfolio.get('holdings', []):
+        if _h.get('status') == 'ACTIVE' and _h.get('roiic_label') is None and 'roiic' not in _h:
+            try:
+                _bt = compute_trajectory(_h.get('ticker', ''))
+                _h['roiic']       = _bt.get('roiic')
+                _h['roiic_pct']   = _bt.get('roiic_pct')
+                _h['roiic_label'] = _bt.get('roiic_label')
+                _h['roiic_note']  = _bt.get('roiic_note')
+            except Exception as _e:
+                log.debug(f"  ROIIC backfill failed for {_h.get('ticker','')}: {_e}")
 
     # Congressional stock disclosures — fetch once, attach to all portfolio holdings
     log.info('  Fetching US Congressional stock disclosures (House + Senate)...')

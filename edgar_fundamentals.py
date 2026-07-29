@@ -107,13 +107,21 @@ def get_cik(ticker: str) -> str:
 
 
 # ── COMPANYFACTS FETCH ────────────────────────────────────────────────────────
+_FACTS_CACHE: dict = {}   # per-run memo: the same ticker is fetched by both the
+                          # sentiment loop and the screened-dict builder — cache
+                          # the companyfacts blob so SEC is hit at most once/run.
+
 def fetch_company_facts(ticker: str) -> dict:
     """
     Fetch the full companyfacts XBRL blob for a ticker.
-    Returns raw dict or {} on failure.
+    Returns raw dict or {} on failure. Memoized per run.
     """
+    key = ticker.upper()
+    if key in _FACTS_CACHE:
+        return _FACTS_CACHE[key]
     cik = get_cik(ticker)
     if not cik:
+        _FACTS_CACHE[key] = {}
         return {}
     try:
         resp = requests.get(
@@ -123,7 +131,9 @@ def fetch_company_facts(ticker: str) -> dict:
         if resp.status_code != 200:
             return {}
         time.sleep(0.15)   # SEC courtesy (10 req/sec limit)
-        return resp.json()
+        facts = resp.json()
+        _FACTS_CACHE[key] = facts
+        return facts
     except Exception as e:
         log.debug(f'  companyfacts fetch failed for {ticker}: {e}')
         return {}
@@ -219,6 +229,44 @@ def compute_trajectory(ticker: str) -> dict:
             roic_series.append({'fy': oi['fy'], 'val': nopat / (ta - cl), 'end': oi['end']})
     roic_trend = _trend(roic_series)
 
+    # ROIIC — return on INCREMENTAL invested capital. ROIC (above) tells you how
+    # good the whole business is today; ROIIC tells you how good the NEW money
+    # the company reinvests is — i.e. whether growth is still creating value or
+    # just getting bigger. It is the single best compounding-quality metric for
+    # a 15-20yr hold. We compare the change in after-tax operating profit to the
+    # change in invested capital across the available filed window (newest vs
+    # oldest, up to 5yr). Returns None when EDGAR lacks two comparable years.
+    _cap_pts = []   # (fy, nopat, invested_capital) newest-first
+    for oi in op_inc[:5]:
+        ta = assets_by_year.get(oi['fy'])
+        cl = cl_by_year.get(oi['fy'], 0)
+        if ta is not None and oi['val'] is not None and (ta - cl) > 0:
+            _cap_pts.append((oi['fy'], oi['val'] * 0.79, ta - cl))
+    roiic = None
+    roiic_label = None
+    roiic_note = None
+    if len(_cap_pts) >= 2:
+        _new, _old = _cap_pts[0], _cap_pts[-1]
+        d_nopat = _new[1] - _old[1]
+        d_ic    = _new[2] - _old[2]
+        if d_ic > 0:
+            roiic = round(d_nopat / d_ic, 4)
+            roiic_label = ('STRONG' if roiic >= 0.20 else
+                           'SOLID'  if roiic >= 0.10 else
+                           'FADING' if roiic >= 0.0  else
+                           'POOR')
+            roiic_note = {
+                'STRONG': 'New investment earns strong returns — high-quality compounding',
+                'SOLID':  'New investment earns solid returns',
+                'FADING': 'New money earning less than the base — growth quality slipping',
+                'POOR':   'New investment losing money — reinvestment not paying off',
+            }[roiic_label]
+        else:
+            # Capital base shrank (buybacks / asset-light) — no net new
+            # investment to measure a return on. Not a red flag on its own.
+            roiic_label = 'CAPITAL-LIGHT'
+            roiic_note  = 'Returning cash rather than reinvesting — little new capital deployed'
+
     # Dilution trajectory (share count growth = bad)
     share_trend = _trend(shares)
     dilution_flag = 'NONE'
@@ -236,6 +284,10 @@ def compute_trajectory(ticker: str) -> dict:
         'gm_5yr_change':      gm_trend['pct_change'],
         'roic_trend':         roic_trend['direction'],
         'roic_5yr_change':    roic_trend['pct_change'],
+        'roiic':              roiic,
+        'roiic_pct':          round(roiic * 100, 1) if isinstance(roiic, float) else None,
+        'roiic_label':        roiic_label,
+        'roiic_note':         roiic_note,
         'share_count_trend':  share_trend['direction'],
         'share_5yr_change':   share_trend['pct_change'],
         'dilution_trajectory': dilution_flag,

@@ -17,6 +17,23 @@ log = logging.getLogger('metrics')
 
 HEADERS = {'User-Agent': 'LongTermScreener vishvesh.niyati@gmail.com'}
 
+# Shared curl_cffi browser-impersonation session so yfinance calls made here
+# (insider transactions) get the same rate-limit protection as the main
+# screener loop. Falls back to None (yfinance default session) if curl_cffi
+# is unavailable. Built once, lazily.
+_YF_SESSION = False   # False = not yet built; None = unavailable; else a Session
+
+
+def _yf_session():
+    global _YF_SESSION
+    if _YF_SESSION is False:
+        try:
+            from curl_cffi import requests as _cffi_requests
+            _YF_SESSION = _cffi_requests.Session(impersonate='chrome')
+        except Exception:
+            _YF_SESSION = None
+    return _YF_SESSION
+
 # ── MEGATREND SCORING SYSTEM ─────────────────────────────────────────────────
 # ALL megatrend definitions live in universe_config.json → megatrends
 # No company names, no hardcoded keywords, no hardcoded scores in Python.
@@ -343,7 +360,8 @@ def fetch_insider_transactions(ticker: str) -> dict:
     """
     try:
         import yfinance as yf   # lazy import; heavy dependency
-        tk = yf.Ticker(ticker)
+        _sess = _yf_session()
+        tk = yf.Ticker(ticker, session=_sess) if _sess is not None else yf.Ticker(ticker)
 
         buy_shares = sell_shares = None
         try:
@@ -531,6 +549,76 @@ def compute_moat_proxy(info: dict) -> dict:
                               else 'WEAK'),
     }
 
+def compute_implied_expectations(info: dict, fcf=None) -> dict:
+    """
+    Reverse-DCF: what future growth is the CURRENT price already assuming?
+
+    Instead of guessing a fair value, we ask the honest inverse question — given
+    today's market cap and this year's free cash flow, how fast must that cash
+    flow compound for a decade to justify the price a buyer pays now (at a ~10%
+    required return with a 3% terminal growth)? A very high number means the
+    market has already priced in near-perfect execution, so a 15-20yr buyer
+    should start small and accumulate on weakness — it is a sizing signal, never
+    a hard veto. Returns plain-English fields the email surfaces directly.
+
+    Returns None fields when there is no positive FCF to reverse-engineer from
+    (early-stage / cash-burning names) — we never fabricate a number.
+    """
+    mkt_cap = info.get('marketCap', 0) or 0
+    if not mkt_cap or mkt_cap <= 0 or fcf is None or fcf <= 0:
+        return {
+            'implied_growth_pct':   None,
+            'implied_growth_label': None,
+            'implied_growth_note':  None,
+        }
+
+    r = 0.10       # required return for a long-term equity buyer
+    g_term = 0.03  # perpetual growth after year 10
+    years = 10
+
+    def _pv(g: float) -> float:
+        """Present value of 10yr growing FCF + terminal value at growth g."""
+        total = 0.0
+        cf = fcf
+        for t in range(1, years + 1):
+            cf = cf * (1 + g)
+            total += cf / ((1 + r) ** t)
+        terminal = (cf * (1 + g_term)) / (r - g_term)
+        total += terminal / ((1 + r) ** years)
+        return total
+
+    # Bisection: find the growth g that makes PV(g) == today's market cap.
+    lo, hi = -0.20, 0.60
+    if _pv(hi) < mkt_cap:
+        implied = hi                      # priced beyond even 60%/yr — cap it
+    elif _pv(lo) > mkt_cap:
+        implied = lo                      # market pricing in decline
+    else:
+        for _ in range(60):
+            mid = (lo + hi) / 2
+            if _pv(mid) < mkt_cap:
+                lo = mid
+            else:
+                hi = mid
+        implied = (lo + hi) / 2
+
+    implied_pct = round(implied * 100, 1)
+    label = ('MODEST'      if implied_pct < 8  else
+             'REASONABLE'  if implied_pct < 15 else
+             'DEMANDING'   if implied_pct < 25 else
+             'PRICED_FOR_PERFECTION')
+    note = {
+        'MODEST':                'The price assumes only modest growth — a low bar to clear.',
+        'REASONABLE':            'The price assumes reasonable growth the business can likely deliver.',
+        'DEMANDING':             'The price already assumes strong growth for a decade — accumulate slowly.',
+        'PRICED_FOR_PERFECTION': 'The price assumes near-perfect execution for a decade — start small.',
+    }[label]
+    return {
+        'implied_growth_pct':   implied_pct,
+        'implied_growth_label': label,
+        'implied_growth_note':  note,
+    }
+
 def compute_all_metrics(ticker: str, info: dict) -> dict:
     """
     Compute all senior researcher metrics for a single candidate.
@@ -542,6 +630,7 @@ def compute_all_metrics(ticker: str, info: dict) -> dict:
     mgmt       = compute_management_quality(info)
     moat       = compute_moat_proxy(info)
     valuation  = compute_valuation(info, fcf.get('fcf_yield'))
+    implied    = compute_implied_expectations(info, fcf.get('fcf'))
     insiders   = fetch_insider_transactions(ticker)
     time.sleep(0.3)  # SEC rate limit courtesy
 
@@ -552,5 +641,6 @@ def compute_all_metrics(ticker: str, info: dict) -> dict:
         **mgmt,
         **moat,
         **valuation,
+        **implied,
         **insiders,
     }

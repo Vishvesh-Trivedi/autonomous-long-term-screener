@@ -128,6 +128,16 @@ def _holding_card(h: dict) -> str:
     val_label  = h.get('valuation_label', '—')
     val_note   = h.get('valuation_note', '')
     val_peg    = h.get('val_peg')
+    # Reverse-DCF (what growth the price already assumes) + ROIIC (payoff on
+    # money reinvested) + priced-for-perfection sizing flag — plain-English.
+    impl_pct   = h.get('implied_growth_pct')
+    impl_label = h.get('implied_growth_label')
+    impl_note  = h.get('implied_growth_note', '')
+    roiic_pct  = h.get('roiic_pct')
+    roiic_lbl  = h.get('roiic_label')
+    roiic_note = h.get('roiic_note', '')
+    pfp        = h.get('priced_for_perfection', False)
+    pfp_note   = h.get('priced_for_perfection_note', '')
     ins_net    = h.get('insider_net_signal') or h.get('insider_signal', '—')
     ins_note   = h.get('insider_note', '')
     eq3        = h.get('earnings_quality_3yr', eq)
@@ -151,6 +161,7 @@ def _holding_card(h: dict) -> str:
     scenario  = h.get('scenario', {})
     tracking  = str(scenario.get('current_tracking','—')).upper()
     trk_note  = scenario.get('tracking_note','')
+    exp_irr   = scenario.get('expected_irr_pct')
     bull_s    = scenario.get('bull', {})
     base_s    = scenario.get('base', {})
     bear_s    = scenario.get('bear', {})
@@ -206,6 +217,10 @@ def _holding_card(h: dict) -> str:
         cap     = max(s.get('mktcap_10yr_b', 0) or 0, 0)
         narr    = (s.get('narrative', '') or '')[:110]
         cap_str = f'${cap/1000:.1f}T' if cap >= 1000 else f'${cap:.0f}B'
+        irr     = s.get('irr_10yr_pct')
+        irr_str = (f'<div style="font-size:9.5px;font-weight:700;color:{c_text};margin-top:2px">'
+                   f'{"+" if isinstance(irr,(int,float)) and irr>=0 else ""}{irr:.0f}%/yr</div>'
+                   if isinstance(irr, (int, float)) else '')
         active  = (tracking == label.upper())
         brd     = f'border:2px solid {c_text}' if active else f'border:1px solid {c_bdr}'
         tick    = '&nbsp;&#10003;' if active else ''
@@ -216,6 +231,7 @@ def _holding_card(h: dict) -> str:
             f'text-transform:uppercase;margin-bottom:4px">{label} {float(prob)*100:.0f}%{tick}</div>'
             f'<div style="font-size:18px;font-weight:800;color:#111827;line-height:1">{mult}x</div>'
             f'<div style="font-size:11px;font-weight:600;color:#374151;margin-top:2px">{cap_str}</div>'
+            f'{irr_str}'
             f'<div style="font-size:8.5px;color:#6b7280;margin-top:5px;line-height:1.4">{narr}</div>'
             f'</div>'
             f'</td>'
@@ -415,20 +431,77 @@ def _holding_card(h: dict) -> str:
     _cong_txt = (f'{cong_sig.title()} &middot; {cong_buys} buy / {cong_sells} sell'
                  if cong_sig in ('BUYING','SELLING','MIXED')
                  else 'No trades in 120d' if cong_sig == 'NONE' else '')
-    _cong_row = (f'<div><span style="color:#9ca3af">Congress (Senate 120d)</span> '
+    _cong_row = (f'<div><span style="color:#9ca3af;display:inline-block;width:190px">Congress (Senate 120d)</span> '
                  f'<strong style="color:{_cong_c}">{_cong_txt}</strong></div>'
                  if (cong_src == 'efd' and _cong_txt) else '')
-    integrity_html = (
-        f'<tr><td style="padding:0">{_sec_label("Valuation &amp; Integrity", "Growth-adjusted &middot; SEC EDGAR multi-year")}</td></tr>'
+    # Aligned label column so every row in the two blocks below lines up.
+    _LBL = 'color:#9ca3af;display:inline-block;width:190px'
+    # ── "What you're paying for": price → expectations → likely return ──────
+    # Plain-English "what the price assumes" (reverse-DCF) row
+    _impl_c = {'MODEST':'#15803d','REASONABLE':'#15803d','DEMANDING':'#d97706',
+               'PRICED_FOR_PERFECTION':'#dc2626'}.get(impl_label, '#4b5563')
+    _impl_row = ''
+    if isinstance(impl_pct, (int, float)):
+        _impl_note_s = f' &middot; <span style="color:#6b7280">{impl_note}</span>' if impl_note else ''
+        _impl_row = (
+            f'<div><span style="{_LBL}">Growth the price assumes</span> '
+            f'<strong style="color:{_impl_c}">~{impl_pct:.0f}%/yr for 10 years</strong>'
+            f'{_impl_note_s}</div>'
+        )
+    # Plain-English "reinvestment payoff" (ROIIC) row
+    _roiic_c = {'STRONG':'#15803d','SOLID':'#15803d','FADING':'#d97706',
+                'POOR':'#dc2626','CAPITAL-LIGHT':'#4b5563'}.get(roiic_lbl, '#4b5563')
+    _roiic_row = ''
+    if roiic_lbl:
+        _roiic_val = (f'~{roiic_pct:.0f}% on new investment'
+                      if isinstance(roiic_pct, (int, float)) else roiic_lbl.title())
+        _roiic_note_s = f' &middot; <span style="color:#6b7280">{roiic_note}</span>' if roiic_note else ''
+        _roiic_row = (
+            f'<div><span style="{_LBL}">Reinvestment payoff</span> '
+            f'<strong style="color:{_roiic_c}">{_roiic_val}</strong>'
+            f'{_roiic_note_s}</div>'
+        )
+    # Plain-English "likely return at this price" — blended IRR pulled up so the
+    # whole money story sits together (per-scenario detail stays in the table below).
+    _irr_row = ''
+    if isinstance(exp_irr, (int, float)):
+        _irr_c = '#15803d' if exp_irr >= 8 else '#d97706' if exp_irr >= 0 else '#dc2626'
+        _irr_row = (
+            f'<div><span style="{_LBL}">Likely return at this price</span> '
+            f'<strong style="color:{_irr_c}">~{exp_irr:.0f}%/yr</strong> '
+            f'<span style="color:#6b7280">&middot; blended bull/base/bear, probability-weighted (price only)</span></div>'
+        )
+    # Priced-for-perfection advisory banner (only when it downgraded sizing)
+    _pfp_html = (
+        f'<div style="font-size:9.5px;color:#b45309;border-left:3px solid #fde68a;'
+        f'padding:5px 10px;margin-top:8px;background:#fffbeb">'
+        f'<strong>Priced for perfection:</strong> {pfp_note}</div>'
+        if (pfp and pfp_note) else ''
+    )
+    # SECTION 1 — "what am I paying, and what will I likely earn" in one place
+    paying_html = (
+        f'<tr><td style="padding:0">{_sec_label("What You&#39;re Paying For", "Computed &middot; market price &amp; SEC EDGAR &middot; not AI")}</td></tr>'
         f'<tr><td style="padding:10px 14px">'
-        f'<div style="font-size:10px;color:#374151;line-height:1.8">'
-        f'<div><span style="color:#9ca3af">Valuation</span> '
+        f'<div style="font-size:10px;color:#374151;line-height:1.9">'
+        f'<div><span style="{_LBL}">Valuation today</span> '
         f'<strong style="color:{_val_c}">{val_label}</strong>{_peg_s}{_val_note_s}</div>'
-        f'<div><span style="color:#9ca3af">Insider (6m)</span> '
+        f'{_impl_row}'
+        f'{_roiic_row}'
+        f'{_irr_row}'
+        f'</div>'
+        f'{_pfp_html}'
+        f'</td></tr>'
+    )
+    # SECTION 2 — integrity / trust checks, kept separate so they stop crowding the money story
+    integrity_html = (
+        f'<tr><td style="padding:0">{_sec_label("Integrity Checks", "SEC EDGAR &middot; insider &middot; Senate eFD")}</td></tr>'
+        f'<tr><td style="padding:10px 14px">'
+        f'<div style="font-size:10px;color:#374151;line-height:1.9">'
+        f'<div><span style="{_LBL}">Insider (6m)</span> '
         f'<strong style="color:{_ins_c}">{ins_net}</strong>{_ins_note_s}</div>'
-        f'<div><span style="color:#9ca3af">Dilution (filed, 5yr)</span> '
+        f'<div><span style="{_LBL}">Dilution (filed, 5yr)</span> '
         f'<strong style="color:{_dil_c}">{dil_traj}</strong>{_share5_s}</div>'
-        f'<div><span style="color:#9ca3af">Earnings quality (3yr)</span> '
+        f'<div><span style="{_LBL}">Earnings quality (3yr)</span> '
         f'<strong style="color:{_eq3_c}">{eq3}</strong>{_eq3_dir_s}</div>'
         f'{_cong_row}'
         f'</div>'
@@ -490,6 +563,9 @@ def _holding_card(h: dict) -> str:
            if breaks_if else '')
         + f'</td></tr>'
 
+        # WHAT YOU'RE PAYING FOR (valuation · implied growth · ROIIC · likely return)
+        + paying_html
+
         # 10-YEAR SCENARIO TRACKING
         + (f'<tr><td style="padding:0">{_sec_label("10-Year Scenario", f"Currently tracking: {tracking}")}</td></tr>'
            f'<tr><td style="padding:10px 14px">'
@@ -500,7 +576,7 @@ def _holding_card(h: dict) -> str:
            f'{_scen_td(base_s,"Base","#4b5563","#f8f9fa","#e5e7eb")}'
            f'{_scen_td(bear_s,"Bear","#b91c1c","#fef2f2","#fecaca")}'
            f'</tr></table>'
-           f'</td></tr>'
+           + f'</td></tr>'
            if (bull_s or base_s or bear_s) else '')
 
         # FUNDAMENTALS (all 12 metrics)
@@ -621,11 +697,11 @@ def _holding_card(h: dict) -> str:
     if bull_s or base_s or bear_s:
         scenario_block = f'''<div style="padding:10px 16px">
     <div style="font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin-bottom:8px">AI Scenario Estimates &nbsp;<span style="font-weight:400;color:#d1d5db">10yr indicative — grounded to current mktcap</span></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      {_scen_cell(bull_s,'Bull','scen-bull')}
-      {_scen_cell(base_s,'Base','scen-base')}
-      {_scen_cell(bear_s,'Bear','scen-bear')}
-    </div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>
+      <td style="width:33%;vertical-align:top;padding-right:4px">{_scen_cell(bull_s,'Bull','scen-bull')}</td>
+      <td style="width:34%;vertical-align:top;padding:0 2px">{_scen_cell(base_s,'Base','scen-base')}</td>
+      <td style="width:33%;vertical-align:top;padding-left:4px">{_scen_cell(bear_s,'Bear','scen-bear')}</td>
+    </tr></table>
     <div style="font-size:10px;color:#374151;margin-top:8px">
       Tracking: <strong class="{trk_cls}">{tracking}</strong>
       {f'&nbsp;&mdash;&nbsp;<span style="color:#6b7280">{trk_note}</span>' if trk_note else ''}
@@ -677,25 +753,27 @@ def _holding_card(h: dict) -> str:
     card = f'''
 <div class="rcard" id="{ticker}" style="margin-bottom:20px;border:1px solid #e5e7eb;border-left:3px solid {_tier_border};border-radius:2px;overflow:hidden;background:#fff">
   <!-- HEADER -->
-  <div style="padding:14px 16px;background:#fafbfc;border-bottom:1px solid #eaecef;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
-    <div>
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap">
-        <span style="font-size:22px;font-weight:800;color:#111827;letter-spacing:-.02em;line-height:1">{ticker}</span>
-        {_t(tier)}
-        <span style="font-size:8px;color:#9ca3af;background:#f3f4f6;padding:2px 6px;border-radius:2px">{ks_str}</span>
+  <div style="padding:14px 16px;background:#fafbfc;border-bottom:1px solid #eaecef">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>
+    <td style="vertical-align:top">
+      <div style="margin-bottom:4px">
+        <span style="font-size:22px;font-weight:800;color:#111827;letter-spacing:-.02em;line-height:1;vertical-align:middle">{ticker}</span>
+        &nbsp;{_t(tier)}
+        &nbsp;<span style="font-size:9px;color:#9ca3af;background:#f3f4f6;padding:2px 6px;border-radius:2px;vertical-align:middle">{ks_str}</span>
       </div>
-      <div style="font-size:11px;color:#6b7280;margin-bottom:4px">{company}</div>
-      <div style="font-size:10px;color:#374151">
+      <div style="font-size:12px;color:#6b7280;margin-bottom:4px">{company}</div>
+      <div style="font-size:11px;color:#374151">
         {price_str} &nbsp;<span class="{ret_cls}" style="font-weight:600">{ret_str}</span>
         &nbsp;&middot;&nbsp;{round(pos,1)}% portfolio &nbsp;&middot;&nbsp;Added {date_added}
       </div>
-    </div>
-    <div style="text-align:right">
-      <div style="font-size:8px;color:#9ca3af;letter-spacing:.1em;text-transform:uppercase">Mkt Cap</div>
-      <div style="font-size:14px;font-weight:700;color:#111827">{mkt_cap_str}</div>
-      <div style="font-size:8px;color:#9ca3af;letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Revenue</div>
-      <div style="font-size:14px;font-weight:700;color:#111827">{rev_str}</div>
-    </div>
+    </td>
+    <td style="text-align:right;vertical-align:top;white-space:nowrap;padding-left:10px">
+      <div style="font-size:9px;color:#9ca3af;letter-spacing:.1em;text-transform:uppercase">Mkt Cap</div>
+      <div style="font-size:15px;font-weight:700;color:#111827">{mkt_cap_str}</div>
+      <div style="font-size:9px;color:#9ca3af;letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Revenue</div>
+      <div style="font-size:15px;font-weight:700;color:#111827">{rev_str}</div>
+    </td>
+    </tr></table>
   </div>
 
   <!-- Megatrend tag -->
@@ -706,32 +784,40 @@ def _holding_card(h: dict) -> str:
     <div style="font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin-bottom:8px">
       Fundamentals &nbsp;<span style="font-weight:400;color:#d1d5db">Yahoo Finance &middot; SEC EDGAR</span>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:10.5px">
-      <div><span style="color:#9ca3af">ROIC</span> <strong style="color:#111827">{_pct(roic)}</strong>{_src('Y')}</div>
-      <div><span style="color:#9ca3af">Gross Margin</span> <strong style="color:#111827">{_pct(gm)}</strong>{_src('Y')}</div>
-      <div><span style="color:#9ca3af">Rev Growth</span> <strong style="color:#111827">{_pct(rev_gr)}</strong>{_src('Y')}</div>
-      <div><span style="color:#9ca3af">Earn. Quality</span> <strong style="color:#111827">{eq}</strong>{_src('Y')}</div>
-      <div><span style="color:#9ca3af">FCF Yield</span> <strong style="color:#111827">{_val(fcf_yield,'pct1') if fcf_yield else '—'}</strong></div>
-      <div><span style="color:#9ca3af">Net Cash</span> <strong style="color:#111827">{_money(net_cash)} {net_flag}</strong>{_src('Y')}</div>
-      <div><span style="color:#9ca3af">D/E</span> <strong style="color:#111827">{_val(de,'x') if de else '—'}</strong>{_src('Y')}</div>
-      <div><span style="color:#9ca3af">Int. Coverage</span> <strong style="color:#111827">{_val(cov,'x') if cov else '—'}</strong></div>
-      <div><span style="color:#9ca3af">Dilution</span> <strong style="color:#111827">{_pct(dilution)}</strong>{_src('Y')}</div>
-      <div><span style="color:#9ca3af">Insider Own.</span> <strong style="color:#111827">{_pct(insider)}</strong>{_src('Y')}</div>
-      <div><span style="color:#9ca3af">R&D Int.</span> <strong style="color:#111827">{rd_int:.1f}%</strong></div>
-      <div><span style="color:#9ca3af">Moat Proxy</span> <strong style="color:#111827">{moat_prx}</strong></div>
-    </div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-size:12px;line-height:1.4">
+      <tr>
+        <td style="padding:4px 6px 4px 0;width:33%"><span style="color:#9ca3af">ROIC</span> <strong style="color:#111827">{_pct(roic)}</strong>{_src('Y')}</td>
+        <td style="padding:4px 6px;width:34%"><span style="color:#9ca3af">Gross Margin</span> <strong style="color:#111827">{_pct(gm)}</strong>{_src('Y')}</td>
+        <td style="padding:4px 0 4px 6px;width:33%"><span style="color:#9ca3af">Rev Growth</span> <strong style="color:#111827">{_pct(rev_gr)}</strong>{_src('Y')}</td>
+      </tr>
+      <tr>
+        <td style="padding:4px 6px 4px 0"><span style="color:#9ca3af">Earn. Quality</span> <strong style="color:#111827">{eq}</strong>{_src('Y')}</td>
+        <td style="padding:4px 6px"><span style="color:#9ca3af">FCF Yield</span> <strong style="color:#111827">{_val(fcf_yield,'pct1') if fcf_yield else '—'}</strong></td>
+        <td style="padding:4px 0 4px 6px"><span style="color:#9ca3af">Net Cash</span> <strong style="color:#111827">{_money(net_cash)} {net_flag}</strong>{_src('Y')}</td>
+      </tr>
+      <tr>
+        <td style="padding:4px 6px 4px 0"><span style="color:#9ca3af">D/E</span> <strong style="color:#111827">{_val(de,'x') if de else '—'}</strong>{_src('Y')}</td>
+        <td style="padding:4px 6px"><span style="color:#9ca3af">Int. Coverage</span> <strong style="color:#111827">{_val(cov,'x') if cov else '—'}</strong></td>
+        <td style="padding:4px 0 4px 6px"><span style="color:#9ca3af">Dilution</span> <strong style="color:#111827">{_pct(dilution)}</strong>{_src('Y')}</td>
+      </tr>
+      <tr>
+        <td style="padding:4px 6px 4px 0"><span style="color:#9ca3af">Insider Own.</span> <strong style="color:#111827">{_pct(insider)}</strong>{_src('Y')}</td>
+        <td style="padding:4px 6px"><span style="color:#9ca3af">R&amp;D Int.</span> <strong style="color:#111827">{rd_int:.1f}%</strong></td>
+        <td style="padding:4px 0 4px 6px"><span style="color:#9ca3af">Moat Proxy</span> <strong style="color:#111827">{moat_prx}</strong></td>
+      </tr>
+    </table>
     {f'<div style="font-size:9px;color:#{"15803d" if cc=="CLEAN" else "b45309"};margin-top:6px">{"✓ Cross-checked with SEC filings" if cc=="CLEAN" else "⚠ Some metrics differ from SEC filings" if edgar_ok else ""}</div>' if cc or edgar_ok else ''}
   </div>
 
   <!-- TECHNICALS -->
   <div style="padding:10px 16px;border-bottom:1px solid #f3f4f6">
     <div style="font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin-bottom:8px">Technical position</div>
-    <div style="display:flex;flex-wrap:wrap;gap:16px;font-size:10px">
-      <div><span style="color:#9ca3af">200MA</span>&nbsp;<strong class="{above_cls}">{above_str}</strong></div>
-      <div><span style="color:#9ca3af">vs QQQ</span>&nbsp;<strong>{_pct2(vs_qqq)}</strong></div>
-      <div><span style="color:#9ca3af">Trend</span>&nbsp;<strong>{trend}</strong></div>
-      <div><span style="color:#9ca3af">52w High</span>&nbsp;<strong>{_val(pct_high,'pct1') if pct_high else '—'}</strong></div>
-    </div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-size:11px"><tr>
+      <td style="width:25%;padding:2px 4px 2px 0"><span style="color:#9ca3af">200MA</span><br><strong class="{above_cls}">{above_str}</strong></td>
+      <td style="width:25%;padding:2px 4px"><span style="color:#9ca3af">vs QQQ</span><br><strong>{_pct2(vs_qqq)}</strong></td>
+      <td style="width:25%;padding:2px 4px"><span style="color:#9ca3af">Trend</span><br><strong>{trend}</strong></td>
+      <td style="width:25%;padding:2px 0 2px 4px"><span style="color:#9ca3af">52w High</span><br><strong>{_val(pct_high,'pct1') if pct_high else '—'}</strong></td>
+    </tr></table>
   </div>
 
   <!-- MARKET INTELLIGENCE (LLM) -->
@@ -806,6 +892,19 @@ def _screened_card(s: dict) -> str:
     recur   = s.get('recurring_revenue_proxy','—')
     val_lbl = s.get('valuation_label','—')
     val_peg = s.get('val_peg')
+    # Plain-English: implied growth (reverse-DCF) + ROIIC (reinvestment payoff)
+    impl_pct   = s.get('implied_growth_pct')
+    impl_label = s.get('implied_growth_label')
+    _impl_cls  = {'MODEST':'pos','REASONABLE':'pos','DEMANDING':'neu',
+                  'PRICED_FOR_PERFECTION':'neg'}.get(impl_label,'neu')
+    _impl_disp = (f'~{impl_pct:.0f}%/yr for 10yr' if isinstance(impl_pct,(int,float)) else '—')
+    roiic_pct  = s.get('roiic_pct')
+    roiic_lbl  = s.get('roiic_label')
+    _roiic_cls = {'STRONG':'pos','SOLID':'pos','FADING':'neu','POOR':'neg',
+                  'CAPITAL-LIGHT':'neu'}.get(roiic_lbl,'neu')
+    _roiic_disp = ('—' if not roiic_lbl else
+                   (f'~{roiic_pct:.0f}% · {roiic_lbl.title()}' if isinstance(roiic_pct,(int,float))
+                    else roiic_lbl.title()))
     _val_cls = {'CHEAP':'pos','FAIR':'neu','RICH':'neg','EXTREME':'neg'}.get(val_lbl,'neu')
     _val_peg_s = f' &middot; PEG {val_peg}' if isinstance(val_peg,(int,float)) else ''
     _ins_cls = {'BUYING':'pos','SELLING':'neg'}.get(ins_sig,'neu')
@@ -875,9 +974,9 @@ def _screened_card(s: dict) -> str:
 <div class="rcard" style="border-left-color:#d4a020">
   <div class="rc-head">
     <div class="rc-left">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-        <span class="rc-ticker">{ticker}</span>
-        &nbsp;{_t(tier)}
+      <div style="margin-bottom:4px">
+        <span class="rc-ticker" style="vertical-align:middle">{ticker}</span>
+        &nbsp;<span style="vertical-align:middle">{_t(tier)}</span>
       </div>
       <div class="rc-company">{company}</div>
     </div>
@@ -891,35 +990,65 @@ def _screened_card(s: dict) -> str:
     if mt_lbl and mt_score >= 6:
         card += f'    {_mt_tag(mt_lbl, mt_score)}\n'
 
+    # Insider consolidated into one line: ownership % + 6-month buy/sell signal
+    _ins_own = _pct(insider)
+    _ins_own_s = f'{_ins_own} owned' if _ins_own != '—' else '—'
+    if ins_sig in ('BUYING', 'SELLING'):
+        _ins_disp = (f'{_ins_own_s} · {ins_sig} (6m)' if _ins_own != '—'
+                     else f'{ins_sig} (6m)')
+    else:
+        _ins_disp = _ins_own_s
+    _reinv_disp = _val(reinv, 'pct1') if reinv else '—'
+    _dil_now_cls = 'neg' if (dilution or 0) > 0.15 else 'neu'
+
     card += f"""
-    <table class="dtable"><caption>Fundamental Snapshot · Yahoo Finance</caption>
+    <table class="dtable"><caption>What You're Paying For · price + SEC EDGAR</caption>
       <tr>
-        <td class="k">ROIC</td><td class="{_cls(roic,0.15,0.08)}">{_pct(roic)}</td>
-        <td class="k">Gross margin</td><td class="{_cls(gm,0.35,0.15)}">{_pct(gm)}</td>
-      </tr>
-      <tr>
-        <td class="k">Revenue growth</td><td class="{_cls(rev_gr,0.10,-0.05)}">{_pct(rev_gr)}</td>
+        <td class="k">Valuation today</td><td class="{_val_cls}">{val_lbl}{_val_peg_s}</td>
         <td class="k">FCF yield</td><td>{_val(fcf_y,'pct1') if fcf_y else '—'}</td>
       </tr>
       <tr>
-        <td class="k">Reinvestment rate</td><td>{_val(reinv,'pct1') if reinv else '—'}</td>
+        <td class="k">Growth the price assumes</td><td class="{_impl_cls}">{_impl_disp}</td>
+        <td class="k">Reinvestment payoff</td><td class="{_roiic_cls}">{_roiic_disp}</td>
+      </tr>
+    </table>
+
+    <table class="dtable"><caption>Quality &amp; Growth · now vs 5-yr trend · Yahoo + SEC EDGAR</caption>
+      <tr>
+        <td class="k">ROIC</td><td class="{_cls(roic,0.15,0.08)}">{_pct(roic)}</td>
+        <td class="{roic_tr_cls}">{roic_tr}</td>
+      </tr>
+      <tr>
+        <td class="k">Revenue growth</td><td class="{_cls(rev_gr,0.10,-0.05)}">{_pct(rev_gr)}</td>
+        <td class="{rev_tr_cls}">{rev_tr}</td>
+      </tr>
+      <tr>
+        <td class="k">Gross margin</td><td class="{_cls(gm,0.35,0.15)}">{_pct(gm)}</td>
+        <td class="{gm_tr_cls}">{gm_tr}</td>
+      </tr>
+      <tr>
+        <td class="k">Dilution</td><td class="{_dil_now_cls}">{_pct(dilution)}</td>
+        <td class="{dil_tr_cls}">{dil_tr}</td>
+      </tr>
+      <tr><td colspan="3" style="color:#8a8a8a;font-size:10px">{edgar_status}</td></tr>
+    </table>
+
+    <table class="dtable"><caption>Balance Sheet, Moat &amp; Ownership · Yahoo Finance</caption>
+      <tr>
+        <td class="k">Net cash</td><td class="{'pos' if (net_cash or 0)>0 else 'neg'}">{_money(net_cash)} ({net_flag})</td>
+        <td class="k">D/E ratio</td><td>{_val(de,'x') if de else '—'}</td>
+      </tr>
+      <tr>
+        <td class="k">Moat proxy</td><td>{moat_p}</td>
         <td class="k">Recurring rev</td><td>{recur}</td>
       </tr>
       <tr>
         <td class="k">Earnings quality</td><td class="{eq_cls}">{eq}</td>
-        <td class="k">Net cash</td><td class="{'pos' if (net_cash or 0)>0 else 'neg'}">{_money(net_cash)} ({net_flag})</td>
+        <td class="k">Reinvestment rate</td><td>{_reinv_disp}</td>
       </tr>
       <tr>
-        <td class="k">D/E ratio</td><td>{_val(de,'x') if de else '—'}</td>
-        <td class="k">Moat proxy</td><td>{moat_p}</td>
-      </tr>
-      <tr>
-        <td class="k">Insider ownership</td><td>{_pct(insider)}</td>
-        <td class="k">Dilution rate</td><td class="{'neg' if (dilution or 0)>0.15 else 'neu'}">{_pct(dilution)}</td>
-      </tr>
-      <tr>
-        <td class="k">Valuation</td><td class="{_val_cls}">{val_lbl}{_val_peg_s}</td>
-        <td class="k">Insider (6m)</td><td class="{_ins_cls}">{ins_sig}</td>
+        <td class="k">Insider</td><td class="{_ins_cls}">{_ins_disp}</td>
+        <td class="k"></td><td></td>
       </tr>
     </table>
 
@@ -929,21 +1058,9 @@ def _screened_card(s: dict) -> str:
         <td class="k">1yr return</td><td class="{_cls(ret_1yr,0,-20) if ret_1yr else 'neu'}">{_pct2(ret_1yr)}</td>
       </tr>
       <tr>
-        <td class="k">QQQ 1yr</td><td class="neu">{_pct2(qqq_ret)}</td>
+        <td class="k">vs QQQ</td><td class="neu">{_pct2(qqq_ret)}</td>
         <td class="k">Trend</td><td>{s.get('trend','—')}</td>
       </tr>
-    </table>
-
-    <table class="dtable"><caption>5-Year Trajectory · SEC EDGAR Filed Data</caption>
-      <tr>
-        <td class="k">Revenue trend</td><td class="{rev_tr_cls}">{rev_tr}</td>
-        <td class="k">ROIC trend</td><td class="{roic_tr_cls}">{roic_tr}</td>
-      </tr>
-      <tr>
-        <td class="k">Gross margin trend</td><td class="{gm_tr_cls}">{gm_tr}</td>
-        <td class="k">Dilution (5yr)</td><td class="{dil_tr_cls}">{dil_tr}</td>
-      </tr>
-      <tr><td colspan="4" style="color:#8a8a8a;font-size:10px">{edgar_status}</td></tr>
     </table>
 
     <table class="dtable"><caption>Sentiment · 30 Days</caption>

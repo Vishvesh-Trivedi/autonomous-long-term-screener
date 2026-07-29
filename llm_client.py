@@ -30,6 +30,19 @@ PROVIDERS = {
         # model succeeded 4/4 in testing. See universe_config.json's
         # llm._model_change_note. Only used if config doesn't specify a model.
         'default_model': 'meta/llama-3.1-8b-instruct',
+        # Ordered NVIDIA free-endpoint models tried in turn: if one model is
+        # down / capacity-limited / returns empty after its own retries, the
+        # next is attempted before we give up on NVIDIA entirely. Primary (8B,
+        # proven most reliable on this account) stays first; the rest are the
+        # free models already documented in universe_config.json's
+        # llm._alternative_models. Overridable via llm.nvidia_models in config.
+        'fallback_models': [
+            'meta/llama-3.1-8b-instruct',
+            'meta/llama-3.3-70b-instruct',
+            'nvidia/llama-3.1-nemotron-70b-instruct',
+            'mistralai/mixtral-8x22b-instruct-v0.1',
+            'deepseek-ai/deepseek-r1',
+        ],
         'rate_limit_per_min': 40,
     },
     'anthropic': {
@@ -49,6 +62,23 @@ def _load_llm_config() -> dict:
     except Exception:
         pass
     return {}
+
+
+def _nvidia_model_chain(cfg: dict, primary_model: str) -> list:
+    """
+    Ordered list of NVIDIA models to try for a single call, primary first.
+    Uses llm.nvidia_models from universe_config.json if present, otherwise the
+    built-in PROVIDERS['nvidia']['fallback_models'] default. The effective
+    primary model (config llm.model, or a per-call override) is always tried
+    first; duplicates are removed while preserving order.
+    """
+    chain = list(cfg.get('nvidia_models') or PROVIDERS['nvidia'].get('fallback_models', []))
+    ordered, seen = [], set()
+    for m in [primary_model] + chain:
+        if m and m not in seen:
+            seen.add(m)
+            ordered.append(m)
+    return ordered
 
 
 _NVIDIA_CALL_TIMES: list = []
@@ -132,7 +162,15 @@ def call_llm(prompt: str, system: str = None, max_tokens: int = 2000,
     )
 
     def _try_provider(prov: str, mdl: str) -> tuple:
-        """Attempt one provider end-to-end. Returns (text, error) — text is '' on failure."""
+        """Attempt one provider/model end-to-end.
+
+        Returns (text, error, rate_limited). `text` is '' on failure.
+        `rate_limited` is True only when the terminal failure was NVIDIA's
+        account-wide 40 req/min limit (HTTP 429). That quota is shared across
+        EVERY model on the API key, so when it's hit, switching to another
+        model on the chain does not help — the caller uses this flag to stop
+        walking the chain and back off instead of wasting requests.
+        """
         try:
             if prov == 'nvidia':
                 # Retry up to 3 times. Two distinct failure modes observed in
@@ -142,29 +180,31 @@ def call_llm(prompt: str, system: str = None, max_tokens: int = 2000,
                 # rate limit — this turns out to be far more common for larger
                 # completions (long thesis/scenario JSON) than short ones.
                 text = ''
+                last_rate_limited = False
                 for _attempt in range(3):
                     _throttle_nvidia_rpm()
                     try:
                         text = _call_nvidia(prompt, system_msg, mdl, max_tokens, temperature)
                     except Exception as e:
                         is_rate_limited = getattr(e, 'status_code', None) == 429 or '429' in str(e)
+                        last_rate_limited = is_rate_limited
                         if is_rate_limited and _attempt < 2:
-                            log.warning(f'  NVIDIA rate-limited (attempt {_attempt+1}/3) — backing off 15s...')
+                            log.warning(f'  NVIDIA rate-limited on {mdl} (attempt {_attempt+1}/3) — backing off 15s...')
                             time.sleep(15)
                             continue
-                        return '', str(e)
+                        return '', str(e), is_rate_limited
                     if text:
-                        return text, None
+                        return text, None, False
                     if _attempt < 2:
-                        log.warning(f'  NVIDIA empty response (attempt {_attempt+1}/3) — retrying...')
+                        log.warning(f'  NVIDIA empty response from {mdl} (attempt {_attempt+1}/3) — retrying...')
                         time.sleep(3)
-                return '', 'NVIDIA returned empty after 3 attempts'
+                return '', f'NVIDIA {mdl} returned empty after 3 attempts', last_rate_limited
             elif prov == 'anthropic':
                 text = _call_anthropic(prompt, system_msg, mdl, max_tokens, temperature)
-                return text, (None if text else 'Anthropic returned an empty response')
-            return '', f'Unknown provider: {prov}'
+                return text, (None if text else 'Anthropic returned an empty response'), False
+            return '', f'Unknown provider: {prov}', False
         except Exception as e:
-            return '', str(e)
+            return '', str(e), False
 
     def _parse(text: str, prov: str, mdl: str) -> dict:
         try:
@@ -188,8 +228,36 @@ def call_llm(prompt: str, system: str = None, max_tokens: int = 2000,
             return {'success': False, 'data': None,
                     'error': f'JSON parse failed: {e}. Response: {text[:200]}', 'provider': prov}
 
-    text, err = _try_provider(provider, model)
-    result = _parse(text, provider, model) if text else {'success': False, 'data': None, 'error': err, 'provider': provider}
+    if provider == 'nvidia':
+        # Try each NVIDIA model in the chain until one returns parseable JSON.
+        # The chain only helps for MODEL-SPECIFIC failures (a model at capacity,
+        # timing out, or returning empty). A 429 is the ACCOUNT-WIDE 40 req/min
+        # limit shared by every model on the key, so on a rate-limit we stop
+        # walking models (they'd all hit the same wall) and let the RPM guard /
+        # next scheduled call pace things instead of burning the request budget.
+        model_chain = _nvidia_model_chain(cfg, model)
+        result = {'success': False, 'data': None,
+                  'error': 'No NVIDIA models attempted', 'provider': 'nvidia'}
+        for _i, _mdl in enumerate(model_chain):
+            _text, _err, _rate_limited = _try_provider('nvidia', _mdl)
+            result = _parse(_text, 'nvidia', _mdl) if _text else \
+                {'success': False, 'data': None, 'error': _err, 'provider': 'nvidia', 'model': _mdl}
+            if result['success']:
+                if _i > 0:
+                    log.info(f'  NVIDIA model fallback succeeded on {_mdl} (model {_i+1}/{len(model_chain)})')
+                break
+            if _rate_limited:
+                log.warning(f'  NVIDIA rate-limited on {_mdl} — 40 req/min is account-wide, '
+                            f'skipping remaining models this call to preserve request budget')
+                break
+            if _i < len(model_chain) - 1:
+                log.warning(f'  NVIDIA model {_mdl} failed ({result["error"]}) — '
+                            f'trying next model ({model_chain[_i+1]})...')
+            else:
+                log.warning(f'  NVIDIA model {_mdl} failed ({result["error"]}) — no more NVIDIA models to try')
+    else:
+        text, err, _ = _try_provider(provider, model)
+        result = _parse(text, provider, model) if text else {'success': False, 'data': None, 'error': err, 'provider': provider}
 
     # Call-level fallback: if the primary provider failed (empty response OR
     # unparseable JSON), automatically retry the same prompt on the configured
@@ -201,7 +269,7 @@ def call_llm(prompt: str, system: str = None, max_tokens: int = 2000,
     if not result['success'] and fallback_provider and fallback_provider != provider and is_provider_available(fallback_provider):
         log.warning(f'  {provider} failed ({result["error"]}) — falling back to {fallback_provider} for this call')
         fb_model = cfg.get('fallback_model') or PROVIDERS[fallback_provider]['default_model']
-        fb_text, fb_err = _try_provider(fallback_provider, fb_model)
+        fb_text, fb_err, _ = _try_provider(fallback_provider, fb_model)
         fb_result = _parse(fb_text, fallback_provider, fb_model) if fb_text else \
             {'success': False, 'data': None, 'error': fb_err, 'provider': fallback_provider}
         if fb_result['success']:

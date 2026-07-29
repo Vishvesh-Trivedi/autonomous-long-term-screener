@@ -73,6 +73,42 @@ body{background:#f1f3f5;font-family:-apple-system,'Helvetica Neue',Arial,sans-se
 .ks-col{border:1px solid #e5e7eb;border-radius:2px;padding:12px}
 .ks-hdr{font-size:8px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:6px}
 .ks-list{font-size:11px;color:#374151;line-height:1.8;font-weight:600}
+/* ── Research-brief holding / screened cards (email_report.py) ─────────── */
+.rcard{margin-bottom:18px;border:1px solid #e5e7eb;border-radius:3px;overflow:hidden;background:#fff}
+.rc-head{padding:14px 16px;background:#fafbfc;border-bottom:1px solid #eaecef}
+.rc-left{margin-bottom:4px}
+.rc-right{margin-top:2px}
+.rc-ticker{font-size:21px;font-weight:800;color:#111827;letter-spacing:-.02em}
+.rc-company{font-size:12px;color:#6b7280;margin-top:2px}
+.rc-tier{font-size:11px;color:#374151;font-weight:600;margin-top:4px}
+.rc-status{font-size:11px;margin-top:2px}
+.rc-body{padding:12px 16px}
+/* Metric snapshot tables — the core data grids */
+.dtable{width:100%;border-collapse:collapse;margin:6px 0 14px;font-size:12px}
+.dtable caption{text-align:left;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;padding:2px 0 7px}
+.dtable td{padding:7px 8px;border-bottom:1px solid #f0f2f5;vertical-align:top;line-height:1.35}
+.dtable td.k{color:#6b7280;font-weight:600;white-space:nowrap}
+.sv{display:inline-block;font-size:10px;font-weight:600;padding:2px 6px;border-radius:2px;background:#f3f4f6;color:#4b5563}
+.flag-clean{color:#15803d;font-weight:700}
+.flag-watch{color:#d97706;font-weight:700}
+.flag-flag{color:#b91c1c;font-weight:700}
+/* ── Mobile (phones): bump the tiny labels so everything is legible ────── */
+@media screen and (max-width:600px){
+  body{padding:6px !important}
+  .w{border-radius:0 !important}
+  .body{padding:12px 12px 20px !important}
+  .section{margin-bottom:20px !important}
+  .stat-l,.section-hdr,.ks-hdr,.card-company,.issue{font-size:10px !important}
+  .stat-v{font-size:16px !important}
+  .rc-ticker{font-size:22px !important}
+  .rc-company,.rc-tier,.rc-status{font-size:12px !important}
+  .dtable{font-size:13px !important}
+  .dtable td{padding:8px 6px !important}
+  .dtable caption{font-size:10px !important}
+  .card-ticker{font-size:19px !important}
+  .ks-block{display:block !important}
+  .ks-col{margin-bottom:10px !important}
+}
 """
 
 def _t(tier: str) -> str:
@@ -261,6 +297,22 @@ def _stock_row(h, show_hint=True):
     if _val and _val not in ('—', 'FAIR'):
         _vc = {'CHEAP': '#15803d', 'RICH': '#d97706', 'EXTREME': '#dc2626'}.get(_val, '#6b7280')
         _sig_chips.append(f'<span style="color:{_vc};font-weight:700">{_val} valuation</span>')
+    # Expected return (probability-weighted 10yr IRR from the scenario model)
+    _exp_irr = (h.get('scenario') or {}).get('expected_irr_pct')
+    if isinstance(_exp_irr, (int, float)):
+        _ec = '#15803d' if _exp_irr >= 8 else '#d97706' if _exp_irr >= 0 else '#dc2626'
+        _sig_chips.append(f'<span style="color:{_ec};font-weight:700">~{_exp_irr:.0f}%/yr expected</span>')
+    # Priced-for-perfection sizing flag (reverse-DCF)
+    if h.get('priced_for_perfection'):
+        _sig_chips.append('<span style="color:#dc2626;font-weight:700">priced for perfection — start small</span>')
+    elif h.get('implied_growth_label') == 'DEMANDING' and isinstance(h.get('implied_growth_pct'), (int, float)):
+        _sig_chips.append(f'<span style="color:#d97706">price assumes ~{h["implied_growth_pct"]:.0f}%/yr growth</span>')
+    # Reinvestment payoff (ROIIC)
+    _roiic_l = h.get('roiic_label')
+    if _roiic_l in ('STRONG', 'SOLID'):
+        _sig_chips.append('<span style="color:#15803d">high reinvestment payoff</span>')
+    elif _roiic_l in ('FADING', 'POOR'):
+        _sig_chips.append('<span style="color:#d97706">fading reinvestment payoff</span>')
     _ins = h.get('insider_net_signal') or h.get('insider_signal')
     if _ins == 'SELLING':
         _sig_chips.append('<span style="color:#dc2626">insiders selling</span>')
