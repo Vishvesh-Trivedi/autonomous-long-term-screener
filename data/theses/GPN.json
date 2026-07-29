@@ -1,22 +1,22 @@
 {
-  "moat_type": "Network effects and scale advantages in payment processing",
+  "moat_type": "Network Effects through Global Payments' extensive merchant network and partnerships",
   "moat_durability_years": 10,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Increased competition from fintech companies",
+  "primary_risk": "Failure to adapt to rapidly changing payment technologies and regulatory requirements",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The sector is expected to face disruption from fintech companies, but Global Payments has a strong track record of adapting to changes in the market.",
-  "thesis_summary": "Global Payments' payment processing services ride the trend of increasing digital payments, leveraging its network effects and scale advantages to maintain its competitive edge.",
-  "thesis_breaks_if": "A structural change in the payment processing industry, such as a significant shift to cashless payments or a major disruption in the fintech space.",
-  "sentiment_note": "The company's valuation is considered attractive, with a growth-adjusted multiple of 10 and a FCF yield of 5.5%",
+  "sector_survival_note": "The payment processing sector has seen significant consolidation and disruption over the past 30 years, with only a few dominant players remaining. Global Payments has demonstrated a strong track record of innovation and adaptation, but faces ongoing competition and regulatory pressures.",
+  "thesis_summary": "Global Payments' moat is its extensive merchant network and partnerships, which ride the big trend of increasing digital payments and e-commerce adoption.",
+  "thesis_breaks_if": "Short-term noise, but the 8-K/news items do not represent a structural change to the 10-15yr thesis.",
+  "sentiment_note": "The company's valuation is attractive, with a growth-adjusted multiple that is CHEAP.",
   "decade_probability": 0.8,
   "annual_alpha_estimate": 8,
   "verdict": "CORE_HOLD",
   "position_size_pct": 1.0,
   "ten_k_highlights": [
-    "The company has a strong track record of revenue growth, with a 5-year CAGR of 67.3%",
-    "Global Payments has a significant presence in the payment processing market, with a network of over 26,000 employees",
-    "The company has a history of returning capital to shareholders, with a 5-year average dividend payout ratio of 35%"
+    "The company's revenue has been rising at a rate of 67.3% over the past 5 years.",
+    "The company's gross margin has been insufficient, but has shown signs of improvement.",
+    "The company's return on invested capital (ROIC) has been rising at a rate of 14.9% over the past 5 years."
   ],
   "valuation_label": "CHEAP",
   "valuation_note": "FCF yield 5.5%, PEG 0.2, EV/EBITDA 10 \u2014 attractive entry for the growth.",
@@ -25,6 +25,9 @@
   "val_ps": 2.4,
   "val_ev_ebitda": 10.3,
   "val_peg": 0.23,
-  "research_date": "2026-07-24T05:26:01.653654",
+  "implied_growth_pct": 5.8,
+  "implied_growth_label": "MODEST",
+  "implied_growth_note": "The price assumes only modest growth \u2014 a low bar to clear.",
+  "research_date": "2026-07-29T06:46:29.272976",
   "ticker": "GPN"
 }

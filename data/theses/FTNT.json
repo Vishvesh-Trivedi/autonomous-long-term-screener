@@ -1,22 +1,22 @@
 {
-  "moat_type": "Network Security Solutions with AI-Powered Threat Intelligence",
+  "moat_type": "Network Effect through Secure Networking Solutions",
   "moat_durability_years": 10,
-  "management_grade": "B",
+  "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on Key Customers and Suppliers",
+  "primary_risk": "Dependence on Key Customers and Partners",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The sector faces increasing competition from cloud-based security solutions, but Fortinet's strong track record and durable moat suggest it can survive and thrive in the long term.",
-  "thesis_summary": "Fortinet's AI-powered network security solutions ride the trend of increasing cybersecurity threats and the need for robust security infrastructure.",
-  "thesis_breaks_if": "A structural change in the cybersecurity landscape or a significant decline in the company's competitive advantage.",
-  "sentiment_note": "Neutral, with a slight bias towards accumulation due to the rich valuation.",
+  "sector_survival_note": "The cybersecurity sector is expected to continue growing, but Fortinet will face increasing competition and disruption from emerging technologies.",
+  "thesis_summary": "Fortinet's secure networking solutions ride the big trend of increasing cybersecurity demand, leveraging a network effect moat.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise unless they structurally change the next decade.",
+  "sentiment_note": "Richly valued, but a great company with a durable moat.",
   "decade_probability": 0.7,
   "annual_alpha_estimate": 8,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue has been rising at a CAGR of 103.4% over the past 5 years.",
-    "Fortinet's gross margin has been increasing, reaching 80% in the latest year.",
-    "The company has a strong cash position, with a cash runway of several years."
+    "The Company's business is subject to risks associated with dependence on key customers and partners.",
+    "The Company's revenue is derived from a limited number of customers, and the loss of any of these customers could have a material adverse effect on the Company's business.",
+    "The Company's business is subject to risks associated with the Company's dependence on third-party suppliers and manufacturers."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 2.1%, PEG 3.6, EV/EBITDA 47, P/S 16 \u2014 very richly valued \u2014 starter position only.",
@@ -25,6 +25,9 @@
   "val_ps": 16.0,
   "val_ev_ebitda": 47.0,
   "val_peg": 3.57,
-  "research_date": "2026-07-24T05:24:56.782322",
+  "implied_growth_pct": 18.6,
+  "implied_growth_label": "DEMANDING",
+  "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
+  "research_date": "2026-07-29T06:29:24.109300",
   "ticker": "FTNT"
 }

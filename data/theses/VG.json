@@ -1,22 +1,22 @@
 {
-  "moat_type": "Scale and low-cost production of liquefied natural gas (LNG)",
+  "moat_type": "Scale and operational efficiency in the liquefaction of natural gas",
   "moat_durability_years": 10,
-  "management_grade": "B",
+  "management_grade": "C",
   "growth_runway_years": 5,
-  "primary_risk": "Regulatory risks and changes in global LNG demand",
+  "primary_risk": "High debt levels and potential cash flow disruptions",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The midstream sector has seen significant consolidation and disruption over the past 30 years, with many companies facing challenges from changing market conditions and technological advancements.",
-  "thesis_summary": "Venture Global's scale and low-cost production of LNG ride the trend of increasing global demand for clean energy.",
-  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise that structurally change the next decade.",
-  "sentiment_note": "Valuation is RICH, prefer a smaller starter position and accumulate on weakness.",
+  "sector_survival_note": "The natural gas industry is subject to fluctuations in demand and supply, which may impact Venture Global's long-term survival.",
+  "thesis_summary": "Venture Global's liquefaction of natural gas business rides the trend of increasing demand for natural gas, with a specific moat in scale and operational efficiency.",
+  "thesis_breaks_if": "A structural change in the natural gas industry, such as a significant shift to renewable energy, would break the thesis.",
+  "sentiment_note": "The company's valuation is rich, and a smaller starter position is recommended.",
   "decade_probability": 0.6,
   "annual_alpha_estimate": 8,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "Venture Global's revenue growth is driven by the increasing demand for LNG, with the company expecting to increase its production capacity by 50% over the next five years.",
-    "The company has a strong balance sheet, with $1.4 billion in cash and no debt, providing it with the flexibility to invest in new projects and expand its operations.",
-    "Venture Global's management team has a proven track record of delivering projects on time and within budget, with a focus on safety and environmental sustainability."
+    "The company's revenue growth is driven by the increasing demand for natural gas, with a compound annual growth rate of 59%.",
+    "Venture Global's gross margin is 44%, which is higher than the industry average.",
+    "The company has a positive cash flow, with a cash runway of several years."
   ],
   "valuation_label": "RICH",
   "valuation_note": "FCF yield -19.0%, PEG 0.9, EV/EBITDA 13 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
@@ -25,6 +25,9 @@
   "val_ps": 2.4,
   "val_ev_ebitda": 12.7,
   "val_peg": 0.88,
-  "research_date": "2026-07-24T05:25:36.178474",
+  "implied_growth_pct": null,
+  "implied_growth_label": null,
+  "implied_growth_note": null,
+  "research_date": "2026-07-29T06:43:32.618989",
   "ticker": "VG"
 }

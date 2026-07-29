@@ -1,22 +1,22 @@
 {
   "moat_type": "Financial Planning and Wealth Management Services",
-  "moat_durability_years": 20,
+  "moat_durability_years": 10,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Intensifying Competition from Fintech and Robo-Advisors",
+  "primary_risk": "Intense competition from fintech and online brokerages",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The financial services sector has seen significant disruption over the past 30 years, with many companies failing to adapt to changing market conditions. However, Ameriprise has demonstrated a strong track record of innovation and adaptation, which suggests that it may be better positioned to survive and thrive in the long term.",
-  "thesis_summary": "Ameriprise Financial offers financial planning and wealth management services, leveraging its extensive network of financial advisors to provide personalized advice and investment solutions to high net worth individuals and institutions.",
-  "thesis_breaks_if": "A structural change in the financial services industry, such as a significant increase in competition from fintech and robo-advisors, or a major regulatory change that impacts Ameriprise's business model.",
-  "sentiment_note": "Neutral",
+  "sector_survival_note": "The sector faces disruption due to increasing competition from fintech and online brokerages, but Ameriprise's strong brand and financial planning services may help it survive.",
+  "thesis_summary": "Ameriprise Financial, Inc. is a leading provider of financial planning and wealth management services, with a strong moat in its financial planning services and a durable competitive advantage.",
+  "thesis_breaks_if": "A structural change in the industry, such as a major fintech player entering the financial planning market, would break the thesis.",
+  "sentiment_note": "Fairly valued for its growth, with a growth-adjusted current multiple of 1.7.",
   "decade_probability": 0.7,
-  "annual_alpha_estimate": 8.5,
+  "annual_alpha_estimate": 8,
   "verdict": "CORE_HOLD",
   "position_size_pct": 0.8,
   "ten_k_highlights": [
-    "Ameriprise Financial has a strong track record of revenue growth, with revenue increasing by 40.7% over the past 5 years.",
-    "The company has a significant competitive advantage in the financial services sector, with a large and experienced network of financial advisors.",
-    "Ameriprise Financial has a solid balance sheet, with a cash runway of several years and a strong track record of generating free cash flow."
+    "The company's revenue has been rising at a rate of 40.7% over the past 5 years.",
+    "The company's gross margin has been insufficient, at 57%, over the past 5 years.",
+    "The company's return on invested capital (ROIC) has been insufficient, at 0%, over the past 5 years."
   ],
   "valuation_label": "FAIR",
   "valuation_note": "FCF yield 14.6%, PEG 1.7 \u2014 fairly valued for its growth.",
@@ -25,6 +25,9 @@
   "val_ps": 2.5,
   "val_ev_ebitda": null,
   "val_peg": 1.74,
-  "research_date": "2026-07-24T05:24:47.289511",
+  "implied_growth_pct": -7.8,
+  "implied_growth_label": "MODEST",
+  "implied_growth_note": "The price assumes only modest growth \u2014 a low bar to clear.",
+  "research_date": "2026-07-29T06:20:05.713843",
   "ticker": "AMP"
 }

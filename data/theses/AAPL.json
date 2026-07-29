@@ -1,22 +1,22 @@
 {
-  "moat_type": "Ecosystem of proprietary hardware and software",
+  "moat_type": "Ecosystem and Brand Loyalty",
   "moat_durability_years": 10,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on a single product category",
+  "primary_risk": "Dependence on Technological Advancements",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The company's diversified product portfolio and strong brand recognition contribute to its high survival rate.",
-  "thesis_summary": "Apple's proprietary hardware and software ecosystem, which includes the iPhone, iPad, and Mac, rides the trend of increasing demand for personal devices and services.",
-  "thesis_breaks_if": "Short-term news cycles and price moves",
-  "sentiment_note": "The company's valuation is considered EXTREME, suggesting a smaller starter position.",
+  "sector_survival_note": "The company's strong brand and ecosystem have allowed it to maintain a dominant position in the sector, with a high likelihood of survival over the next 20 years.",
+  "thesis_summary": "Apple Inc. is a leader in the technology sector, with a strong moat based on its ecosystem and brand loyalty, riding the trend of increasing demand for consumer electronics.",
+  "thesis_breaks_if": "A structural change in the technology sector, such as a significant shift to a new platform or a major disruption to the company's business model.",
+  "sentiment_note": "The company's valuation is considered EXTREME, but the entry multiple sets the starting yield of a 15-20yr hold.",
   "decade_probability": 0.8,
-  "annual_alpha_estimate": 8,
+  "annual_alpha_estimate": 12.5,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue growth rate has been increasing over the past five years, from 14.1% to 17.7%.",
-    "The company's gross margin has been increasing over the past five years, from 38.4% to 48%.",
-    "The company's return on invested capital (ROIC) has been increasing over the past five years, from 42.2% to 65%."
+    "The company's revenue growth has been driven by the increasing demand for consumer electronics, with a 5-year compound annual growth rate of 17%.",
+    "The company's gross margin has been increasing over the past 5 years, with a 5-year compound annual growth rate of 42.2%.",
+    "The company's cash runway is positive, with a free cash flow yield of 2.7%."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 2.7%, PEG 2.6, EV/EBITDA 30 \u2014 very richly valued \u2014 starter position only.",
@@ -25,6 +25,9 @@
   "val_ps": 10.6,
   "val_ev_ebitda": 30.0,
   "val_peg": 2.64,
-  "research_date": "2026-07-24T05:24:59.211714",
+  "implied_growth_pct": 15.6,
+  "implied_growth_label": "DEMANDING",
+  "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
+  "research_date": "2026-07-29T06:29:16.042710",
   "ticker": "AAPL"
 }
