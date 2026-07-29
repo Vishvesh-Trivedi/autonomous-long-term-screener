@@ -119,6 +119,8 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
           FINNHUB_API_KEY:   ${{ secrets.FINNHUB_API_KEY }}
+          REDDIT_CLIENT_ID:     ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
           GMAIL_SENDER:      ${{ secrets.GMAIL_SENDER }}
           GMAIL_PASSWORD:    ${{ secrets.GMAIL_PASSWORD }}
           EMAIL_RECIPIENT:   ${{ secrets.EMAIL_RECIPIENT }}
@@ -140,7 +142,7 @@ jobs:
           git add data/scenarios/            || true
           git add data/checkpoints/          || true
           git add data/cache/fundamentals.json.gz || true
-          git add data/congress_disclosures_cache.json || true
+          git add data/cache/senate_trades.json || true
           git diff --staged --quiet || git commit -m "Auto: screener run $(date +'%Y-%m-%d')"
           git push
       - name: Upload logs
