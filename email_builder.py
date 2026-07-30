@@ -178,12 +178,12 @@ def _action_call(h):
     small = ' (small)' if verdict == 'MOONSHOT' else ''
 
     if verdict in ('AVOID', 'EXIT'):
-        return ('DO NOT ADD &mdash; thesis broken', '#b91c1c', '#fef2f2', '#fecaca', reason, 0)
+        return ('DO NOT ADD &mdash; reason to own it broke', '#b91c1c', '#fef2f2', '#fecaca', reason, 0)
     if verdict in ('MONITOR', 'SPECULATIVE', 'TRIM'):
-        return ('HOLD &mdash; thesis under review, don&#39;t add', '#92400e', '#fffbeb', '#fcd34d', reason, 1)
+        return ('HOLD &mdash; still checking, don&#39;t add', '#92400e', '#fffbeb', '#fcd34d', reason, 1)
     if accumulate_ok:
         if zone == 'buy':
-            return (f'ADD{small} &mdash; accumulation zone', '#166534', '#f0fdf4', '#86efac', reason, 3)
+            return (f'ADD{small} &mdash; good time to add', '#166534', '#f0fdf4', '#86efac', reason, 3)
         if zone == 'wait':
             return ('HOLD &mdash; wait for a better entry', '#92400e', '#fffbeb', '#fcd34d', reason, 1)
         return ('HOLD &mdash; no clear entry signal', '#374151', '#f3f4f6', '#d1d5db', reason, 1)
@@ -217,30 +217,30 @@ def _entry_zone(h):
     p = abs(pct_from_high) if pct_from_high is not None else None
 
     if above_200 is False:
-        parts = ['Trading below its 200-day moving average — a classic accumulation signal for long-term investors.']
+        parts = ['Trading below its 200-day average price — often a good time for long-term investors to add.']
         if thesis_snip:
-            parts.append(f'Thesis: {thesis_snip}')
+            parts.append(f'Why we own it: {thesis_snip}')
         if tracking:
-            parts.append(f'Scenario tracking: {tracking}' + (f' — {tracking_note}' if tracking_note else '') + '.')
+            parts.append(f'Tracking vs our outlook: {tracking}' + (f' — {tracking_note}' if tracking_note else '') + '.')
         return 'buy', ' '.join(parts)
 
     if pct_from_high is not None and pct_from_high > -8:
-        parts = [f'Only {p:.0f}% off its 52-week high — near peak territory, risk/reward is tight right now.']
+        parts = [f'Only {p:.0f}% off its 52-week high — near its peak, so the reward for the risk is thin right now.']
         if thesis_snip:
-            parts.append(f'The thesis remains intact: {thesis_snip}')
-        parts.append('Wait for a 10–15% pullback before adding to this position.')
+            parts.append(f'The reason to own it still holds: {thesis_snip}')
+        parts.append('Wait for a 10–15% dip before adding to this position.')
         return 'wait', ' '.join(parts)
 
     if pct_from_high is not None:
-        depth = 'significant' if p >= 20 else 'healthy'
-        parts = [f'{p:.0f}% off its 52-week high — a {depth} pullback that offers a better entry than recent buyers got.']
+        depth = 'big' if p >= 20 else 'healthy'
+        parts = [f'{p:.0f}% off its 52-week high — a {depth} dip that offers a better entry price than recent buyers got.']
         if thesis_snip:
-            parts.append(f'Thesis: {thesis_snip}')
+            parts.append(f'Why we own it: {thesis_snip}')
         if tracking:
-            parts.append(f'Scenario tracking: {tracking}' + (f' — {tracking_note}' if tracking_note else '') + '.')
+            parts.append(f'Tracking vs our outlook: {tracking}' + (f' — {tracking_note}' if tracking_note else '') + '.')
         return 'buy', ' '.join(parts)
 
-    reason = thesis_snip if thesis_snip else 'No technical data available. Review the thesis manually.'
+    reason = thesis_snip if thesis_snip else 'No price-trend data. Review the reasons to own it manually.'
     return 'monitor', reason
 
 
@@ -505,6 +505,24 @@ def generate_action_email(decisions: Dict, portfolio: Dict, decision_review: Dic
     avg_ret_s = f'{"+" if (avg_ret or 0) >= 0 else ""}{avg_ret:.1f}%' if avg_ret is not None else '—'
     avg_ret_c = '#15803d' if (avg_ret or 0) >= 0 else '#dc2626'
 
+    # Per-tier average return — user may accumulate only certain tiers (e.g. T1),
+    # so break the book's return out by T1 / T2 / T3.
+    def _tier_avg_return(tier):
+        rets = []
+        for h in holdings:
+            if h.get('tier') != tier:
+                continue
+            ep, cp = h.get('entry_price'), h.get('current_price')
+            if ep and cp and ep != cp:
+                rets.append((cp - ep) / ep * 100)
+        avg = sum(rets) / len(rets) if rets else None
+        s = f'{"+" if (avg or 0) >= 0 else ""}{avg:.1f}%' if avg is not None else '—'
+        c = ('#9ca3af' if avg is None else ('#15803d' if avg >= 0 else '#dc2626'))
+        return s, c, len(rets)
+    t1_ret_s, t1_ret_c, t1_ret_n = _tier_avg_return('T1')
+    t2_ret_s, t2_ret_c, t2_ret_n = _tier_avg_return('T2')
+    t3_ret_s, t3_ret_c, t3_ret_n = _tier_avg_return('T3')
+
     # Accumulation-oriented counts (matches the 15-20yr book, not a trading P&L):
     # how many holdings are actionable-to-add now vs hold vs under review.
     n_add = n_hold_act = n_review = 0
@@ -539,8 +557,8 @@ def generate_action_email(decisions: Dict, portfolio: Dict, decision_review: Dic
             f'<div style="font-size:13px;color:#111827;font-weight:700">Add to {_pt} '
             f'<span style="background:{_pbg};color:{_pc};font-size:8px;font-weight:700;'
             f'padding:2px 6px;border-radius:2px;border:1px solid {_pc}33">{_plrat}</span></div>'
-            f'<div style="font-size:10px;color:#4b5563;margin-top:3px">{_pco} is in an '
-            f'accumulation zone &mdash; a chance to average in on a name we hold for the long run.</div>'
+            f'<div style="font-size:10px;color:#4b5563;margin-top:3px">{_pco} is a good '
+            f'place to add right now &mdash; a chance to buy a bit more of a company we hold for the long run.</div>'
             f'</div>'
         )
 
@@ -585,7 +603,7 @@ def generate_action_email(decisions: Dict, portfolio: Dict, decision_review: Dic
             body_rows += _action_month_row(item, 'sell')
 
     if buy_zone:
-        body_rows += _divider(f'Accumulation zone &mdash; {len(buy_zone)} holdings')
+        body_rows += _divider(f'Good time to add &mdash; {len(buy_zone)} holdings')
         for h in buy_zone:
             body_rows += _stock_row(h)
 
@@ -613,7 +631,7 @@ def generate_action_email(decisions: Dict, portfolio: Dict, decision_review: Dic
             f'<div style="margin:0 12px 4px;padding:11px 14px;background:#f8fafc;'
             f'border:1px solid #e2e8f0;border-left:4px solid #475569;border-radius:3px">'
             f'<div style="font-size:8px;font-weight:700;color:#475569;letter-spacing:.12em;'
-            f'text-transform:uppercase;margin-bottom:4px">Committee self-review &middot; {_flag_txt}</div>'
+            f'text-transform:uppercase;margin-bottom:4px">Model self-check &middot; {_flag_txt}</div>'
             f'<div style="font-size:11px;color:#334155;line-height:1.5">{_p_note[:280]}</div>'
             f'</div>'
         )
@@ -646,12 +664,33 @@ def generate_action_email(decisions: Dict, portfolio: Dict, decision_review: Dic
       <div style="font-size:20px;font-weight:800;color:{avg_ret_c};letter-spacing:-.02em">{avg_ret_s}</div>
     </td>
     <td style="padding:14px 0;width:33%;text-align:center;border-right:1px solid #eaecef">
-      <div style="font-size:8px;font-weight:600;color:#9ca3af;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px">Accumulate Now</div>
+      <div style="font-size:8px;font-weight:600;color:#9ca3af;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px">Add Now</div>
       <div style="font-size:20px;font-weight:800;color:{"#15803d" if n_add else "#9ca3af"};letter-spacing:-.02em">{n_add}</div>
     </td>
     <td style="padding:14px 0;width:34%;text-align:center">
       <div style="font-size:8px;font-weight:600;color:#9ca3af;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px">Under Review</div>
       <div style="font-size:20px;font-weight:800;color:{"#d97706" if n_review else "#9ca3af"};letter-spacing:-.02em">{n_review}</div>
+    </td>
+  </tr>
+</table>
+
+<!-- STATS BAR 2: average return by tier (you may accumulate only some tiers) -->
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-bottom:2px solid #eaecef">
+  <tr>
+    <td style="padding:12px 0;width:33%;text-align:center;border-right:1px solid #eaecef">
+      <div style="font-size:8px;font-weight:600;color:#15803d;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px">T1 Avg Return</div>
+      <div style="font-size:18px;font-weight:800;color:{t1_ret_c};letter-spacing:-.02em">{t1_ret_s}</div>
+      <div style="font-size:8px;color:#9ca3af;margin-top:2px">{t1_ret_n} priced</div>
+    </td>
+    <td style="padding:12px 0;width:33%;text-align:center;border-right:1px solid #eaecef">
+      <div style="font-size:8px;font-weight:600;color:#1d4ed8;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px">T2 Avg Return</div>
+      <div style="font-size:18px;font-weight:800;color:{t2_ret_c};letter-spacing:-.02em">{t2_ret_s}</div>
+      <div style="font-size:8px;color:#9ca3af;margin-top:2px">{t2_ret_n} priced</div>
+    </td>
+    <td style="padding:12px 0;width:34%;text-align:center">
+      <div style="font-size:8px;font-weight:600;color:#d97706;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px">T3 Avg Return</div>
+      <div style="font-size:18px;font-weight:800;color:{t3_ret_c};letter-spacing:-.02em">{t3_ret_s}</div>
+      <div style="font-size:8px;color:#9ca3af;margin-top:2px">{t3_ret_n} priced</div>
     </td>
   </tr>
 </table>

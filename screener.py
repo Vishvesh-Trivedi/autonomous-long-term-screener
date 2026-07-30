@@ -2301,6 +2301,8 @@ Your job:
 7. TEN‑K HIGHLIGHTS: Give exactly 3 bullet points from the filing that every long‑term investor should know. Each must quote or closely paraphrase the document.
 8. THESIS: One sentence that names the company's actual product/service, its specific moat, and the big trend it rides.
 
+WRITING STYLE: Write every string value (especially thesis_summary, primary_risk, sentiment_note, sector_survival_note and the highlights) in plain, everyday English that a non-expert can understand. Avoid jargon and buzzwords; if a technical term is unavoidable, add a few plain words explaining it. Use short, direct sentences.
+
 Return ONLY valid JSON:
 {{"moat_type":"string","moat_durability_years":number,"management_grade":"A|B|C|D",
 "growth_runway_years":number,"primary_risk":"string",
@@ -2308,7 +2310,8 @@ Return ONLY valid JSON:
 "thesis_summary":"string","thesis_breaks_if":"string",
 "sentiment_note":"string","decade_probability":0.0-1.0,"annual_alpha_estimate":number,
 "verdict":"CORE_HOLD|ACCUMULATE|MONITOR|AVOID","position_size_pct":number,
-"ten_k_highlights":["highlight1","highlight2","highlight3"]}}"""
+"ten_k_highlights":["highlight1","highlight2","highlight3"]}}
+Keep every string value under 240 characters. Output ONLY the JSON object and make sure it is complete and closed with a final }}."""
 
 RESEARCH_PROMPT_T3 = """You are a senior long‑term equity analyst evaluating a pre‑revenue or early‑revenue company for a 10‑15 year hold. Your analysis must be grounded in the company's SEC filing extract below.
 
@@ -2335,6 +2338,8 @@ Your job:
 7. TEN‑K HIGHLIGHTS: Give exactly 3 bullet points from the filing that every long‑term investor should know. Each must quote or closely paraphrase the document.
 8. THESIS: One sentence investment thesis.
 
+WRITING STYLE: Write every string value (especially thesis_summary, kill_risk, unfair_advantage and the highlights) in plain, everyday English that a non-expert can understand. Avoid jargon and buzzwords; if a technical term is unavoidable, add a few plain words explaining it. Use short, direct sentences.
+
 Return ONLY valid JSON:
 {{"category":"string","tam_estimate_b":number,"unfair_advantage":"string",
 "milestone_1":"string","milestone_2":"string","milestone_3":"string",
@@ -2344,7 +2349,8 @@ Return ONLY valid JSON:
 "kill_risk":"string","thesis_summary":"one sentence",
 "thesis_breaks_if":"specific testable exit condition",
 "moonshot_score":0-10,"verdict":"MOONSHOT|SPECULATIVE|AVOID","position_size_pct":number,
-"ten_k_highlights":["highlight1","highlight2","highlight3"]}}"""
+"ten_k_highlights":["highlight1","highlight2","highlight3"]}}
+Keep every string value under 240 characters. Output ONLY the JSON object and make sure it is complete and closed with a final }}."""
 
 _QQQ_CAGR_CACHE: dict = {}
 def get_qqq_cagrs() -> dict:
@@ -2488,11 +2494,14 @@ def research_candidate(ticker: str, tier: str, info: dict, filing_text: str, sen
         )
 
     system = "You are a long-term investment analyst. Return ONLY valid JSON."
-    # 2200: the T1/T2 schema alone runs ~900-1200 tokens once the model adds any
-    # preamble despite "ONLY JSON" — 1400 was truncating responses before the
-    # closing brace, which _parse() then silently turned into an empty string
-    # (see llm_client.py) instead of a real truncation error.
-    research = research_stock(prompt, system=system, max_tokens=2200)
+    # Output-token budget for the research JSON. The T1/T2 schema has ~13 fields
+    # including 6+ free-text strings plus 3 ten_k_highlights; at 2200 the verbose
+    # free-tier models were still hitting max_tokens mid-JSON (no closing brace),
+    # which _parse() reports as a truncation PARSE_ERROR and blocks the candidate
+    # from ever becoming a T1/T2/T3 buy. 3000 gives headroom; the prompt also now
+    # caps string length. Overridable via llm.research_max_tokens in config.
+    _res_max = _cn(3000, 'llm', 'research_max_tokens') or 3000
+    research = research_stock(prompt, system=system, max_tokens=int(_res_max))
 
     # Record the growth-adjusted valuation read on the thesis so downstream
     # sizing, holds and both emails can surface it (see construct_portfolio).
@@ -4288,6 +4297,40 @@ def run_longterm_screener():
                 h['tier']           = migration['to_tier']
                 h['tier_migrated']  = datetime.now().strftime('%Y-%m-%d')
 
+    # Annotate month-over-month change so the Research Brief can show a full
+    # dossier only for holdings that actually moved (new position, tier
+    # migration, rating change, or scenario-tracking shift) and a one-line
+    # summary for steady holds — the way long-horizon research firms report.
+    # _prev_* fields persist in portfolio.json and are the previous run's final
+    # values; on first run after deploy they are absent so everything shows full.
+    _new_tks  = {n.get('ticker') for n in decisions.get('new_additions', [])}
+    _migr_tks = {m.get('ticker') for m in decisions.get('migrations', [])}
+    for h in portfolio.get('holdings', []):
+        if h.get('status') != 'ACTIVE':
+            continue
+        cur_v = h.get('verdict')
+        cur_t = h.get('tier')
+        cur_s = (h.get('scenario') or {}).get('current_tracking')
+        prev_v = h.get('_prev_verdict')
+        prev_t = h.get('_prev_tier')
+        prev_s = h.get('_prev_scenario_tracking')
+        first_seen = (prev_v is None and prev_t is None and prev_s is None)
+        reasons = []
+        if h.get('ticker') in _new_tks:
+            reasons.append('new position')
+        if h.get('ticker') in _migr_tks or (prev_t and cur_t and cur_t != prev_t):
+            reasons.append(f'tier {prev_t or "?"}\u2192{cur_t}')
+        if prev_v and cur_v and cur_v != prev_v:
+            reasons.append(f'rating {prev_v}\u2192{cur_v}')
+        if prev_s and cur_s and cur_s != prev_s:
+            reasons.append(f'tracking {prev_s}\u2192{cur_s}')
+        h['changed_this_month'] = bool(reasons) or first_seen
+        h['change_reason'] = '; '.join(reasons) if reasons else ('new coverage' if first_seen else '')
+        # Snapshot this run's final state for next run's comparison.
+        h['_prev_verdict'] = cur_v
+        h['_prev_tier'] = cur_t
+        h['_prev_scenario_tracking'] = cur_s
+
     portfolio['run_history'].append({
         'date':            datetime.now().strftime('%Y-%m-%d'),
         'new_additions':   [h['ticker'] for h in decisions['new_additions']],
@@ -4349,4 +4392,32 @@ def run_longterm_screener():
     log.info('=' * 66)
 
 if __name__ == '__main__':
-    run_longterm_screener()
+    # Run the screener, then force an immediate, clean process exit.
+    #
+    # Why os._exit: yfinance's curl_cffi browser-impersonation session (and the
+    # LLM HTTP clients) leave non-daemon background threads alive. After the run
+    # finishes and the emails are sent, normal interpreter shutdown blocks
+    # *forever* waiting on those threads — the process never returns, so on CI
+    # the `python screener.py | tee` step hangs for hours and the follow-up
+    # "Commit updated data" step (which pushes portfolio/theses/caches back to
+    # the repo) never runs. That is why fresh emails arrive but the stored state
+    # never refreshes between runs. All real work is done and logs are flushed
+    # below, so exiting hard is safe and deterministic.
+    import sys
+    _exit_code = 0
+    try:
+        run_longterm_screener()
+    except SystemExit as _e:
+        _exit_code = _e.code if isinstance(_e.code, int) else (0 if _e.code is None else 1)
+    except BaseException:
+        import traceback
+        traceback.print_exc()
+        _exit_code = 1
+    finally:
+        logging.shutdown()
+        try:
+            sys.stdout.flush()
+            sys.stderr.flush()
+        except Exception:
+            pass
+    os._exit(_exit_code)

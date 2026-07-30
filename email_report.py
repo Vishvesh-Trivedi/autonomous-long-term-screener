@@ -361,7 +361,7 @@ def _holding_card(h: dict) -> str:
     _rc, _rbg, _rlbl = _rating_style(h.get('verdict'))
     if isinstance(decade_p, (int, float)):
         _conv = 'High' if decade_p >= 0.6 else ('Medium' if decade_p >= 0.4 else 'Low')
-        _conv_s = f'Conviction: {_conv}'
+        _conv_s = f'Confidence: {_conv}'
     else:
         _conv_s = ''
     # Band the model's alpha estimate rather than print false-precision decimals.
@@ -378,6 +378,18 @@ def _holding_card(h: dict) -> str:
     if _conv_s or _alpha_s:
         _meta += ' &middot; <span style="color:#9ca3af">model est.</span>'
     _call    = (thesis[:150] + '…') if (thesis and len(thesis) > 150) else (thesis or 'Thesis pending')
+    # "Changed this month" reason strip — explains why this holding earned a full
+    # re-write (new position / tier / rating / scenario shift). Steady holds carry
+    # no reason, so this renders nothing for them.
+    change_reason = str(h.get('change_reason', '') or '')
+    _chg_banner = (
+        f'<tr><td style="padding:0 14px 10px">'
+        f'<div style="background:#eef6ff;border:1px solid #cfe3ff;border-left:3px solid #1d4ed8;'
+        f'border-radius:3px;padding:6px 10px;font-size:9.5px;color:#1d4ed8">'
+        f'<span style="text-transform:uppercase;letter-spacing:.08em;font-size:8px;'
+        f'font-weight:700">Changed this month</span> &middot; {change_reason}</div>'
+        f'</td></tr>'
+    ) if change_reason else ''
     rating_header = (
         f'<tr><td style="padding:0 14px 12px">'
         f'<div style="border:1px solid {_rc}33;background:{_rbg};border-radius:3px;padding:10px 12px">'
@@ -440,61 +452,40 @@ def _holding_card(h: dict) -> str:
     # Plain-English "what the price assumes" (reverse-DCF) row
     _impl_c = {'MODEST':'#15803d','REASONABLE':'#15803d','DEMANDING':'#d97706',
                'PRICED_FOR_PERFECTION':'#dc2626'}.get(impl_label, '#4b5563')
-    _impl_row = ''
-    if isinstance(impl_pct, (int, float)):
-        _impl_note_s = f' &middot; <span style="color:#6b7280">{impl_note}</span>' if impl_note else ''
-        _impl_row = (
-            f'<div><span style="{_LBL}">Growth the price assumes</span> '
-            f'<strong style="color:{_impl_c}">~{impl_pct:.0f}%/yr for 10 years</strong>'
-            f'{_impl_note_s}</div>'
-        )
-    # Plain-English "reinvestment payoff" (ROIIC) row
     _roiic_c = {'STRONG':'#15803d','SOLID':'#15803d','FADING':'#d97706',
                 'POOR':'#dc2626','CAPITAL-LIGHT':'#4b5563'}.get(roiic_lbl, '#4b5563')
-    _roiic_row = ''
-    if roiic_lbl:
-        _roiic_val = (f'~{roiic_pct:.0f}% on new investment'
-                      if isinstance(roiic_pct, (int, float)) else roiic_lbl.title())
-        _roiic_note_s = f' &middot; <span style="color:#6b7280">{roiic_note}</span>' if roiic_note else ''
-        _roiic_row = (
-            f'<div><span style="{_LBL}">Reinvestment payoff</span> '
-            f'<strong style="color:{_roiic_c}">{_roiic_val}</strong>'
-            f'{_roiic_note_s}</div>'
-        )
-    # Plain-English "likely return at this price" — blended IRR pulled up so the
-    # whole money story sits together (per-scenario detail stays in the table below).
-    _irr_row = ''
-    if isinstance(exp_irr, (int, float)):
-        _irr_c = '#15803d' if exp_irr >= 8 else '#d97706' if exp_irr >= 0 else '#dc2626'
-        _irr_row = (
-            f'<div><span style="{_LBL}">Likely return at this price</span> '
-            f'<strong style="color:{_irr_c}">~{exp_irr:.0f}%/yr</strong> '
-            f'<span style="color:#6b7280">&middot; blended bull/base/bear, probability-weighted (price only)</span></div>'
-        )
+    _irr_c = ('#15803d' if (isinstance(exp_irr, (int, float)) and exp_irr >= 8)
+              else '#d97706' if (isinstance(exp_irr, (int, float)) and exp_irr >= 0)
+              else '#dc2626')
     # Priced-for-perfection advisory banner (only when it downgraded sizing)
     _pfp_html = (
         f'<div style="font-size:9.5px;color:#b45309;border-left:3px solid #fde68a;'
         f'padding:5px 10px;margin-top:8px;background:#fffbeb">'
-        f'<strong>Priced for perfection:</strong> {pfp_note}</div>'
+        f'<strong>Expensive &mdash; needs everything to go right:</strong> {pfp_note}</div>'
         if (pfp and pfp_note) else ''
     )
-    # SECTION 1 — "what am I paying, and what will I likely earn" in one place
+    # SECTION 1 — the four valuation lenses (valuation · implied growth ·
+    # reinvestment payoff · likely return) condensed onto ONE line so the
+    # Research Brief stays scannable. Per-lens notes drop to keep it to a line.
+    _pay_parts = [f'<strong style="color:{_val_c}">{val_label}</strong>{_peg_s}']
+    if isinstance(impl_pct, (int, float)):
+        _pay_parts.append(f'price assumes <strong style="color:{_impl_c}">~{impl_pct:.0f}%/yr</strong> growth')
+    if roiic_lbl:
+        _roiic_val = (f'~{roiic_pct:.0f}%' if isinstance(roiic_pct, (int, float)) else roiic_lbl.title())
+        _pay_parts.append(f'profit reinvested <strong style="color:{_roiic_c}">{_roiic_val}</strong>')
+    if isinstance(exp_irr, (int, float)):
+        _pay_parts.append(f'likely return <strong style="color:{_irr_c}">~{exp_irr:.0f}%/yr</strong>')
+    _pay_line = ' &middot; '.join(_pay_parts)
     paying_html = (
         f'<tr><td style="padding:0">{_sec_label("What You&#39;re Paying For", "Computed &middot; market price &amp; SEC EDGAR &middot; not AI")}</td></tr>'
         f'<tr><td style="padding:10px 14px">'
-        f'<div style="font-size:10px;color:#374151;line-height:1.9">'
-        f'<div><span style="{_LBL}">Valuation today</span> '
-        f'<strong style="color:{_val_c}">{val_label}</strong>{_peg_s}{_val_note_s}</div>'
-        f'{_impl_row}'
-        f'{_roiic_row}'
-        f'{_irr_row}'
-        f'</div>'
+        f'<div style="font-size:10px;color:#374151;line-height:1.65">{_pay_line}</div>'
         f'{_pfp_html}'
         f'</td></tr>'
     )
     # SECTION 2 — integrity / trust checks, kept separate so they stop crowding the money story
     integrity_html = (
-        f'<tr><td style="padding:0">{_sec_label("Integrity Checks", "SEC EDGAR &middot; insider &middot; Senate eFD")}</td></tr>'
+        f'<tr><td style="padding:0">{_sec_label("Trust Checks", "SEC EDGAR &middot; insider &middot; Senate eFD")}</td></tr>'
         f'<tr><td style="padding:10px 14px">'
         f'<div style="font-size:10px;color:#374151;line-height:1.9">'
         f'<div><span style="{_LBL}">Insider (6m)</span> '
@@ -534,19 +525,20 @@ def _holding_card(h: dict) -> str:
         f'</tr></table>'
         f'</td></tr>'
 
+        + _chg_banner
         + rating_header
         + advisory_html
 
-        # INVESTMENT THESIS
-        + f'<tr><td style="padding:0">{_sec_label("Investment Thesis", "20-year view")}</td></tr>'
+        # WHY WE OWN IT
+        + f'<tr><td style="padding:0">{_sec_label("Why We Own It", "20-year view")}</td></tr>'
         f'<tr><td style="padding:12px 14px 10px">'
         f'<div style="font-size:11px;color:#1a1d23;line-height:1.65">'
         f'{thesis_html}'
         f'</div>'
         + (f'<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-top:10px"><tr>'
-           f'<td style="font-size:9.5px;color:#6b7280;padding-right:10px">Moat: <strong style="color:#374151">{moat_type}</strong></td>'
-           f'<td style="font-size:9.5px;color:#6b7280;padding-right:10px">{moat_dur} yrs durable</td>'
-           f'<td style="font-size:9.5px;color:#6b7280;padding-right:10px">Mgmt: <strong style="color:#374151">{mgmt_gr}</strong></td>'
+           f'<td style="font-size:9.5px;color:#6b7280;padding-right:10px">Edge: <strong style="color:#374151">{moat_type}</strong></td>'
+           f'<td style="font-size:9.5px;color:#6b7280;padding-right:10px">{moat_dur} yrs lasting</td>'
+           f'<td style="font-size:9.5px;color:#6b7280;padding-right:10px">Management: <strong style="color:#374151">{mgmt_gr}</strong></td>'
            f'<td style="font-size:9.5px;color:#6b7280">Runway: <strong style="color:#374151">{runway_yr} yrs</strong></td>'
            f'</tr></table>'
            if moat_type else '')
@@ -555,11 +547,11 @@ def _holding_card(h: dict) -> str:
            f'{f" &middot; {sect_note}" if sect_note else ""}'
            f'</div>' if sect_dur else '')
         + (f'<div style="font-size:9.5px;color:#374151;margin-top:6px">'
-           f'<strong>Primary risk:</strong> {risk}</div>' if risk else '')
+           f'<strong>Main risk:</strong> {risk}</div>' if risk else '')
         + ten_k_html
         + congress_html
         + (f'<div style="font-size:9.5px;color:#b91c1c;border-left:3px solid #fecaca;padding:5px 10px;'
-           f'margin-top:8px;background:#fef2f2"><strong>Exit if:</strong> {breaks_if}</div>'
+           f'margin-top:8px;background:#fef2f2"><strong>Sell if:</strong> {breaks_if}</div>'
            if breaks_if else '')
         + f'</td></tr>'
 
@@ -567,7 +559,7 @@ def _holding_card(h: dict) -> str:
         + paying_html
 
         # 10-YEAR SCENARIO TRACKING
-        + (f'<tr><td style="padding:0">{_sec_label("10-Year Scenario", f"Currently tracking: {tracking}")}</td></tr>'
+        + (f'<tr><td style="padding:0">{_sec_label("How It Could Play Out", f"Currently tracking: {tracking}")}</td></tr>'
            f'<tr><td style="padding:10px 14px">'
            + (f'<div style="font-size:10px;color:#374151;line-height:1.5;margin-bottom:10px;'
               f'border-left:3px solid {trk_c};padding-left:10px">{trk_note}</div>' if trk_note else '')
@@ -601,7 +593,7 @@ def _holding_card(h: dict) -> str:
         + integrity_html
 
         # TRACK RECORD (10yr) — long-term compounding, what matters most
-        + f'<tr><td style="padding:0">{_sec_label("Track Record", "Compounding vs QQQ &middot; 10-15yr lens")}</td></tr>'
+        + f'<tr><td style="padding:0">{_sec_label("Track Record", "Compounding vs QQQ &middot; 10-15yr view")}</td></tr>'
         f'<tr><td style="padding:10px 14px">'
         f'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>'
         + _stat('3yr CAGR', _pct2(cagr3) if cagr3 is not None else '—')
@@ -615,7 +607,7 @@ def _holding_card(h: dict) -> str:
         + f'</td></tr>'
 
         # TECHNICAL POSITION
-        + f'<tr><td style="padding:0">{_sec_label("Technical Position", "background only")}</td></tr>'
+        + f'<tr><td style="padding:0">{_sec_label("Price Trend", "background only")}</td></tr>'
         f'<tr><td style="padding:10px 14px">'
         f'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>'
         + _stat('200-Day MA', above_str, above_c)
@@ -632,11 +624,11 @@ def _holding_card(h: dict) -> str:
         f'<tr><td style="padding:10px 14px">{news_raw_html}</td></tr>'
 
         # AI INSIGHTS — the model's read of the news above
-        + f'<tr><td style="padding:0">{_sec_label("AI insights &middot; news", "LLM&#39;s read of the news above &middot; paraphrased, not verbatim")}</td></tr>'
+        + f'<tr><td style="padding:0">{_sec_label("AI read of the news", "the model&#39;s take on the news above &middot; in its own words")}</td></tr>'
         f'<tr><td style="padding:10px 14px">{intel_html}</td></tr>'
 
         # 8-K FILING INSIGHTS
-        + f'<tr><td style="padding:0">{_sec_label("AI insights &middot; 8-K filings", "LLM-extracted from the SEC 8-K filing text &middot; EDGAR")}</td></tr>'
+        + f'<tr><td style="padding:0">{_sec_label("AI read of SEC filings", "the model&#39;s take on the SEC 8-K filing &middot; EDGAR")}</td></tr>'
         f'<tr><td style="padding:10px 14px 14px">{sec_8k_html}</td></tr>'
 
         + f'</table>'
@@ -1104,6 +1096,48 @@ def _rating_style(verdict) -> tuple:
     }.get(v, ('#6b7280', '#f8f9fa', v or '\u2014'))
 
 
+def _holding_oneliner(h: dict) -> str:
+    """One-line roster row for a steady hold (no tier/rating/scenario change this
+    month). Long-horizon research firms report inactivity as a line, not a full
+    re-write — the full dossier is unchanged from the prior brief."""
+    tk      = h.get('ticker', '')
+    tier    = h.get('tier', 'T2')
+    company = h.get('company_name', tk)
+    tier_c  = {'T1': '#15803d', 'T2': '#1d4ed8', 'T3': '#d97706'}.get(tier, '#6b7280')
+    rc, rbg, rlbl = _rating_style(h.get('verdict'))
+    cur_price = h.get('current_price')
+    price_s = f'${cur_price:.2f}' if isinstance(cur_price, (int, float)) else '\u2014'
+    ret = h.get('return_1yr')
+    ret_s = f'{ret:+.1f}%' if isinstance(ret, (int, float)) else '\u2014'
+    ret_c = ('#15803d' if (isinstance(ret, (int, float)) and ret >= 0)
+             else '#dc2626' if isinstance(ret, (int, float)) else '#6b7280')
+    pos = h.get('position_size_pct', 0) or 0
+    trk = str((h.get('scenario') or {}).get('current_tracking', '') or '').upper()
+    trk_c = {'BULL': '#15803d', 'BASE': '#d97706', 'BEAR': '#dc2626'}.get(trk, '#9ca3af')
+    trk_s = (f'<span style="color:{trk_c};font-weight:700">{trk.title()}</span>'
+             if trk and trk not in ('', '\u2014', 'NONE') else '')
+    return (
+        f'<table id="{tk}" width="100%" border="0" cellpadding="0" cellspacing="0" '
+        f'style="margin-bottom:6px;border:1px solid #eef0f2;border-left:3px solid {tier_c};background:#fff">'
+        f'<tr>'
+        f'<td style="padding:9px 12px;vertical-align:middle;white-space:nowrap">'
+        f'<span style="font-size:8px;font-weight:700;color:{tier_c}">{tier}</span>&nbsp;'
+        f'<strong style="font-size:13px;color:#111827">{tk}</strong>'
+        f'<span style="font-size:9px;color:#9ca3af;margin-left:6px">{round(pos,1)}%</span>'
+        f'</td>'
+        f'<td style="padding:9px 8px;vertical-align:middle;font-size:9px;color:#6b7280">{company}</td>'
+        f'<td style="padding:9px 8px;text-align:right;vertical-align:middle;white-space:nowrap">'
+        f'<span style="font-size:12px;font-weight:700;color:#111827">{price_s}</span>&nbsp;'
+        f'<span style="font-size:10px;font-weight:700;color:{ret_c}">{ret_s}</span>'
+        f'</td>'
+        f'<td style="padding:9px 8px;text-align:right;vertical-align:middle;white-space:nowrap">{trk_s}</td>'
+        f'<td style="padding:9px 12px;text-align:right;vertical-align:middle;white-space:nowrap">'
+        f'<span style="background:{rbg};color:{rc};font-size:8px;font-weight:700;padding:2px 6px;border-radius:2px">{rlbl}</span>'
+        f'</td>'
+        f'</tr></table>'
+    )
+
+
 def _build_exec_summary(holdings: list) -> str:
     """
     Front-page analyst summary table \u2014 the whole book at a 15-20 year glance,
@@ -1168,17 +1202,17 @@ def _build_exec_summary(holdings: list) -> str:
 
     return (
         '<div class="section" style="margin-bottom:14px">'
-        '<div class="section-hdr">Executive summary &mdash; the book at a 15-20 year glance</div>'
+        '<div class="section-hdr">Summary &mdash; every holding at a glance</div>'
         '<table style="width:100%;border-collapse:collapse">'
         '<tr style="border-bottom:2px solid #e5e7eb">'
-        + _th('Stock') + _th('Rating') + _th('Sector 20y', True) + _th('Moat', True)
-        + _th('Conviction', True) + _th('vs QQQ', True) + _th('Thesis') +
+        + _th('Stock') + _th('Rating') + _th('Sector 20y', True) + _th('Edge', True)
+        + _th('Confidence', True) + _th('vs QQQ', True) + _th('Why we own it') +
         '</tr>'
         f'{rows}'
         '</table>'
         '<div style="font-size:8.5px;color:#9ca3af;margin-top:8px">'
-        'Rating = 15-20yr stance, not a trade. Decade odds &amp; vs-QQQ are the model\'s '
-        'probabilistic estimates \u2014 not price targets.</div>'
+        'Rating = our 15-20 year view, not a quick trade. The odds and vs-QQQ figures are '
+        'estimates, not promises.</div>'
         '</div>'
     )
 
@@ -1226,17 +1260,17 @@ def _build_concentration_view(holdings: list, screened: list) -> str:
         </tr>"""
 
     max_mt_pct = (mt_sorted[0][1] / total_pos * 100) if mt_sorted else 0
-    verdict = ('⚠ Concentrated — single megatrend exceeds 30% of book'
+    verdict = ('⚠ Concentrated — one big trend is over 30% of the portfolio'
                if max_mt_pct > 30
-               else '✓ Reasonably diversified across megatrends')
+               else '✓ Reasonably spread across big trends')
     verdict_color = '#c0392b' if max_mt_pct > 30 else '#2a7a4a'
 
     return f"""
 <div class="section">
-  <div class="section-hdr">Portfolio concentration — am I making one bet?</div>
+  <div class="section-hdr">Am I making one big bet?</div>
   <div style="font-size:11px;color:{verdict_color};font-weight:600;margin-bottom:10px">{verdict}</div>
   <table style="width:100%;border-collapse:collapse;font-size:11px">
-    <tr><th style="text-align:left;font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">Megatrend exposure</th><th></th><th></th></tr>
+    <tr><th style="text-align:left;font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">Big-trend exposure</th><th></th><th></th></tr>
     {mt_rows}
   </table>
 </div>"""
@@ -1307,7 +1341,7 @@ def _build_sector_outlook(megatrend_review: dict) -> str:
   {changes_html}
   <div style="font-size:8.5px;color:#9ca3af;margin-bottom:8px">Last reviewed {last_reviewed or 'never'} &middot; re-reviewed quarterly</div>
   <table style="width:100%;border-collapse:collapse;font-size:11px">
-    <tr><th style="text-align:left;font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">Megatrend</th>
+    <tr><th style="text-align:left;font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">Big trend</th>
         <th style="font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">Score</th>
         <th style="text-align:right;font-size:9px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px">Survival</th></tr>
     {rows}
@@ -1402,7 +1436,7 @@ def _build_decision_review(decision_review: dict) -> str:
 
     return f"""
 <div class="section">
-  <div class="section-hdr">Decision self-review — the model checking its own work</div>
+  <div class="section-hdr">The model checking its own work</div>
   <div style="font-size:11px;margin-bottom:8px">{summary}</div>
   {note_html}
   {table_html}
@@ -1430,7 +1464,7 @@ def _build_whats_changed(decisions: dict, decision_review: dict) -> str:
             '<div class="section" style="margin-bottom:14px">'
             '<div class="section-hdr">What changed this quarter</div>'
             '<div style="font-size:11px;color:#15803d;font-weight:600">'
-            '&#10003; No structural changes &mdash; the book held steady. '
+            '&#10003; No big changes &mdash; the portfolio held steady. '
             '<span style="color:#6b7280;font-weight:400">For a 15-20 year strategy, '
             'inaction is usually the correct action.</span></div>'
             '</div>'
@@ -1465,7 +1499,7 @@ def _build_whats_changed(decisions: dict, decision_review: dict) -> str:
         flag = str(v.get('flag', '')).upper(); note = (v.get('note', '') or '')[:80]
         note_html = f'<span style="color:#6b7280;font-size:10px"> &middot; {note}</span>' if note else ''
         rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
-                 f'{_chip("COMMITTEE " + flag, "#b45309", "#fffbeb")}</td>'
+                 f'{_chip("FLAGGED " + flag, "#b45309", "#fffbeb")}</td>'
                  f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong>'
                  f'{note_html}</td></tr>')
 
@@ -1495,7 +1529,7 @@ def _build_disclosures() -> str:
                 f'line-height:1.6">{body}</td></tr>')
     return (
         '<div class="section" style="margin-bottom:6px">'
-        '<div class="section-hdr">Methodology &amp; disclosures</div>'
+        '<div class="section-hdr">How this is built &amp; disclaimers</div>'
         '<div style="font-size:10px;color:#4b5563;line-height:1.6;margin-bottom:10px">'
         'Every position is assessed for a <strong>15-20 year</strong> hold. We do not set price '
         'targets or trade on momentum; the figures below are probabilistic estimates of how a '
@@ -1507,9 +1541,9 @@ def _build_disclosures() -> str:
                'plays out over the next 10+ years. Subjective and model-generated.')
         + _row('vs QQQ/yr', 'Estimated annualised excess return versus the Nasdaq-100 over the hold. '
                'An expectation, not a promise; wide error bars apply.')
-        + _row('Moat / Sector 20y', 'Durability of the competitive advantage and of the sector&#39;s '
-               'relevance over a 15-20 year horizon.')
-        + _row('News / 8-K / AI insights', 'Short-term (30-day) context only. These do <em>not</em> '
+        + _row('Edge / Sector 20y', 'How long the company&#39;s competitive advantage and the sector&#39;s '
+               'relevance should last over a 15-20 year horizon.')
+        + _row('News / SEC filings / AI notes', 'Short-term (30-day) background only. These do <em>not</em> '
                'override a long-term thesis; they are background colour.')
         + '</table>'
         '<div style="font-size:8.5px;color:#9ca3af;margin-top:10px;line-height:1.6">'
@@ -1601,19 +1635,56 @@ def generate_full_report(decisions: dict, portfolio: dict, researched: dict,
         return (t_order, -ret)
 
     if holdings:
-        for h in sorted(holdings, key=_sort_key):
-            html += _holding_card(h)
+        # Show a full dossier only for holdings that changed this month (new
+        # position, tier migration, rating or scenario-tracking shift); steady
+        # holds collapse to a one-line roster row — the way long-horizon firms
+        # report. changed_this_month is written by the screener; default True so
+        # the first brief after deploy (before the flag exists) shows everything.
+        _changed = [h for h in holdings if h.get('changed_this_month', True)]
+        _steady  = [h for h in holdings if not h.get('changed_this_month', True)]
+        if _changed:
+            html += (
+                f'<div style="margin:14px 0 8px;padding:9px 14px;background:#0d2137;'
+                f'font-size:9px;font-weight:700;color:#e2e8f0;letter-spacing:.12em;'
+                f'text-transform:uppercase;border-radius:2px">'
+                f'Full analysis &mdash; changed this month ({len(_changed)})</div>'
+            )
+            for h in sorted(_changed, key=_sort_key):
+                html += _holding_card(h)
+        if _steady:
+            html += (
+                f'<div style="margin:16px 0 6px;padding:9px 14px;background:#f8f9fa;'
+                f'border-top:1px solid #eaecef;border-bottom:1px solid #eaecef;'
+                f'font-size:9px;font-weight:700;color:#9ca3af;letter-spacing:.12em;'
+                f'text-transform:uppercase">'
+                f'Steady holds &mdash; no change this month ({len(_steady)}) '
+                f'<span style="font-weight:400;text-transform:none;letter-spacing:0;color:#adb5bd">'
+                f'&middot; full write-up unchanged from prior brief</span></div>'
+            )
+            for h in sorted(_steady, key=_sort_key):
+                html += _holding_oneliner(h)
 
-    # Screened candidates
+    # Screened candidates — cap at the top 5 to keep the brief scannable; the
+    # rest are research-pending/failed and low-signal, so we just note the count.
     if screened:
+        _scr_show = screened[:5]
+        _scr_more = len(screened) - len(_scr_show)
+        _scr_hdr  = (f'Screened candidates &mdash; research pending '
+                     f'({"showing 5 of " + str(len(screened)) if _scr_more > 0 else len(screened)})')
         html += (
             f'<div style="margin-top:8px;margin-bottom:8px;padding:10px 14px;background:#fffbeb;'
             f'border-left:4px solid #d97706;font-size:8px;font-weight:700;color:#92400e;'
             f'letter-spacing:.1em;text-transform:uppercase">'
-            f'Screened candidates &mdash; research pending ({len(screened)})</div>'
+            f'{_scr_hdr}</div>'
         )
-        for s in screened:
+        for s in _scr_show:
             html += _screened_card(s)
+        if _scr_more > 0:
+            html += (
+                f'<div style="margin:0 0 8px;padding:8px 14px;font-size:9px;color:#9ca3af;'
+                f'font-style:italic">+ {_scr_more} more screened candidate'
+                f'{"s" if _scr_more != 1 else ""} not shown &mdash; see full run log.</div>'
+            )
 
     html += _build_disclosures()
     html += '</div>'  # padding:12px wrapper
