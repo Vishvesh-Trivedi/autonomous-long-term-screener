@@ -20,16 +20,18 @@
     "_model_change_note": "Switched to meta/llama-3.1-8b-instruct 2026-07-08 after live testing showed the larger free-tier models (49B nemotron-super, 70B llama-3.3, 70B llama-3.1) failing 50-100% of the time on this account (timeouts or empty responses) for the full research prompt, while the 8B model succeeded 4/4 in ~3.5s each. This is what was silently blocking every new candidate from getting a usable thesis.",
     "provider": "nvidia",
     "model": "meta/llama-3.1-8b-instruct",
-    "_nvidia_models_comment": "Automatic NVIDIA fallback chain, tried top-to-bottom on a single call: if a model is down/at capacity/returns empty after its own retries, the next free model is attempted before giving up. Primary (8B) is most reliable on this account; the rest are free endpoints. Edit this list to change the chain \u2014 no code change needed.",
+    "request_timeout_sec": 90,
+    "_request_timeout_comment": "Per-attempt LLM timeout in seconds. The OpenAI/Anthropic clients default to 600s (10 min) with built-in retries, which let a single stalled free-tier call hang the run for tens of minutes. Capped low so a stalled model fails fast and the model-chain fallback takes over. 8B normally answers in ~3.5s.",
+    "research_max_tokens": 3000,
+    "_research_max_tokens_comment": "Output-token budget for the per-stock research JSON. The T1/T2 schema has ~13 fields incl. several free-text strings + 3 highlights; at 2200 verbose free-tier models truncated the JSON before the closing brace, causing PARSE_ERROR and blocking the candidate from ever becoming a T1/T2/T3 buy. 3000 gives headroom; the prompt also caps string length.",
+    "_nvidia_models_comment": "Automatic NVIDIA fallback chain, tried top-to-bottom on a single call: if a model is down/at capacity/returns empty after its own retries, the next free model is attempted before giving up. Primary (8B) is most reliable on this account; 70B is backup. Removed 2026-07: nemotron-70b (404), mixtral-8x22b-v0.1 (410 Gone/retired), deepseek-r1 (404) \u2014 they returned dead-endpoint errors. Re-add only after confirming the endpoint is live. Edit this list to change the chain \u2014 no code change needed.",
     "nvidia_models": [
       "meta/llama-3.1-8b-instruct",
-      "meta/llama-3.3-70b-instruct",
-      "nvidia/llama-3.1-nemotron-70b-instruct",
-      "mistralai/mixtral-8x22b-instruct-v0.1",
-      "deepseek-ai/deepseek-r1"
+      "meta/llama-3.3-70b-instruct"
     ],
-    "fallback_provider": "anthropic",
-    "fallback_model": "claude-sonnet-5",
+    "fallback_provider": null,
+    "_fallback_provider_note": "NVIDIA-only. Anthropic/Claude fallback is disabled (null) on purpose. To re-enable it later, set this to \"anthropic\", provide ANTHROPIC_API_KEY, and set fallback_model to a valid Claude model id.",
+    "fallback_model": null,
     "_alternative_models": {
       "_comment": "Other free NVIDIA models you can switch to by changing model above. Re-test reliability before switching back to a larger model - see _model_change_note.",
       "reasoning_best": "deepseek-ai/deepseek-r1",

@@ -33,15 +33,15 @@ PROVIDERS = {
         # Ordered NVIDIA free-endpoint models tried in turn: if one model is
         # down / capacity-limited / returns empty after its own retries, the
         # next is attempted before we give up on NVIDIA entirely. Primary (8B,
-        # proven most reliable on this account) stays first; the rest are the
-        # free models already documented in universe_config.json's
-        # llm._alternative_models. Overridable via llm.nvidia_models in config.
+        # proven most reliable on this account) stays first, 70B as backup.
+        # Overridable via llm.nvidia_models in config.
+        #
+        # Removed 2026-07 after live 404/410 responses: nemotron-70b (404),
+        # mixtral-8x22b-v0.1 (410 Gone / retired), deepseek-r1 (404). Re-add via
+        # config llm.nvidia_models only after confirming the endpoint is live.
         'fallback_models': [
             'meta/llama-3.1-8b-instruct',
             'meta/llama-3.3-70b-instruct',
-            'nvidia/llama-3.1-nemotron-70b-instruct',
-            'mistralai/mixtral-8x22b-instruct-v0.1',
-            'deepseek-ai/deepseek-r1',
         ],
         'rate_limit_per_min': 40,
     },
@@ -62,6 +62,21 @@ def _load_llm_config() -> dict:
     except Exception:
         pass
     return {}
+
+
+def _request_timeout() -> float:
+    """Per-request LLM timeout in seconds (config llm.request_timeout_sec).
+
+    The OpenAI/Anthropic clients default to a 600s (10-minute) timeout with
+    built-in retries, so a single stalled free-tier call could hang the run for
+    tens of minutes before our own model-chain fallback ever got a turn. We cap
+    each attempt low and disable client-side retries so a stalled model fails
+    fast and control returns to call_llm's own retry/fallback logic quickly.
+    """
+    try:
+        return float(_load_llm_config().get('request_timeout_sec', 90) or 90)
+    except (TypeError, ValueError):
+        return 90.0
 
 
 def _nvidia_model_chain(cfg: dict, primary_model: str) -> list:
@@ -289,8 +304,10 @@ def _call_nvidia(prompt: str, system: str, model: str,
         raise RuntimeError('openai package not installed — add to requirements.txt')
 
     client = OpenAI(
-        base_url = PROVIDERS['nvidia']['base_url'],
-        api_key  = os.environ.get('NVIDIA_API_KEY'),
+        base_url    = PROVIDERS['nvidia']['base_url'],
+        api_key     = os.environ.get('NVIDIA_API_KEY'),
+        timeout     = _request_timeout(),  # fail fast instead of the 600s default
+        max_retries = 0,                    # call_llm handles retries/fallback itself
     )
     resp = client.chat.completions.create(
         model       = model,
@@ -313,7 +330,11 @@ def _call_anthropic(prompt: str, system: str, model: str,
     except ImportError:
         raise RuntimeError('anthropic package not installed')
 
-    client = anthropic.Anthropic(api_key=os.environ.get('ANTHROPIC_API_KEY'))
+    client = anthropic.Anthropic(
+        api_key     = os.environ.get('ANTHROPIC_API_KEY'),
+        timeout     = _request_timeout(),  # fail fast instead of the long default
+        max_retries = 0,                    # call_llm handles retries/fallback itself
+    )
     resp = client.messages.create(
         model       = model,
         max_tokens  = max_tokens,
