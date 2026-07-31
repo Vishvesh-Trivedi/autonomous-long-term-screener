@@ -1,22 +1,22 @@
 {
-  "moat_type": "string",
+  "moat_type": "Proprietary software platform with strong network effects",
   "moat_durability_years": 20,
   "management_grade": "A",
   "growth_runway_years": 10,
-  "primary_risk": "string",
+  "primary_risk": "Dependence on key talent and ability to innovate",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "Bending Spoons has a strong track record and is a dominant player in the industry, with a high likelihood of survival over the next 20 years.",
-  "thesis_summary": "Bending Spoons, a leading provider of digital products, rides the trend of increasing demand for software solutions and maintains its competitive advantage through its strong brand and customer loyalty.",
-  "thesis_breaks_if": "The thesis breaks if the company fails to maintain its competitive advantage or if the industry undergoes a structural replacement.",
-  "sentiment_note": "The company is richly valued, but its strong track record and competitive advantage justify a starter position.",
+  "sector_survival_note": "The software industry has seen low disruption and high survival rates over the past 30 years",
+  "thesis_summary": "Bending Spoons' software platform provides a strong moat, with a high chance of survival and a potential for high returns over 10-15 years",
+  "thesis_breaks_if": "A structural change in the software industry or a significant disruption to the company's moat",
+  "sentiment_note": "The company is richly valued, but its strong moat and high growth potential make it a good candidate for a starter position",
   "decade_probability": 0.8,
-  "annual_alpha_estimate": 8,
+  "annual_alpha_estimate": 10,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company has a strong brand and customer loyalty, which enables it to maintain its competitive advantage.",
-    "The company has a high return on invested capital (ROIC) of 10%, indicating its ability to generate strong returns on its investments.",
-    "The company has a high gross margin of 67%, indicating its ability to maintain its pricing power and generate strong profits."
+    "The company has a strong cash runway and is FCF positive",
+    "The company's revenue growth is high, at 132% over the past year",
+    "The company has a high gross margin of 67%"
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 1.6%, PEG 1.3, EV/EBITDA 33, P/S 13 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 22.5,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-07-29T06:41:32.476747",
+  "research_date": "2026-07-31T00:50:07.167455",
   "ticker": "BSP"
 }

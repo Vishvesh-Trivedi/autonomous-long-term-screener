@@ -1,22 +1,22 @@
 {
-  "moat_type": "Leadership in Semiconductor Manufacturing Equipment",
-  "moat_durability_years": 15,
+  "moat_type": "Leadership in Semiconductor Manufacturing Inspection and Metrology Equipment",
+  "moat_durability_years": 20,
   "management_grade": "A",
   "growth_runway_years": 5,
   "primary_risk": "Dependence on a few large customers",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The semiconductor industry has seen significant consolidation, but KLA's position as a leading equipment manufacturer is unlikely to be disrupted in the next 20 years.",
-  "thesis_summary": "KLA Corporation's semiconductor manufacturing equipment rides the trend of increasing demand for semiconductors in various industries.",
-  "thesis_breaks_if": "A structural change in the semiconductor industry, such as a significant shift to alternative manufacturing technologies, would break the thesis.",
-  "sentiment_note": "The company's valuation is considered EXTREME, suggesting a smaller starter position.",
+  "sector_survival_note": "KLA Corporation has a strong track record of innovation and has maintained its market leadership position in the semiconductor manufacturing inspection and metrology equipment sector.",
+  "thesis_summary": "KLA Corporation provides semiconductor manufacturing inspection and metrology equipment, riding the trend of increasing demand for advanced semiconductors.",
+  "thesis_breaks_if": "A structural change in the demand for advanced semiconductors or a significant disruption in the company's leadership position.",
+  "sentiment_note": "The company's rich valuation and high growth expectations make it a high-risk investment.",
   "decade_probability": 0.8,
   "annual_alpha_estimate": 8,
-  "verdict": "ACCUMULATE",
-  "position_size_pct": 0.2,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 0.5,
   "ten_k_highlights": [
     "The company's revenue has been rising at a CAGR of 75.7% over the past 5 years.",
-    "KLA's gross margin has been increasing over the past 7 years, from 58.4% to 61%.",
-    "The company's return on invested capital (ROIC) has been declining over the past 5 years, from 46.1% to 41%."
+    "KLA Corporation has a strong track record of innovation and has maintained its market leadership position in the semiconductor manufacturing inspection and metrology equipment sector.",
+    "The company's gross margin has been rising over the past 7 years, and its ROIC has been falling over the same period."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 1.4%, PEG 2.2, EV/EBITDA 48, P/S 21 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 24.0,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-07-29T06:29:25.559003",
+  "research_date": "2026-07-31T00:48:33.168703",
   "ticker": "KLAC"
 }

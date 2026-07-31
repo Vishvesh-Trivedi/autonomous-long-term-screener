@@ -1,22 +1,22 @@
 {
-  "moat_type": "Leading edge lithography technology and equipment",
-  "moat_durability_years": 10,
+  "moat_type": "Dominant position in high-end semiconductor equipment",
+  "moat_durability_years": 15,
   "management_grade": "A",
   "growth_runway_years": 5,
   "primary_risk": "Dependence on a few large customers",
-  "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological change, which may lead to disruption of market leaders.",
-  "thesis_summary": "ASML's leading edge lithography technology and equipment enable the production of complex semiconductor chips, riding the trend of increasing demand for AI and other high-performance computing applications.",
-  "thesis_breaks_if": "A structural shift in the semiconductor industry, such as a significant decline in demand for high-performance computing chips.",
-  "sentiment_note": "The company's valuation is considered EXTREME, suggesting a smaller starter position and potential accumulation on weakness.",
-  "decade_probability": 0.7,
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "ASML's moat is likely to last due to its strong position in the high-end semiconductor equipment market, which has a long history of consolidation and limited competition.",
+  "thesis_summary": "ASML's high-end semiconductor equipment rides the big trend of increasing computing power and data storage needs.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "sentiment_note": "ASML is a great company with a strong moat, but its current valuation is EXTREME.",
+  "decade_probability": 0.8,
   "annual_alpha_estimate": 10,
   "verdict": "ACCUMULATE",
-  "position_size_pct": 0.2,
+  "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The Company's revenue is primarily generated from the sale of lithography systems and related products to semiconductor manufacturers.",
-    "The Company's gross profit margin has been impacted by the mix of products sold, with higher-margin products being sold in lower volumes.",
-    "The Company's research and development expenses have increased in recent years, primarily due to the development of new products and technologies."
+    "ASML's revenue growth is driven by the increasing demand for high-end semiconductor equipment, which is used in a variety of applications including smartphones, laptops, and data centers.",
+    "The company's gross margin is expected to remain high due to its strong position in the market and its ability to pass on cost increases to customers.",
+    "ASML has a strong balance sheet with a cash runway of several years, which provides the company with the financial flexibility to invest in research and development and pursue strategic acquisitions."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 1.4%, PEG 2.3, EV/EBITDA 2850, P/S 20 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 24.2,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-07-29T06:19:59.885553",
+  "research_date": "2026-07-31T00:45:13.199597",
   "ticker": "ASML"
 }

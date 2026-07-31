@@ -1,22 +1,22 @@
 {
   "moat_type": "Ecosystem and Brand Loyalty",
-  "moat_durability_years": 10,
+  "moat_durability_years": 20,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on Technological Advancements",
+  "primary_risk": "Dependence on Key Suppliers",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The company's strong brand and ecosystem have allowed it to maintain a dominant position in the sector, with a high likelihood of survival over the next 20 years.",
-  "thesis_summary": "Apple Inc. is a leader in the technology sector, with a strong moat based on its ecosystem and brand loyalty, riding the trend of increasing demand for consumer electronics.",
-  "thesis_breaks_if": "A structural change in the technology sector, such as a significant shift to a new platform or a major disruption to the company's business model.",
-  "sentiment_note": "The company's valuation is considered EXTREME, but the entry multiple sets the starting yield of a 15-20yr hold.",
+  "sector_survival_note": "Apple's ecosystem and brand loyalty are strong enough to withstand disruption in the sector.",
+  "thesis_summary": "Apple's ecosystem and brand loyalty drive sales of its iPhones and other products, riding the trend of increasing demand for mobile devices.",
+  "thesis_breaks_if": "Significant disruption to the smartphone market or a major decline in consumer demand for mobile devices.",
+  "sentiment_note": "Richly valued but a great company with a strong moat and durable business model.",
   "decade_probability": 0.8,
-  "annual_alpha_estimate": 12.5,
+  "annual_alpha_estimate": 8,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue growth has been driven by the increasing demand for consumer electronics, with a 5-year compound annual growth rate of 17%.",
-    "The company's gross margin has been increasing over the past 5 years, with a 5-year compound annual growth rate of 42.2%.",
-    "The company's cash runway is positive, with a free cash flow yield of 2.7%."
+    "Apple's revenue growth has been driven by the increasing popularity of its ecosystem, including the App Store, Apple Music, and Apple TV+.",
+    "The company has a strong track record of innovation, with a focus on developing new products and services that meet the evolving needs of its customers.",
+    "Apple's cash and cash equivalents totaled $182.1 billion at the end of fiscal 2022, providing a strong financial foundation for the company's future growth and development."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 2.7%, PEG 2.6, EV/EBITDA 30 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 15.6,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-07-29T06:29:16.042710",
+  "research_date": "2026-07-31T00:46:54.333478",
   "ticker": "AAPL"
 }

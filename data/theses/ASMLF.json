@@ -1,22 +1,22 @@
 {
-  "moat_type": "Leadership in Extreme Ultraviolet Lithography (EUVL) technology",
+  "moat_type": "Leadership in Lithography Technology",
   "moat_durability_years": 10,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on a single customer, TSMC",
+  "primary_risk": "Dependence on a Limited Number of Customers",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological change, which may lead to disruption of ASML's market position.",
-  "thesis_summary": "ASML's EUVL technology enables the production of complex chips, riding the trend of increasing computing power.",
-  "thesis_breaks_if": "A structural shift to alternative lithography technologies or a significant decline in demand for complex chips.",
-  "sentiment_note": "Richly valued, but a great company with a strong moat and durable business model.",
+  "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological change, which may lead to disruption.",
+  "thesis_summary": "ASML provides lithography equipment and software to the semiconductor industry, riding the trend of increasing demand for advanced computing and storage solutions.",
+  "thesis_breaks_if": "A structural shift in the industry towards alternative lithography technologies.",
+  "sentiment_note": "Very richly valued, but a great company with a strong moat.",
   "decade_probability": 0.7,
   "annual_alpha_estimate": 8,
   "verdict": "ACCUMULATE",
-  "position_size_pct": 0.2,
+  "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "ASML's revenue was $35,328 million for the fiscal year ended December 31, 2025.",
-    "The Company's gross margin was 53% for the fiscal year ended December 31, 2025.",
-    "ASML's research and development expenses were $4,919 million for the fiscal year ended December 31, 2025."
+    "The company's revenue is highly dependent on a limited number of customers, including Intel and Samsung.",
+    "The company has a significant amount of goodwill on its balance sheet, which may be impaired in the future.",
+    "The company's business is subject to intense competition and rapid technological change, which may lead to disruption."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 1.4%, PEG 2.2, EV/EBITDA 51, P/S 20 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 24.2,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-07-29T06:20:00.442204",
+  "research_date": "2026-07-31T00:43:41.342462",
   "ticker": "ASMLF"
 }

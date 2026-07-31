@@ -1,22 +1,22 @@
 {
-  "moat_type": "Network Effect through Secure Networking Solutions",
-  "moat_durability_years": 10,
+  "moat_type": "Network Security and Threat Intelligence",
+  "moat_durability_years": 15,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on Key Customers and Partners",
+  "primary_risk": "Cybersecurity Threats and Regulatory Changes",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The cybersecurity sector is expected to continue growing, but Fortinet will face increasing competition and disruption from emerging technologies.",
-  "thesis_summary": "Fortinet's secure networking solutions ride the big trend of increasing cybersecurity demand, leveraging a network effect moat.",
-  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise unless they structurally change the next decade.",
-  "sentiment_note": "Richly valued, but a great company with a durable moat.",
+  "sector_survival_note": "The cybersecurity sector is expected to continue growing, but with increasing competition and disruption from emerging technologies.",
+  "thesis_summary": "Fortinet provides network security and threat intelligence solutions, riding the trend of increasing cybersecurity threats and regulatory requirements.",
+  "thesis_breaks_if": "A structural shift in the cybersecurity landscape, such as a major breakthrough in AI-powered threat detection, could disrupt Fortinet's moat.",
+  "sentiment_note": "Fortinet is a high-quality company with a strong moat, but its valuation is rich, and investors should exercise caution.",
   "decade_probability": 0.7,
-  "annual_alpha_estimate": 8,
+  "annual_alpha_estimate": 10,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The Company's business is subject to risks associated with dependence on key customers and partners.",
-    "The Company's revenue is derived from a limited number of customers, and the loss of any of these customers could have a material adverse effect on the Company's business.",
-    "The Company's business is subject to risks associated with the Company's dependence on third-party suppliers and manufacturers."
+    "Fortinet's revenue has been rising at a CAGR of 103.4% over the past 5 years.",
+    "The company's gross margin has been increasing, reaching 80% in the latest period.",
+    "Fortinet's return on invested capital (ROIC) has been rising, reaching 76% in the latest period."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 2.1%, PEG 3.6, EV/EBITDA 47, P/S 16 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 18.6,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-07-29T06:29:24.109300",
+  "research_date": "2026-07-31T00:48:32.646331",
   "ticker": "FTNT"
 }

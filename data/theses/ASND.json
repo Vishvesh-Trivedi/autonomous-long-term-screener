@@ -1,22 +1,22 @@
 {
-  "moat_type": "string",
+  "moat_type": "Novel gene therapies for rare diseases",
   "moat_durability_years": 10,
-  "management_grade": "A",
+  "management_grade": "B",
   "growth_runway_years": 5,
-  "primary_risk": "string",
+  "primary_risk": "Regulatory approval and reimbursement challenges",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The company's durability and track record are solid, but the sector is subject to disruption and replacement.",
-  "thesis_summary": "Ascendis Pharma's specific competitive advantage is its treatment of rare genetic disorders, specifically its product Voxzogo, which rides the big trend of gene therapy.",
-  "thesis_breaks_if": "The thesis breaks if the company's product Voxzogo faces significant competition or regulatory issues.",
-  "sentiment_note": "The company's valuation is rich, but the entry multiple sets the starting yield of a 15-20yr hold.",
-  "decade_probability": 0.6,
-  "annual_alpha_estimate": 10,
+  "sector_survival_note": "The biotech sector faces significant disruption and consolidation, but Ascendis Pharma's focus on rare diseases provides a niche advantage.",
+  "thesis_summary": "Ascendis Pharma develops novel gene therapies for rare diseases, leveraging its expertise in gene editing to drive growth and profitability.",
+  "thesis_breaks_if": "Structural changes to the regulatory environment or significant advancements in competing technologies.",
+  "sentiment_note": "Valuation is rich, but the company's durable moat and strong growth prospects justify a long-term hold.",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 8,
   "verdict": "MONITOR",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue growth rate is 144%.",
-    "The company's gross margin is 89%.",
-    "The company's cash runway is positive."
+    "The company's cash runway is positive, with sufficient funds to support operations for the next several years.",
+    "Ascendis Pharma has a strong track record of revenue growth, with a 5-year CAGR of 15.2%.",
+    "The company's gross margin is high, at 89%, driven by its focus on rare diseases and novel gene therapies."
   ],
   "valuation_label": "RICH",
   "valuation_note": "FCF yield 0.3%, PEG 0.2, P/S 19 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
@@ -30,6 +30,6 @@
   "implied_growth_note": "The price assumes near-perfect execution for a decade \u2014 start small.",
   "priced_for_perfection": true,
   "priced_for_perfection_note": "Price already assumes ~46%/yr growth for a decade \u2014 start small, add on weakness",
-  "research_date": "2026-07-29T06:43:31.195813",
+  "research_date": "2026-07-31T00:50:18.343945",
   "ticker": "ASND"
 }

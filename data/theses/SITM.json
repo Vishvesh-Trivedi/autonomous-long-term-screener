@@ -1,22 +1,22 @@
 {
-  "moat_type": "High-Performance Oscillator Technology",
+  "moat_type": "High-precision timing technology",
   "moat_durability_years": 10,
   "management_grade": "B",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on a limited number of customers",
+  "primary_risk": "Dependence on a single customer",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological change, which may lead to disruption of SiTime's market position.",
-  "thesis_summary": "SiTime Corporation provides high-performance oscillators that ride the trend of increasing demand for high-speed computing and artificial intelligence.",
-  "thesis_breaks_if": "Material agreement entered, Acquisition or disposition completed, Direct financial obligation created, Item 3.02, Director/officer departure or appointment, Regulation FD disclosure, Financial statements attached; Item 5.07",
-  "sentiment_note": "Richly valued, but potential for long-term growth",
+  "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological change, which may lead to disruption of market leaders.",
+  "thesis_summary": "SiTime Corporation provides high-precision timing technology that rides the big trend of AI infrastructure demand.",
+  "thesis_breaks_if": "A structural change in the demand for high-precision timing technology or a significant disruption in the semiconductor industry.",
+  "sentiment_note": "Richly valued, but a great company with a strong moat.",
   "decade_probability": 0.6,
   "annual_alpha_estimate": 8,
   "verdict": "MONITOR",
   "position_size_pct": 0.2,
   "ten_k_highlights": [
-    "SiTime Corporation designs, develops, and markets a range of high-performance oscillators and clock generators for use in a variety of applications, including high-speed computing, artificial intelligence, and other high-performance applications.",
-    "The Company's products are used in a variety of end markets, including data center, artificial intelligence, and other high-performance applications.",
-    "SiTime Corporation's revenue has been increasing at a rate of 49.3% per year over the past five years, driven by growing demand for high-performance computing and artificial intelligence."
+    "SiTime Corporation's revenue has been rising at a rate of 49.3% over the past 5 years.",
+    "The company's gross margin has been falling over the past 7 years, from 63.1% to 56.1%.",
+    "SiTime Corporation has a strong balance sheet with $245.8 million in cash and cash equivalents and no debt."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 0.3%, PEG 3.8, EV/EBITDA 4571, P/S 45 \u2014 very richly valued \u2014 starter position only.",
@@ -28,9 +28,9 @@
   "implied_growth_pct": 47.2,
   "implied_growth_label": "PRICED_FOR_PERFECTION",
   "implied_growth_note": "The price assumes near-perfect execution for a decade \u2014 start small.",
-  "long_term_alpha_pp": 14.3,
+  "long_term_alpha_pp": 9.1,
   "priced_for_perfection": true,
   "priced_for_perfection_note": "Price already assumes ~47%/yr growth for a decade \u2014 start small, add on weakness",
-  "research_date": "2026-07-29T06:41:33.115086",
+  "research_date": "2026-07-31T00:50:07.840579",
   "ticker": "SITM"
 }

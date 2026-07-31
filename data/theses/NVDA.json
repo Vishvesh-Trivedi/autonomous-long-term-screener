@@ -1,22 +1,22 @@
 {
-  "moat_type": "Artificial Intelligence and Graphics Processing Unit (GPU) Technology",
-  "moat_durability_years": 15,
+  "moat_type": "Artificial Intelligence and Graphics Processing Unit (GPU) Leadership",
+  "moat_durability_years": 10,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on the growth of the gaming and data center markets",
+  "primary_risk": "Dependence on Gaming and High-Performance Computing Markets",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The company's AI and GPU technology has been a dominant force in the industry for over a decade, and it is likely to remain so for at least 20 years.",
-  "thesis_summary": "NVIDIA Corporation's specific moat is its artificial intelligence and graphics processing unit (GPU) technology, which it rides on the big trend of growing demand for AI and data center services.",
-  "thesis_breaks_if": "A structural change in the demand for AI and data center services, or a significant improvement in competing technologies.",
-  "sentiment_note": "The company's valuation is rich, but its fundamentals support a long-term hold.",
+  "sector_survival_note": "NVIDIA's AI and GPU leadership is likely to remain dominant in the next 20 years, as the company continues to innovate and expand its product offerings.",
+  "thesis_summary": "NVIDIA's AI and GPU leadership rides the trend of increasing demand for artificial intelligence and high-performance computing.",
+  "thesis_breaks_if": "A structural shift in the AI and GPU market, such as a significant decline in demand or a major competitor surpassing NVIDIA's leadership.",
+  "sentiment_note": "NVIDIA's valuation is rich, but the company's strong fundamentals and growth prospects justify a long-term hold.",
   "decade_probability": 0.8,
   "annual_alpha_estimate": 10,
   "verdict": "CORE_HOLD",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue has been rising at a rate of 702.3% over the past 5 years.",
-    "The company's gross margin has been rising over the past 13 years, from 43.6% to 74%.",
-    "The company's return on invested capital (ROIC) has been rising over the past 13 years, from 15.6% to 67%."
+    "NVIDIA's revenue has risen 702.3% over the past 5 years, driven by growth in the gaming and high-performance computing markets.",
+    "The company's gross margin has increased from 63.4% to 74.0% over the past 5 years, driven by cost savings and pricing power.",
+    "NVIDIA's return on invested capital (ROIC) has risen from 34.6% to 67.0% over the past 5 years, driven by the company's focus on innovation and efficiency."
   ],
   "valuation_label": "RICH",
   "valuation_note": "FCF yield 2.4%, PEG 0.6, EV/EBITDA 30, P/S 20 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 17.2,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-07-29T06:19:52.634663",
+  "research_date": "2026-07-31T00:43:32.493635",
   "ticker": "NVDA"
 }

@@ -1,22 +1,22 @@
 {
-  "moat_type": "IP leadership in programmable logic devices",
+  "moat_type": "Patent-protected FPGA-based semiconductor technology",
   "moat_durability_years": 10,
   "management_grade": "B",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on a few large customers",
+  "primary_risk": "Dependence on a few key customers",
   "sector_durability_20yr": "MEDIUM",
   "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological change, which may lead to disruption of market leaders.",
-  "thesis_summary": "Lattice Semiconductor's programmable logic devices ride the trend of increasing demand for artificial intelligence and machine learning.",
-  "thesis_breaks_if": "Acquisition or significant change in business strategy",
-  "sentiment_note": "Rich valuation, but a great company with a strong moat",
+  "thesis_summary": "Lattice Semiconductor provides FPGA-based semiconductor technology that enables the development of high-performance, low-power electronics, riding the trend of increasing demand for AI and IoT devices.",
+  "thesis_breaks_if": "Short-term news cycles or 8-K items that structurally change the company's business model or competitive advantage.",
+  "sentiment_note": "Richly valued, but a great company with a strong moat and durable business model.",
   "decade_probability": 0.7,
   "annual_alpha_estimate": 8,
   "verdict": "MONITOR",
-  "position_size_pct": 0.5,
+  "position_size_pct": 0.2,
   "ten_k_highlights": [
-    "The Company's net sales for the year ended December 31, 2022, were $574.0 million, an increase of 42.2% from $404.8 million for the year ended December 31, 2021.",
-    "The Company's gross margin for the year ended December 31, 2022, was 68.2%, compared to 64.5% for the year ended December 31, 2021.",
-    "The Company's research and development expenses for the year ended December 31, 2022, were $123.8 million, an increase of 44.1% from $86.1 million for the year ended December 31, 2021."
+    "The company's revenue has been rising at a CAGR of 38.2% over the past 5 years.",
+    "The company's gross margin has been stable at around 68% over the past 5 years.",
+    "The company's ROIC has been falling at a rate of 91.0% over the past 5 years."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 0.7%, PEG 0.6, EV/EBITDA 266, P/S 33 \u2014 very richly valued \u2014 starter position only.",
@@ -30,6 +30,6 @@
   "implied_growth_note": "The price assumes near-perfect execution for a decade \u2014 start small.",
   "priced_for_perfection": true,
   "priced_for_perfection_note": "Price already assumes ~34%/yr growth for a decade \u2014 start small, add on weakness",
-  "research_date": "2026-07-29T06:46:20.630049",
+  "research_date": "2026-07-31T00:52:08.170145",
   "ticker": "LSCC"
 }

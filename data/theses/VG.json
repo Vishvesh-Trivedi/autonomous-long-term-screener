@@ -1,22 +1,22 @@
 {
-  "moat_type": "Scale and operational efficiency in the liquefaction of natural gas",
+  "moat_type": "LNG Export Infrastructure",
   "moat_durability_years": 10,
-  "management_grade": "C",
+  "management_grade": "B",
   "growth_runway_years": 5,
-  "primary_risk": "High debt levels and potential cash flow disruptions",
+  "primary_risk": "Regulatory Risks and Delays",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The natural gas industry is subject to fluctuations in demand and supply, which may impact Venture Global's long-term survival.",
-  "thesis_summary": "Venture Global's liquefaction of natural gas business rides the trend of increasing demand for natural gas, with a specific moat in scale and operational efficiency.",
-  "thesis_breaks_if": "A structural change in the natural gas industry, such as a significant shift to renewable energy, would break the thesis.",
-  "sentiment_note": "The company's valuation is rich, and a smaller starter position is recommended.",
-  "decade_probability": 0.6,
+  "sector_survival_note": "The LNG export infrastructure sector has seen significant consolidation and disruption over the past 30 years, with many companies failing to survive in the long term.",
+  "thesis_summary": "Venture Global's LNG export infrastructure provides a competitive advantage through its proprietary technology and long-term contracts, riding the trend of increasing global demand for natural gas.",
+  "thesis_breaks_if": "Material changes to regulatory frameworks or significant delays in project timelines.",
+  "sentiment_note": "The company's valuation is rich, but the entry multiple sets a high starting yield for a 15-20 year hold.",
+  "decade_probability": 0.7,
   "annual_alpha_estimate": 8,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue growth is driven by the increasing demand for natural gas, with a compound annual growth rate of 59%.",
-    "Venture Global's gross margin is 44%, which is higher than the industry average.",
-    "The company has a positive cash flow, with a cash runway of several years."
+    "The company's proprietary technology enables efficient and cost-effective LNG export infrastructure.",
+    "The company has a long-term contract with a major energy company to supply LNG.",
+    "The company's management team has a track record of successful project execution and capital allocation."
   ],
   "valuation_label": "RICH",
   "valuation_note": "FCF yield -19.0%, PEG 0.9, EV/EBITDA 13 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": null,
   "implied_growth_label": null,
   "implied_growth_note": null,
-  "research_date": "2026-07-29T06:43:32.618989",
+  "research_date": "2026-07-31T00:50:17.146704",
   "ticker": "VG"
 }

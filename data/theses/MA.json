@@ -1,22 +1,22 @@
 {
-  "moat_type": "Network Effects and Payment Processing",
-  "moat_durability_years": 15,
+  "moat_type": "Network Effects through Payment Processing",
+  "moat_durability_years": 20,
   "management_grade": "A",
-  "growth_runway_years": 5,
-  "primary_risk": "Regulatory Risks and Changes in Payment Processing",
+  "growth_runway_years": 10,
+  "primary_risk": "Regulatory Changes to Payment Processing",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The payment processing sector has seen significant consolidation and disruption over the past 30 years, but Mastercard's strong brand and network effects have allowed it to maintain its market share.",
-  "thesis_summary": "Mastercard's payment processing network and strong brand ride the trend of increasing digital payments.",
-  "thesis_breaks_if": "A structural change in the payment processing landscape, such as a major competitor acquiring a significant market share or a new payment method gaining widespread adoption.",
-  "sentiment_note": "Accumulate slowly due to rich valuation.",
+  "sector_survival_note": "Mastercard's moat is highly durable due to its long history of innovation and its strong position in the payment processing industry.",
+  "thesis_summary": "Mastercard's payment processing network and innovative products ride the trend of increasing digital payments.",
+  "thesis_breaks_if": "A structural change in the payment processing industry, such as a new competitor with a similar moat, would break the thesis.",
+  "sentiment_note": "Valuation is rich, but the company's durability and moat make it a core hold.",
   "decade_probability": 0.8,
-  "annual_alpha_estimate": 9.5,
-  "verdict": "ACCUMULATE",
+  "annual_alpha_estimate": 8,
+  "verdict": "CORE_HOLD",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "Mastercard has a strong brand and network effects, with a 73.6% increase in revenue over the past 5 years.",
-    "The company has a high return on invested capital (ROIC) of 59%, indicating strong profitability.",
-    "Mastercard has a significant cash runway, with a positive free cash flow (FCF) and a low debt-to-equity ratio."
+    "Mastercard's revenue has been rising at a rate of 73.6% over the past 5 years.",
+    "The company's return on invested capital (ROIC) has been increasing at a rate of 46.3% over the past 5 years.",
+    "Mastercard's share count has been falling at a rate of 8.7% over the past 5 years, indicating a reduction in dilution."
   ],
   "valuation_label": "RICH",
   "valuation_note": "FCF yield 3.6%, PEG 1.6, EV/EBITDA 22, P/S 14 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 11.5,
   "implied_growth_label": "REASONABLE",
   "implied_growth_note": "The price assumes reasonable growth the business can likely deliver.",
-  "research_date": "2026-07-29T06:21:59.829375",
+  "research_date": "2026-07-31T00:46:53.035766",
   "ticker": "MA"
 }

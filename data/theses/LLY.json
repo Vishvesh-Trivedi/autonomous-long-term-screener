@@ -1,22 +1,22 @@
 {
-  "moat_type": "Patented pharmaceutical products and strong brand recognition",
-  "moat_durability_years": 15,
+  "moat_type": "Patented pharmaceutical products and strong pipeline",
+  "moat_durability_years": 20,
   "management_grade": "A",
   "growth_runway_years": 10,
-  "primary_risk": "Patent expiration and loss of exclusivity for key products",
-  "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The pharmaceutical industry is subject to intense competition, patent expirations, and regulatory changes, which may impact the company's ability to maintain its market share and profitability.",
-  "thesis_summary": "Eli Lilly's patented pharmaceutical products and strong brand recognition provide a durable moat, which the company can leverage to ride the trend of increasing demand for high-quality healthcare products.",
-  "thesis_breaks_if": "Short-term news cycles or 8-K events that structurally change the company's business model or competitive advantage.",
-  "sentiment_note": "The company's valuation is EXTREME, but its strong fundamentals and durable moat make it a worthwhile investment opportunity.",
+  "primary_risk": "Patent expiration and generic competition",
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "The pharmaceutical industry has seen relatively low disruption over the past 30 years, with most companies still independent market leaders.",
+  "thesis_summary": "Eli Lilly's patented pharmaceutical products and strong pipeline ride the trend of an aging global population and increasing healthcare spending.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
+  "sentiment_note": "Richly valued, but a great company with a strong moat and durable business model.",
   "decade_probability": 0.8,
   "annual_alpha_estimate": 8,
   "verdict": "MONITOR",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue has been rising at a 5-year CAGR of 130.2%, driven by the growth of its pharmaceutical products.",
-    "The company's gross margin has been stable at 83%, indicating a strong pricing power and efficient operations.",
-    "The company has a strong balance sheet with a cash runway of several years, providing flexibility to invest in research and development and pursue strategic acquisitions."
+    "The company's revenue has risen 130.2% over the past 5 years.",
+    "The company's gross margin has been insufficient over the past 5 years.",
+    "The company's share count has been stable, with no dilution over the past 5 years."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 0.9%, PEG 1.6, EV/EBITDA 30, P/S 14 \u2014 very richly valued \u2014 starter position only.",
@@ -30,6 +30,6 @@
   "implied_growth_note": "The price assumes near-perfect execution for a decade \u2014 start small.",
   "priced_for_perfection": true,
   "priced_for_perfection_note": "Price already assumes ~30%/yr growth for a decade \u2014 start small, add on weakness",
-  "research_date": "2026-07-29T06:30:24.497357",
+  "research_date": "2026-07-31T00:48:42.564385",
   "ticker": "LLY"
 }

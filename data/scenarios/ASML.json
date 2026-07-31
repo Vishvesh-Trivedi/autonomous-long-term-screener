@@ -1,32 +1,32 @@
 {
   "bull": {
-    "narrative": "ASML's EUVL technology continues to dominate the industry, driving significant growth in demand for semiconductors.",
-    "revenue_10yr_b": 53.19,
+    "narrative": "ASML's EUVL technology continues to dominate the industry, driving significant revenue growth and market capitalization expansion.",
+    "revenue_10yr_b": 43.45,
     "mktcap_10yr_b": 500.0,
     "multiple": 0.8,
-    "probability": 0.7,
-    "irr_10yr_pct": -1.9
+    "probability": 0.3,
+    "irr_10yr_pct": -2.4
   },
   "base": {
-    "narrative": "ASML's EUVL technology maintains its market position, but at a slower growth rate due to increasing competition.",
-    "revenue_10yr_b": 38.19,
+    "narrative": "ASML's EUVL technology maintains its market share, but faces increasing competition from alternative lithography technologies.",
+    "revenue_10yr_b": 38.45,
     "mktcap_10yr_b": 300.0,
     "multiple": 0.5,
-    "probability": 0.2,
-    "irr_10yr_pct": -6.8
+    "probability": 0.4,
+    "irr_10yr_pct": -7.2
   },
   "bear": {
-    "narrative": "A structural change in the industry leads to a decline in demand for semiconductors, significantly impacting ASML's business.",
+    "narrative": "A structural change in the industry, such as a significant shift to alternative lithography technologies or a major disruption to ASML's customer base, leads to a decline in ASML's market capitalization.",
     "mktcap_10yr_b": 150.0,
     "multiple": 0.2,
-    "probability": 0.1,
-    "irr_10yr_pct": -13.1
+    "probability": 0.3,
+    "irr_10yr_pct": -13.4
   },
   "current_tracking": "BULL",
-  "tracking_note": "Based on current market trends and ASML's strong position in the industry.",
-  "thesis_breaks_if": "A significant shift to alternative lithography technologies or a major disruption to ASML's customer base.",
+  "tracking_note": "Based on current market trends and ASML's competitive position.",
+  "thesis_breaks_if": "A structural change in the industry, such as a significant shift to alternative lithography technologies or a major disruption to ASML's customer base.",
   "natural_eval_window_days": 365,
-  "expected_irr_pct": -4.0,
-  "written_date": "2026-07-29T07:08:00.082077",
+  "expected_irr_pct": -7.6,
+  "written_date": "2026-07-31T00:57:36.480416",
   "ticker": "ASML"
 }
