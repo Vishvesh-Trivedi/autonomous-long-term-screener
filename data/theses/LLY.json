@@ -1,22 +1,22 @@
 {
-  "moat_type": "Patented pharmaceutical products and strong pipeline",
+  "moat_type": "Patented pharmaceutical products and strong brand recognition",
   "moat_durability_years": 20,
   "management_grade": "A",
-  "growth_runway_years": 10,
-  "primary_risk": "Patent expiration and generic competition",
+  "growth_runway_years": 5,
+  "primary_risk": "Patent expiration and loss of market share",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The pharmaceutical industry has seen relatively low disruption over the past 30 years, with most companies still independent market leaders.",
-  "thesis_summary": "Eli Lilly's patented pharmaceutical products and strong pipeline ride the trend of an aging global population and increasing healthcare spending.",
-  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
-  "sentiment_note": "Richly valued, but a great company with a strong moat and durable business model.",
+  "sector_survival_note": "Eli Lilly has a strong track record of innovation and has maintained its market leadership in the pharmaceutical industry over the past 17 years.",
+  "thesis_summary": "Eli Lilly's patented pharmaceutical products and strong brand recognition drive its market leadership in the pharmaceutical industry, riding the trend of increasing demand for prescription medications.",
+  "thesis_breaks_if": "Significant changes to patent laws or loss of market share due to generic competition",
+  "sentiment_note": "Eli Lilly is a well-established company with a strong track record of innovation and a durable moat, but its valuation is rich and may not be justified by its growth prospects.",
   "decade_probability": 0.8,
-  "annual_alpha_estimate": 8,
+  "annual_alpha_estimate": 4,
   "verdict": "MONITOR",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue has risen 130.2% over the past 5 years.",
-    "The company's gross margin has been insufficient over the past 5 years.",
-    "The company's share count has been stable, with no dilution over the past 5 years."
+    "Eli Lilly has a strong track record of innovation, with 17 years of filed data showing revenue growth and stable share count.",
+    "The company has a significant cash runway, with positive free cash flow and a low debt-to-equity ratio.",
+    "Eli Lilly's management has demonstrated capital allocation skill, with a history of investing in research and development and returning capital to shareholders."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 0.9%, PEG 1.6, EV/EBITDA 30, P/S 14 \u2014 very richly valued \u2014 starter position only.",
@@ -30,6 +30,6 @@
   "implied_growth_note": "The price assumes near-perfect execution for a decade \u2014 start small.",
   "priced_for_perfection": true,
   "priced_for_perfection_note": "Price already assumes ~30%/yr growth for a decade \u2014 start small, add on weakness",
-  "research_date": "2026-07-31T00:48:42.564385",
+  "research_date": "2026-08-03T13:01:28.768430",
   "ticker": "LLY"
 }

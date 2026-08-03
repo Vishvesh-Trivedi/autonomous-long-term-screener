@@ -1,22 +1,22 @@
 {
-  "moat_type": "Financial planning and wealth management expertise",
+  "moat_type": "Diversified financial services with a strong presence in wealth management",
   "moat_durability_years": 20,
   "management_grade": "A",
   "growth_runway_years": 10,
-  "primary_risk": "Increased competition from fintech and digital banks",
+  "primary_risk": "Regulatory changes affecting the financial services industry",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The financial services sector is subject to disruption, but Ameriprise has a strong brand and expertise that can help it survive and thrive.",
-  "thesis_summary": "Ameriprise Financial offers financial planning and wealth management services to high net worth individuals, leveraging its expertise and brand to ride the trend of increasing demand for financial planning and wealth management.",
-  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally changes the next decade",
-  "sentiment_note": "Ameriprise has a strong track record of revenue growth and a solid balance sheet, making it a good long-term investment opportunity.",
+  "sector_survival_note": "The financial services sector has seen significant consolidation over the past 30 years, with many companies facing disruption and replacement.",
+  "thesis_summary": "Ameriprise Financial offers diversified financial services, including wealth management, with a strong moat in its diversified business model, riding the trend of increasing demand for financial services.",
+  "thesis_breaks_if": "If regulatory changes significantly impact the financial services industry, affecting Ameriprise Financial's business model.",
+  "sentiment_note": "Ameriprise Financial is a well-established company with a strong track record, but its valuation is somewhat rich.",
   "decade_probability": 0.8,
   "annual_alpha_estimate": 8,
   "verdict": "CORE_HOLD",
   "position_size_pct": 0.8,
   "ten_k_highlights": [
-    "Ameriprise Financial, Inc. is a leading financial services company that offers a range of financial planning and wealth management services to high net worth individuals.",
-    "The company has a strong brand and expertise in the financial services sector, which can help it survive and thrive in a rapidly changing industry.",
-    "Ameriprise has a solid balance sheet and a strong track record of revenue growth, making it a good long-term investment opportunity."
+    "Ameriprise Financial has a strong track record of revenue growth, with a 5-year CAGR of 40.7%",
+    "The company has a diversified business model, with a mix of wealth management, asset management, and insurance operations",
+    "Ameriprise Financial has a strong balance sheet, with a cash runway of several years"
   ],
   "valuation_label": "FAIR",
   "valuation_note": "FCF yield 14.6%, PEG 1.7 \u2014 fairly valued for its growth.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": -7.8,
   "implied_growth_label": "MODEST",
   "implied_growth_note": "The price assumes only modest growth \u2014 a low bar to clear.",
-  "research_date": "2026-07-31T00:43:40.592257",
+  "research_date": "2026-08-03T12:53:39.314759",
   "ticker": "AMP"
 }

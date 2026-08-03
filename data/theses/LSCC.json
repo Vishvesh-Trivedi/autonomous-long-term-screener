@@ -1,22 +1,22 @@
 {
-  "moat_type": "Patent-protected FPGA-based semiconductor technology",
+  "moat_type": "Leading provider of Field-Programmable Gate Arrays (FPGAs) for the semiconductor industry",
   "moat_durability_years": 10,
   "management_grade": "B",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on a few key customers",
+  "primary_risk": "Dependence on a few large customers",
   "sector_durability_20yr": "MEDIUM",
   "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological change, which may lead to disruption of market leaders.",
-  "thesis_summary": "Lattice Semiconductor provides FPGA-based semiconductor technology that enables the development of high-performance, low-power electronics, riding the trend of increasing demand for AI and IoT devices.",
-  "thesis_breaks_if": "Short-term news cycles or 8-K items that structurally change the company's business model or competitive advantage.",
-  "sentiment_note": "Richly valued, but a great company with a strong moat and durable business model.",
+  "thesis_summary": "Lattice Semiconductor's FPGAs ride the trend of increasing demand for AI and machine learning applications.",
+  "thesis_breaks_if": "Short-term news cycles or 8-K noise that structurally changes the company's competitive advantage or growth prospects.",
+  "sentiment_note": "The company's valuation is EXTREME, but its durable moat and growth prospects justify a starter position.",
   "decade_probability": 0.7,
-  "annual_alpha_estimate": 8,
+  "annual_alpha_estimate": 10,
   "verdict": "MONITOR",
-  "position_size_pct": 0.2,
+  "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue has been rising at a CAGR of 38.2% over the past 5 years.",
-    "The company's gross margin has been stable at around 68% over the past 5 years.",
-    "The company's ROIC has been falling at a rate of 91.0% over the past 5 years."
+    "The company's revenue has been rising at a rate of 38.2% over the past 5 years.",
+    "The company has a stable gross margin of 68% over the past 5 years.",
+    "The company has a cash runway of at least 5 years based on its current free cash flow generation."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 0.7%, PEG 0.6, EV/EBITDA 266, P/S 33 \u2014 very richly valued \u2014 starter position only.",
@@ -30,6 +30,6 @@
   "implied_growth_note": "The price assumes near-perfect execution for a decade \u2014 start small.",
   "priced_for_perfection": true,
   "priced_for_perfection_note": "Price already assumes ~34%/yr growth for a decade \u2014 start small, add on weakness",
-  "research_date": "2026-07-31T00:52:08.170145",
+  "research_date": "2026-08-03T13:08:35.372494",
   "ticker": "LSCC"
 }

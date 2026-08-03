@@ -1,32 +1,32 @@
 {
   "bull": {
-    "narrative": "ASML's EUVL technology continues to dominate the industry, driving significant revenue growth and market capitalization expansion.",
-    "revenue_10yr_b": 43.45,
+    "narrative": "ASML's EUVL technology continues to dominate the industry, driving significant growth in demand for semiconductors.",
+    "revenue_10yr_b": 55.93,
     "mktcap_10yr_b": 500.0,
     "multiple": 0.8,
     "probability": 0.3,
-    "irr_10yr_pct": -2.4
+    "irr_10yr_pct": -2.2
   },
   "base": {
-    "narrative": "ASML's EUVL technology maintains its market share, but faces increasing competition from alternative lithography technologies.",
-    "revenue_10yr_b": 38.45,
+    "narrative": "ASML's EUVL technology maintains its market position, but growth slows as the industry reaches maturity.",
+    "revenue_10yr_b": 45.93,
     "mktcap_10yr_b": 300.0,
     "multiple": 0.5,
-    "probability": 0.4,
-    "irr_10yr_pct": -7.2
+    "probability": 0.5,
+    "irr_10yr_pct": -7.1
   },
   "bear": {
-    "narrative": "A structural change in the industry, such as a significant shift to alternative lithography technologies or a major disruption to ASML's customer base, leads to a decline in ASML's market capitalization.",
+    "narrative": "A structural change in the industry, such as a shift to alternative lithography technologies, significantly impacts ASML's business.",
     "mktcap_10yr_b": 150.0,
     "multiple": 0.2,
-    "probability": 0.3,
-    "irr_10yr_pct": -13.4
+    "probability": 0.2,
+    "irr_10yr_pct": -13.3
   },
   "current_tracking": "BULL",
-  "tracking_note": "Based on current market trends and ASML's competitive position.",
+  "tracking_note": "Based on current financials and thesis.",
   "thesis_breaks_if": "A structural change in the industry, such as a significant shift to alternative lithography technologies or a major disruption to ASML's customer base.",
   "natural_eval_window_days": 365,
-  "expected_irr_pct": -7.6,
-  "written_date": "2026-07-31T00:57:36.480416",
+  "expected_irr_pct": -6.9,
+  "written_date": "2026-08-03T13:21:16.737327",
   "ticker": "ASML"
 }

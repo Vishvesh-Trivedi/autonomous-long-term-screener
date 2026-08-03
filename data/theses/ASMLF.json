@@ -1,22 +1,22 @@
 {
-  "moat_type": "Leadership in Lithography Technology",
+  "moat_type": "Leadership in Lithography Equipment",
   "moat_durability_years": 10,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on a Limited Number of Customers",
-  "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological change, which may lead to disruption.",
-  "thesis_summary": "ASML provides lithography equipment and software to the semiconductor industry, riding the trend of increasing demand for advanced computing and storage solutions.",
-  "thesis_breaks_if": "A structural shift in the industry towards alternative lithography technologies.",
-  "sentiment_note": "Very richly valued, but a great company with a strong moat.",
-  "decade_probability": 0.7,
-  "annual_alpha_estimate": 8,
-  "verdict": "ACCUMULATE",
+  "primary_risk": "Dependence on Semiconductor Industry",
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "The company's leadership in lithography equipment has allowed it to maintain a dominant position in the sector for over a decade, with a 43,938 employee base and a 10-year price history of 32.7% CAGR.",
+  "thesis_summary": "ASML's lithography equipment rides the big trend of increasing demand for semiconductors.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise",
+  "sentiment_note": "Richly valued, but a great company with a strong moat and durable business model.",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 10,
+  "verdict": "CORE_HOLD",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue is highly dependent on a limited number of customers, including Intel and Samsung.",
-    "The company has a significant amount of goodwill on its balance sheet, which may be impaired in the future.",
-    "The company's business is subject to intense competition and rapid technological change, which may lead to disruption."
+    "The company's revenue growth rate has been 21% over the past year.",
+    "ASML's gross margin is 53%, indicating a strong pricing power in the industry.",
+    "The company has a positive cash flow, with a cash runway of several years."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 1.4%, PEG 2.2, EV/EBITDA 51, P/S 20 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 24.2,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-07-31T00:43:41.342462",
+  "research_date": "2026-08-03T12:55:11.195887",
   "ticker": "ASMLF"
 }

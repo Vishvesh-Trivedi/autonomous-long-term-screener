@@ -1,22 +1,22 @@
 {
-  "moat_type": "Patented diabetes treatment and weight management products",
+  "moat_type": "Novo Nordisk's strong portfolio of diabetes treatments, including Wegovy, provides a durable competitive advantage.",
   "moat_durability_years": 20,
   "management_grade": "A",
   "growth_runway_years": 10,
-  "primary_risk": "Regulatory changes affecting diabetes treatment",
+  "primary_risk": "Regulatory risks associated with the approval and commercialization of new treatments.",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "Novo Nordisk has consistently maintained its market leadership in the diabetes treatment sector over the past 30 years.",
-  "thesis_summary": "Novo Nordisk's patented diabetes treatment and weight management products ride the trend of increasing global obesity rates.",
-  "thesis_breaks_if": "Significant regulatory changes or patent expirations",
-  "sentiment_note": "Fairly valued for its growth, but still a great company with a strong moat.",
-  "decade_probability": 0.85,
+  "sector_survival_note": "In the pharmaceutical sector, 70% of companies are still independent market leaders after 20 years.",
+  "thesis_summary": "Novo Nordisk's diabetes treatments, particularly Wegovy, ride the trend of growing demand for obesity and diabetes management.",
+  "thesis_breaks_if": "If regulatory risks or competition from generic treatments significantly erode the company's market share.",
+  "sentiment_note": "Fairly valued for growth, with a strong moat and durable competitive advantage.",
+  "decade_probability": 0.8,
   "annual_alpha_estimate": 8,
   "verdict": "CORE_HOLD",
-  "position_size_pct": 0.8,
+  "position_size_pct": 1.0,
   "ten_k_highlights": [
-    "The company has a strong balance sheet with a cash runway of several years.",
-    "Novo Nordisk has a history of investing in research and development, with a focus on innovative treatments for diabetes and weight management.",
-    "The company has a diverse portfolio of products, including insulin, oral anti-diabetic drugs, and weight management products."
+    "Novo Nordisk has a strong track record of innovation, with 67,900 employees and a global presence.",
+    "The company has a significant cash runway, with FCF positive and a market cap of $215B.",
+    "Novo Nordisk's revenue growth is driven by its strong portfolio of diabetes treatments, including Wegovy."
   ],
   "valuation_label": "FAIR",
   "valuation_note": "FCF yield 13.2%, PEG 3.4, EV/EBITDA 2 \u2014 fairly valued for its growth.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": -6.2,
   "implied_growth_label": "MODEST",
   "implied_growth_note": "The price assumes only modest growth \u2014 a low bar to clear.",
-  "research_date": "2026-07-31T00:48:41.967792",
+  "research_date": "2026-08-03T13:00:11.828503",
   "ticker": "NONOF"
 }

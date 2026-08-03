@@ -1,22 +1,22 @@
 {
-  "moat_type": "Diversified electrical products and services with a focus on data center infrastructure",
+  "moat_type": "Diversified electrical products and solutions with a strong focus on data centers and industrial applications",
   "moat_durability_years": 20,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on a few large customers",
+  "primary_risk": "Dependence on a few large customers in the data center market",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "About 50% of companies in this sector still survive and lead in 20 years, but face significant disruption",
-  "thesis_summary": "nVent Electric provides electrical products and services that support the growth of data centers, which is a key trend in the tech industry",
-  "thesis_breaks_if": "A structural change in the data center industry or a significant decline in demand for electrical products",
-  "sentiment_note": "The company's valuation is rich, but it's a great company with a strong moat and durable business",
+  "sector_survival_note": "The electrical products sector is subject to disruption from technological advancements and changing customer needs, but nVent Electric's diversified product portfolio and strong focus on data centers and industrial applications suggest a medium level of durability.",
+  "thesis_summary": "nVent Electric's diversified electrical products and solutions, particularly its focus on data centers and industrial applications, ride the big trend of increasing demand for data storage and processing.",
+  "thesis_breaks_if": "A structural change in the data center market, such as a shift to alternative technologies or a significant decline in demand.",
+  "sentiment_note": "Accumulate slowly due to rich valuation, but the company's strong track record and diversified product portfolio make it a compelling long-term investment opportunity.",
   "decade_probability": 0.8,
-  "annual_alpha_estimate": 10,
+  "annual_alpha_estimate": 8,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company has a strong track record of revenue growth and profitability",
-    "The company's gross margin has been stable over the past 8 years",
-    "The company has a significant amount of cash on hand and generates positive free cash flow"
+    "nVent Electric's revenue has risen by 58.1% over the past five years, driven by growth in the data center and industrial markets.",
+    "The company's gross margin has remained stable over the past eight years, indicating a strong pricing power and operational efficiency.",
+    "nVent Electric's return on invested capital (ROIC) has risen by 19.8% over the past five years, indicating a strong ability to generate returns on capital invested."
   ],
   "valuation_label": "RICH",
   "valuation_note": "FCF yield 1.6%, PEG 1.7, EV/EBITDA 29 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
@@ -28,7 +28,7 @@
   "implied_growth_pct": 23.1,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "long_term_alpha_pp": 22.1,
-  "research_date": "2026-07-31T00:51:59.519556",
+  "long_term_alpha_pp": 24.0,
+  "research_date": "2026-08-03T13:08:27.134807",
   "ticker": "NVT"
 }
