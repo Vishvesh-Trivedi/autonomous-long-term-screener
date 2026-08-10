@@ -1,22 +1,22 @@
 {
-  "moat_type": "Network Security Solutions with Advanced Threat Protection",
-  "moat_durability_years": 20,
+  "moat_type": "Network Security and Threat Intelligence",
+  "moat_durability_years": 15,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on Key Customers",
+  "primary_risk": "Dependence on a few large customers",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The network security sector has seen minimal disruption over the past 30 years, with companies like Fortinet maintaining their market leadership.",
-  "thesis_summary": "Fortinet's network security solutions with advanced threat protection ride the trend of increasing cybersecurity needs.",
-  "thesis_breaks_if": "A structural shift in the network security market, such as a major competitor developing a similar moat.",
-  "sentiment_note": "Fortinet is a strong company with a rich valuation, but it's worth accumulating on weakness.",
+  "sector_survival_note": "The network security sector has seen minimal disruption over the past 30 years, with companies like Fortinet consistently leading the market.",
+  "thesis_summary": "Fortinet's network security solutions, powered by its threat intelligence, ride the trend of increasing cybersecurity needs.",
+  "thesis_breaks_if": "Intel Foundry's major new client is a structural change to the 10-15yr thesis.",
+  "sentiment_note": "Richly valued, but a great company with a strong moat.",
   "decade_probability": 0.8,
-  "annual_alpha_estimate": 10,
+  "annual_alpha_estimate": 8,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "Fortinet's revenue has been rising at a 5-year CAGR of 103.4%.",
-    "The company's gross margin has been increasing over the past 7 years.",
-    "Fortinet's return on invested capital (ROIC) has been rising at a 5-year CAGR of 115.5%."
+    "Fortinet has a strong track record of revenue growth, with a 5-year CAGR of 103.4%.",
+    "The company has a high return on invested capital (ROIC) of 76%, indicating efficient use of capital.",
+    "Fortinet's cash runway is positive, with free cash flow covering operating expenses."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 2.1%, PEG 3.6, EV/EBITDA 47, P/S 16 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 18.6,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-08-03T12:57:00.302635",
+  "research_date": "2026-08-10T10:58:03.161971",
   "ticker": "FTNT"
 }

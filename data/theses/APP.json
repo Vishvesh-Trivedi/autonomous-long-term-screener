@@ -1,22 +1,22 @@
 {
-  "moat_type": "Mobile app monetization and user acquisition platform",
+  "moat_type": "Network effects in mobile app distribution and monetization",
   "moat_durability_years": 10,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on third-party app stores and changing platform policies",
-  "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "AppLovin's moat is likely to last due to its diversified business model and strong track record of innovation.",
-  "thesis_summary": "AppLovin's mobile app monetization and user acquisition platform rides the big trend of mobile app growth and user acquisition.",
-  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise",
-  "sentiment_note": "Accumulate slowly due to rich valuation, but prefer a great company over perfect timing.",
-  "decade_probability": 0.8,
+  "primary_risk": "Dependence on mobile app developers and publishers",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The mobile app market is highly competitive, with many companies vying for market share. While AppLovin has a strong moat, it may face disruption from new entrants or changes in consumer behavior.",
+  "thesis_summary": "AppLovin's mobile app distribution and monetization platform rides the big trend of increasing mobile app usage and advertising spend.",
+  "thesis_breaks_if": "A structural change in the mobile app market, such as a shift to a new distribution platform or a significant decline in advertising spend.",
+  "sentiment_note": "Accumulate slowly due to rich valuation, but prefer a great company on weakness.",
+  "decade_probability": 0.7,
   "annual_alpha_estimate": 10,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "AppLovin's revenue has risen 96.2% over the past 5 years.",
-    "The company's gross margin has been insufficient, but is improving.",
-    "AppLovin's return on invested capital (ROIC) has risen 2479.7% over the past 5 years."
+    "AppLovin's revenue grew 96.2% over the past 5 years, driven by increasing demand for mobile app distribution and monetization services.",
+    "The company's gross margin has been insufficient over the past 5 years, but has been improving.",
+    "AppLovin's return on invested capital (ROIC) has been rising significantly over the past 5 years, indicating improving profitability."
   ],
   "valuation_label": "RICH",
   "valuation_note": "FCF yield 3.2%, PEG 1.2, EV/EBITDA 30, P/S 22 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
@@ -28,7 +28,7 @@
   "implied_growth_pct": 13.2,
   "implied_growth_label": "REASONABLE",
   "implied_growth_note": "The price assumes reasonable growth the business can likely deliver.",
-  "long_term_alpha_pp": 33.1,
-  "research_date": "2026-08-03T12:50:56.523798",
+  "long_term_alpha_pp": 28.7,
+  "research_date": "2026-08-10T10:51:32.044797",
   "ticker": "APP"
 }

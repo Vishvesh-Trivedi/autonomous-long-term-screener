@@ -1,22 +1,22 @@
 {
-  "moat_type": "Global payment processing network with strong relationships with merchants and financial institutions",
-  "moat_durability_years": 10,
+  "moat_type": "Network Effects and Strong Brand Recognition",
+  "moat_durability_years": 20,
   "management_grade": "A",
-  "growth_runway_years": 5,
-  "primary_risk": "Competition from fintech companies and changing regulatory environment",
-  "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "About 40% of companies in this sector are still independent market leaders after 20 years, according to 30-year sector history (1995-2025)",
-  "thesis_summary": "Global Payments Inc. provides a global payment processing network that helps merchants and financial institutions manage transactions, riding the trend of increasing digital payments",
-  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise do not structurally change the next decade",
-  "sentiment_note": "Attractive entry for the growth, with a cheap valuation and strong cash runway",
+  "growth_runway_years": 10,
+  "primary_risk": "Regulatory Risks and Changes in Payment Processing Regulations",
+  "sector_durability_20yr": "HIGH",
+  "sector_survival_note": "The payment processing industry has seen significant consolidation, but Global Payments has demonstrated resilience and adaptability.",
+  "thesis_summary": "Global Payments offers a suite of payment processing solutions that leverage network effects and strong brand recognition, riding the trend of increasing digital payments.",
+  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise",
+  "sentiment_note": "Attractive entry for the growth, with a strong moat and durable management.",
   "decade_probability": 0.8,
   "annual_alpha_estimate": 8,
   "verdict": "CORE_HOLD",
   "position_size_pct": 0.8,
   "ten_k_highlights": [
-    "The company's revenue has been rising at a rate of 67.3% over the past 5 years.",
-    "The company's gross margin has been insufficient, but has been improving over time.",
-    "The company's return on invested capital (ROIC) has been rising at a rate of 14.9% over the past 5 years."
+    "Global Payments has a strong track record of revenue growth, with a 5-year CAGR of 67.3%",
+    "The company has a high return on invested capital (ROIC) of 14.9% over the past 5 years",
+    "Global Payments has a solid balance sheet, with a cash runway of several years"
   ],
   "valuation_label": "CHEAP",
   "valuation_note": "FCF yield 5.5%, PEG 0.2, EV/EBITDA 10 \u2014 attractive entry for the growth.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 5.8,
   "implied_growth_label": "MODEST",
   "implied_growth_note": "The price assumes only modest growth \u2014 a low bar to clear.",
-  "research_date": "2026-08-03T13:10:07.960128",
+  "research_date": "2026-08-10T11:11:27.059804",
   "ticker": "GPN"
 }

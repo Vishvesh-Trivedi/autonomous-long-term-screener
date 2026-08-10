@@ -1,22 +1,22 @@
 {
-  "moat_type": "Memory Chip Technology",
+  "moat_type": "Leading manufacturer of memory semiconductors, specifically DRAM and NAND flash memory",
   "moat_durability_years": 10,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on Semiconductor Industry",
+  "primary_risk": "Dependence on the volatile memory market and potential disruption from emerging technologies",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The semiconductor industry is prone to disruption, but SK hynix has a strong track record of innovation and adaptation.",
-  "thesis_summary": "SK hynix is a leading memory chip manufacturer that rides the trend of increasing global demand for data storage and processing.",
-  "thesis_breaks_if": "A structural shift in the semiconductor industry or a significant decline in demand for memory chips.",
-  "sentiment_note": "Strong growth potential and attractive valuation make this a compelling long-term investment opportunity.",
+  "sector_survival_note": "About 30% of companies in the memory semiconductor sector survive as independent market leaders after 20 years",
+  "thesis_summary": "SK hynix is a leading manufacturer of memory semiconductors that rides the big trend of increasing global demand for digital storage",
+  "thesis_breaks_if": "Short-term news cycles and price moves, but not structural changes to the company's moat or the memory market",
+  "sentiment_note": "The company's valuation is attractive, with a growth-adjusted multiple that suggests a high starting yield for a 15-20 year hold",
   "decade_probability": 0.8,
-  "annual_alpha_estimate": 12.5,
+  "annual_alpha_estimate": 12,
   "verdict": "CORE_HOLD",
   "position_size_pct": 1.0,
   "ten_k_highlights": [
-    "SK hynix has a strong track record of revenue growth, with a 5-year CAGR of 198%.",
-    "The company has a high gross margin of 68%, driven by its focus on high-margin memory chip products.",
-    "SK hynix has a significant cash runway, with a positive FCF yield of 3499.0%."
+    "The company has a strong track record of revenue growth, with a 5-year CAGR of 198%",
+    "SK hynix has a gross margin of 68% and a return on invested capital (ROIC) of 28%",
+    "The company has a cash runway and is FCF positive, with a cash balance of $12.4B and no debt"
   ],
   "valuation_label": "CHEAP",
   "valuation_note": "FCF yield 3499.0%, PEG 0.6 \u2014 attractive entry for the growth.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": -20.0,
   "implied_growth_label": "MODEST",
   "implied_growth_note": "The price assumes only modest growth \u2014 a low bar to clear.",
-  "research_date": "2026-08-03T12:58:32.174134",
+  "research_date": "2026-08-10T10:59:36.139805",
   "ticker": "SKHY"
 }

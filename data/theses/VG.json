@@ -1,22 +1,22 @@
 {
-  "moat_type": "Economies of scale in liquefied natural gas (LNG) production and export",
+  "moat_type": "Scale and Cost Advantages in LNG Export",
   "moat_durability_years": 10,
   "management_grade": "B",
   "growth_runway_years": 5,
-  "primary_risk": "High capital expenditure requirements and potential disruptions to global LNG markets",
+  "primary_risk": "Regulatory and Environmental Risks",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The LNG market is expected to experience significant disruption and consolidation over the next 20 years, with only a few companies likely to remain independent market leaders.",
-  "thesis_summary": "Venture Global's moat in LNG production and export is expected to last around 10 years, riding the big trend of increasing global demand for clean energy.",
-  "thesis_breaks_if": "A structural change in the global LNG market, such as a significant shift to renewable energy sources or a major disruption to global trade patterns.",
-  "sentiment_note": "Neutral, with a slightly bearish bias due to the company's rich valuation and high growth expectations.",
-  "decade_probability": 0.6,
-  "annual_alpha_estimate": 8,
+  "sector_survival_note": "The midstream sector faces disruption due to increasing competition and changing market trends.",
+  "thesis_summary": "Venture Global's LNG export business rides the trend of increasing global energy demand, with a strong moat in scale and cost advantages.",
+  "thesis_breaks_if": "Material changes to regulatory or environmental policies that impact LNG export operations.",
+  "sentiment_note": "The company's valuation is rich, but the business fundamentals are strong.",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 6,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue growth is expected to be driven by increasing demand for LNG in Asia and Europe.",
-    "The company's gross margin is expected to be impacted by the cost of capital expenditures and the need to maintain a competitive pricing strategy.",
-    "The company's cash runway is expected to be sufficient to cover its capital expenditures and operating expenses over the next 5 years."
+    "The company has a strong cash runway with positive free cash flow.",
+    "The midstream sector is expected to grow at a rate of 3-5% per annum.",
+    "The company has a material agreement with a major energy player to supply LNG."
   ],
   "valuation_label": "RICH",
   "valuation_note": "FCF yield -19.0%, PEG 0.9, EV/EBITDA 13 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": null,
   "implied_growth_label": null,
   "implied_growth_note": null,
-  "research_date": "2026-08-03T13:06:05.217106",
+  "research_date": "2026-08-10T11:06:31.492263",
   "ticker": "VG"
 }

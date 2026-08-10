@@ -1,22 +1,22 @@
 {
-  "moat_type": "Diversified financial services with a strong presence in wealth management",
+  "moat_type": "Network effects from high-touch financial services",
   "moat_durability_years": 20,
   "management_grade": "A",
-  "growth_runway_years": 10,
-  "primary_risk": "Regulatory changes affecting the financial services industry",
+  "growth_runway_years": 5,
+  "primary_risk": "Increased competition from fintech and digital banks",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The financial services sector has seen significant consolidation over the past 30 years, with many companies facing disruption and replacement.",
-  "thesis_summary": "Ameriprise Financial offers diversified financial services, including wealth management, with a strong moat in its diversified business model, riding the trend of increasing demand for financial services.",
-  "thesis_breaks_if": "If regulatory changes significantly impact the financial services industry, affecting Ameriprise Financial's business model.",
-  "sentiment_note": "Ameriprise Financial is a well-established company with a strong track record, but its valuation is somewhat rich.",
+  "sector_survival_note": "The financial services sector is prone to disruption, but Ameriprise's high-touch services may provide a buffer against digital disruption.",
+  "thesis_summary": "Ameriprise Financial offers high-touch financial services, leveraging network effects to maintain a competitive moat.",
+  "thesis_breaks_if": "Pinterest's 13G filing showing a 10.2% stake in Ameriprise Financial is a structural change to the thesis, as it may lead to increased competition or a takeover.",
+  "sentiment_note": "Ameriprise Financial is a well-established company with a strong track record, but its valuation is fairly valued for its growth.",
   "decade_probability": 0.8,
-  "annual_alpha_estimate": 8,
+  "annual_alpha_estimate": 4.5,
   "verdict": "CORE_HOLD",
   "position_size_pct": 0.8,
   "ten_k_highlights": [
-    "Ameriprise Financial has a strong track record of revenue growth, with a 5-year CAGR of 40.7%",
-    "The company has a diversified business model, with a mix of wealth management, asset management, and insurance operations",
-    "Ameriprise Financial has a strong balance sheet, with a cash runway of several years"
+    "The Company's revenue has been rising at a rate of 40.7% over the past 5 years.",
+    "The Company's gross margin has been insufficient, averaging 57% over the past 5 years.",
+    "The Company's return on invested capital (ROIC) has been insufficient, averaging 0% over the past 5 years."
   ],
   "valuation_label": "FAIR",
   "valuation_note": "FCF yield 14.6%, PEG 1.7 \u2014 fairly valued for its growth.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": -7.8,
   "implied_growth_label": "MODEST",
   "implied_growth_note": "The price assumes only modest growth \u2014 a low bar to clear.",
-  "research_date": "2026-08-03T12:53:39.314759",
+  "research_date": "2026-08-10T10:54:53.722656",
   "ticker": "AMP"
 }

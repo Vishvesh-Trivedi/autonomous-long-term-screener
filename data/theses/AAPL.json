@@ -5,18 +5,18 @@
   "growth_runway_years": 10,
   "primary_risk": "Dependence on Supply Chain and Manufacturing Partners",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "Apple's strong brand and ecosystem have allowed it to maintain its market leadership in the tech industry for over two decades.",
-  "thesis_summary": "Apple's iPhone and ecosystem have a strong moat due to brand loyalty and a large user base, riding the trend of increasing smartphone adoption and digital services.",
+  "sector_survival_note": "Apple's ecosystem and brand loyalty are likely to remain strong over the next 20 years, with a high chance of survival in the sector.",
+  "thesis_summary": "Apple's iPhone and ecosystem ride the trend of increasing demand for mobile devices and services.",
   "thesis_breaks_if": "A structural change in the smartphone market or a significant disruption to Apple's supply chain.",
-  "sentiment_note": "The company's valuation is considered EXTREME, but the entry multiple sets the starting yield of a 15-20yr hold.",
+  "sentiment_note": "Richly valued, but a great company with a strong moat and durable business model.",
   "decade_probability": 0.8,
   "annual_alpha_estimate": 8,
   "verdict": "CORE_HOLD",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "Apple's revenue growth has been driven by the increasing adoption of its iPhone and ecosystem, with revenue reaching $451.4 billion in the latest year.",
-    "The company's gross margin has been increasing over the past five years, reaching 48% in the latest year.",
-    "Apple's return on invested capital (ROIC) has been rising over the past five years, reaching 65% in the latest year."
+    "Apple's revenue growth has been driven by the increasing demand for its iPhone and ecosystem products.",
+    "The company has a strong track record of returning cash to shareholders through dividends and share buybacks.",
+    "Apple's gross margin has been impacted by the increasing cost of components and the company's efforts to reduce its reliance on Chinese manufacturing."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 2.7%, PEG 2.6, EV/EBITDA 30 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 15.6,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-08-03T12:56:51.862917",
+  "research_date": "2026-08-10T10:56:36.027900",
   "ticker": "AAPL"
 }

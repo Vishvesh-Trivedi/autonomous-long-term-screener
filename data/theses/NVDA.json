@@ -1,22 +1,22 @@
 {
-  "moat_type": "Artificial Intelligence (AI) and Graphics Processing Unit (GPU) technology",
-  "moat_durability_years": 20,
+  "moat_type": "Artificial Intelligence and Graphics Processing Unit (GPU) Leadership",
+  "moat_durability_years": 10,
   "management_grade": "A",
-  "growth_runway_years": 10,
-  "primary_risk": "Dependence on the growth of the gaming and AI markets",
+  "growth_runway_years": 5,
+  "primary_risk": "Dependence on Gaming and AI Markets",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The company's AI and GPU technology has a strong track record of innovation and adoption, and the gaming and AI markets are expected to continue growing over the next 20 years.",
-  "thesis_summary": "NVIDIA's AI and GPU technology provides a strong moat in the gaming and AI markets, allowing the company to maintain its market leadership over the next 20 years.",
-  "thesis_breaks_if": "A structural shift in the gaming and AI markets, such as a significant decline in demand or a new technology that replaces NVIDIA's products.",
-  "sentiment_note": "The company's valuation is rich, but the long-term potential of its AI and GPU technology justifies a core hold position.",
-  "decade_probability": 0.9,
+  "sector_survival_note": "NVIDIA's GPU leadership and AI expertise will continue to drive innovation and growth in the industry.",
+  "thesis_summary": "NVIDIA's AI and GPU leadership rides the trend of increasing demand for AI and datacenter computing.",
+  "thesis_breaks_if": "A structural shift in the AI and GPU market, such as a significant decline in demand or a major disruption in NVIDIA's technology.",
+  "sentiment_note": "Valuation is rich, but the company's strong fundamentals and growth prospects justify a slow accumulation strategy.",
+  "decade_probability": 0.8,
   "annual_alpha_estimate": 15,
-  "verdict": "CORE_HOLD",
+  "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue has grown from $3.1 billion in 2015 to $25.3 billion in 2020, a compound annual growth rate of 43%.",
-    "The company's gross margin has expanded from 63.4% in 2015 to 74.4% in 2020, driven by the growth of its high-margin AI and GPU businesses.",
-    "The company has a strong balance sheet, with $12.4 billion in cash and equivalents and no debt."
+    "NVIDIA's revenue has risen 702.3% over the past 5 years, driven by growth in the gaming and AI markets.",
+    "The company's gross margin has increased from 54.5% in 2015 to 74% in 2020, driven by efficiency gains and pricing power.",
+    "NVIDIA's return on invested capital (ROIC) has risen from 34.6% in 2015 to 67% in 2020, driven by the company's ability to generate strong cash flows and invest in high-returning projects."
   ],
   "valuation_label": "RICH",
   "valuation_note": "FCF yield 2.4%, PEG 0.6, EV/EBITDA 30, P/S 20 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 17.2,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-08-03T12:52:27.851027",
+  "research_date": "2026-08-10T10:53:06.589383",
   "ticker": "NVDA"
 }

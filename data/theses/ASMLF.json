@@ -1,22 +1,22 @@
 {
-  "moat_type": "Leadership in Lithography Equipment",
-  "moat_durability_years": 10,
+  "moat_type": "Leadership in Extreme Ultraviolet Lithography (EUVL) technology",
+  "moat_durability_years": 15,
   "management_grade": "A",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on Semiconductor Industry",
+  "primary_risk": "Dependence on a single large customer",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The company's leadership in lithography equipment has allowed it to maintain a dominant position in the sector for over a decade, with a 43,938 employee base and a 10-year price history of 32.7% CAGR.",
-  "thesis_summary": "ASML's lithography equipment rides the big trend of increasing demand for semiconductors.",
-  "thesis_breaks_if": "Short-term price moves, news cycles, and 8-K noise",
-  "sentiment_note": "Richly valued, but a great company with a strong moat and durable business model.",
+  "sector_survival_note": "The semiconductor industry has seen significant consolidation, but ASML's EUVL technology provides a durable competitive advantage.",
+  "thesis_summary": "ASML's EUVL technology rides the trend of increasing demand for advanced semiconductor manufacturing.",
+  "thesis_breaks_if": "A structural shift to alternative lithography technologies or a significant decline in demand for advanced semiconductors.",
+  "sentiment_note": "Rich valuation, but a great company with a durable moat.",
   "decade_probability": 0.8,
   "annual_alpha_estimate": 10,
-  "verdict": "CORE_HOLD",
+  "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company's revenue growth rate has been 21% over the past year.",
-    "ASML's gross margin is 53%, indicating a strong pricing power in the industry.",
-    "The company has a positive cash flow, with a cash runway of several years."
+    "ASML has a strong track record of innovation and has maintained its leadership position in the EUVL market.",
+    "The company has a diverse customer base and a significant backlog of orders, providing a stable revenue stream.",
+    "ASML's focus on research and development has enabled it to stay ahead of the competition and maintain its market share."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 1.4%, PEG 2.2, EV/EBITDA 51, P/S 20 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 24.2,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-08-03T12:55:11.195887",
+  "research_date": "2026-08-10T10:54:55.424888",
   "ticker": "ASMLF"
 }
