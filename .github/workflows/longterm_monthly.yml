@@ -42,8 +42,18 @@ jobs:
           git config user.name  "AC Screener Bot"
           git config user.email "screener@noreply.github.com"
           git add data/ipo_watchlist.json || true
-          git diff --staged --quiet || git commit -m "Auto: IPO watchlist update $(date +'%Y-%m-%d')"
-          git push
+          if git diff --staged --quiet; then
+            echo "No IPO watchlist changes to commit."
+          else
+            git commit -m "Auto: IPO watchlist update $(date +'%Y-%m-%d')"
+            # Rebase + push with retry: another job may push to main while we run.
+            for i in 1 2 3 4 5; do
+              if git pull --rebase origin main && git push; then
+                echo "Pushed on attempt $i"; break
+              fi
+              echo "Push attempt $i failed (remote moved?), retrying in 10s..."; sleep 10
+            done
+          fi
 
   # ── JOB 2: Main Screener (weekly) ───────────────────────────────────────────
   run-screener:
@@ -143,8 +153,19 @@ jobs:
           git add data/checkpoints/          || true
           git add data/cache/fundamentals.json.gz || true
           git add data/cache/senate_trades.json || true
-          git diff --staged --quiet || git commit -m "Auto: screener run $(date +'%Y-%m-%d')"
-          git push
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Auto: screener run $(date +'%Y-%m-%d')"
+            # Rebase + push with retry: the scheduled IPO-monitor / another run may
+            # push to main during our multi-hour run, making a bare push non-fast-forward.
+            for i in 1 2 3 4 5; do
+              if git pull --rebase origin main && git push; then
+                echo "Pushed on attempt $i"; break
+              fi
+              echo "Push attempt $i failed (remote moved?), retrying in 10s..."; sleep 10
+            done
+          fi
       - name: Upload logs
         if: always()
         uses: actions/upload-artifact@v4
