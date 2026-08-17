@@ -829,7 +829,7 @@ def generate_exit_email(exits: List[Dict], month_str: str) -> tuple:
   <div class="ret-cell"><div class="ret-k">Alpha</div><div class="ret-v {'pos' if (alpha or 0)>=0 else 'neg'}">{alpha_str}</div></div>
 </div>
 <div class="journey-line" style="padding:6px 16px"><div class="j-date">{date_added}</div><div class="j-dot add"></div><div>Thesis: "{thesis[:80]}..."</div></div>
-<div class="journey-line" style="padding:6px 16px"><div class="j-date">Monthly</div><div class="j-dot" style="background:#e8e8ec"></div><div>Tracking: {tracking}</div></div>
+<div class="journey-line" style="padding:6px 16px"><div class="j-date">Ongoing</div><div class="j-dot" style="background:#e8e8ec"></div><div>Tracking: {tracking}</div></div>
 <div class="journey-line" style="padding:6px 16px"><div class="j-date">{exit_date[:7]}</div><div class="j-dot exit"></div><div>Exit reason: {exit_reason[:100]}</div></div>
 <div class="thesis-box" style="margin:10px 16px"><div class="thesis-lbl">Original exit condition</div><div class="thesis-txt">{breaks_if}</div></div>
 <div class="exit-box" style="margin:10px 16px"><div class="exit-lbl">Why we sold</div><div class="exit-txt">{exit_reason}</div></div>

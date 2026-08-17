@@ -2,8 +2,8 @@
 """
 Long-Term Investment Screener v2.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Autonomous monthly screener for T1/T2/T3 stock classification.
-Runs via GitHub Actions on the 1st of every month at 08:00 UTC.
+Autonomous long-term screener for T1/T2/T3 stock classification.
+Runs via GitHub Actions weekly on Mondays at 08:00 UTC.
 
 v2.0 additions:
   - Step 3.5: Technicals (200MA, 52-week range, 1yr vs QQQ)
@@ -3623,7 +3623,7 @@ def _mast(date_str, issue_n, strip_stats):
         f'<div class="issue-row"><span class="issue-tag">Long-Term Portfolio &middot; {date_str}</span>'
         f'<span class="issue-num">Issue #{str(issue_n).zfill(2)}</span></div>'
         '<div class="brand">Autonomous<span>Capital</span></div>'
-        '<div class="tagline">Monthly Portfolio Intelligence</div>'
+        '<div class="tagline">Long-Term Portfolio Intelligence</div>'
         '</div><div class="mast-bar"></div>'
         f'<div class="strip">{stats_html}</div></div>'
     )
