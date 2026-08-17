@@ -1,0 +1,33 @@
+{
+  "moat_type": "Diversified beverage portfolio with strong brand recognition",
+  "moat_durability_years": 20,
+  "management_grade": "A",
+  "growth_runway_years": 10,
+  "primary_risk": "Intense competition and changing consumer preferences",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The beverage industry has seen significant consolidation and disruption in the past 30 years, with many companies struggling to adapt to changing consumer preferences and technological advancements.",
+  "thesis_summary": "Keurig Dr Pepper's diversified beverage portfolio and strong brand recognition provide a sustainable competitive advantage in the beverage industry, which is expected to continue growing in the next decade.",
+  "thesis_breaks_if": "A significant change in consumer preferences or a major disruption in the beverage industry supply chain.",
+  "sentiment_note": "Neutral",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 4.5,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 1.0,
+  "ten_k_highlights": [
+    "The Company's revenue has been rising at a rate of 30.9% over the past 5 years.",
+    "The Company's gross margin has been stable over the past 7 years, ranging from 50.6% to 51.1%.",
+    "The Company's return on invested capital (ROIC) has been rising over the past 5 years, from 5.5% to 7.0%."
+  ],
+  "valuation_label": "FAIR",
+  "valuation_note": "FCF yield 4.7%, PEG 1.1, EV/EBITDA 17 \u2014 fairly valued for its growth.",
+  "valuation_multiplier": 1.0,
+  "val_pe": 12.4,
+  "val_ps": 2.1,
+  "val_ev_ebitda": 17.4,
+  "val_peg": 1.08,
+  "implied_growth_pct": 7.9,
+  "implied_growth_label": "MODEST",
+  "implied_growth_note": "The price assumes only modest growth \u2014 a low bar to clear.",
+  "research_date": "2026-08-17T13:09:19.716683",
+  "ticker": "KDP"
+}

@@ -1,0 +1,32 @@
+{
+  "bull": {
+    "narrative": "Keurig Dr Pepper's diversified beverage portfolio and strong brand recognition continue to drive growth in the beverage industry, with a 10-year revenue CAGR of 5% and a 10-year market capitalization of $120B.",
+    "revenue_10yr_b": 0.05,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 3.5,
+    "probability": 0.3,
+    "irr_10yr_pct": 27.9
+  },
+  "base": {
+    "narrative": "Keurig Dr Pepper's diversified beverage portfolio and strong brand recognition maintain a stable position in the beverage industry, with a 10-year revenue CAGR of 2% and a 10-year market capitalization of $80B.",
+    "revenue_10yr_b": 0.02,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 3.0,
+    "probability": 0.4,
+    "irr_10yr_pct": 21.5
+  },
+  "bear": {
+    "narrative": "A significant change in consumer preferences or a major disruption in the beverage industry supply chain leads to a decline in Keurig Dr Pepper's market position, with a 10-year market capitalization of $40B.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 2.0,
+    "probability": 0.3,
+    "irr_10yr_pct": 13.4
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "A significant change in consumer preferences or a major disruption in the beverage industry supply chain.",
+  "natural_eval_window_days": 365,
+  "expected_irr_pct": 21.0,
+  "written_date": "2026-08-17T13:32:40.727600",
+  "ticker": "KDP"
+}

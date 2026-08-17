@@ -1,0 +1,32 @@
+{
+  "bull": {
+    "narrative": "Blackstone's private equity and real assets expertise continues to ride the trend of increasing demand for alternative investments.",
+    "revenue_10yr_b": 24.51,
+    "mktcap_10yr_b": 342.91,
+    "multiple": 2.17,
+    "probability": 0.7,
+    "irr_10yr_pct": 7.1
+  },
+  "base": {
+    "narrative": "Blackstone's private equity and real assets expertise maintains a strong position in the alternative investment landscape, but faces increasing competition.",
+    "revenue_10yr_b": 18.41,
+    "mktcap_10yr_b": 245.91,
+    "multiple": 1.83,
+    "probability": 0.3,
+    "irr_10yr_pct": 3.6
+  },
+  "bear": {
+    "narrative": "A structural change in the alternative investment landscape erodes Blackstone's expertise and competitive advantage, leading to a decline in demand for its services.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 1.17,
+    "probability": 0.05,
+    "irr_10yr_pct": -1.4
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current market trends and Blackstone's strong position in the alternative investment landscape.",
+  "thesis_breaks_if": "A structural change in the alternative investment landscape that erodes Blackstone's expertise and competitive advantage.",
+  "natural_eval_window_days": 365,
+  "expected_irr_pct": 5.7,
+  "written_date": "2026-08-17T13:32:30.871633",
+  "ticker": "BX"
+}

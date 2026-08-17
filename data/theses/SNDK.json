@@ -1,22 +1,22 @@
 {
-  "moat_type": "Flash memory technology and proprietary controller designs",
+  "moat_type": "Flash memory technology and manufacturing expertise",
   "moat_durability_years": 10,
   "management_grade": "B",
   "growth_runway_years": 5,
-  "primary_risk": "Dependence on a few large customers",
+  "primary_risk": "Dependence on volatile memory market demand",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The flash memory market is highly competitive and subject to rapid technological change, which may lead to disruption of the company's market position.",
-  "thesis_summary": "Sandisk's flash memory products and proprietary controller designs ride the trend of increasing demand for portable storage and data transfer.",
-  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
-  "sentiment_note": "Richly valued, but a great company with a strong moat.",
-  "decade_probability": 0.7,
+  "sector_survival_note": "The memory trade faces disruption from emerging technologies, but Sandisk's expertise and market share may allow it to adapt",
+  "thesis_summary": "Sandisk's flash memory products ride the trend of increasing digital storage needs",
+  "thesis_breaks_if": "A structural shift in the memory market, such as a significant decline in demand or a major disruption in technology",
+  "sentiment_note": "Neutral, with a slightly negative bias due to the company's rich valuation",
+  "decade_probability": 0.6,
   "annual_alpha_estimate": 4,
-  "verdict": "ACCUMULATE",
-  "position_size_pct": 0.5,
+  "verdict": "MONITOR",
+  "position_size_pct": 0.2,
   "ten_k_highlights": [
-    "The company's revenue is INSUFFICIENT to determine growth over the past 5 years.",
-    "The company's gross margin is INSUFFICIENT to determine stability over the past 5 years.",
-    "The company's share count is INSUFFICIENT to determine dilution over the past 5 years."
+    "The company's revenue is highly dependent on a few large customers, including major technology companies",
+    "Sandisk has a significant amount of goodwill on its balance sheet, which may be impaired in the future",
+    "The company's business is subject to intense competition and rapid technological change"
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 1.9%, PEG 0.0, EV/EBITDA 42, P/S 18 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 20.5,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-08-10T11:04:40.867778",
+  "research_date": "2026-08-17T13:03:00.740373",
   "ticker": "SNDK"
 }

@@ -1,22 +1,22 @@
 {
-  "moat_type": "Network Effect",
+  "moat_type": "Network effects and scale advantages in payment processing",
   "moat_durability_years": 20,
   "management_grade": "A",
-  "growth_runway_years": 5,
-  "primary_risk": "Regulatory Changes",
+  "growth_runway_years": 10,
+  "primary_risk": "Regulatory changes or disruptions to the payment processing industry",
   "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The payment processing industry has seen minimal disruption over the past 30 years, with Visa and Mastercard maintaining their market share.",
-  "thesis_summary": "Visa's network effect-based moat allows it to ride the trend of increasing digital payments.",
-  "thesis_breaks_if": "A structural change in the payment processing industry, such as the emergence of a new competitor with a similar network effect-based moat.",
-  "sentiment_note": "Visa's strong financials and durable moat make it an attractive long-term investment opportunity.",
+  "sector_survival_note": "The payment processing industry has seen minimal disruption over the past 30 years, with Visa and Mastercard maintaining their market leadership.",
+  "thesis_summary": "Visa's payment processing network and scale advantages enable it to ride the trend of increasing digital payments.",
+  "thesis_breaks_if": "A structural change in the payment processing industry, such as a new competitor with a similar moat, or a significant regulatory change.",
+  "sentiment_note": "Visa is a high-quality company with a strong moat and durable competitive advantages.",
   "decade_probability": 0.9,
   "annual_alpha_estimate": 8,
   "verdict": "CORE_HOLD",
-  "position_size_pct": 1,
+  "position_size_pct": 1.0,
   "ten_k_highlights": [
-    "Visa's revenue has risen 44.8% over the past 5 years.",
-    "The company's return on invested capital (ROIC) has increased 57.9% over the past 5 years.",
-    "Visa's cash and cash equivalents have increased to $34.4 billion, providing a strong cash runway."
+    "Visa's revenue has been rising at a rate of 44.8% over the past 5 years.",
+    "The company's gross margin has been insufficient, but has shown signs of improvement.",
+    "Visa's return on invested capital (ROIC) has been rising at a rate of 57.9% over the past 5 years."
   ],
   "valuation_label": "FAIR",
   "valuation_note": "FCF yield 3.2%, PEG 1.6, EV/EBITDA 22 \u2014 fairly valued for its growth.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 13.2,
   "implied_growth_label": "REASONABLE",
   "implied_growth_note": "The price assumes reasonable growth the business can likely deliver.",
-  "research_date": "2026-08-10T10:54:38.163715",
+  "research_date": "2026-08-17T12:50:24.796957",
   "ticker": "V"
 }

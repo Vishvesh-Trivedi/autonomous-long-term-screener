@@ -3,20 +3,20 @@
   "moat_durability_years": 10,
   "management_grade": "B",
   "growth_runway_years": 5,
-  "primary_risk": "Regulatory and Environmental Risks",
+  "primary_risk": "Regulatory Risks and Delays in LNG Export Projects",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The midstream sector faces disruption due to increasing competition and changing market trends.",
-  "thesis_summary": "Venture Global's LNG export business rides the trend of increasing global energy demand, with a strong moat in scale and cost advantages.",
-  "thesis_breaks_if": "Material changes to regulatory or environmental policies that impact LNG export operations.",
-  "sentiment_note": "The company's valuation is rich, but the business fundamentals are strong.",
+  "sector_survival_note": "The LNG export market is expected to face increasing competition and disruption from new entrants and changing global demand trends.",
+  "thesis_summary": "Venture Global's large-scale LNG export business rides the trend of increasing global demand for natural gas, with its specific moat in scale and cost advantages.",
+  "thesis_breaks_if": "A structural shift in global demand for LNG or a significant increase in competition from new entrants.",
+  "sentiment_note": "The company's valuation is considered rich, but its long-term growth prospects and competitive advantages make it a worthwhile investment.",
   "decade_probability": 0.7,
-  "annual_alpha_estimate": 6,
+  "annual_alpha_estimate": 4.5,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "The company has a strong cash runway with positive free cash flow.",
-    "The midstream sector is expected to grow at a rate of 3-5% per annum.",
-    "The company has a material agreement with a major energy player to supply LNG."
+    "Venture Global's revenue growth is expected to be driven by the increasing demand for LNG in the global market.",
+    "The company's gross margin is expected to be impacted by the cost of capital and operating expenses.",
+    "Venture Global's cash runway is expected to be sufficient to fund its operations and growth initiatives."
   ],
   "valuation_label": "RICH",
   "valuation_note": "FCF yield -19.0%, PEG 0.9, EV/EBITDA 13 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": null,
   "implied_growth_label": null,
   "implied_growth_note": null,
-  "research_date": "2026-08-10T11:06:31.492263",
+  "research_date": "2026-08-17T13:12:31.628961",
   "ticker": "VG"
 }

@@ -1,0 +1,32 @@
+{
+  "bull": {
+    "narrative": "BETA achieves certification of the ALIA-250 aircraft and scales up production, leading to significant revenue growth and market expansion.",
+    "revenue_10yr_b": 1.5,
+    "mktcap_10yr_b": 30.0,
+    "multiple": 20.0,
+    "probability": 0.2,
+    "irr_10yr_pct": 17.4
+  },
+  "base": {
+    "narrative": "BETA achieves certification of the ALIA-250 aircraft but faces significant production and regulatory challenges, leading to modest revenue growth and market expansion.",
+    "revenue_10yr_b": 0.5,
+    "mktcap_10yr_b": 15.0,
+    "multiple": 10.0,
+    "probability": 0.5,
+    "irr_10yr_pct": 9.5
+  },
+  "bear": {
+    "narrative": "BETA fails to achieve certification of the ALIA-250 aircraft, leading to significant revenue decline and market contraction.",
+    "mktcap_10yr_b": 5.0,
+    "multiple": 5.0,
+    "probability": 0.3,
+    "irr_10yr_pct": -1.9
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "BETA's current financials and market position suggest a base-case scenario, with modest revenue growth and market expansion.",
+  "thesis_breaks_if": "BETA Technologies fails to achieve certification of the ALIA-250 aircraft within the next 12 months",
+  "natural_eval_window_days": 365,
+  "expected_irr_pct": 7.7,
+  "written_date": "2026-08-17T13:35:58.170734",
+  "ticker": "BETA"
+}

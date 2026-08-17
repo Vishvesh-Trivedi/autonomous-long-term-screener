@@ -1,22 +1,22 @@
 {
-  "moat_type": "High-performance timing solutions for the semiconductor industry",
+  "moat_type": "High-precision timing technology",
   "moat_durability_years": 10,
-  "management_grade": "B",
+  "management_grade": "C",
   "growth_runway_years": 5,
   "primary_risk": "Dependence on a few large customers",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological changes, which may lead to disruption of market leaders.",
-  "thesis_summary": "SiTime provides high-performance timing solutions for the semiconductor industry, riding the trend of increasing demand for advanced timing components.",
-  "thesis_breaks_if": "A structural change in the semiconductor industry, such as a significant shift to alternative timing technologies.",
-  "sentiment_note": "Neutral, with a slight bias towards accumulation due to the company's rich valuation.",
+  "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological change, which may lead to disruption and reduced market share.",
+  "thesis_summary": "SiTime Corporation provides high-precision timing technology that rides the trend of increasing demand for high-speed data transmission.",
+  "thesis_breaks_if": "A structural change in the company's business model or a significant disruption in the semiconductor industry.",
+  "sentiment_note": "The company's valuation is EXTREME, but the entry multiple sets the starting yield of a 15-20yr hold.",
   "decade_probability": 0.6,
   "annual_alpha_estimate": 8,
   "verdict": "MONITOR",
   "position_size_pct": 0.2,
   "ten_k_highlights": [
-    "SiTime's revenue has been rising at a rate of 49.3% over the past 5 years.",
-    "The company's gross margin has been falling over the past 7 years, from 63.1% to 56.1%.",
-    "SiTime's share count has been rising at a rate of 26.3% over the past 5 years, indicating significant dilution."
+    "SiTime Corporation's revenue has been rising at a rate of 49.3% over the past 5 years.",
+    "The company's gross margin has been falling over the past 7 years, from 64.6% to 56.1%.",
+    "SiTime Corporation's share count has been rising at a rate of 26.3% over the past 5 years, indicating significant dilution."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 0.3%, PEG 3.8, EV/EBITDA 4571, P/S 45 \u2014 very richly valued \u2014 starter position only.",
@@ -31,6 +31,6 @@
   "long_term_alpha_pp": 13.8,
   "priced_for_perfection": true,
   "priced_for_perfection_note": "Price already assumes ~47%/yr growth for a decade \u2014 start small, add on weakness",
-  "research_date": "2026-08-10T11:04:42.942473",
+  "research_date": "2026-08-17T13:10:52.309611",
   "ticker": "SITM"
 }

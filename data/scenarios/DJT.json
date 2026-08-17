@@ -1,0 +1,32 @@
+{
+  "bull": {
+    "narrative": "DJT secures major content deals and achieves 100 million users on Truth Social, leading to significant revenue growth.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 25.0,
+    "multiple": 10.0,
+    "probability": 0.3,
+    "irr_10yr_pct": 27.0
+  },
+  "base": {
+    "narrative": "DJT secures moderate content deals and achieves 10 million users on Truth Social, leading to steady revenue growth.",
+    "revenue_10yr_b": 0.5,
+    "mktcap_10yr_b": 5.0,
+    "multiple": 5.0,
+    "probability": 0.5,
+    "irr_10yr_pct": 8.1
+  },
+  "bear": {
+    "narrative": "DJT fails to secure content deals and achieves only 1 million users on Truth Social, leading to stagnant revenue.",
+    "mktcap_10yr_b": 2.5,
+    "multiple": 2.0,
+    "probability": 0.2,
+    "irr_10yr_pct": 0.8
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "DJT's exclusive access to Trump's social media following could lead to significant revenue growth.",
+  "thesis_breaks_if": "DJT fails to secure a major content deal within the next 2 years",
+  "natural_eval_window_days": 365,
+  "expected_irr_pct": 12.3,
+  "written_date": "2026-08-17T13:34:22.867143",
+  "ticker": "DJT"
+}

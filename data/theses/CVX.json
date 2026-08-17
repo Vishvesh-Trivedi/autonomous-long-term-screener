@@ -1,0 +1,33 @@
+{
+  "moat_type": "Integrated oil and gas company with a diversified portfolio of upstream and downstream assets",
+  "moat_durability_years": 20,
+  "management_grade": "A",
+  "growth_runway_years": 10,
+  "primary_risk": "Geopolitical risks and declining oil demand",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The oil and gas sector has seen significant disruption in recent years, with many companies facing financial difficulties and consolidation.",
+  "thesis_summary": "Chevron Corporation is a leading oil and gas company with a strong moat, riding the trend of increasing global energy demand.",
+  "thesis_breaks_if": "A significant shift to renewable energy sources or a major decline in oil prices",
+  "sentiment_note": "Attractive entry for the growth, with a cheap valuation and strong cash runway",
+  "decade_probability": 0.8,
+  "annual_alpha_estimate": 8,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 1.0,
+  "ten_k_highlights": [
+    "Chevron Corporation has a strong track record of revenue growth, with a 5-year CAGR of 16.4%",
+    "The company has a stable share count, with a 5-year dilution rate of -3.3%",
+    "Chevron Corporation has a significant cash runway, with a positive free cash flow yield of 7.1%"
+  ],
+  "valuation_label": "CHEAP",
+  "valuation_note": "FCF yield 7.1%, PEG 0.8, EV/EBITDA 8 \u2014 attractive entry for the growth.",
+  "valuation_multiplier": 1.15,
+  "val_pe": 15.3,
+  "val_ps": 1.9,
+  "val_ev_ebitda": 8.4,
+  "val_peg": 0.77,
+  "implied_growth_pct": 2.3,
+  "implied_growth_label": "MODEST",
+  "implied_growth_note": "The price assumes only modest growth \u2014 a low bar to clear.",
+  "research_date": "2026-08-17T13:11:00.270627",
+  "ticker": "CVX"
+}

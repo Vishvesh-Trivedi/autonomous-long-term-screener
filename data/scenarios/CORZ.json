@@ -1,0 +1,32 @@
+{
+  "bull": {
+    "narrative": "Core Scientific reaches 1.5 GW Muskogee campus capacity and expands its cloud computing business aggressively, leading to significant revenue growth.",
+    "revenue_10yr_b": 5.5,
+    "mktcap_10yr_b": 35.0,
+    "multiple": 6.4,
+    "probability": 0.3,
+    "irr_10yr_pct": 18.4
+  },
+  "base": {
+    "narrative": "Core Scientific reaches 1.5 GW Muskogee campus capacity but faces moderate competition in the cloud computing market, leading to steady revenue growth.",
+    "revenue_10yr_b": 2.5,
+    "mktcap_10yr_b": 13.0,
+    "multiple": 4.0,
+    "probability": 0.4,
+    "irr_10yr_pct": 7.2
+  },
+  "bear": {
+    "narrative": "Core Scientific fails to reach 1.5 GW Muskogee campus capacity and struggles to compete in the cloud computing market, leading to stagnant revenue growth.",
+    "mktcap_10yr_b": 8.0,
+    "multiple": 3.2,
+    "probability": 0.3,
+    "irr_10yr_pct": 2.1
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Strong unfair advantage in cloud computing, but dependence on a single customer (Microsoft) is a risk.",
+  "thesis_breaks_if": "Failure to reach 1.5 GW Muskogee campus capacity within 2 years",
+  "natural_eval_window_days": 365,
+  "expected_irr_pct": 9.0,
+  "written_date": "2026-08-17T13:36:08.790129",
+  "ticker": "CORZ"
+}

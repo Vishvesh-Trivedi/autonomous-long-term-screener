@@ -1,0 +1,32 @@
+{
+  "bull": {
+    "narrative": "AXTI achieves significant growth through key partnerships with major cloud service providers, leading to widespread adoption of InP-based optical interconnects in data centers and cloud computing infrastructure.",
+    "revenue_10yr_b": 2.55,
+    "mktcap_10yr_b": 31.5,
+    "multiple": 25,
+    "probability": 0.2,
+    "irr_10yr_pct": 19.4
+  },
+  "base": {
+    "narrative": "AXTI secures some partnerships but faces increased competition from other semiconductor companies, resulting in moderate growth.",
+    "revenue_10yr_b": 1.35,
+    "mktcap_10yr_b": 13.5,
+    "multiple": 15,
+    "probability": 0.6,
+    "irr_10yr_pct": 9.7
+  },
+  "bear": {
+    "narrative": "AXTI fails to secure key partnerships and faces significant competition from other semiconductor companies, leading to a decline in revenue and market capitalization.",
+    "mktcap_10yr_b": 2.1,
+    "multiple": 10,
+    "probability": 0.2,
+    "irr_10yr_pct": -8.9
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis.",
+  "thesis_breaks_if": "AXTI fails to secure key partnerships with major cloud service providers within the next 2 years.",
+  "natural_eval_window_days": 730,
+  "expected_irr_pct": 7.9,
+  "written_date": "2026-08-17T13:36:04.426674",
+  "ticker": "AXTI"
+}

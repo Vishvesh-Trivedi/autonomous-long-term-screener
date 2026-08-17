@@ -1,22 +1,22 @@
 {
-  "moat_type": "Leadership in Electronic Design Automation (EDA) software",
-  "moat_durability_years": 20,
-  "management_grade": "A",
-  "growth_runway_years": 10,
+  "moat_type": "Proprietary EDA and simulation software for semiconductor and electronics design",
+  "moat_durability_years": 15,
+  "management_grade": "B",
+  "growth_runway_years": 5,
   "primary_risk": "Dependence on a few large customers",
   "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "EDA software is a critical component of the semiconductor industry, but faces increasing competition from open-source alternatives.",
-  "thesis_summary": "Synopsys provides high-margin EDA software to the semiconductor industry, riding the trend of increasing demand for complex chips.",
-  "thesis_breaks_if": "A structural shift to open-source EDA software or a significant decline in semiconductor demand.",
-  "sentiment_note": "Neutral, with a slightly negative bias due to rich valuation.",
-  "decade_probability": 0.7,
-  "annual_alpha_estimate": 8,
+  "sector_survival_note": "The semiconductor industry is highly competitive, but Synopsys' software expertise and customer relationships give it a strong position.",
+  "thesis_summary": "Synopsys provides software for designing and testing semiconductors, leveraging its proprietary EDA tools and strong customer relationships to ride the trend of increasing semiconductor demand.",
+  "thesis_breaks_if": "A structural shift to open-source EDA tools or a major loss of key customers.",
+  "sentiment_note": "Richly valued, but a great company with a strong moat and durable business.",
+  "decade_probability": 0.6,
+  "annual_alpha_estimate": 4,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "Synopsys, Inc. is a global leader in electronic design automation (EDA) software, providing solutions for chip design, verification, and manufacturing.",
-    "The company's revenue has been rising at a CAGR of 62.8% over the past 5 years, driven by growth in the semiconductor industry.",
-    "Synopsys has a strong cash position, with a cash runway of several years, and a history of generating positive free cash flow."
+    "Synopsys has a strong track record of revenue growth, with a 5-year CAGR of 62.8%.",
+    "The company has a high gross margin of 83%, indicating a strong pricing power.",
+    "Synopsys has a large and experienced management team, with a long history of successful capital allocation."
   ],
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 3.7%, PEG 2.1, EV/EBITDA 47 \u2014 very richly valued \u2014 starter position only.",
@@ -28,6 +28,6 @@
   "implied_growth_pct": 11.3,
   "implied_growth_label": "REASONABLE",
   "implied_growth_note": "The price assumes reasonable growth the business can likely deliver.",
-  "research_date": "2026-08-10T11:08:12.425341",
+  "research_date": "2026-08-17T13:14:14.430482",
   "ticker": "SNPS"
 }

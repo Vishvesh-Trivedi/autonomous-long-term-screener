@@ -1,22 +1,22 @@
 {
-  "moat_type": "Diversified electrical solutions with a strong presence in the industrial and commercial sectors",
+  "moat_type": "Diversified electrical products and solutions for industrial and commercial markets",
   "moat_durability_years": 20,
   "management_grade": "A",
-  "growth_runway_years": 10,
+  "growth_runway_years": 5,
   "primary_risk": "Dependence on a few large customers",
-  "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The electrical solutions sector has seen stable market leaders over the past 30 years, with companies like nVent Electric maintaining their position through strategic acquisitions and innovation.",
-  "thesis_summary": "nVent Electric's diversified electrical solutions ride the trend of increasing demand for industrial and commercial electrical infrastructure.",
-  "thesis_breaks_if": "A structural change in the electrical solutions market, such as a significant shift to renewable energy sources, could disrupt nVent Electric's moat.",
-  "sentiment_note": "Accumulate on weakness due to rich valuation.",
-  "decade_probability": 0.8,
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The electrical products sector faces moderate disruption from technological advancements and changing customer needs.",
+  "thesis_summary": "nVent Electric provides diversified electrical products and solutions for industrial and commercial markets, riding the trend of increasing demand for electrical infrastructure.",
+  "thesis_breaks_if": "A structural change in the electrical products sector or a significant decline in demand for nVent's products.",
+  "sentiment_note": "Accumulate slowly due to rich valuation.",
+  "decade_probability": 0.7,
   "annual_alpha_estimate": 6,
   "verdict": "ACCUMULATE",
   "position_size_pct": 0.5,
   "ten_k_highlights": [
-    "nVent Electric has a strong track record of revenue growth, with a 5-year CAGR of 58.1%.",
-    "The company has maintained stable gross margins and return on invested capital (ROIC) over the past 5 years.",
-    "nVent Electric has a cash runway, with positive free cash flow, and a market capitalization of $25.7 billion."
+    "nVent Electric has a strong track record of revenue growth, with a 5-year CAGR of 58.1%",
+    "The company has a stable gross margin and a rising return on invested capital (ROIC)",
+    "nVent Electric has a positive cash flow and a strong balance sheet"
   ],
   "valuation_label": "RICH",
   "valuation_note": "FCF yield 1.6%, PEG 1.7, EV/EBITDA 29 \u2014 priced ahead of fundamentals \u2014 accumulate slowly.",
@@ -28,7 +28,7 @@
   "implied_growth_pct": 23.1,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "long_term_alpha_pp": 24.0,
-  "research_date": "2026-08-10T11:09:41.642976",
+  "long_term_alpha_pp": 26.0,
+  "research_date": "2026-08-17T13:15:46.976938",
   "ticker": "NVT"
 }

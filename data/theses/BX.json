@@ -1,0 +1,33 @@
+{
+  "moat_type": "Private equity and real assets expertise",
+  "moat_durability_years": 20,
+  "management_grade": "A",
+  "growth_runway_years": 5,
+  "primary_risk": "Disruption from alternative investment platforms",
+  "sector_durability_20yr": "MEDIUM",
+  "sector_survival_note": "The private equity and real assets sector faces disruption from alternative investment platforms, but Blackstone's expertise and diversified business model provide a competitive advantage.",
+  "thesis_summary": "Blackstone's private equity and real assets expertise rides the trend of increasing demand for alternative investments.",
+  "thesis_breaks_if": "A structural change in the alternative investment landscape that erodes Blackstone's expertise and competitive advantage.",
+  "sentiment_note": "Neutral, with a slightly positive bias due to the company's strong track record and competitive advantage.",
+  "decade_probability": 0.7,
+  "annual_alpha_estimate": 8.5,
+  "verdict": "CORE_HOLD",
+  "position_size_pct": 0.8,
+  "ten_k_highlights": [
+    "Blackstone's revenue fell by 36% over the past 5 years, but the company's gross margin and return on invested capital (ROIC) have been insufficient.",
+    "Blackstone's share count has risen by 6.3% over the past 5 years, resulting in moderate dilution.",
+    "Blackstone's cash runway is positive, with free cash flow (FCF) providing a buffer against potential downturns."
+  ],
+  "valuation_label": "FAIR",
+  "valuation_note": "FCF yield 3.2%, PEG 1.7 \u2014 fairly valued for its growth.",
+  "valuation_multiplier": 1.0,
+  "val_pe": 19.2,
+  "val_ps": 11.1,
+  "val_ev_ebitda": null,
+  "val_peg": 1.7,
+  "implied_growth_pct": 13.2,
+  "implied_growth_label": "REASONABLE",
+  "implied_growth_note": "The price assumes reasonable growth the business can likely deliver.",
+  "research_date": "2026-08-17T13:03:00.130085",
+  "ticker": "BX"
+}

@@ -1,0 +1,32 @@
+{
+  "bull": {
+    "narrative": "Joby Aviation achieves commercial eVTOL flights with paying passengers within the next 2 years, leading to rapid adoption and widespread use of its eVTOL aircraft, resulting in significant revenue growth and market capitalization expansion.",
+    "revenue_10yr_b": 4.8,
+    "mktcap_10yr_b": 34.8,
+    "multiple": 288,
+    "probability": 0.2,
+    "irr_10yr_pct": 16.1
+  },
+  "base": {
+    "narrative": "Joby Aviation achieves moderate success with its eVTOL aircraft, securing certification and generating revenue, but faces intense competition and regulatory challenges, resulting in steady but unspectacular growth.",
+    "revenue_10yr_b": 2.4,
+    "mktcap_10yr_b": 14.4,
+    "multiple": 120,
+    "probability": 0.6,
+    "irr_10yr_pct": 6.3
+  },
+  "bear": {
+    "narrative": "Joby Aviation struggles to achieve certification and faces significant regulatory hurdles, leading to delays and reduced revenue, resulting in a decline in market capitalization and multiple contraction.",
+    "mktcap_10yr_b": 2.4,
+    "multiple": 20,
+    "probability": 0.2,
+    "irr_10yr_pct": -11.2
+  },
+  "current_tracking": "BULL",
+  "tracking_note": "Based on current financials and thesis, the base case is the most likely outcome.",
+  "thesis_breaks_if": "Joby Aviation achieves commercial eVTOL flights with paying passengers within the next 2 years",
+  "natural_eval_window_days": 730,
+  "expected_irr_pct": 4.8,
+  "written_date": "2026-08-17T13:36:01.383649",
+  "ticker": "JOBY"
+}

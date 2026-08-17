@@ -1,0 +1,32 @@
+{
+  "bull": {
+    "narrative": "FANG's operational moat and strong production capabilities drive sustained revenue growth and multiple expansion.",
+    "revenue_10yr_b": 193.11,
+    "mktcap_10yr_b": 500.0,
+    "multiple": 3.5,
+    "probability": 0.3,
+    "irr_10yr_pct": 24.3
+  },
+  "base": {
+    "narrative": "FANG's revenue growth slows as ROIC declines, but the company's strong operational moat maintains a stable multiple.",
+    "revenue_10yr_b": 123.45,
+    "mktcap_10yr_b": 300.0,
+    "multiple": 3.25,
+    "probability": 0.5,
+    "irr_10yr_pct": 18.1
+  },
+  "bear": {
+    "narrative": "FANG's operational disruptions and declining ROIC lead to a significant decline in revenue and multiple contraction.",
+    "mktcap_10yr_b": 150.0,
+    "multiple": 2.5,
+    "probability": 0.2,
+    "irr_10yr_pct": 10.2
+  },
+  "current_tracking": "BASE",
+  "tracking_note": "FANG's current financials and thesis narrative suggest a base case scenario.",
+  "thesis_breaks_if": "A significant decline in oil prices or a major disruption to FANG's operations.",
+  "natural_eval_window_days": 365,
+  "expected_irr_pct": 18.4,
+  "written_date": "2026-08-17T13:34:20.013202",
+  "ticker": "FANG"
+}
