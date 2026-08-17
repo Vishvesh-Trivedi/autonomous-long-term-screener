@@ -1477,11 +1477,31 @@ def _build_whats_changed(decisions: dict, decision_review: dict) -> str:
     rows = ''
     for it in adds:
         tk = it.get('ticker', ''); co = it.get('company_name', tk); tier = it.get('tier', '')
-        rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
-                 f'{_chip("NEW POSITION", "#15803d", "#f0fdf4")}</td>'
-                 f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong> '
-                 f'<span style="color:#9ca3af;font-size:9px">{tier}</span>'
-                 f'<span style="color:#6b7280;font-size:10px"> &middot; {co}</span></td></tr>')
+        _kind = str(it.get('entry_kind', '') or '').upper()
+        if _kind == 'SWAP':
+            _out = it.get('swapped_out', '')
+            _sm  = it.get('swap_meta', {}) or {}
+            _detail = (f' &middot; replaces {_out}' if _out else '')
+            _edge = _sm.get('conv_edge')
+            if _edge is not None:
+                _detail += f' <span style="color:#9ca3af">(+{_edge} conviction, +{_sm.get("irr_edge","?")}pp IRR)</span>'
+            rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
+                     f'{_chip("SWAP IN", "#7c3aed", "#f5f3ff")}</td>'
+                     f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong> '
+                     f'<span style="color:#9ca3af;font-size:9px">{tier}</span>'
+                     f'<span style="color:#6b7280;font-size:10px">{_detail}</span></td></tr>')
+        elif _kind == 'OVERRIDE':
+            rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
+                     f'{_chip("OVERRIDE ADD", "#b45309", "#fffbeb")}</td>'
+                     f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong> '
+                     f'<span style="color:#9ca3af;font-size:9px">{tier}</span>'
+                     f'<span style="color:#6b7280;font-size:10px"> &middot; generational name, added above sector cap &middot; {co}</span></td></tr>')
+        else:
+            rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
+                     f'{_chip("NEW POSITION", "#15803d", "#f0fdf4")}</td>'
+                     f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong> '
+                     f'<span style="color:#9ca3af;font-size:9px">{tier}</span>'
+                     f'<span style="color:#6b7280;font-size:10px"> &middot; {co}</span></td></tr>')
     for it in migs:
         tk = it.get('ticker', ''); ft = it.get('from_tier', '?'); tt = it.get('to_tier', '?')
         rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
@@ -1504,7 +1524,10 @@ def _build_whats_changed(decisions: dict, decision_review: dict) -> str:
                  f'{note_html}</td></tr>')
 
     parts = []
-    if adds:  parts.append(f'{len(adds)} new')
+    _n_swap = sum(1 for it in adds if str(it.get('entry_kind', '') or '').upper() == 'SWAP')
+    _n_new  = len(adds) - _n_swap
+    if _n_new:  parts.append(f'{_n_new} new')
+    if _n_swap: parts.append(f'{_n_swap} swap{"s" if _n_swap != 1 else ""}')
     if migs:  parts.append(f'{len(migs)} tier move{"s" if len(migs) != 1 else ""}')
     if exits: parts.append(f'{len(exits)} exit{"s" if len(exits) != 1 else ""}')
     if flagged: parts.append(f'{len(flagged)} flagged')
