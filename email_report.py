@@ -1477,11 +1477,31 @@ def _build_whats_changed(decisions: dict, decision_review: dict) -> str:
     rows = ''
     for it in adds:
         tk = it.get('ticker', ''); co = it.get('company_name', tk); tier = it.get('tier', '')
-        rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
-                 f'{_chip("NEW POSITION", "#15803d", "#f0fdf4")}</td>'
-                 f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong> '
-                 f'<span style="color:#9ca3af;font-size:9px">{tier}</span>'
-                 f'<span style="color:#6b7280;font-size:10px"> &middot; {co}</span></td></tr>')
+        _kind = str(it.get('entry_kind', '') or '').upper()
+        if _kind == 'SWAP':
+            _out = it.get('swapped_out', '')
+            _sm  = it.get('swap_meta', {}) or {}
+            _detail = (f' &middot; replaces {_out}' if _out else '')
+            _edge = _sm.get('conv_edge')
+            if _edge is not None:
+                _detail += f' <span style="color:#9ca3af">(+{_edge} conviction, +{_sm.get("irr_edge","?")}pp IRR)</span>'
+            rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
+                     f'{_chip("SWAP IN", "#7c3aed", "#f5f3ff")}</td>'
+                     f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong> '
+                     f'<span style="color:#9ca3af;font-size:9px">{tier}</span>'
+                     f'<span style="color:#6b7280;font-size:10px">{_detail}</span></td></tr>')
+        elif _kind == 'OVERRIDE':
+            rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
+                     f'{_chip("OVERRIDE ADD", "#b45309", "#fffbeb")}</td>'
+                     f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong> '
+                     f'<span style="color:#9ca3af;font-size:9px">{tier}</span>'
+                     f'<span style="color:#6b7280;font-size:10px"> &middot; generational name, added above sector cap &middot; {co}</span></td></tr>')
+        else:
+            rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
+                     f'{_chip("NEW POSITION", "#15803d", "#f0fdf4")}</td>'
+                     f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong> '
+                     f'<span style="color:#9ca3af;font-size:9px">{tier}</span>'
+                     f'<span style="color:#6b7280;font-size:10px"> &middot; {co}</span></td></tr>')
     for it in migs:
         tk = it.get('ticker', ''); ft = it.get('from_tier', '?'); tt = it.get('to_tier', '?')
         rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
@@ -1504,7 +1524,10 @@ def _build_whats_changed(decisions: dict, decision_review: dict) -> str:
                  f'{note_html}</td></tr>')
 
     parts = []
-    if adds:  parts.append(f'{len(adds)} new')
+    _n_swap = sum(1 for it in adds if str(it.get('entry_kind', '') or '').upper() == 'SWAP')
+    _n_new  = len(adds) - _n_swap
+    if _n_new:  parts.append(f'{_n_new} new')
+    if _n_swap: parts.append(f'{_n_swap} swap{"s" if _n_swap != 1 else ""}')
     if migs:  parts.append(f'{len(migs)} tier move{"s" if len(migs) != 1 else ""}')
     if exits: parts.append(f'{len(exits)} exit{"s" if len(exits) != 1 else ""}')
     if flagged: parts.append(f'{len(flagged)} flagged')
@@ -1517,6 +1540,155 @@ def _build_whats_changed(decisions: dict, decision_review: dict) -> str:
         '<table style="width:100%;border-collapse:collapse;font-size:11px">'
         f'{rows}</table>'
         '</div>'
+    )
+
+
+def _conv_bar(score) -> str:
+    """A tiny inline conviction meter (0-100) for the slot tables."""
+    try:
+        s = max(0.0, min(100.0, float(score)))
+    except (TypeError, ValueError):
+        return '<span style="color:#9ca3af">&mdash;</span>'
+    col = '#15803d' if s >= 70 else '#d97706' if s >= 50 else '#dc2626'
+    return (f'<span style="display:inline-block;width:34px;height:5px;background:#eef1f4;'
+            f'border-radius:3px;vertical-align:middle;margin-right:5px">'
+            f'<span style="display:inline-block;width:{s*0.34:.0f}px;height:5px;background:{col};'
+            f'border-radius:3px"></span></span>'
+            f'<span style="font-size:9.5px;font-weight:700;color:{col}">{s:.0f}</span>')
+
+
+def _build_slots_and_contests(decisions: dict) -> str:
+    """Makes the reshuffle engine VISIBLE every run. Shows (a) any slot contests
+    this run — a challenger displacing, contesting, or failing to unseat an
+    incumbent — and (b) a sector-capacity table with each incumbent's conviction,
+    so the reader sees why a sector is full and how strong the names holding it
+    are. This is the context behind every add/skip a capacity-constrained book
+    makes, and it renders even when nothing changed."""
+    d = decisions or {}
+    contests = d.get('contests', []) or []
+    slots    = d.get('sector_slots', {}) or {}
+    if not contests and not slots:
+        return ''
+
+    def _chip(label, color, bg):
+        return (f'<span style="background:{bg};color:{color};font-size:8.5px;font-weight:700;'
+                f'padding:2px 7px;border-radius:2px;margin-right:6px;white-space:nowrap">{label}</span>')
+
+    # ── Contest rows ─────────────────────────────────────────────────────────
+    contest_html = ''
+    _style = {
+        'EXECUTED': ('SWAPPED',       '#7c3aed', '#f5f3ff'),
+        'PENDING':  ('CONTEST',       '#b45309', '#fffbeb'),
+        'HELD':     ('SLOT HELD',     '#4b5563', '#f3f4f6'),
+        'OVERRIDE': ('OVERRIDE ADD',  '#b45309', '#fffbeb'),
+    }
+    _order = {'EXECUTED': 0, 'PENDING': 1, 'OVERRIDE': 2, 'HELD': 3}
+    for c in sorted(contests, key=lambda x: _order.get(x.get('status'), 9)):
+        st  = c.get('status', '')
+        lbl, col, bg = _style.get(st, ('CONTEST', '#4b5563', '#f3f4f6'))
+        ch  = c.get('challenger', ''); inc = c.get('incumbent') or ''
+        sec = c.get('sector', '')
+        chc = c.get('challenger_conviction'); chi = c.get('challenger_irr')
+        inc_c = c.get('incumbent_conviction'); inci = c.get('incumbent_irr')
+        if st == 'EXECUTED':
+            body = (f'<strong>{ch}</strong> replaced <strong>{inc}</strong> in {sec} '
+                    f'<span style="color:#6b7280">&middot; conviction {chc:.0f} vs {inc_c:.0f} '
+                    f'(+{c.get("conv_edge")}), IRR {chi:.0f}% vs {inci:.0f}% (+{c.get("irr_edge")}pp)</span>')
+        elif st == 'PENDING':
+            body = (f'<strong>{ch}</strong> is contesting <strong>{inc}</strong>&#39;s slot in {sec} '
+                    f'<span style="color:#6b7280">&middot; edge confirmed, awaiting confirmation '
+                    f'({c.get("runs")}/{c.get("needed")} runs) &middot; conviction {chc:.0f} vs {inc_c:.0f}</span>')
+        elif st == 'OVERRIDE':
+            body = (f'<strong>{ch}</strong> added above the {sec} cap '
+                    f'<span style="color:#6b7280">&middot; generational conviction {chc:.0f}, IRR {chi:.0f}%</span>')
+        else:  # HELD
+            body = (f'<strong>{inc}</strong> defended its {sec} slot vs <strong>{ch}</strong> '
+                    f'<span style="color:#6b7280">&middot; incumbent still stronger '
+                    f'(conviction {inc_c:.0f} vs {chc:.0f})</span>')
+        contest_html += (f'<tr style="border-bottom:1px solid #f1f3f5">'
+                         f'<td style="padding:6px 6px;white-space:nowrap;vertical-align:top">{_chip(lbl, col, bg)}</td>'
+                         f'<td style="padding:6px 6px;font-size:10.5px;color:#111827">{body}</td></tr>')
+
+    # ── Sector capacity table (only sectors at/over cap — the contestable ones) ─
+    _full = {s: v for s, v in slots.items()
+             if v.get('count', 0) >= v.get('cap', 99) and v.get('holdings')}
+    cap_html = ''
+    for sec in sorted(_full, key=lambda s: _full[s].get('count', 0), reverse=True):
+        v = _full[sec]
+        hs = v.get('holdings', [])
+        weakest_tk = hs[-1]['ticker'] if hs else None
+        chips = ''
+        for h in hs:
+            _mk = ' style="opacity:.6"' if h['ticker'] == weakest_tk else ''
+            _wk = (' <span style="color:#dc2626;font-size:8px;font-weight:700">weakest</span>'
+                   if h['ticker'] == weakest_tk else '')
+            chips += (f'<span{_mk}>{_conv_bar(h.get("conviction"))} '
+                      f'<span style="font-size:9.5px;color:#374151">{h["ticker"]}</span>{_wk}</span>'
+                      f'<span style="color:#d1d5db">&nbsp;&nbsp;</span>')
+        cap_html += (f'<tr style="border-bottom:1px solid #f1f3f5">'
+                     f'<td style="padding:6px 6px;white-space:nowrap;vertical-align:top">'
+                     f'<strong style="color:#111827;font-size:10px">{sec}</strong><br>'
+                     f'<span style="font-size:8.5px;color:#9ca3af">{v.get("count")}/{v.get("cap")} full</span></td>'
+                     f'<td style="padding:6px 6px;line-height:2">{chips}</td></tr>')
+
+    if not contest_html and not cap_html:
+        return ''
+
+    out = '<div class="section" style="margin-bottom:14px"><div class="section-hdr">Slot contests &amp; sector capacity</div>'
+    if contest_html:
+        out += ('<div style="font-size:10px;color:#6b7280;margin-bottom:6px">'
+                'How the book reshuffles: a superior challenger can displace the weakest name in a full sector. '
+                'Every contest this run &mdash; won, pending, or defended.</div>'
+                f'<table style="width:100%;border-collapse:collapse;margin-bottom:10px">{contest_html}</table>')
+    else:
+        out += ('<div style="font-size:10px;color:#15803d;font-weight:600;margin-bottom:6px">'
+                '&#10003; No slot contests this run &mdash; no challenger cleared the bar to displace an incumbent.</div>')
+    if cap_html:
+        out += ('<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;'
+                'font-weight:700;margin-bottom:4px">Sectors at capacity &mdash; incumbent conviction</div>'
+                f'<table style="width:100%;border-collapse:collapse;font-size:11px">{cap_html}</table>')
+    out += '</div>'
+    return out
+
+
+def _build_passed_on(decisions: dict) -> str:
+    """The funnel: strong-looking candidates the model researched but did NOT add
+    this run, and exactly why (sector cap, survival veto, valuation, a swap still
+    building confirmation). Ranked by conviction so the best near-misses are on
+    top. Shows the discipline behind an otherwise-quiet book."""
+    avoided = (decisions or {}).get('avoided', []) or []
+    if not avoided:
+        return ''
+
+    def _cv(a):
+        try:
+            return float(a.get('conviction_score')) if a.get('conviction_score') is not None else -1.0
+        except (TypeError, ValueError):
+            return -1.0
+    ranked = sorted(avoided, key=_cv, reverse=True)[:8]
+
+    rows = ''
+    for a in ranked:
+        tk = a.get('ticker', ''); tier = a.get('tier', ''); reason = (a.get('reason', '') or '')[:110]
+        cv = a.get('conviction_score')
+        cv_html = _conv_bar(cv) if cv is not None else '<span style="color:#9ca3af">&mdash;</span>'
+        rows += (f'<tr style="border-bottom:1px solid #f1f3f5">'
+                 f'<td style="padding:6px 6px;white-space:nowrap;vertical-align:top">'
+                 f'<strong style="color:#111827">{tk}</strong> '
+                 f'<span style="color:#9ca3af;font-size:9px">{tier}</span></td>'
+                 f'<td style="padding:6px 6px;white-space:nowrap;vertical-align:top">{cv_html}</td>'
+                 f'<td style="padding:6px 6px;font-size:10px;color:#6b7280;vertical-align:top">{reason}</td></tr>')
+
+    _more = len(avoided) - len(ranked)
+    more_html = (f'<div style="font-size:9px;color:#9ca3af;margin-top:6px">'
+                 f'+{_more} more screened out this run.</div>') if _more > 0 else ''
+    return (
+        '<div class="section" style="margin-bottom:14px">'
+        '<div class="section-hdr">Passed on this run &mdash; and why</div>'
+        '<div style="font-size:10px;color:#6b7280;margin-bottom:6px">'
+        'Researched, ranked on forward conviction, but not added &mdash; the constraint that stopped each one.</div>'
+        '<table style="width:100%;border-collapse:collapse;font-size:11px">'
+        f'{rows}</table>{more_html}</div>'
     )
 
 
@@ -1622,10 +1794,12 @@ def generate_full_report(decisions: dict, portfolio: dict, researched: dict,
 
     html += _build_exec_summary(holdings)
     html += _build_whats_changed(decisions, decision_review)
+    html += _build_slots_and_contests(decisions)
     html += _build_sector_outlook(megatrend_review)
     html += _build_sector_survival_map(sector_survival, holdings)
     html += _build_decision_review(decision_review)
     html += _build_concentration_view(holdings, screened)
+    html += _build_passed_on(decisions)
 
     # Holdings — sorted by tier then return descending
     def _sort_key(h):
