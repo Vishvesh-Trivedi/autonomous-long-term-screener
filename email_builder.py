@@ -8,6 +8,31 @@ Plus the trial email fallback.
 
 from datetime import datetime
 from typing import List, Dict, Any
+import json as _json, os as _os
+
+# ── Config access (ADD gate threshold) ────────────────────────────────────
+_UCFG = None
+def _ucfg():
+    global _UCFG
+    if _UCFG is None:
+        try:
+            with open(_os.path.join(_os.path.dirname(__file__), 'universe_config.json'), encoding='utf-8') as _f:
+                _UCFG = _json.load(_f)
+        except Exception:
+            _UCFG = {}
+    return _UCFG
+
+def _min_add_irr():
+    """Minimum expected 10yr IRR (%/yr) for a holding to read 'ADD'. Returns a
+    very low number when the gate is disabled so it never blocks."""
+    try:
+        vd = _ucfg().get('valuation_discipline', {}) or {}
+        if not vd.get('enabled', True):
+            return -1e9
+        return float(vd.get('min_add_irr', 8))
+    except Exception:
+        return 8.0
+
 
 # Shared CSS (used by email_report.py as well)
 _CSS_BASE = """
@@ -183,6 +208,12 @@ def _action_call(h):
         return ('HOLD &mdash; still checking, don&#39;t add', '#92400e', '#fffbeb', '#fcd34d', reason, 1)
     if accumulate_ok:
         if zone == 'buy':
+            # Long-term ADD gate: don't call it a 'good time to add' if the
+            # scenario model expects the name to return below our IRR bar, even
+            # on a price dip. Names with no IRR estimate are not blocked.
+            _exp = (h.get('scenario') or {}).get('expected_irr_pct')
+            if isinstance(_exp, (int, float)) and _exp < _min_add_irr():
+                return ('HOLD &mdash; thesis intact, wait for better value', '#92400e', '#fffbeb', '#fcd34d', reason, 1)
             return (f'ADD{small} &mdash; good time to add', '#166534', '#f0fdf4', '#86efac', reason, 3)
         if zone == 'wait':
             return ('HOLD &mdash; wait for a better entry', '#92400e', '#fffbeb', '#fcd34d', reason, 1)
@@ -562,13 +593,16 @@ def generate_action_email(decisions: Dict, portfolio: Dict, decision_review: Dic
             f'</div>'
         )
 
-    # Classify holdings into zones
+    # Classify holdings into zones using the SAME action call as the card label,
+    # so the section a holding sits in always matches its recommendation: ADD
+    # names appear under 'Good time to add'; near-high or low expected-return
+    # names fall to 'Wait for a better entry'; the rest are 'Monitoring'.
     buy_zone, wait_zone, monitor_zone = [], [], []
     for h in holdings:
-        zone, _ = _entry_zone(h)
-        if zone == 'buy':
+        _al = _action_call(h)[0].upper()
+        if _al.startswith('ADD') or _al.startswith('YES'):
             buy_zone.append(h)
-        elif zone == 'wait':
+        elif 'WAIT' in _al:
             wait_zone.append(h)
         else:
             monitor_zone.append(h)
@@ -608,7 +642,7 @@ def generate_action_email(decisions: Dict, portfolio: Dict, decision_review: Dic
             body_rows += _stock_row(h)
 
     if wait_zone:
-        body_rows += _divider(f'Near highs, wait for a better entry &mdash; {len(wait_zone)} holdings')
+        body_rows += _divider(f'Wait for a better entry &mdash; {len(wait_zone)} holdings')
         for h in wait_zone:
             body_rows += _stock_row(h)
 

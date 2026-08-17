@@ -2,6 +2,12 @@
   "_comment": "universe_config.json \u2014 all tunable parameters. Edit this, never edit screener.py for configuration changes.",
   "_version": "2.0",
   "_last_updated": "2026-06-01",
+  "valuation_discipline": {
+    "enabled": true,
+    "min_add_irr": 8,
+    "_min_add_irr_comment": "Minimum probability-weighted expected 10yr IRR (%/yr, from the scenario model's expected_irr_pct) for a holding to be shown as 'ADD / good time to add' in the Action Brief. Holdings the model expects to return below this bar are downgraded to 'HOLD \u2014 thesis intact, wait for better value' even on a price dip, and moved out of the 'Good time to add' section. Prevents the contradiction of recommending an add on a name projected to underperform. Set enabled=false to disable the gate entirely.",
+    "_enabled_comment": "When false, the ADD gate is bypassed and behaviour reverts to the prior technical-only entry timing."
+  },
   "email": {
     "recipient": "vishvesh.niyati@gmail.com",
     "cc": [],
