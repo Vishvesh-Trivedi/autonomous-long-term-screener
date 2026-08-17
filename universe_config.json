@@ -104,6 +104,8 @@
     "enabled": true,
     "veto_low_survival": true,
     "recommend_exit_low_survival": true,
+    "min_consecutive_low_for_exit": 2,
+    "_min_consecutive_low_comment": "Hysteresis for the sector-survival force-exit. A holding is only recommended for exit once its sector has been rated LOW this many runs IN A ROW (streak tracked in data/sector_survival.json). Blocking NEW buys still fires on a single LOW (cheap); forcing a realized-loss SALE of a 15-20yr position requires confirmation so one noisy LLM read can't whipsaw the book. Set to 1 to restore the old single-read behaviour.",
     "survivor_cap_min": 1,
     "cache_days": 30
   },

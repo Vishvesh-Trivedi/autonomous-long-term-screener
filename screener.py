@@ -2862,7 +2862,14 @@ def build_sector_survival_map(researched: dict, portfolio: dict) -> dict:
         return cached if cached.get('sectors') else {}
 
     # Merge onto any prior cache so sectors not assessed this run keep their verdict.
-    merged = dict(cached.get('sectors', {}))
+    # Track a consecutive-LOW streak per sector so construct_portfolio can require
+    # confirmation before force-exiting a 15-20yr holding (hysteresis): a sector
+    # freshly rated LOW increments its prior streak, anything else resets it to 0.
+    prior_sectors = cached.get('sectors', {})
+    for _name, _d in sectors_out.items():
+        _prev = int((prior_sectors.get(_name) or {}).get('low_streak', 0) or 0)
+        _d['low_streak'] = (_prev + 1) if _d['survives_20yr'] == 'LOW' else 0
+    merged = dict(prior_sectors)
     merged.update(sectors_out)
     result = {'as_of': datetime.now().isoformat(), 'sectors': merged}
     save_json(SECTOR_SURVIVAL_FILE, result)
@@ -3096,12 +3103,17 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
     _sectors_survival   = (sector_map or {}).get('sectors', {})
     _veto_low           = bool(_cn(True, 'sector_survival', 'veto_low_survival'))
     _exit_low           = bool(_cn(True, 'sector_survival', 'recommend_exit_low_survival'))
+    _min_low_streak     = int(_cn(2, 'sector_survival', 'min_consecutive_low_for_exit') or 2)
     _sector_hard_cap    = _cu('max_holdings_per_sector', 3)
     _survivor_cap_min   = _cn(1, 'sector_survival', 'survivor_cap_min') or 1
 
     def _sector_survives(sec: str) -> str:
         """HIGH | MEDIUM | LOW | '' (no opinion) for a Yahoo sector name."""
         return (_sectors_survival.get(sec or '') or {}).get('survives_20yr', '')
+
+    def _sector_low_streak(sec: str) -> int:
+        """How many runs IN A ROW this sector has been rated LOW (hysteresis)."""
+        return int((_sectors_survival.get(sec or '') or {}).get('low_streak', 0) or 0)
 
     def _sector_cap(sec: str) -> int:
         """Effective per-sector holdings cap: the LLM survivor count can only
@@ -3126,17 +3138,22 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
             decisions['exits'].append({**holding, 'status': 'EXIT_RECOMMENDED',
                                        'exit_reason': f'Reassessment: AVOID — {research.get("primary_risk","")}',
                                        'research': research})
-        elif _exit_low and _sector_survives(holding.get('sector', '')) == 'LOW':
-            # Sector survival hard gate: the sector this holding sits in is now
-            # judged unlikely to survive 15-20yr, so recommend exiting regardless
-            # of the per-stock verdict.
+        elif _exit_low and _sector_survives(holding.get('sector', '')) == 'LOW' \
+                and _sector_low_streak(holding.get('sector', '')) >= _min_low_streak:
+            # Sector survival hard gate WITH HYSTERESIS: the sector this holding
+            # sits in has now been judged unlikely to survive 15-20yr for
+            # _min_low_streak runs in a row, so recommend exiting regardless of
+            # the per-stock verdict. A single noisy LOW read does NOT force a
+            # realized-loss sale of a long-term position (see the streak counter
+            # in build_sector_survival_map); only a confirmed, persistent LOW does.
             _sec = holding.get('sector', 'Unknown')
             _why = (_sectors_survival.get(_sec) or {}).get('rationale', '')
+            _strk = _sector_low_streak(_sec)
             decisions['exits'].append({**holding, 'status': 'EXIT_RECOMMENDED',
-                                       'exit_reason': f'Sector survival: {_sec} rated LOW for 15-20yr — {_why}'.strip(' —'),
+                                       'exit_reason': f'Sector survival: {_sec} rated LOW for 15-20yr {_strk} runs in a row — {_why}'.strip(' —'),
                                        'sector_survival_verdict': 'LOW',
                                        'research': research, 'scenario': scenario})
-            log.info(f'  EXIT (sector survival) {ticker}: {_sec} rated LOW')
+            log.info(f'  EXIT (sector survival, confirmed x{_strk}) {ticker}: {_sec} rated LOW')
         elif verdict in ('CORE_HOLD', 'ACCUMULATE', 'MOONSHOT'):
             current_tier = holding.get('tier', 'T3')
             new_tier     = None
@@ -3154,6 +3171,23 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
                                           'research': research, 'scenario': scenario,
                                           'concentration_flag': _concentration_flag(holding),
                                           'rerun_flag': _rerun_flag(holding)})
+        else:
+            # MONITOR / SPECULATIVE / unknown verdict on an existing holding.
+            # The portfolio is mutated in place downstream, so the position is
+            # KEPT — a 15-20yr thesis is not abandoned on a soft downgrade. But
+            # previously such holdings fell through every branch and vanished from
+            # the decision set, so they disappeared from the emails' holdings
+            # section (invisible exactly when flagged). Keep them visible as a
+            # monitored HOLD, carrying whichever downgrade note applies.
+            _mon_note = (research.get('long_term_note') or research.get('sector_risk_note')
+                         or research.get('priced_for_perfection_note')
+                         or f'Downgraded to {verdict} — monitoring, thesis intact')
+            decisions['hold'].append({**holding, 'status': 'HOLD',
+                                      'monitor_flag': verdict,
+                                      'note': _mon_note,
+                                      'research': research, 'scenario': scenario,
+                                      'concentration_flag': _concentration_flag(holding),
+                                      'rerun_flag': _rerun_flag(holding)})
 
     sector_count = {}
     for h in portfolio.get('holdings', []):
