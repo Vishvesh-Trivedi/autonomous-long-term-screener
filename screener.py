@@ -3168,7 +3168,9 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
         'exits':               [],
         'migrations':          [],
         'avoided':             [],
-        'screened_candidates': []
+        'screened_candidates': [],
+        'contests':            [],
+        'sector_slots':        {},
     }
     existing_tickers = {h['ticker'] for h in portfolio.get('holdings', [])}
 
@@ -3311,6 +3313,7 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
     _swap_new_pend = {}
     _swaps_in_sector = {}
     _swaps_total   = 0
+    _near_miss_logged = set()
 
     def _remove_incumbent(inc):
         """Move a displaced incumbent out of hold/migrations so it isn't kept,
@@ -3497,6 +3500,12 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
                                          'challenger_conviction': _ch_conv,
                                          'conv_edge': round(_conv_edge, 1),
                                          'irr_edge': round(_irr_edge, 1)}
+                            decisions['contests'].append({
+                                'sector': sector, 'status': 'EXECUTED',
+                                'challenger': ticker, 'challenger_conviction': _ch_conv, 'challenger_irr': round(_ch_irr, 1),
+                                'incumbent': _weakest['ticker'], 'incumbent_conviction': _weakest['score'], 'incumbent_irr': round(_weakest['irr'], 1),
+                                'conv_edge': round(_conv_edge, 1), 'irr_edge': round(_irr_edge, 1),
+                                'runs': _runs, 'needed': _swap_confirm})
                             log.info(f'  SWAP {sector}: {ticker} (conv {_ch_conv:.0f}/IRR {_ch_irr:.1f}) '
                                      f'displaces {_weakest["ticker"]} (conv {_weakest["score"]:.0f}/IRR {_weakest["irr"]:.1f})')
                             _acted = True
@@ -3508,15 +3517,37 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
                                 'reason': (f'{_cap_reason}. Swap vs {_weakest["ticker"]} building '
                                            f'confirmation ({_runs}/{_swap_confirm} runs)'),
                                 'conviction_score': _ch_conv})
+                            decisions['contests'].append({
+                                'sector': sector, 'status': 'PENDING',
+                                'challenger': ticker, 'challenger_conviction': _ch_conv, 'challenger_irr': round(_ch_irr, 1),
+                                'incumbent': _weakest['ticker'], 'incumbent_conviction': _weakest['score'], 'incumbent_irr': round(_weakest['irr'], 1),
+                                'conv_edge': round(_conv_edge, 1), 'irr_edge': round(_irr_edge, 1),
+                                'runs': _runs, 'needed': _swap_confirm})
+                            _near_miss_logged.add(sector)
                             log.info(f'  SWAP pending {sector}: {ticker} vs {_weakest["ticker"]} '
                                      f'({_runs}/{_swap_confirm} runs)')
                             continue
+                    elif sector not in _near_miss_logged:
+                        # Strongest challenger contested but the incumbent held —
+                        # surface it so the reader sees the slot was defended.
+                        _near_miss_logged.add(sector)
+                        decisions['contests'].append({
+                            'sector': sector, 'status': 'HELD',
+                            'challenger': ticker, 'challenger_conviction': _ch_conv, 'challenger_irr': round(_ch_irr, 1),
+                            'incumbent': _weakest['ticker'], 'incumbent_conviction': _weakest['score'], 'incumbent_irr': round(_weakest['irr'], 1),
+                            'conv_edge': round(_conv_edge, 1), 'irr_edge': round(_irr_edge, 1),
+                            'runs': 0, 'needed': _swap_confirm})
             if not _acted:
                 # Generational-name override: a rare N->N+1 add above the cap.
                 if _swap_enabled and _ovr_enabled and _ch_conv >= _ovr_min_conv and _ch_irr >= _ovr_min_irr \
                         and _swaps_total < _swap_total_cap:
                     _swaps_total += 1
                     _swap_ctx = {'type': 'OVERRIDE', 'challenger_conviction': _ch_conv}
+                    decisions['contests'].append({
+                        'sector': sector, 'status': 'OVERRIDE',
+                        'challenger': ticker, 'challenger_conviction': _ch_conv, 'challenger_irr': round(_ch_irr, 1),
+                        'incumbent': None, 'incumbent_conviction': None, 'incumbent_irr': None,
+                        'conv_edge': None, 'irr_edge': None, 'runs': 0, 'needed': 0})
                     log.info(f'  OVERRIDE {sector}: {ticker} added above cap '
                              f'(generational: conv {_ch_conv:.0f}, IRR {_ch_irr:.1f})')
                     # Do NOT decrement sector_count — this is a genuine extra slot.
@@ -3713,6 +3744,29 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
         sector_count[sector] = sector_count.get(sector, 0) + 1
         route_note = '→ KiwiSaver or manual' if ks_check['available'] else '→ Manual Sharesies only'
         log.info(f'  NEW [{tier}] {ticker}: {verdict} | {position_pct}% | {route_note}')
+
+    # Sector-slot occupancy snapshot for the email: every sector's cap and the
+    # conviction of each name filling it, so the reader can SEE why a sector is
+    # full and how strong the incumbents are (the context a swap decision needs).
+    _slots = {}
+    for _b in ('hold', 'migrations', 'new_additions'):
+        for _h in decisions[_b]:
+            _sec = _h.get('sector', 'Unknown')
+            _res = _h.get('research', {}) or {}
+            _scn = _h.get('scenario', {}) or {}
+            _slots.setdefault(_sec, []).append({
+                'ticker':     _h.get('ticker'),
+                'tier':       _h.get('tier'),
+                'verdict':    _res.get('verdict', _h.get('verdict', '')),
+                'conviction': _conviction_score({**_h, **_res}, _scn),
+                'irr':        round(_expected_irr(_scn, _h), 1),
+                'kind':       _h.get('entry_kind', ''),
+            })
+    decisions['sector_slots'] = {
+        _s: {'cap': _sector_cap(_s), 'count': len(_v),
+             'holdings': sorted(_v, key=lambda x: x['conviction'], reverse=True)}
+        for _s, _v in _slots.items()
+    }
 
     # Persist swap confirmation streaks — only challengers still in contention
     # this run survive, so a name that drops out resets its streak next time.
