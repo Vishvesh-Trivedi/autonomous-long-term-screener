@@ -153,6 +153,8 @@ jobs:
           git add data/checkpoints/          || true
           git add data/cache/fundamentals.json.gz || true
           git add data/cache/senate_trades.json || true
+          git add data/swap_state.json       || true
+          git add data/rejection_log.json    || true
           if git diff --staged --quiet; then
             echo "No data changes to commit."
           else
