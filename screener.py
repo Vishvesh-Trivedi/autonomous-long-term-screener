@@ -20,8 +20,9 @@ v2.0 additions:
   - Robust number parsing & forced scenario sanitisation
 """
 
-from email_builder import generate_action_email, generate_exit_email, generate_trial_email
-from email_report import generate_full_report
+from email_builder import generate_exit_email, generate_trial_email
+from email_report import generate_full_report as generate_detailed_report
+from email_digest import generate_action_email, generate_full_report
 from research_metrics import compute_all_metrics, compute_megatrend_alignment, refresh_megatrends, MEGATRENDS, compute_valuation
 from edgar_fundamentals import compute_trajectory, cross_check_yahoo, fetch_customer_concentration, get_stockholders_equity, compute_earnings_quality_trend, get_edgar_statement_fields
 from ipo_monitor import run_ipo_monitor, get_ipo_watchlist_summary, get_eligible_for_screening
@@ -4692,20 +4693,31 @@ def run_longterm_screener():
         clear_checkpoints()
         return
 
+    reports_dir = BASE_DIR / "reports"
+    reports_dir.mkdir(exist_ok=True)
+    save_json(reports_dir / "decisions.json", decisions)
+    email_failures = []
     action_html, action_subject = generate_action_email(decisions, portfolio, decision_review)
-    send_email(action_html, action_subject)
+    (reports_dir / "action.html").write_text(action_html, encoding="utf-8")
+    if not send_email(action_html, action_subject):
+        email_failures.append("Action Brief delivery")
     time.sleep(5)
 
     try:
         ipo_summary = get_ipo_watchlist_summary()
         megatrend_review = load_json(BASE_DIR / 'data' / 'megatrend_scores.json')
+        full_html, _ = generate_detailed_report(decisions, portfolio, researched, ipo_summary, FIF_THRESHOLD, megatrend_review, sector_map, decision_review)
+        (reports_dir / "research_full.html").write_text(full_html, encoding="utf-8")
         detail_html, detail_sub = generate_full_report(decisions, portfolio, researched, ipo_summary, FIF_THRESHOLD, megatrend_review, sector_map, decision_review)
+        (reports_dir / "research.html").write_text(detail_html, encoding="utf-8")
         if send_email(detail_html, detail_sub):
             log.info(f'  ✓ Email 2 sent: {detail_sub}')
         else:
             log.error('  ✗ Email 2 send returned False — check SMTP')
+            email_failures.append('Research Summary delivery')
     except Exception as e:
         import traceback
+        email_failures.append('Research report generation')
         log.error(f'  ✗ Email 2 generation crashed: {e}')
         log.error(traceback.format_exc())
 
@@ -4715,11 +4727,16 @@ def run_longterm_screener():
             exit_html, exit_sub = generate_exit_email(decisions['exits'], month_str)
             if send_email(exit_html, exit_sub):
                 log.info(f'  ✓ Email 3 sent: {exit_sub}')
+            else:
+                email_failures.append('Exit Report delivery')
         except Exception as e:
             import traceback
+            email_failures.append('Exit Report generation')
             log.error(f'  ✗ Email 3 crashed: {e}')
             log.error(traceback.format_exc())
 
+    if email_failures:
+        raise RuntimeError('Email failures: ' + ', '.join(email_failures))
     clear_checkpoints()
     log.info('=' * 66)
     log.info(f'  Run complete · {len(portfolio["holdings"])} holdings')
