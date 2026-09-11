@@ -1,23 +1,6 @@
 {
-  "moat_type": "Highly effective and proprietary gene therapy platform",
-  "moat_durability_years": 10,
-  "management_grade": "A",
-  "growth_runway_years": 5,
-  "primary_risk": "Dependence on a small number of products and the ability to obtain regulatory approvals",
-  "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The biotech sector is known for high failure rates, but companies with strong moats and durable business models can survive and thrive.",
-  "thesis_summary": "Ascendis Pharma's gene therapy platform helps treat rare genetic diseases, riding the trend of precision medicine.",
-  "thesis_breaks_if": "A structural change in the regulatory environment or a major failure of the company's lead product.",
-  "sentiment_note": "Richly valued, but a great company with a strong moat and durable business model.",
-  "decade_probability": 0.7,
-  "annual_alpha_estimate": 8,
-  "verdict": "ACCUMULATE",
-  "position_size_pct": 0.5,
-  "ten_k_highlights": [
-    "The company's cash runway is positive due to its ability to generate free cash flow.",
-    "The company has a strong track record of revenue growth, with a 5-year CAGR of 15.8%.",
-    "The company's management team has a proven track record of capital allocation, with a focus on investing in research and development."
-  ],
+  "verdict": "ERROR",
+  "error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 2.1%, PEG 0.2, EV/EBITDA 61, P/S 16 \u2014 very richly valued \u2014 starter position only.",
   "valuation_multiplier": 0.45,
@@ -28,6 +11,6 @@
   "implied_growth_pct": 18.9,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-08-17T13:12:33.717936",
+  "research_date": "2026-09-11T06:25:42.023932",
   "ticker": "ASND"
 }

@@ -1,23 +1,6 @@
 {
-  "moat_type": "Leadership in high-performance computing and graphics processing units (GPUs)",
-  "moat_durability_years": 10,
-  "management_grade": "B",
-  "growth_runway_years": 5,
-  "primary_risk": "Dependence on a few large customers",
-  "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological changes, which may lead to disruption of market leaders.",
-  "thesis_summary": "AMD's high-performance computing and graphics processing units (GPUs) ride the trend of increasing demand for cloud computing and artificial intelligence.",
-  "thesis_breaks_if": "Short-term price moves, news cycles, or 8-K noise that structurally change the next decade.",
-  "sentiment_note": "Richly valued, but a great company with a strong moat.",
-  "decade_probability": 0.7,
-  "annual_alpha_estimate": 8,
-  "verdict": "MONITOR",
-  "position_size_pct": 0.2,
-  "ten_k_highlights": [
-    "AMD has a strong track record of revenue growth, with a 5-year CAGR of 110.8%.",
-    "The company's gross margin has been stable over the past 8 years, at around 56%.",
-    "AMD's research and development expenses have been increasing, but the company has been able to maintain a positive cash flow from operations."
-  ],
+  "verdict": "ERROR",
+  "error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 1.1%, PEG 1.1, EV/EBITDA 87, P/S 20 \u2014 very richly valued \u2014 starter position only.",
   "valuation_multiplier": 0.45,
@@ -28,8 +11,6 @@
   "implied_growth_pct": 28.0,
   "implied_growth_label": "PRICED_FOR_PERFECTION",
   "implied_growth_note": "The price assumes near-perfect execution for a decade \u2014 start small.",
-  "priced_for_perfection": true,
-  "priced_for_perfection_note": "Price already assumes ~28%/yr growth for a decade \u2014 start small, add on weakness",
-  "research_date": "2026-08-17T13:06:10.524944",
+  "research_date": "2026-09-11T06:24:36.831396",
   "ticker": "AMD"
 }

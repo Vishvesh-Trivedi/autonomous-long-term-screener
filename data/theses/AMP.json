@@ -1,23 +1,6 @@
 {
-  "moat_type": "Diversified financial services with a strong presence in wealth management and advice",
-  "moat_durability_years": 20,
-  "management_grade": "A",
-  "growth_runway_years": 10,
-  "primary_risk": "Regulatory changes and increased competition in the financial services industry",
-  "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The financial services sector is expected to experience significant disruption over the next 20 years, with companies that adapt to changing regulations and consumer needs more likely to survive.",
-  "thesis_summary": "Ameriprise Financial provides diversified financial services, including wealth management and advice, riding the trend of increasing demand for financial planning and advice.",
-  "thesis_breaks_if": "A significant change in regulatory requirements or a major disruption in the financial services industry",
-  "sentiment_note": "Ameriprise Financial is a well-established company with a strong track record of growth and profitability, making it a solid long-term investment opportunity.",
-  "decade_probability": 0.8,
-  "annual_alpha_estimate": 8,
-  "verdict": "CORE_HOLD",
-  "position_size_pct": 0.8,
-  "ten_k_highlights": [
-    "The company's revenue has been rising over the past 5 years, with a 5-year revenue growth rate of 40.7%",
-    "The company's gross margin has been increasing over the past 5 years, with a 5-year gross margin increase of 10.2%",
-    "The company's return on invested capital (ROIC) has been rising over the past 5 years, with a 5-year ROIC increase of 15.6%"
-  ],
+  "verdict": "ERROR",
+  "error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
   "valuation_label": "FAIR",
   "valuation_note": "FCF yield 16.0%, PEG 1.8 \u2014 fairly valued for its growth.",
   "valuation_multiplier": 1.0,
@@ -28,6 +11,6 @@
   "implied_growth_pct": -9.1,
   "implied_growth_label": "MODEST",
   "implied_growth_note": "The price assumes only modest growth \u2014 a low bar to clear.",
-  "research_date": "2026-08-17T12:51:56.108958",
+  "research_date": "2026-09-11T06:23:35.029007",
   "ticker": "AMP"
 }

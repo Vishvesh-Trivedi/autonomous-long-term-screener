@@ -1,6 +1,6 @@
 {
-  "last_reviewed": "2026-05-29T03:55:55.909207",
-  "next_review": "2026-08-27",
+  "last_reviewed": "2026-09-11T05:30:32.764653",
+  "next_review": "2026-12-10",
   "scores": {
     "ai_infrastructure": 10,
     "nuclear_renaissance": 9,
@@ -11,8 +11,82 @@
     "aging_demographics": 8,
     "energy_transition": 7,
     "fintech_inclusion": 7,
-    "water_food": 7
+    "water_food_security": 7
   },
-  "detail": {},
-  "model_used": "claude-sonnet-4-5"
+  "detail": {
+    "ai_infrastructure": {
+      "label": "AI Infrastructure",
+      "survives_10yr": true,
+      "survives_20yr": true,
+      "rationale": "review failed: Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
+      "confidence": "LOW"
+    },
+    "nuclear_renaissance": {
+      "label": "Nuclear Renaissance",
+      "survives_10yr": true,
+      "survives_20yr": true,
+      "rationale": "review failed: Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
+      "confidence": "LOW"
+    },
+    "space_commercial": {
+      "label": "Space Commercialisation",
+      "survives_10yr": true,
+      "survives_20yr": true,
+      "rationale": "review failed: Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
+      "confidence": "LOW"
+    },
+    "synthetic_biology": {
+      "label": "Synthetic Biology",
+      "survives_10yr": true,
+      "survives_20yr": true,
+      "rationale": "review failed: Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
+      "confidence": "LOW"
+    },
+    "critical_minerals": {
+      "label": "Critical Minerals",
+      "survives_10yr": true,
+      "survives_20yr": true,
+      "rationale": "review failed: Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
+      "confidence": "LOW"
+    },
+    "defense_technology": {
+      "label": "Defense Technology",
+      "survives_10yr": true,
+      "survives_20yr": true,
+      "rationale": "review failed: Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
+      "confidence": "LOW"
+    },
+    "aging_demographics": {
+      "label": "Aging Demographics",
+      "survives_10yr": true,
+      "survives_20yr": true,
+      "rationale": "review failed: Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
+      "confidence": "LOW"
+    },
+    "energy_transition": {
+      "label": "Energy Transition",
+      "survives_10yr": true,
+      "survives_20yr": true,
+      "rationale": "review failed: Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
+      "confidence": "LOW"
+    },
+    "fintech_inclusion": {
+      "label": "Fintech and Inclusion",
+      "survives_10yr": true,
+      "survives_20yr": true,
+      "rationale": "review failed: Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
+      "confidence": "LOW"
+    },
+    "water_food_security": {
+      "label": "Water and Food Security",
+      "survives_10yr": true,
+      "survives_20yr": true,
+      "rationale": "review failed: Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
+      "confidence": "LOW"
+    }
+  },
+  "model_used": "meta/llama-3.1-8b-instruct",
+  "new_this_run": [],
+  "deprecated_this_run": [],
+  "undeprecated_this_run": []
 }

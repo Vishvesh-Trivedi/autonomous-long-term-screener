@@ -2,15 +2,15 @@
   "verdict": "ERROR",
   "error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
   "valuation_label": "FAIR",
-  "valuation_note": "FCF yield 21.4%, PEG 3.3, EV/EBITDA 2 \u2014 fairly valued for its growth.",
+  "valuation_note": "FCF yield 21.5%, PEG 3.3, EV/EBITDA 2 \u2014 fairly valued for its growth.",
   "valuation_multiplier": 1.0,
-  "val_pe": 10.8,
+  "val_pe": 12.9,
   "val_ps": 0.6,
   "val_ev_ebitda": 1.7,
-  "val_peg": 3.28,
-  "implied_growth_pct": -13.5,
+  "val_peg": 3.3,
+  "implied_growth_pct": -13.6,
   "implied_growth_label": "MODEST",
   "implied_growth_note": "The price assumes only modest growth \u2014 a low bar to clear.",
-  "research_date": "2026-09-11T06:24:17.677318",
-  "ticker": "NONOF"
+  "research_date": "2026-09-11T06:24:35.425587",
+  "ticker": "NVO"
 }

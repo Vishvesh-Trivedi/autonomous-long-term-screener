@@ -1,0 +1,18 @@
+{
+  "runs": [
+    {
+      "date": "2026-09-11",
+      "avoided": [
+        {
+          "ticker": "ATEYY",
+          "tier": "T1",
+          "verdict": "CORE_HOLD",
+          "reason": "Sector cap (concentration limit): already 3 Technology holdings (max 3). Swap vs CRDO building confirmation (1/2 runs)",
+          "conviction_score": 55.8
+        }
+      ],
+      "swaps": []
+    }
+  ],
+  "last_updated": "2026-09-11T06:28:41.197236"
+}

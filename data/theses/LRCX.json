@@ -1,23 +1,6 @@
 {
-  "moat_type": "Leadership in semiconductor manufacturing equipment",
-  "moat_durability_years": 10,
-  "management_grade": "A",
-  "growth_runway_years": 5,
-  "primary_risk": "Dependence on a few large customers",
-  "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The semiconductor industry is highly competitive and subject to rapid technological changes, which may lead to disruption of market leaders.",
-  "thesis_summary": "Lam Research provides semiconductor manufacturing equipment, leveraging its expertise in plasma etching and other technologies to ride the trend of increasing demand for semiconductors.",
-  "thesis_breaks_if": "A structural shift in the semiconductor industry, such as a replacement of plasma etching with a new technology, or a significant disruption in the supply chain.",
-  "sentiment_note": "The company's valuation is extremely high, but its strong track record and growth prospects justify a starter position.",
-  "decade_probability": 0.8,
-  "annual_alpha_estimate": 10,
-  "verdict": "MONITOR",
-  "position_size_pct": 0.2,
-  "ten_k_highlights": [
-    "The company's revenue growth is driven by the increasing demand for semiconductors, which is expected to continue in the next 10-15 years.",
-    "The company has a strong track record of delivering high-quality products and services to its customers, which has led to a high level of customer satisfaction and retention.",
-    "The company's management team has a proven track record of making strategic decisions that have driven growth and profitability."
-  ],
+  "verdict": "ERROR",
+  "error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 1.2%, PEG 1.6, EV/EBITDA 48, P/S 18 \u2014 very richly valued \u2014 starter position only.",
   "valuation_multiplier": 0.45,
@@ -28,8 +11,6 @@
   "implied_growth_pct": 26.9,
   "implied_growth_label": "PRICED_FOR_PERFECTION",
   "implied_growth_note": "The price assumes near-perfect execution for a decade \u2014 start small.",
-  "priced_for_perfection": true,
-  "priced_for_perfection_note": "Price already assumes ~27%/yr growth for a decade \u2014 start small, add on weakness",
-  "research_date": "2026-08-17T13:01:21.417457",
+  "research_date": "2026-09-11T06:24:33.369025",
   "ticker": "LRCX"
 }

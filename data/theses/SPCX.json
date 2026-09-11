@@ -2,15 +2,15 @@
   "verdict": "ERROR",
   "error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
   "valuation_label": "EXTREME",
-  "valuation_note": "FCF yield -0.8%, PEG 0.0, EV/EBITDA 767, P/S 51 \u2014 very richly valued \u2014 starter position only.",
+  "valuation_note": "FCF yield -0.6%, PEG 1.0, EV/EBITDA 652, P/S 85 \u2014 very richly valued \u2014 starter position only.",
   "valuation_multiplier": 0.45,
-  "val_pe": 13.6,
-  "val_ps": 50.7,
-  "val_ev_ebitda": 767.1,
-  "val_peg": 0.03,
+  "val_pe": 88.7,
+  "val_ps": 84.7,
+  "val_ev_ebitda": 652.2,
+  "val_peg": 0.97,
   "implied_growth_pct": null,
   "implied_growth_label": null,
   "implied_growth_note": null,
-  "research_date": "2026-09-11T06:26:18.179743",
-  "ticker": "ALM"
+  "research_date": "2026-09-11T06:25:13.208827",
+  "ticker": "SPCX"
 }

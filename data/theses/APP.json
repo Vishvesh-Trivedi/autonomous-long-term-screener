@@ -1,23 +1,6 @@
 {
-  "moat_type": "Network effects from its large user base and extensive ad inventory",
-  "moat_durability_years": 20,
-  "management_grade": "A",
-  "growth_runway_years": 5,
-  "primary_risk": "Dependence on a few large customers",
-  "sector_durability_20yr": "HIGH",
-  "sector_survival_note": "The adtech sector has seen significant consolidation, but AppLovin's strong growth and profitability suggest it can maintain its market position.",
-  "thesis_summary": "AppLovin is a leading mobile adtech company with a strong moat, durable management, and a long growth runway, riding the trend of increasing mobile ad spend.",
-  "thesis_breaks_if": "If the company's dependence on a few large customers leads to significant revenue declines.",
-  "sentiment_note": "Generally positive sentiment, with some concerns about the company's valuation.",
-  "decade_probability": 0.8,
-  "annual_alpha_estimate": 10,
-  "verdict": "CORE_HOLD",
-  "position_size_pct": 0.8,
-  "ten_k_highlights": [
-    "AppLovin has a strong track record of revenue growth, with a 5-year CAGR of 96.2%",
-    "The company has a high return on invested capital (ROIC) of 64%, indicating efficient use of capital",
-    "AppLovin has a large and growing user base, with over 876 employees and a significant presence in the mobile adtech market"
-  ],
+  "verdict": "ERROR",
+  "error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
   "valuation_label": "FAIR",
   "valuation_note": "FCF yield 4.2%, PEG 0.9, EV/EBITDA 20, P/S 16 \u2014 fairly valued for its growth.",
   "valuation_multiplier": 1.0,
@@ -28,7 +11,7 @@
   "implied_growth_pct": 9.4,
   "implied_growth_label": "REASONABLE",
   "implied_growth_note": "The price assumes reasonable growth the business can likely deliver.",
-  "long_term_alpha_pp": 19.1,
-  "research_date": "2026-08-17T12:53:29.873953",
+  "long_term_alpha_pp": 20.1,
+  "research_date": "2026-09-11T06:23:36.327099",
   "ticker": "APP"
 }

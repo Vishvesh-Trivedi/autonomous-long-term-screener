@@ -1,23 +1,6 @@
 {
-  "moat_type": "Leading provider of process control and yield management solutions for the semiconductor industry",
-  "moat_durability_years": 10,
-  "management_grade": "A",
-  "growth_runway_years": 5,
-  "primary_risk": "Dependence on the semiconductor industry",
-  "sector_durability_20yr": "MEDIUM",
-  "sector_survival_note": "The semiconductor industry is subject to rapid technological advancements and changing customer needs, which may lead to disruption and replacement of market leaders.",
-  "thesis_summary": "KLA Corporation's process control and yield management solutions ride the trend of increasing demand for semiconductors in areas like artificial intelligence, 5G, and the Internet of Things.",
-  "thesis_breaks_if": "A structural shift in the semiconductor industry or a significant decline in demand for KLA's products and services",
-  "sentiment_note": "The company's rich valuation and severe dilution make it a high-risk investment opportunity",
-  "decade_probability": 0.7,
-  "annual_alpha_estimate": 8,
-  "verdict": "ACCUMULATE",
-  "position_size_pct": 0.2,
-  "ten_k_highlights": [
-    "The company's revenue has been rising over the past 8 years, with a 5-year CAGR of 47.4%",
-    "KLA Corporation's gross margin has been increasing over the past 8 years, with a 5-year CAGR of 12.1%",
-    "The company's share count has been rising over the past 8 years, with a 5-year CAGR of 821.7%"
-  ],
+  "verdict": "ERROR",
+  "error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of life on 2026-08-26T09:00:00Z and is no longer available.\"}",
   "valuation_label": "EXTREME",
   "valuation_note": "FCF yield 1.4%, PEG 1.9, EV/EBITDA 44, P/S 20 \u2014 very richly valued \u2014 starter position only.",
   "valuation_multiplier": 0.45,
@@ -28,6 +11,6 @@
   "implied_growth_pct": 24.3,
   "implied_growth_label": "DEMANDING",
   "implied_growth_note": "The price already assumes strong growth for a decade \u2014 accumulate slowly.",
-  "research_date": "2026-08-17T13:02:52.636945",
+  "research_date": "2026-09-11T06:24:26.979688",
   "ticker": "KLAC"
 }
