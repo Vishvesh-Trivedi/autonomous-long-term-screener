@@ -1,0 +1,42 @@
+name: Validate screener
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "**.py"
+      - "scripts/**"
+      - ".github/workflows/**"
+      - "universe_config.json"
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate workflow definitions
+        run: docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:1.7.7 -color
+      - name: Compile all Python on 3.11
+        run: python -m compileall -q .
+      - name: Regression tests (no network or email)
+        run: python -m unittest discover -s tests -p test_regressions.py -v
+      - name: Existing offline tests
+        run: python tests/test_offline.py
+      - name: Render real portfolio previews
+        run: python gen_preview.py
+      - name: Upload email previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: email-previews-${{ github.run_id }}
+          path: reports/
+          if-no-files-found: warn
+          retention-days: 14
