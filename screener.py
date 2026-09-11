@@ -3268,7 +3268,7 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
                                       'rerun_flag': _rerun_flag(holding)})
 
     sector_count = {}
-    for h in portfolio.get('holdings', []):
+    for h in decisions['hold'] + decisions['migrations']:
         s = h.get('sector', 'Unknown')
         sector_count[s] = sector_count.get(s, 0) + 1
 
