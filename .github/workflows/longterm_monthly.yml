@@ -15,6 +15,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: screener-state-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   # ── JOB 1: IPO Monitor (weekly) ─────────────────────────────────────────────
   ipo-monitor:
@@ -37,29 +41,14 @@ jobs:
           NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python quarterly_review.py || echo "Quarterly review skipped (not due or no credits)" 
-      - name: Commit IPO watchlist
-        run: |
-          git config user.name  "AC Screener Bot"
-          git config user.email "screener@noreply.github.com"
-          git add data/ipo_watchlist.json || true
-          if git diff --staged --quiet; then
-            echo "No IPO watchlist changes to commit."
-          else
-            git commit -m "Auto: IPO watchlist update $(date +'%Y-%m-%d')"
-            # Rebase + push with retry: another job may push to main while we run.
-            for i in 1 2 3 4 5; do
-              if git pull --rebase origin main && git push; then
-                echo "Pushed on attempt $i"; break
-              fi
-              echo "Push attempt $i failed (remote moved?), retrying in 10s..."; sleep 10
-            done
-          fi
+      - name: Commit IPO state
+        run: bash scripts/persist_state.sh "IPO state"
 
   # ── JOB 2: Main Screener (weekly) ───────────────────────────────────────────
   run-screener:
     runs-on: ubuntu-latest
     timeout-minutes: 350
-    if: github.event.schedule == '0 8 * * 1' || github.event.inputs.run_mode == 'FULL' || github.event.inputs.run_mode == 'TRIAL' || github.event_name == 'workflow_dispatch'
+    if: github.event.schedule == '0 8 * * 1' || github.event.inputs.run_mode == 'FULL' || github.event.inputs.run_mode == 'TRIAL' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_mode != 'IPO_ONLY')
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -139,35 +128,20 @@ jobs:
           set -o pipefail
           python screener.py 2>&1 | tee screener.log
       - name: Commit updated data
+        if: success()
+        run: bash scripts/persist_state.sh "screener state"
+
+      - name: Preserve generated state
         if: always()
-        run: |
-          git config user.name  "AC Screener Bot"
-          git config user.email "screener@noreply.github.com"
-          git add data/portfolio.json        || true
-          git add data/knowledge_base.json   || true
-          git add data/bad_symbols.txt       || true
-          git add data/ipo_watchlist.json    || true
-          git add data/megatrend_scores.json  || true
-          git add data/theses/               || true
-          git add data/scenarios/            || true
-          git add data/checkpoints/          || true
-          git add data/cache/fundamentals.json.gz || true
-          git add data/cache/senate_trades.json || true
-          git add data/swap_state.json       || true
-          git add data/rejection_log.json    || true
-          if git diff --staged --quiet; then
-            echo "No data changes to commit."
-          else
-            git commit -m "Auto: screener run $(date +'%Y-%m-%d')"
-            # Rebase + push with retry: the scheduled IPO-monitor / another run may
-            # push to main during our multi-hour run, making a bare push non-fast-forward.
-            for i in 1 2 3 4 5; do
-              if git pull --rebase origin main && git push; then
-                echo "Pushed on attempt $i"; break
-              fi
-              echo "Push attempt $i failed (remote moved?), retrying in 10s..."; sleep 10
-            done
-          fi
+        uses: actions/upload-artifact@v4
+        with:
+          name: screener-state-${{ github.run_id }}
+          path: |
+            data/
+            universe_config.json
+            reports/
+          retention-days: 14
+
       - name: Upload logs
         if: always()
         uses: actions/upload-artifact@v4
