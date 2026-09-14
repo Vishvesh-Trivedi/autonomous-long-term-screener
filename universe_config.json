@@ -89,25 +89,13 @@
       "amex"
     ],
     "min_ticker_length": 1,
-    "max_ticker_length": 5,
-    "exclude_patterns": [
-      "-W",
-      "-UN",
-      "-R",
-      "BULL",
-      "BEAR"
-    ],
-    "exclude_suffixes": [
-      ".A",
-      ".B",
-      ".C",
-      ".WS",
-      ".RT",
-      ".UN"
-    ],
+    "max_ticker_length": 10,
+    "exclude_patterns": [],
+    "exclude_suffixes": [],
     "blacklist": [],
     "user_custom": [],
-    "_comment_sp500_core": "SP500_CORE list removed. Universe is fully discovered from SEC EDGAR + NASDAQ API. No hardcoded tickers."
+    "_comment_sp500_core": "SP500_CORE list removed. Universe is fully discovered from SEC EDGAR + NASDAQ API. No hardcoded tickers.",
+    "_comment_full_market_mode": "Full-market mode defaults to no symbol-pattern/suffix exclusions. Use blacklist/exclude_patterns/exclude_suffixes only if you want to explicitly narrow scope."
   },
   "scenario_sanity": {
     "_comment": "Caps on LLM-generated 10-year market cap projections. Prevents hallucinated trillion-dollar numbers.",

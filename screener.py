@@ -20,9 +20,8 @@ v2.0 additions:
   - Robust number parsing & forced scenario sanitisation
 """
 
-from email_builder import generate_exit_email, generate_trial_email
-from email_report import generate_full_report as generate_detailed_report
-from email_digest import generate_action_email, generate_full_report
+from email_builder import generate_action_email, generate_exit_email, generate_trial_email
+from email_report import generate_full_report
 from research_metrics import compute_all_metrics, compute_megatrend_alignment, refresh_megatrends, MEGATRENDS, compute_valuation
 from edgar_fundamentals import compute_trajectory, cross_check_yahoo, fetch_customer_concentration, get_stockholders_equity, compute_earnings_quality_trend, get_edgar_statement_fields
 from ipo_monitor import run_ipo_monitor, get_ipo_watchlist_summary, get_eligible_for_screening
@@ -134,7 +133,7 @@ def _load_screening_config() -> None:
     cfg = load_config()
     _CFG = cfg
 
-    EXCLUDE_PATTERNS = cfg.get('universe', {}).get('exclude_patterns', ['-W','-UN','-R','BULL','BEAR'])
+    EXCLUDE_PATTERNS = cfg.get('universe', {}).get('exclude_patterns', [])
 
     # Email settings from config (override env if config has them)
     email_cfg = cfg.get('email', {})
@@ -351,8 +350,26 @@ def save_thesis(t: str, d):     save_json(THESES_DIR / f'{t}.json', d)
 # ── STEP 1: UNIVERSE BUILDER ──────────────────────────────────────────────────
 def build_universe(config: dict) -> list:
     log.info('Step 1/7: Building universe...')
+    ucfg = config.get('universe', {}) if isinstance(config, dict) else {}
+    exchanges = [str(x).strip().lower() for x in (ucfg.get('exchanges') or []) if str(x).strip()]
+    min_len = int(ucfg.get('min_ticker_length', 1) or 1)
+    max_len = int(ucfg.get('max_ticker_length', 10) or 10)
+    exclude_suffixes = tuple(str(x).upper() for x in (ucfg.get('exclude_suffixes') or []) if str(x).strip())
+    user_custom = [str(x).strip().upper() for x in (ucfg.get('user_custom') or []) if str(x).strip()]
+    blacklist = {str(x).strip().upper() for x in (ucfg.get('blacklist') or []) if str(x).strip()}
+
+    # Backward-compatibility: keep reading legacy root-level keys if present.
+    legacy_user_custom = [str(x).strip().upper() for x in (config.get('user_custom') or []) if str(x).strip()]
+    legacy_blacklist = {str(x).strip().upper() for x in (config.get('blacklist') or []) if str(x).strip()}
+    if legacy_user_custom or legacy_blacklist:
+        log.warning('  Config note: move user_custom/blacklist under universe for full config-driven behavior.')
+    if legacy_user_custom:
+        user_custom.extend(legacy_user_custom)
+    if legacy_blacklist:
+        blacklist.update(legacy_blacklist)
+
     tickers = set()
-    for exchange in ['nasdaq', 'nyse', 'amex']:
+    for exchange in exchanges:
         try:
             resp = requests.get(
                 f'https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=5000&exchange={exchange}',
@@ -380,16 +397,16 @@ def build_universe(config: dict) -> list:
         log.warning(f'  SEC EDGAR failed: {e}')
 
     # User custom tickers (from config — not hardcoded picks)
-    tickers.update(config.get('user_custom', []))
-    tickers -= set(config.get('blacklist', []))
+    tickers.update(user_custom)
+    tickers -= blacklist
     tickers = {
         t.strip().upper() for t in tickers
-        if t and isinstance(t, str) and 1 <= len(t.strip()) <= 5
+        if t and isinstance(t, str) and min_len <= len(t.strip()) <= max_len
     }
     tickers = {
         t for t in tickers
         if not any(p in t for p in EXCLUDE_PATTERNS)
-        and not t.endswith(('.A','.B','.C','.WS','.RT','.UN'))
+        and not (exclude_suffixes and t.endswith(exclude_suffixes))
     }
     portfolio = load_portfolio()
     for ipo in portfolio.get('ipo_pipeline', []):
@@ -3268,7 +3285,7 @@ def construct_portfolio(researched: dict, portfolio: dict, config: dict, sector_
                                       'rerun_flag': _rerun_flag(holding)})
 
     sector_count = {}
-    for h in decisions['hold'] + decisions['migrations']:
+    for h in portfolio.get('holdings', []):
         s = h.get('sector', 'Unknown')
         sector_count[s] = sector_count.get(s, 0) + 1
 
@@ -4693,31 +4710,20 @@ def run_longterm_screener():
         clear_checkpoints()
         return
 
-    reports_dir = BASE_DIR / "reports"
-    reports_dir.mkdir(exist_ok=True)
-    save_json(reports_dir / "decisions.json", decisions)
-    email_failures = []
     action_html, action_subject = generate_action_email(decisions, portfolio, decision_review)
-    (reports_dir / "action.html").write_text(action_html, encoding="utf-8")
-    if not send_email(action_html, action_subject):
-        email_failures.append("Action Brief delivery")
+    send_email(action_html, action_subject)
     time.sleep(5)
 
     try:
         ipo_summary = get_ipo_watchlist_summary()
         megatrend_review = load_json(BASE_DIR / 'data' / 'megatrend_scores.json')
-        full_html, _ = generate_detailed_report(decisions, portfolio, researched, ipo_summary, FIF_THRESHOLD, megatrend_review, sector_map, decision_review)
-        (reports_dir / "research_full.html").write_text(full_html, encoding="utf-8")
         detail_html, detail_sub = generate_full_report(decisions, portfolio, researched, ipo_summary, FIF_THRESHOLD, megatrend_review, sector_map, decision_review)
-        (reports_dir / "research.html").write_text(detail_html, encoding="utf-8")
         if send_email(detail_html, detail_sub):
             log.info(f'  ✓ Email 2 sent: {detail_sub}')
         else:
             log.error('  ✗ Email 2 send returned False — check SMTP')
-            email_failures.append('Research Summary delivery')
     except Exception as e:
         import traceback
-        email_failures.append('Research report generation')
         log.error(f'  ✗ Email 2 generation crashed: {e}')
         log.error(traceback.format_exc())
 
@@ -4727,16 +4733,11 @@ def run_longterm_screener():
             exit_html, exit_sub = generate_exit_email(decisions['exits'], month_str)
             if send_email(exit_html, exit_sub):
                 log.info(f'  ✓ Email 3 sent: {exit_sub}')
-            else:
-                email_failures.append('Exit Report delivery')
         except Exception as e:
             import traceback
-            email_failures.append('Exit Report generation')
             log.error(f'  ✗ Email 3 crashed: {e}')
             log.error(traceback.format_exc())
 
-    if email_failures:
-        raise RuntimeError('Email failures: ' + ', '.join(email_failures))
     clear_checkpoints()
     log.info('=' * 66)
     log.info(f'  Run complete · {len(portfolio["holdings"])} holdings')
