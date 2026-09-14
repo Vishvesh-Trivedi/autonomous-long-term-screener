@@ -12,7 +12,26 @@
         }
       ],
       "swaps": []
+    },
+    {
+      "date": "2026-09-14",
+      "avoided": [],
+      "swaps": [
+        {
+          "in": "ATEYY",
+          "out": "CRDO",
+          "kind": "SWAP",
+          "meta": {
+            "type": "SWAP",
+            "displaced": "CRDO",
+            "incumbent_conviction": 19.7,
+            "challenger_conviction": 58.7,
+            "conv_edge": 39.0,
+            "irr_edge": 10.4
+          }
+        }
+      ]
     }
   ],
-  "last_updated": "2026-09-11T06:28:41.197236"
+  "last_updated": "2026-09-14T18:41:58.085140"
 }
