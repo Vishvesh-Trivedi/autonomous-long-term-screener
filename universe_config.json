@@ -52,6 +52,8 @@
     "_model_change_note": "Switched to meta/llama-3.1-8b-instruct 2026-07-08 after live testing showed the larger free-tier models (49B nemotron-super, 70B llama-3.3, 70B llama-3.1) failing 50-100% of the time on this account (timeouts or empty responses) for the full research prompt, while the 8B model succeeded 4/4 in ~3.5s each. This is what was silently blocking every new candidate from getting a usable thesis.",
     "provider": "nvidia",
     "model": "meta/llama-3.1-8b-instruct",
+    "nvidia_rate_limit_per_min": 35,
+    "_nvidia_rate_limit_per_min_comment": "Per-minute NVIDIA request cap enforced by llm_client RPM guard. NVIDIA free tier is documented at 40 req/min; defaulting to 35 leaves safety headroom for retries and parallel workers.",
     "request_timeout_sec": 90,
     "_request_timeout_comment": "Per-attempt LLM timeout in seconds. The OpenAI/Anthropic clients default to 600s (10 min) with built-in retries, which let a single stalled free-tier call hang the run for tens of minutes. Capped low so a stalled model fails fast and the model-chain fallback takes over. 8B normally answers in ~3.5s.",
     "research_max_tokens": 3000,

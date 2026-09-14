@@ -14,7 +14,7 @@ Falls back gracefully if primary provider is unavailable.
 The same prompts work across providers because we constrain output to JSON.
 """
 
-import os, json, logging, time
+import os, json, logging, time, threading
 from pathlib import Path
 
 log = logging.getLogger('llm')
@@ -97,6 +97,22 @@ def _nvidia_model_chain(cfg: dict, primary_model: str) -> list:
 
 
 _NVIDIA_CALL_TIMES: list = []
+_NVIDIA_CALL_TIMES_LOCK = threading.Lock()
+
+
+def _nvidia_rpm_limit() -> int:
+    """Effective NVIDIA rate-limit ceiling (calls/min).
+
+    Default remains the documented free-tier 40 req/min, but can be lowered via
+    universe_config.json -> llm.nvidia_rate_limit_per_min to leave headroom.
+    """
+    cfg = _load_llm_config()
+    v = cfg.get('nvidia_rate_limit_per_min', PROVIDERS['nvidia']['rate_limit_per_min'])
+    try:
+        iv = int(v)
+        return iv if iv > 0 else PROVIDERS['nvidia']['rate_limit_per_min']
+    except (TypeError, ValueError):
+        return PROVIDERS['nvidia']['rate_limit_per_min']
 
 def _throttle_nvidia_rpm() -> None:
     """
@@ -105,18 +121,24 @@ def _throttle_nvidia_rpm() -> None:
     Sleeps before making a call that would push us over the limit, instead of
     firing and reacting to a 429 after the fact.
     """
-    limit  = PROVIDERS['nvidia']['rate_limit_per_min']
+    limit  = _nvidia_rpm_limit()
     window = 60.0
-    now = time.time()
     global _NVIDIA_CALL_TIMES
-    _NVIDIA_CALL_TIMES = [t for t in _NVIDIA_CALL_TIMES if now - t < window]
-    if len(_NVIDIA_CALL_TIMES) >= limit:
-        sleep_for = window - (now - _NVIDIA_CALL_TIMES[0]) + 0.5
+
+    # Reserve a slot atomically across concurrent worker threads.
+    while True:
+        sleep_for = 0.0
+        with _NVIDIA_CALL_TIMES_LOCK:
+            now = time.time()
+            _NVIDIA_CALL_TIMES = [t for t in _NVIDIA_CALL_TIMES if now - t < window]
+            if len(_NVIDIA_CALL_TIMES) < limit:
+                _NVIDIA_CALL_TIMES.append(now)
+                return
+            sleep_for = window - (now - _NVIDIA_CALL_TIMES[0]) + 0.5
         if sleep_for > 0:
             log.warning(f'  NVIDIA RPM guard: {len(_NVIDIA_CALL_TIMES)} calls in the last {window:.0f}s '
                         f'(limit {limit}) — sleeping {sleep_for:.1f}s')
             time.sleep(sleep_for)
-    _NVIDIA_CALL_TIMES.append(time.time())
 
 
 def is_provider_available(provider: str = None) -> bool:
