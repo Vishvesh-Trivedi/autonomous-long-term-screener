@@ -9,6 +9,7 @@ Plus the trial email fallback.
 from datetime import datetime
 from typing import List, Dict, Any
 import json as _json, os as _os
+import re
 
 # ── Config access (ADD gate threshold) ────────────────────────────────────
 _UCFG = None
@@ -511,7 +512,7 @@ def _stock_row(h, show_hint=True):
     )
 
 
-def _action_month_row(item, kind):
+def _action_month_row(item, kind, swap_in_by_out=None):
     """Card row for this-month buy/sell/add — same card structure as _stock_row."""
     ticker     = item.get('ticker', '')
     company    = item.get('company_name', ticker)
@@ -539,8 +540,100 @@ def _action_month_row(item, kind):
     }
     blabel, bbg, btxt, bbd, border_c = badge_map.get(kind, ('', '#f3f4f6', '#6b7280', '#e5e7eb', '#e5e7eb'))
 
-    note = item.get('exit_reason', '') if kind == 'sell' else ''
-    note_html = (f'<div style="font-size:10px;color:#6b7280;margin-top:3px">{note[:60]}</div>'
+    def _first_sentence(text: str, max_len: int = 180) -> str:
+        t = str(text or '').strip()
+        if not t:
+            return ''
+        m = re.split(r'(?<=[.!?])\s+', t, maxsplit=1)
+        s = m[0].strip() if m else t
+        return (s[:max_len - 1] + '...') if len(s) > max_len else s
+
+    def _swap_exit_note(raw_note: str) -> str:
+        """Explain the exit in terms of the linked replacement, not only score math."""
+        raw = str(raw_note or '').strip()
+        if not raw.upper().startswith('SWAP: DISPLACED BY '):
+            return raw
+        m = re.match(
+            r'^SWAP:\s*displaced by\s+([A-Z0-9.\-]+)\s*[—-]\s*higher long-term conviction\s*'
+            r'\(([-+]?\d+(?:\.\d+)?)\s*vs\s*([-+]?\d+(?:\.\d+)?)\)\s*and expected IRR\s*'
+            r'\(([-+]?\d+(?:\.\d+)?)%/yr\s*vs\s*([-+]?\d+(?:\.\d+)?)%/yr\)\s*in\s*(.+)$',
+            raw,
+            flags=re.IGNORECASE,
+        )
+        if not m:
+            return raw
+        sold_ticker = str(item.get('ticker', '') or 'This holding')
+        challenger, ch_conv, old_conv, ch_irr, old_irr, sector = m.groups()
+        repl = (swap_in_by_out or {}).get(str(item.get('ticker', '')).upper(), {})
+        repl_thesis = _first_sentence(repl.get('thesis_summary', ''))
+        parts = [
+            f'{sold_ticker} was exited as a direct swap in {sector}.',
+            f'We moved that slot to {challenger} for stronger long-term upside '
+            f'({float(ch_conv):.0f} vs {float(old_conv):.0f} conviction; '
+            f'{float(ch_irr):.1f}%/yr vs {float(old_irr):.1f}%/yr expected return).'
+        ]
+        if isinstance(chg, (int, float)) and chg < 0:
+            parts.append(
+                f'Even though CRDO is down {abs(chg):.0f}% from our entry, this is not a panic sell: '
+                f'it is a capital reallocation to the higher-probability long-term winner.'
+            )
+        if repl_thesis:
+            parts.append(f'Why {challenger}: {repl_thesis}')
+        return ' '.join(parts)
+
+    def _plain_exit_reason(raw_note: str) -> str:
+        raw = str(raw_note or '').strip()
+        if not raw:
+            return ''
+        if raw.upper().startswith('SWAP: DISPLACED BY '):
+            return _swap_exit_note(raw)
+        return _first_sentence(raw, max_len=220)
+
+    def _swap_buy_note() -> str:
+        """Plain-English summary for swap-ins, explicitly linked to the exit."""
+        if str(item.get('entry_kind', '') or '').upper() != 'SWAP':
+            return ''
+        out = str(item.get('swapped_out', '') or '').strip()
+        sec = str(item.get('sector', '') or '').strip()
+        th = _first_sentence(item.get('thesis_summary', ''))
+        meta = item.get('swap_meta', {}) or {}
+        ch_conv = meta.get('challenger_conviction')
+        old_conv = meta.get('incumbent_conviction')
+        irr_edge = meta.get('irr_edge')
+        parts = []
+        if out:
+            parts.append(f'This is the other side of the {out} exit.')
+        else:
+            parts.append('Selected as the stronger name in this sector.')
+        why = 'We switched because this is the stronger long-term fit'
+        details = []
+        if isinstance(ch_conv, (int, float)) and isinstance(old_conv, (int, float)):
+            details.append(f'score {ch_conv:.0f} vs {old_conv:.0f}')
+        if isinstance(irr_edge, (int, float)):
+            details.append(f'expected return edge +{irr_edge:.1f}pp/yr')
+        if details:
+            why += ' (' + ', '.join(details) + ')'
+        if sec:
+            why += f' in {sec}'
+        why += '.'
+        parts.append(why)
+        if th:
+            parts.append(f'Why this company: {th}')
+        r1 = item.get('return_1yr')
+        if isinstance(r1, (int, float)) and r1 >= 35:
+            parts.append(
+                f'Yes, it is already up about {r1:.0f}% over 12 months, but the model is forward-looking: '
+                f'it still projects better 10-year risk/reward than the stock we replaced.'
+            )
+        return ' '.join(parts)
+
+    note = ''
+    if kind == 'sell':
+        note = _plain_exit_reason(item.get('exit_reason', ''))
+    elif kind == 'buy':
+        note = _swap_buy_note()
+
+    note_html = (f'<div style="font-size:10px;color:#6b7280;margin-top:3px">{note[:260]}</div>'
                  if note else '')
 
     # Committee self-review flag (advisory) — only shown when not OK.
@@ -716,14 +809,21 @@ def generate_action_email(decisions: Dict, portfolio: Dict, decision_review: Dic
 
     # Build body rows — buy zone first, then wait, then monitor
     body_rows = ''
+    swap_in_by_out = {}
+    for _n in new_additions:
+        if str(_n.get('entry_kind', '') or '').upper() == 'SWAP':
+            _out = str(_n.get('swapped_out', '') or '').upper()
+            if _out:
+                swap_in_by_out[_out] = _n
+
     if new_additions or exits or migrations:
         body_rows += _divider("This month&#39;s actions")
         for item in new_additions:
-            body_rows += _action_month_row(item, 'buy')
+            body_rows += _action_month_row(item, 'buy', swap_in_by_out)
         for item in migrations:
-            body_rows += _action_month_row(item, 'increase')
+            body_rows += _action_month_row(item, 'increase', swap_in_by_out)
         for item in exits:
-            body_rows += _action_month_row(item, 'sell')
+            body_rows += _action_month_row(item, 'sell', swap_in_by_out)
 
     if buy_zone:
         body_rows += _divider(f'Good time to add &mdash; {len(buy_zone)} holdings')
@@ -881,6 +981,42 @@ def generate_exit_email(exits: List[Dict], month_str: str) -> tuple:
 .lesson-box{background:#f0f4ff;border-left:3px solid #5b9bd6;padding:9px 11px}
 """
 
+    def _first_sentence(text: str, max_len: int = 220) -> str:
+        t = str(text or '').strip()
+        if not t:
+            return ''
+        m = re.split(r'(?<=[.!?])\s+', t, maxsplit=1)
+        s = m[0].strip() if m else t
+        return (s[:max_len - 1] + '...') if len(s) > max_len else s
+
+    def _plain_exit_reason(h):
+        ticker = str(h.get('ticker', '') or 'This holding')
+        raw = str(h.get('exit_reason', '') or '').strip()
+        if not raw:
+            return 'Thesis conditions no longer met.'
+        m = re.match(
+            r'^SWAP:\s*displaced by\s+([A-Z0-9.\-]+)\s*[—-]\s*higher long-term conviction\s*'
+            r'\(([-+]?\d+(?:\.\d+)?)\s*vs\s*([-+]?\d+(?:\.\d+)?)\)\s*and expected IRR\s*'
+            r'\(([-+]?\d+(?:\.\d+)?)%/yr\s*vs\s*([-+]?\d+(?:\.\d+)?)%/yr\)\s*in\s*(.+)$',
+            raw,
+            flags=re.IGNORECASE,
+        )
+        if not m:
+            return _first_sentence(raw)
+        challenger, ch_conv, old_conv, ch_irr, old_irr, sector = m.groups()
+        ret_pct = h.get('return_pct')
+        parts = [
+            f'{ticker} was exited as a direct swap in {sector}.',
+            f'We rotated into {challenger} because it looked stronger from here '
+            f'({float(ch_conv):.0f} vs {float(old_conv):.0f} conviction; '
+            f'{float(ch_irr):.1f}%/yr vs {float(old_irr):.1f}%/yr expected return).'
+        ]
+        if isinstance(ret_pct, (int, float)) and ret_pct < 0:
+            parts.append(
+                f'Even with a {abs(ret_pct):.1f}% loss, the decision is to reallocate to the better long-term opportunity.'
+            )
+        return ' '.join(parts)
+
     def _exit_card(h):
         ticker     = h.get('ticker','')
         company    = h.get('company_name', ticker)
@@ -894,7 +1030,7 @@ def generate_exit_email(exits: List[Dict], month_str: str) -> tuple:
         qqq_ret    = h.get('qqq_return_pct')
         spy_ret    = h.get('spy_return_pct')
         alpha      = h.get('alpha_vs_qqq')
-        exit_reason = h.get('exit_reason', 'Thesis conditions no longer met')
+        exit_reason = _plain_exit_reason(h)
         thesis      = h.get('thesis_summary', '')
         breaks_if   = h.get('thesis_breaks_if', '')
         tracking    = h.get('scenario', {}).get('current_tracking', '—')

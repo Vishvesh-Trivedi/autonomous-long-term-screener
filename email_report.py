@@ -17,6 +17,7 @@ Dense, analytical, professional. Every holding gets a full research card:
 """
 
 from datetime import datetime
+import re
 from email_builder import _CSS_BASE, _t, _val, _cls, _sent_badge, _sig_badge, _mt_tag
 
 
@@ -1474,6 +1475,26 @@ def _build_whats_changed(decisions: dict, decision_review: dict) -> str:
         return (f'<span style="background:{bg};color:{color};font-size:8.5px;font-weight:700;'
                 f'padding:2px 7px;border-radius:2px;margin-right:6px;white-space:nowrap">{label}</span>')
 
+    def _simple_swap_exit(note: str, sold_ticker: str = '') -> str:
+        raw = str(note or '').strip()
+        if not raw.upper().startswith('SWAP: DISPLACED BY '):
+            return raw
+        m = re.match(
+            r'^SWAP:\s*displaced by\s+([A-Z0-9.\-]+)\s*[—-]\s*higher long-term conviction\s*'
+            r'\(([-+]?\d+(?:\.\d+)?)\s*vs\s*([-+]?\d+(?:\.\d+)?)\)\s*and expected IRR\s*'
+            r'\(([-+]?\d+(?:\.\d+)?)%/yr\s*vs\s*([-+]?\d+(?:\.\d+)?)%/yr\)\s*in\s*(.+)$',
+            raw,
+            flags=re.IGNORECASE,
+        )
+        if not m:
+            return raw
+        challenger, ch_conv, old_conv, ch_irr, old_irr, sector = m.groups()
+        _sold = sold_ticker or 'the prior holding'
+        return (f'Exited as a direct swap in {sector}: moved from {_sold} to {challenger} '
+                f'because {challenger} ranked stronger long term '
+                f'({float(ch_conv):.0f} vs {float(old_conv):.0f} conviction; '
+                f'{float(ch_irr):.1f}%/yr vs {float(old_irr):.1f}%/yr expected return).')
+
     rows = ''
     for it in adds:
         tk = it.get('ticker', ''); co = it.get('company_name', tk); tier = it.get('tier', '')
@@ -1485,6 +1506,9 @@ def _build_whats_changed(decisions: dict, decision_review: dict) -> str:
             _edge = _sm.get('conv_edge')
             if _edge is not None:
                 _detail += f' <span style="color:#9ca3af">(+{_edge} conviction, +{_sm.get("irr_edge","?")}pp IRR)</span>'
+            _r1 = it.get('return_1yr')
+            if isinstance(_r1, (int, float)) and _r1 >= 35:
+                _detail += f' <span style="color:#9ca3af">(despite +{_r1:.0f}% 12m run)</span>'
             rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
                      f'{_chip("SWAP IN", "#7c3aed", "#f5f3ff")}</td>'
                      f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong> '
@@ -1509,7 +1533,8 @@ def _build_whats_changed(decisions: dict, decision_review: dict) -> str:
                  f'<td style="padding:7px 6px"><strong style="color:#111827">{tk}</strong>'
                  f'<span style="color:#6b7280;font-size:10px"> &middot; {ft} &rarr; {tt}</span></td></tr>')
     for it in exits:
-        tk = it.get('ticker', ''); note = (it.get('exit_reason', '') or '')[:80]
+        tk = it.get('ticker', '')
+        note = _simple_swap_exit(it.get('exit_reason', ''), tk)[:130]
         note_html = f'<span style="color:#6b7280;font-size:10px"> &middot; {note}</span>' if note else ''
         rows += (f'<tr style="border-bottom:1px solid #f1f3f5"><td style="padding:7px 6px;white-space:nowrap">'
                  f'{_chip("EXITED", "#dc2626", "#fef2f2")}</td>'
