@@ -61,11 +61,12 @@ except Exception as e: bad('foreign fallback', e)
 try:
     g = {}; exec(SRC[SRC.index('RESEARCH_PROMPT_T1_T2'):b].rsplit('def ', 1)[0], g)
     g['RESEARCH_PROMPT_T1_T2'].format(ticker='X', tier='T1', revenue=1, roic=.1, gm=.5, rev_growth=.1, mkt_cap=2,
-        runway='ok', company_history='H', valuation_line='FAIR — fixture valuation', above_200ma='Y', return_1yr=1, vs_qqq=1, trend='UP', pct_from_high=-5,
-        news_count=1, headlines='h', reddit_mentions=0, sec_8k_count=0, sec_8k_events='n', filing_text='f')
-    g['RESEARCH_PROMPT_T3'].format(ticker='X', mkt_cap=2, cash=1, runway='ok', rd=1, revenue=1, company_history='H', valuation_line='FAIR — fixture valuation',
+        runway='ok', company_history='H', above_200ma='Y', return_1yr=1, vs_qqq=1, trend='UP', pct_from_high=-5,
+        news_count=1, headlines='h', reddit_mentions=0, sec_8k_count=0, sec_8k_events='n', filing_text='f',
+        valuation_line='v')
+    g['RESEARCH_PROMPT_T3'].format(ticker='X', mkt_cap=2, cash=1, runway='ok', rd=1, revenue=1, company_history='H',
         above_200ma='Y', return_1yr=1, vs_qqq=1, trend='UP', reddit_mentions=0, reddit_titles='r', headlines='h',
-        sec_8k_count=0, sec_8k_events='n', filing_text='f')
+        sec_8k_count=0, sec_8k_events='n', filing_text='f', valuation_line='v')
     ok('prompts format')
 except Exception as e: bad('prompts format', e)
 
