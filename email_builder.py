@@ -363,6 +363,92 @@ def _stock_row(h, show_hint=True):
     chips_html = (f'<div style="font-size:9.5px;color:#6b7280;margin-top:6px">'
                   + ' &middot; '.join(_sig_chips) + '</div>') if _sig_chips else ''
 
+    # ── Fundamentals / quality / risk from fields that actually exist on the
+    # holding. Each item is guarded on presence so nothing fabricated is shown.
+    def _pf(v):
+        """Format a value that may be a fraction (0.38) or already a percent (38)."""
+        try:
+            x = float(v)
+        except (TypeError, ValueError):
+            return None
+        if -3 <= x <= 3:
+            x *= 100
+        return x
+
+    def _fact(label, val, good=None, suffix='%', signed=False):
+        if val is None:
+            return None
+        c = '#111827'
+        if good is not None:
+            c = '#15803d' if val >= good else '#6b7280'
+        sign = '+' if (signed and val >= 0) else ''
+        return (f'<span style="color:#9ca3af">{label}</span> '
+                f'<span style="color:{c};font-weight:700">{sign}{val:.1f}{suffix}</span>')
+
+    _facts = []
+    for _lbl, _v, _good, _sfx, _sg in [
+        ('ROIC',   _pf(h.get('roic')),           15, '%', False),
+        ('GM',     _pf(h.get('gross_margin')),   None, '%', False),
+        ('Rev',    _pf(h.get('rev_growth')),     None, '%/yr', True),
+        ('FCF yld', h.get('fcf_yield'),          None, '%', False),
+        ('5y CAGR', h.get('return_5yr_cagr'),    None, '%', True),
+        ('10y CAGR', h.get('return_10yr_cagr'),  None, '%', True),
+        ('vs QQQ', h.get('return_vs_qqq'),       0,   '%', True),
+    ]:
+        _f = _fact(_lbl, _v, _good, _sfx, _sg)
+        if _f:
+            _facts.append(_f)
+    facts_html = (f'<div style="font-size:9.5px;color:#6b7280;margin-top:6px;line-height:1.7">'
+                  + ' &nbsp;&middot;&nbsp; '.join(_facts) + '</div>') if _facts else ''
+
+    # Quality / moat / conviction chips
+    _q = []
+    _moat = h.get('moat_type')
+    if _moat:
+        _md = h.get('moat_durability_years')
+        _q.append(f'<span style="color:#0d2137;font-weight:700">{_moat} moat</span>'
+                  + (f' <span style="color:#6b7280">{_md}y</span>' if _md else ''))
+    _run = h.get('growth_runway_years')
+    if _run:
+        _q.append(f'<span style="color:#6b7280">runway</span> <span style="font-weight:700">{_run}y</span>')
+    _mtl, _mts = h.get('megatrend_label'), h.get('megatrend_score')
+    if _mtl and _mtl != 'General Market' and (_mts or 0) > 0:
+        _q.append(f'<span style="color:#1d4ed8;font-weight:700">{_mtl}</span>')
+    _mg = h.get('management_grade')
+    if _mg:
+        _q.append(f'<span style="color:#6b7280">mgmt</span> <span style="font-weight:700">{_mg}</span>')
+    _eq = h.get('earnings_quality')
+    if _eq and _eq != 'UNKNOWN':
+        _ec2 = '#15803d' if _eq == 'CLEAN' else '#d97706'
+        _q.append(f'<span style="color:{_ec2};font-weight:700">{_eq.lower()} earnings</span>')
+    _nc = h.get('net_cash_flag')
+    if _nc and _nc not in ('—', 'NONE'):
+        _q.append(f'<span style="color:#15803d;font-weight:700">net cash: {str(_nc).lower()}</span>')
+    _dp = _pf(h.get('decade_probability'))
+    if _dp is not None:
+        _q.append(f'<span style="color:#6b7280">decade odds</span> <span style="color:#15803d;font-weight:700">~{_dp:.0f}%</span>')
+    _aa = h.get('annual_alpha_estimate')
+    if isinstance(_aa, (int, float)):
+        _ac = '#15803d' if _aa >= 0 else '#dc2626'
+        _q.append(f'<span style="color:{_ac};font-weight:700">{"+" if _aa>=0 else ""}{_aa:.0f}%/yr est. alpha</span>')
+    quality_html = (f'<div style="font-size:9.5px;color:#6b7280;margin-top:5px;line-height:1.7">'
+                    + ' &nbsp;&middot;&nbsp; '.join(_q) + '</div>') if _q else ''
+
+    # Primary risk + thesis-break trigger (the two most useful long-term lines)
+    _risk = str(h.get('primary_risk', '') or '').strip()
+    _tb   = str(h.get('thesis_breaks_if', '') or '').strip()
+    _risk_bits = []
+    if _risk:
+        _risk_bits.append(f'<span style="color:#b91c1c;font-weight:700">Key risk:</span> '
+                          f'<span style="color:#4b5563">{_risk[:180]}</span>')
+    if _tb:
+        _tbt = _tb if _tb.lower().startswith(('if ', 'when ')) else f'if {_tb}'
+        _risk_bits.append(f'<span style="color:#92400e;font-weight:700">Sell trigger:</span> '
+                          f'<span style="color:#4b5563">{_tbt[:180]}</span>')
+    risk_html = (f'<div style="font-size:9.5px;line-height:1.6;margin-top:7px;'
+                 f'padding-top:7px;border-top:1px dashed #e5e7eb">'
+                 + '<br>'.join(_risk_bits) + '</div>') if _risk_bits else ''
+
     # Portfolio-action advisories on held names (drift trim / event re-research).
     _adv = [x for x in (h.get('concentration_flag'), h.get('rerun_flag')) if x]
     adv_html = ''
@@ -412,7 +498,10 @@ def _stock_row(h, show_hint=True):
         f'<div style="background:{sig_bg};border:1px solid {sig_bdr};border-radius:4px;padding:10px 14px">'
         f'<div style="font-size:11px;font-weight:700;color:{sig_c}">{sig_label}</div>'
         f'{reason_html}'
+        f'{facts_html}'
+        f'{quality_html}'
         f'{chips_html}'
+        f'{risk_html}'
         f'{adv_html}'
         f'</div>'
         f'</td></tr>'
