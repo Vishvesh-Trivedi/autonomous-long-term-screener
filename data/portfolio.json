@@ -2,7 +2,7 @@
   "_comment": "Long-Term Investment Screener \u00e2\u20ac\u201d Portfolio History. DO NOT edit manually. Managed by screener.py",
   "_version": "1.0",
   "created": "2026-05-18",
-  "last_updated": "2026-09-14T18:41:58.567529",
+  "last_updated": "2026-09-21T16:46:12.603808",
   "holdings": [
     {
       "ticker": "AGX",
@@ -37,9 +37,9 @@
       "earnings_quality": "CLEAN",
       "entry_price": 694.72,
       "above_200ma": false,
-      "pct_from_high": -50.6,
-      "return_1yr": 71.8,
-      "return_vs_qqq": 50.9,
+      "pct_from_high": -51.8,
+      "return_1yr": 48.3,
+      "return_vs_qqq": 25.2,
       "trend": "DOWN",
       "news_count": 20,
       "news_sentiment": "POSITIVE",
@@ -48,7 +48,7 @@
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "Revenue beat"
+        "Data centre"
       ],
       "sec_8k_count": 3,
       "sec_8k_events": [
@@ -93,24 +93,24 @@
           "narrative": "Argan Inc. continues to execute on its growth strategy, expanding its market share and increasing revenue at a 15% CAGR. The company's cost advantage moat and disciplined management enable it to maintain a gross margin above 20%, driving significant earnings growth and resulting in a market capitalization of $30.0B in 10 years.",
           "revenue_10yr_b": 2.93,
           "mktcap_10yr_b": 30.0,
-          "multiple": 5.4,
+          "multiple": 5.6,
           "probability": 0.4,
-          "irr_10yr_pct": 18.4
+          "irr_10yr_pct": 18.7
         },
         "base": {
           "narrative": "Argan Inc. delivers steady growth, with revenue increasing at a 10% CAGR over the next 10 years. The company maintains its gross margin above 18%, resulting in moderate earnings growth and a market capitalization of $20.0B in 10 years.",
           "revenue_10yr_b": 2.24,
           "mktcap_10yr_b": 20.0,
-          "multiple": 3.6,
+          "multiple": 3.7,
           "probability": 0.5,
-          "irr_10yr_pct": 13.7
+          "irr_10yr_pct": 14.0
         },
         "bear": {
           "narrative": "Argan Inc. faces significant challenges, including increased competition and rising costs, resulting in a decline in gross margin to 12%. Revenue growth slows to 5% CAGR, and the market capitalization falls to $5.0B in 10 years.",
           "mktcap_10yr_b": 5.0,
           "multiple": 0.9,
           "probability": 0.1,
-          "irr_10yr_pct": -1.0
+          "irr_10yr_pct": -0.7
         },
         "current_tracking": "BASE",
         "tracking_note": "The company's current financial performance is in line with the base case scenario, with a strong cost advantage moat and disciplined management.",
@@ -118,10 +118,10 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-06-18T02:00:26.248179",
         "ticker": "AGX",
-        "expected_irr_pct": 14.1
+        "expected_irr_pct": 14.4
       },
-      "current_price": 394.14,
-      "market_cap": 5529722368,
+      "current_price": 383.51,
+      "market_cap": 5380585984,
       "revenue": 1188132992,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-09-09",
@@ -129,7 +129,7 @@
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 9.97,
+      "fcf_yield": 10.25,
       "net_cash_m": 1018.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -164,11 +164,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -23.4,
-      "return_3yr_cagr": 108.9,
-      "return_5yr_cagr": 57.9,
+      "pct_from_200ma": -25.2,
+      "return_3yr_cagr": 105.4,
+      "return_5yr_cagr": 57.0,
       "return_10yr_cagr": 23.9,
-      "max_drawdown": -50.6,
+      "max_drawdown": -51.8,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -221,9 +221,9 @@
       "earnings_quality": "CLEAN",
       "entry_price": 549.87,
       "above_200ma": false,
-      "pct_from_high": -15.6,
-      "return_1yr": 24.3,
-      "return_vs_qqq": 3.4,
+      "pct_from_high": -17.1,
+      "return_1yr": 18.5,
+      "return_vs_qqq": -4.6,
       "trend": "DOWN",
       "news_count": 20,
       "news_sentiment": "POSITIVE",
@@ -278,9 +278,9 @@
           "narrative": "United Therapeutics' strong financials, high gross margin, and solid ROIC drive long-term growth, with successful expansion of its product portfolio and increased market share in the pharmaceutical industry.",
           "revenue_10yr_b": 25.0,
           "mktcap_10yr_b": 50.0,
-          "multiple": 2.3,
+          "multiple": 2.4,
           "probability": 0.4,
-          "irr_10yr_pct": 8.8
+          "irr_10yr_pct": 8.9
         },
         "base": {
           "narrative": "United Therapeutics maintains its current market position, with steady revenue growth and stable margins, as the company continues to invest in research and development to support its product portfolio.",
@@ -288,14 +288,14 @@
           "mktcap_10yr_b": 30.0,
           "multiple": 1.4,
           "probability": 0.5,
-          "irr_10yr_pct": 3.3
+          "irr_10yr_pct": 3.5
         },
         "bear": {
           "narrative": "United Therapeutics fails to maintain or expand its product portfolio, leading to declining revenue and market share, as increased competition and regulatory challenges impact the company's profitability.",
           "mktcap_10yr_b": 2.3407675392000002,
           "multiple": 0.1,
           "probability": 0.1,
-          "irr_10yr_pct": -19.9
+          "irr_10yr_pct": -19.8
         },
         "current_tracking": "BASE",
         "tracking_note": "Monitoring the company's product pipeline and market trends to assess potential upside or downside risks.",
@@ -303,10 +303,10 @@
         "natural_eval_window_days": 180,
         "written_date": "2026-06-06T00:40:53.530294",
         "ticker": "UTHR",
-        "expected_irr_pct": 3.2
+        "expected_irr_pct": 3.3
       },
-      "current_price": 503.66,
-      "market_cap": 21602326528,
+      "current_price": 494.83,
+      "market_cap": 21223600128,
       "revenue": 3154500096,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-09-08",
@@ -314,7 +314,7 @@
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 5.37,
+      "fcf_yield": 5.46,
       "net_cash_m": 2662.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 17.4,
@@ -349,11 +349,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -3.9,
-      "return_3yr_cagr": 32.3,
-      "return_5yr_cagr": 20.4,
-      "return_10yr_cagr": 15.6,
-      "max_drawdown": -15.6,
+      "pct_from_200ma": -5.7,
+      "return_3yr_cagr": 30.2,
+      "return_5yr_cagr": 21.4,
+      "return_10yr_cagr": 14.8,
+      "max_drawdown": -17.1,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -406,20 +406,20 @@
       "earnings_quality": "CLEAN",
       "entry_price": 218.74,
       "above_200ma": true,
-      "pct_from_high": -6.1,
-      "return_1yr": 31.5,
-      "return_vs_qqq": 10.6,
+      "pct_from_high": -5.9,
+      "return_1yr": 23.5,
+      "return_vs_qqq": 0.4,
       "trend": "UP",
       "news_count": 20,
-      "news_sentiment": "MIXED",
+      "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "MIXED",
+      "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "Guidance"
+        "Partnership"
       ],
-      "sec_8k_count": 5,
+      "sec_8k_count": 4,
       "sec_8k_events": [
         {
           "date": "2026-09-14",
@@ -479,7 +479,7 @@
           "mktcap_10yr_b": 20.0,
           "multiple": 0.4,
           "probability": 0.2,
-          "irr_10yr_pct": -8.9
+          "irr_10yr_pct": -8.8
         },
         "current_tracking": "BASE",
         "tracking_note": "Gold at $3,200/oz, royalty portfolio intact, Cobre Panama suspended but optionality preserved. Base case trajectory.",
@@ -489,8 +489,8 @@
         "ticker": "FNV",
         "expected_irr_pct": 3.3
       },
-      "current_price": 262.65,
-      "market_cap": 50658304000,
+      "current_price": 261.59,
+      "market_cap": 50449080320,
       "revenue": 2300800000,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-09-14",
@@ -520,7 +520,7 @@
       "mutualfund_holders": [
         {
           "name": "VanEck ETF Trust-VanEck Gold Miners ETF",
-          "pct": 0.027999999
+          "pct": 0.028099999
         },
         {
           "name": "MFS SERIES TRUST X-MFS International Intrinsic Value Fund",
@@ -533,11 +533,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 12.2,
-      "return_3yr_cagr": 23.1,
-      "return_5yr_cagr": 14.7,
-      "return_10yr_cagr": 15.5,
-      "max_drawdown": -6.1,
+      "pct_from_200ma": 11.8,
+      "return_3yr_cagr": 25.0,
+      "return_5yr_cagr": 16.0,
+      "return_10yr_cagr": 16.4,
+      "max_drawdown": -5.9,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -590,9 +590,9 @@
       "earnings_quality": "WATCH",
       "entry_price": 31.12,
       "above_200ma": true,
-      "pct_from_high": -3.4,
-      "return_1yr": -1.9,
-      "return_vs_qqq": -22.8,
+      "pct_from_high": -3.1,
+      "return_1yr": -1.5,
+      "return_vs_qqq": -24.6,
       "trend": "UP",
       "news_count": 20,
       "news_sentiment": "POSITIVE",
@@ -603,7 +603,6 @@
       "key_themes": [
         "AI demand",
         "Data centre",
-        "Guidance",
         "Space/Launch"
       ],
       "sec_8k_count": 3,
@@ -676,8 +675,8 @@
         "ticker": "GTLB",
         "expected_irr_pct": 3.8
       },
-      "current_price": 49.3,
-      "market_cap": 8214119936,
+      "current_price": 49.47,
+      "market_cap": 8242444800,
       "revenue": 1055166976,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-09-01",
@@ -685,7 +684,7 @@
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 2.59,
+      "fcf_yield": 2.58,
       "net_cash_m": 1257.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 26.0,
@@ -720,11 +719,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 55.6,
-      "return_3yr_cagr": 0.9,
+      "pct_from_200ma": 55.1,
+      "return_3yr_cagr": 4.1,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -62.3,
+      "max_drawdown": -62.2,
       "years_listed": 4.9,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -773,13 +772,13 @@
       "de_ratio": 0.0,
       "interest_coverage": 999.0,
       "dilution_rate": 0.0,
-      "insider_ownership": 0.02165,
+      "insider_ownership": 0.02164,
       "earnings_quality": "WATCH",
       "entry_price": 17.93,
       "above_200ma": true,
-      "pct_from_high": -22.8,
-      "return_1yr": -5.8,
-      "return_vs_qqq": -26.7,
+      "pct_from_high": -24.6,
+      "return_1yr": -11.1,
+      "return_vs_qqq": -34.2,
       "trend": "UP",
       "news_count": 10,
       "news_sentiment": "POSITIVE",
@@ -790,15 +789,11 @@
       "key_themes": [
         "Insider activity"
       ],
-      "sec_8k_count": 2,
+      "sec_8k_count": 1,
       "sec_8k_events": [
         {
           "date": "2026-08-06",
           "description": "Results of operations / earnings, Director/officer departure or appointment, Financial statements attached"
-        },
-        {
-          "date": "2026-06-16",
-          "description": "Item 5.07"
         }
       ],
       "qqq_price_at_entry": 705.0599975585938,
@@ -829,24 +824,24 @@
           "narrative": "Omada Health achieves strong revenue growth, exceeding 20% annually, driven by expanding digital health market and successful product offerings, resulting in a 10-year revenue of $2.5B and market cap of $10.0B, with a multiple of 4.0 and a probability of 0.4",
           "revenue_10yr_b": 16.198530048,
           "mktcap_10yr_b": 8.099265024,
-          "multiple": 6.4,
+          "multiple": 6.6,
           "probability": 0.4,
-          "irr_10yr_pct": 20.4
+          "irr_10yr_pct": 20.7
         },
         "base": {
           "narrative": "Omada Health maintains steady revenue growth, averaging 15% annually, driven by stable digital health market and consistent product offerings, resulting in a 10-year revenue of $1.8B and market cap of $5.0B, with a multiple of 2.8 and a probability of 0.5",
           "revenue_10yr_b": 9.719118028799999,
           "mktcap_10yr_b": 4.859559014399999,
-          "multiple": 3.8,
+          "multiple": 3.9,
           "probability": 0.5,
-          "irr_10yr_pct": 14.4
+          "irr_10yr_pct": 14.7
         },
         "bear": {
           "narrative": "Omada Health experiences declining revenue growth, averaging 5% annually, due to increased competition and market saturation, resulting in a 10-year market cap of $0.5B, with a multiple of 1.8 and a probability of 0.1",
           "mktcap_10yr_b": 2.4297795071999997,
-          "multiple": 1.9,
+          "multiple": 2.0,
           "probability": 0.1,
-          "irr_10yr_pct": 6.7
+          "irr_10yr_pct": 7.0
         },
         "current_tracking": "BASE",
         "tracking_note": "Monitoring revenue growth and market trends to adjust projections",
@@ -854,10 +849,10 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-06-18T09:00:46.782036",
         "ticker": "OMDA",
-        "expected_irr_pct": 16.0
+        "expected_irr_pct": 16.3
       },
-      "current_price": 20.67,
-      "market_cap": 1265349248,
+      "current_price": 20.17,
+      "market_cap": 1234747008,
       "revenue": 309759008,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-08-06",
@@ -865,7 +860,7 @@
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 1.41,
+      "fcf_yield": 1.45,
       "net_cash_m": 222.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 13.1,
@@ -900,11 +895,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 21.3,
+      "pct_from_200ma": 18.2,
       "return_3yr_cagr": null,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -22.8,
+      "max_drawdown": -24.6,
       "years_listed": 1.3,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -957,23 +952,27 @@
       "earnings_quality": "WATCH",
       "entry_price": 16.49,
       "above_200ma": true,
-      "pct_from_high": -26.0,
-      "return_1yr": -26.0,
-      "return_vs_qqq": -46.9,
+      "pct_from_high": -7.6,
+      "return_1yr": -6.5,
+      "return_vs_qqq": -29.6,
       "trend": "UP",
-      "news_count": 10,
+      "news_count": 14,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "AI demand",
         "Product launch",
-        "Space/Launch"
+        "Space/Launch",
+        "Insider activity"
       ],
-      "sec_8k_count": 1,
+      "sec_8k_count": 2,
       "sec_8k_events": [
+        {
+          "date": "2026-09-14",
+          "description": "Regulation FD disclosure"
+        },
         {
           "date": "2026-08-05",
           "description": "Results of operations / earnings, Financial statements attached"
@@ -1015,24 +1014,24 @@
           "narrative": "Caris Life Sciences successfully expands its comprehensive genomic testing to over 1000 healthcare providers, driving revenue growth and establishing itself as a leader in the precision medicine market. The company's data analytics capabilities and strategic partnerships further enhance its competitive advantage, leading to a significant increase in market share and revenue.",
           "revenue_10yr_b": 15.0,
           "mktcap_10yr_b": 41.66713344,
-          "multiple": 5.9,
+          "multiple": 4.9,
           "probability": 0.4,
-          "irr_10yr_pct": 19.3
+          "irr_10yr_pct": 17.1
         },
         "base": {
           "narrative": "Caris Life Sciences achieves moderate success in expanding its comprehensive genomic testing services, but faces intense competition and regulatory challenges. The company's revenue growth is steady, but not spectacular, and its market share increases gradually. The data analytics capabilities and partnerships contribute to the company's growth, but not to the extent anticipated in the bull scenario.",
           "revenue_10yr_b": 5.0,
           "mktcap_10yr_b": 20.0,
-          "multiple": 2.8,
+          "multiple": 2.3,
           "probability": 0.3,
-          "irr_10yr_pct": 10.9
+          "irr_10yr_pct": 8.8
         },
         "bear": {
           "narrative": "Caris Life Sciences fails to expand its comprehensive genomic testing services and partnerships, leading to stagnant revenue growth and loss of market share. The company's data analytics capabilities are not sufficient to overcome the competitive and regulatory challenges, and the precision medicine market becomes increasingly crowded and commoditized.",
           "mktcap_10yr_b": 5.0,
-          "multiple": 0.7,
+          "multiple": 0.6,
           "probability": 0.3,
-          "irr_10yr_pct": -3.5
+          "irr_10yr_pct": -5.2
         },
         "current_tracking": "BULL",
         "tracking_note": "Caris Life Sciences has announced several strategic partnerships and has seen significant growth in its comprehensive genomic testing services.",
@@ -1040,18 +1039,18 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-06-06T00:44:17.189747",
         "ticker": "CAI",
-        "expected_irr_pct": 9.9
+        "expected_irr_pct": 7.9
       },
-      "current_price": 25.16,
-      "market_cap": 7113660416,
+      "current_price": 30.32,
+      "market_cap": 8568286208,
       "revenue": 989604992,
       "sec_8k_highlights": [],
-      "sec_8k_latest_date": "2026-08-05",
+      "sec_8k_latest_date": "2026-09-14",
       "news_intelligence": {
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 2.14,
+      "fcf_yield": 1.78,
       "net_cash_m": 341.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 10.3,
@@ -1086,12 +1085,12 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 20.3,
+      "pct_from_200ma": 44.6,
       "return_3yr_cagr": null,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -35.9,
-      "years_listed": 1.2,
+      "max_drawdown": -22.5,
+      "years_listed": 1.3,
       "currency": "USD",
       "reddit_source": "blocked",
       "congress_source": "efd",
@@ -1143,11 +1142,11 @@
       "earnings_quality": "CLEAN",
       "entry_price": 14.78,
       "above_200ma": true,
-      "pct_from_high": -0.1,
-      "return_1yr": 114.0,
-      "return_vs_qqq": 93.1,
+      "pct_from_high": -3.4,
+      "return_1yr": 127.6,
+      "return_vs_qqq": 104.5,
       "trend": "UP",
-      "news_count": 14,
+      "news_count": 16,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
@@ -1155,10 +1154,9 @@
       "signal_or_noise": "SIGNAL",
       "key_themes": [
         "AI demand",
-        "Revenue beat",
         "Product launch"
       ],
-      "sec_8k_count": 8,
+      "sec_8k_count": 7,
       "sec_8k_events": [
         {
           "date": "2026-09-08",
@@ -1209,9 +1207,9 @@
           "narrative": "CMBT successfully deploys AI-powered security solutions in over 1000 enterprise clients, achieving 25% annual revenue growth and becoming a market leader in AI-powered cybersecurity.",
           "revenue_10yr_b": 5.0,
           "mktcap_10yr_b": 50.0,
-          "multiple": 8.9,
+          "multiple": 8.8,
           "probability": 0.4,
-          "irr_10yr_pct": 24.4
+          "irr_10yr_pct": 24.2
         },
         "base": {
           "narrative": "CMBT meets its growth targets, deploying AI-powered security solutions in 100 enterprise clients and achieving 20% annual revenue growth, establishing itself as a major player in the AI-powered cybersecurity market.",
@@ -1219,14 +1217,14 @@
           "mktcap_10yr_b": 20.0,
           "multiple": 3.5,
           "probability": 0.5,
-          "irr_10yr_pct": 13.5
+          "irr_10yr_pct": 13.4
         },
         "bear": {
           "narrative": "CMBT fails to innovate and keep pace with rapidly evolving cybersecurity threats and technologies, resulting in stagnant revenue growth and a loss of market share.",
           "mktcap_10yr_b": 5.0,
           "multiple": 0.9,
           "probability": 0.1,
-          "irr_10yr_pct": -1.2
+          "irr_10yr_pct": -1.3
         },
         "current_tracking": "BULL",
         "tracking_note": "CMBT has made significant progress in deploying AI-powered security solutions and has established strategic partnerships with major enterprise clients.",
@@ -1234,10 +1232,10 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-06-06T00:45:22.350330",
         "ticker": "CMBT",
-        "expected_irr_pct": 16.4
+        "expected_irr_pct": 16.2
       },
-      "current_price": 19.46,
-      "market_cap": 5646703104,
+      "current_price": 19.68,
+      "market_cap": 5710540800,
       "revenue": 2266800896,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-09-08",
@@ -1245,7 +1243,7 @@
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": -4.31,
+      "fcf_yield": -4.27,
       "net_cash_m": -5293.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1280,11 +1278,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 44.1,
-      "return_3yr_cagr": 21.5,
-      "return_5yr_cagr": 32.3,
-      "return_10yr_cagr": 19.6,
-      "max_drawdown": -0.1,
+      "pct_from_200ma": 43.3,
+      "return_3yr_cagr": 19.6,
+      "return_5yr_cagr": 30.7,
+      "return_10yr_cagr": 18.6,
+      "max_drawdown": -3.4,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -1333,13 +1331,13 @@
       "de_ratio": 138642261.33,
       "interest_coverage": 999.0,
       "dilution_rate": 0.0,
-      "insider_ownership": 0.28892002,
+      "insider_ownership": 0.28897,
       "earnings_quality": "CLEAN",
       "entry_price": 28.13,
       "above_200ma": false,
-      "pct_from_high": -56.2,
-      "return_1yr": -50.9,
-      "return_vs_qqq": -71.8,
+      "pct_from_high": -56.1,
+      "return_1yr": -48.0,
+      "return_vs_qqq": -71.1,
       "trend": "DOWN",
       "news_count": 20,
       "news_sentiment": "POSITIVE",
@@ -1418,7 +1416,7 @@
           "mktcap_10yr_b": 4.2,
           "multiple": 0.6,
           "probability": 0.1,
-          "irr_10yr_pct": -5.2
+          "irr_10yr_pct": -5.3
         },
         "current_tracking": "BULL",
         "tracking_note": "Strong brand and distribution network, with potential for international expansion.",
@@ -1428,8 +1426,8 @@
         "ticker": "CELH",
         "expected_irr_pct": 15.1
       },
-      "current_price": 28.37,
-      "market_cap": 7178604544,
+      "current_price": 28.47,
+      "market_cap": 7202718208,
       "revenue": 3047273984,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-08-10",
@@ -1437,7 +1435,7 @@
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 6.58,
+      "fcf_yield": 6.56,
       "net_cash_m": -44.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1472,11 +1470,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -24.2,
-      "return_3yr_cagr": -24.6,
-      "return_5yr_cagr": -1.5,
-      "return_10yr_cagr": 45.1,
-      "max_drawdown": -70.5,
+      "pct_from_200ma": -23.3,
+      "return_3yr_cagr": -20.6,
+      "return_5yr_cagr": -1.2,
+      "return_10yr_cagr": 44.8,
+      "max_drawdown": -70.4,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -1529,9 +1527,9 @@
       "earnings_quality": "WATCH",
       "entry_price": 35.17,
       "above_200ma": true,
-      "pct_from_high": 0.0,
-      "return_1yr": 134.7,
-      "return_vs_qqq": 113.8,
+      "pct_from_high": -3.0,
+      "return_1yr": 146.9,
+      "return_vs_qqq": 123.8,
       "trend": "UP",
       "news_count": 20,
       "news_sentiment": "POSITIVE",
@@ -1540,11 +1538,14 @@
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "AI demand",
-        "Competition"
+        "Space/Launch"
       ],
-      "sec_8k_count": 1,
+      "sec_8k_count": 2,
       "sec_8k_events": [
+        {
+          "date": "2026-09-16",
+          "description": "Material event filed"
+        },
         {
           "date": "2026-08-28",
           "description": "Material event filed"
@@ -1586,24 +1587,24 @@
           "narrative": "Frontline successfully expands its fleet and diversifies its services, capturing a significant share of the marine transportation and energy market, leading to a substantial increase in revenue and market capitalization.",
           "revenue_10yr_b": 10.5,
           "mktcap_10yr_b": 35.0,
-          "multiple": 3.1,
+          "multiple": 3.2,
           "probability": 0.4,
-          "irr_10yr_pct": 12.0
+          "irr_10yr_pct": 12.2
         },
         "base": {
           "narrative": "Frontline maintains its current market position and continues to operate efficiently, with moderate growth in revenue and market capitalization.",
           "revenue_10yr_b": 4.5,
           "mktcap_10yr_b": 15.0,
-          "multiple": 1.3,
+          "multiple": 1.4,
           "probability": 0.3,
-          "irr_10yr_pct": 2.9
+          "irr_10yr_pct": 3.1
         },
         "bear": {
           "narrative": "Frontline fails to expand its fleet or diversify its services, leading to a decline in market share and revenue, resulting in a decrease in market capitalization.",
           "mktcap_10yr_b": 5.0,
-          "multiple": 0.4,
+          "multiple": 0.5,
           "probability": 0.3,
-          "irr_10yr_pct": -7.8
+          "irr_10yr_pct": -7.6
         },
         "current_tracking": "BULL",
         "tracking_note": "Frontline's recent strategic moves indicate a strong potential for growth and expansion.",
@@ -1611,18 +1612,18 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-06-18T02:02:59.818624",
         "ticker": "FRO",
-        "expected_irr_pct": 3.3
+        "expected_irr_pct": 3.5
       },
-      "current_price": 50.55,
-      "market_cap": 11253586944,
+      "current_price": 49.72,
+      "market_cap": 11067697152,
       "revenue": 2714702080,
       "sec_8k_highlights": [],
-      "sec_8k_latest_date": "2026-08-28",
+      "sec_8k_latest_date": "2026-09-16",
       "news_intelligence": {
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 11.91,
+      "fcf_yield": 12.11,
       "net_cash_m": -2113.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1657,11 +1658,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 53.5,
-      "return_3yr_cagr": 54.4,
-      "return_5yr_cagr": 56.8,
-      "return_10yr_cagr": 29.7,
-      "max_drawdown": 0.0,
+      "pct_from_200ma": 57.5,
+      "return_3yr_cagr": 52.7,
+      "return_5yr_cagr": 54.5,
+      "return_10yr_cagr": 29.0,
+      "max_drawdown": -3.0,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -1714,11 +1715,11 @@
       "earnings_quality": "WATCH",
       "entry_price": 81.07,
       "above_200ma": true,
-      "pct_from_high": 0.0,
-      "return_1yr": 163.1,
-      "return_vs_qqq": 142.2,
+      "pct_from_high": -1.9,
+      "return_1yr": 167.0,
+      "return_vs_qqq": 143.9,
       "trend": "UP",
-      "news_count": 13,
+      "news_count": 20,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
@@ -1726,6 +1727,8 @@
       "signal_or_noise": "SIGNAL",
       "key_themes": [
         "Revenue beat",
+        "Guidance",
+        "Space/Launch",
         "Competition"
       ],
       "sec_8k_count": 1,
@@ -1771,9 +1774,9 @@
           "narrative": "International Seaways successfully expands services, improves efficiency, and capitalizes on growing demand for global trade, resulting in significant revenue growth and increased market share.",
           "revenue_10yr_b": 2.5,
           "mktcap_10yr_b": 12.0,
-          "multiple": 2.3,
+          "multiple": 2.2,
           "probability": 0.4,
-          "irr_10yr_pct": 8.6
+          "irr_10yr_pct": 8.3
         },
         "base": {
           "narrative": "International Seaways maintains its established position in the maritime shipping industry, with moderate revenue growth and stable market share.",
@@ -1781,14 +1784,14 @@
           "mktcap_10yr_b": 6.0,
           "multiple": 1.1,
           "probability": 0.3,
-          "irr_10yr_pct": 1.4
+          "irr_10yr_pct": 1.1
         },
         "bear": {
           "narrative": "International Seaways fails to achieve positive free cash flow, and a significant decline in global shipping volumes negatively impacts revenue and market share.",
           "mktcap_10yr_b": 1.5,
           "multiple": 0.3,
           "probability": 0.3,
-          "irr_10yr_pct": -11.8
+          "irr_10yr_pct": -12.0
         },
         "current_tracking": "BULL",
         "tracking_note": "Monitoring progress towards positive free cash flow and global shipping volume trends.",
@@ -1796,10 +1799,10 @@
         "natural_eval_window_days": 730,
         "written_date": "2026-06-18T02:03:33.403956",
         "ticker": "INSW",
-        "expected_irr_pct": 0.3
+        "expected_irr_pct": 0.1
       },
-      "current_price": 105.76,
-      "market_cap": 5238431744,
+      "current_price": 108.65,
+      "market_cap": 5381577216,
       "revenue": 1261373056,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-08-10",
@@ -1807,7 +1810,7 @@
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 5.56,
+      "fcf_yield": 5.41,
       "net_cash_m": -243.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -1842,11 +1845,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 54.7,
-      "return_3yr_cagr": 52.7,
-      "return_5yr_cagr": 61.3,
+      "pct_from_200ma": 55.0,
+      "return_3yr_cagr": 53.3,
+      "return_5yr_cagr": 58.7,
       "return_10yr_cagr": null,
-      "max_drawdown": 0.0,
+      "max_drawdown": -1.9,
       "years_listed": 9.8,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -1899,15 +1902,15 @@
       "earnings_quality": "CLEAN",
       "entry_price": 82.66,
       "above_200ma": true,
-      "pct_from_high": -8.4,
-      "return_1yr": 120.0,
-      "return_vs_qqq": 99.1,
+      "pct_from_high": -8.3,
+      "return_1yr": 110.6,
+      "return_vs_qqq": 87.5,
       "trend": "UP",
-      "news_count": 11,
-      "news_sentiment": "MIXED",
+      "news_count": 9,
+      "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "MIXED",
+      "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
         "Partnership",
@@ -1983,8 +1986,8 @@
         "ticker": "TIGO",
         "expected_irr_pct": 3.4
       },
-      "current_price": 95.59,
-      "market_cap": 16031397888,
+      "current_price": 95.5,
+      "market_cap": 16016305152,
       "revenue": 7248000000,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-08-06",
@@ -1992,7 +1995,7 @@
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 8.9,
+      "fcf_yield": 8.91,
       "net_cash_m": -11234.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -2027,11 +2030,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 25.5,
-      "return_3yr_cagr": 94.0,
+      "pct_from_200ma": 23.7,
+      "return_3yr_cagr": 93.1,
       "return_5yr_cagr": 26.4,
       "return_10yr_cagr": null,
-      "max_drawdown": -8.4,
+      "max_drawdown": -8.3,
       "years_listed": 7.7,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -2058,7 +2061,7 @@
       "tier": "T2",
       "date_added": "2026-06-07",
       "sector": "Financial Services",
-      "market_cap": 3349815808,
+      "market_cap": 3266248704,
       "revenue": 399720000,
       "sentiment_confidence": 2,
       "megatrend": "general",
@@ -2088,19 +2091,17 @@
       "earnings_quality": "CLEAN",
       "entry_price": 122.79,
       "above_200ma": true,
-      "pct_from_high": -21.3,
-      "return_1yr": 88.4,
-      "return_vs_qqq": 67.5,
+      "pct_from_high": -23.0,
+      "return_1yr": 76.1,
+      "return_vs_qqq": 53.0,
       "trend": "UP",
-      "news_count": 2,
+      "news_count": 0,
       "news_sentiment": "NEUTRAL",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
       "overall_sentiment": "NEUTRAL",
       "signal_or_noise": "SIGNAL",
-      "key_themes": [
-        "AI demand"
-      ],
+      "key_themes": [],
       "sec_8k_count": 3,
       "sec_8k_events": [
         {
@@ -2151,24 +2152,24 @@
           "narrative": "Sprott Inc. successfully rides the commodity cycle growth trend, leveraging its brand and expertise to increase market share and revenue. Commodity prices rise, driving demand for precious metals and commodity investments.",
           "revenue_10yr_b": 1.52,
           "mktcap_10yr_b": 8.5,
-          "multiple": 2.5,
+          "multiple": 2.6,
           "probability": 0.4,
-          "irr_10yr_pct": 9.8
+          "irr_10yr_pct": 10.0
         },
         "base": {
           "narrative": "Sprott Inc. maintains its current market position, with steady demand for precious metals and commodity investments. The company adapts to market changes, but commodity prices remain relatively stable.",
           "revenue_10yr_b": 0.76,
           "mktcap_10yr_b": 4.8,
-          "multiple": 1.4,
+          "multiple": 1.5,
           "probability": 0.5,
-          "irr_10yr_pct": 3.7
+          "irr_10yr_pct": 3.9
         },
         "bear": {
           "narrative": "Commodity prices plummet, reducing demand for precious metals and commodity investments. Sprott Inc. fails to adapt to market changes, losing market share and revenue.",
           "mktcap_10yr_b": 1.2,
           "multiple": 0.4,
           "probability": 0.1,
-          "irr_10yr_pct": -9.8
+          "irr_10yr_pct": -9.5
         },
         "current_tracking": "BASE",
         "tracking_note": "Monitoring commodity price trends and company adaptation to market changes.",
@@ -2176,16 +2177,15 @@
         "natural_eval_window_days": 180,
         "written_date": "2026-06-18T02:07:43.320924",
         "ticker": "SII",
-        "expected_irr_pct": 4.8
+        "expected_irr_pct": 5.0
       },
-      "current_price": 130.18,
+      "current_price": 126.93,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-08-05",
       "news_intelligence": {
-        "_status": "failed",
-        "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
+        "_status": "no_data"
       },
-      "fcf_yield": 4.18,
+      "fcf_yield": 4.28,
       "net_cash_m": 190.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -2220,11 +2220,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 5.8,
-      "return_3yr_cagr": 59.8,
-      "return_5yr_cagr": 30.6,
-      "return_10yr_cagr": 25.9,
-      "max_drawdown": -21.3,
+      "pct_from_200ma": 2.7,
+      "return_3yr_cagr": 60.0,
+      "return_5yr_cagr": 30.8,
+      "return_10yr_cagr": 25.7,
+      "max_drawdown": -23.0,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -2250,7 +2250,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Basic Materials",
-      "market_cap": 1045851520,
+      "market_cap": 1026262272,
       "revenue": 74183000,
       "sentiment_confidence": 1,
       "megatrend": "nuclear_renaissance",
@@ -2276,23 +2276,27 @@
       "de_ratio": 68263473.05,
       "interest_coverage": 999.0,
       "dilution_rate": 0.0,
-      "insider_ownership": 0.59508,
+      "insider_ownership": 0.59513,
       "earnings_quality": "WATCH",
       "entry_price": 12.12,
       "above_200ma": false,
-      "pct_from_high": -29.1,
-      "return_1yr": -3.8,
-      "return_vs_qqq": -24.7,
+      "pct_from_high": -30.3,
+      "return_1yr": -5.4,
+      "return_vs_qqq": -28.5,
       "trend": "DOWN",
-      "news_count": 1,
+      "news_count": 2,
       "news_sentiment": "NEUTRAL",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
       "overall_sentiment": "NEUTRAL",
       "signal_or_noise": "SIGNAL",
       "key_themes": [],
-      "sec_8k_count": 2,
+      "sec_8k_count": 3,
       "sec_8k_events": [
+        {
+          "date": "2026-09-16",
+          "description": "Material event filed"
+        },
         {
           "date": "2026-08-13",
           "description": "Material event filed"
@@ -2345,24 +2349,24 @@
           "narrative": "VMET successfully capitalizes on the growing demand for precious metals royalty and streaming, achieving significant revenue growth and expanding its market share.",
           "revenue_10yr_b": 1.5,
           "mktcap_10yr_b": 7.653440512,
-          "multiple": 7.3,
+          "multiple": 7.5,
           "probability": 0.4,
-          "irr_10yr_pct": 22.0
+          "irr_10yr_pct": 22.3
         },
         "base": {
           "narrative": "VMET experiences steady growth, meeting industry expectations and maintaining its current market position.",
           "revenue_10yr_b": 0.5,
           "mktcap_10yr_b": 5.0,
-          "multiple": 4.8,
+          "multiple": 4.9,
           "probability": 0.3,
-          "irr_10yr_pct": 16.9
+          "irr_10yr_pct": 17.2
         },
         "bear": {
           "narrative": "VMET fails to reach $100M in annual revenue within 5 years, leading to a decline in market capitalization and investor confidence.",
           "mktcap_10yr_b": 0.5,
           "multiple": 0.5,
           "probability": 0.3,
-          "irr_10yr_pct": -7.1
+          "irr_10yr_pct": -6.9
         },
         "current_tracking": "BULL",
         "tracking_note": "VMET's current growth trajectory and industry trends suggest a high potential for success.",
@@ -2370,16 +2374,16 @@
         "natural_eval_window_days": 3650,
         "written_date": "2026-06-18T02:07:55.710032",
         "ticker": "VMET",
-        "expected_irr_pct": 11.7
+        "expected_irr_pct": 12.0
       },
-      "current_price": 9.61,
+      "current_price": 9.43,
       "sec_8k_highlights": [],
-      "sec_8k_latest_date": "2026-08-13",
+      "sec_8k_latest_date": "2026-09-16",
       "news_intelligence": {
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 4.75,
+      "fcf_yield": 4.84,
       "net_cash_m": -362.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.2,
@@ -2414,12 +2418,12 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -11.9,
+      "pct_from_200ma": -13.0,
       "return_3yr_cagr": null,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -29.1,
-      "years_listed": 0.5,
+      "max_drawdown": -30.3,
+      "years_listed": 0.6,
       "currency": "USD",
       "reddit_source": "blocked",
       "congress_source": "efd",
@@ -2444,7 +2448,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Basic Materials",
-      "market_cap": 5115216384,
+      "market_cap": 5147954176,
       "revenue": 757072000,
       "sentiment_confidence": 1,
       "megatrend": "synthetic_biology",
@@ -2474,9 +2478,9 @@
       "earnings_quality": "WATCH",
       "entry_price": 30.16,
       "above_200ma": true,
-      "pct_from_high": -17.3,
-      "return_1yr": 40.3,
-      "return_vs_qqq": 19.4,
+      "pct_from_high": -16.6,
+      "return_1yr": 44.0,
+      "return_vs_qqq": 20.9,
       "trend": "UP",
       "news_count": 1,
       "news_sentiment": "NEUTRAL",
@@ -2537,13 +2541,13 @@
           "mktcap_10yr_b": 20.0,
           "multiple": 3.9,
           "probability": 0.4,
-          "irr_10yr_pct": 14.6
+          "irr_10yr_pct": 14.5
         },
         "base": {
           "narrative": "Perimeter Solutions maintains its current market position and grows revenue at a moderate pace, driven by steady demand for its products and services.",
           "revenue_10yr_b": 1.5,
           "mktcap_10yr_b": 10.0,
-          "multiple": 2.0,
+          "multiple": 1.9,
           "probability": 0.3,
           "irr_10yr_pct": 6.9
         },
@@ -2562,14 +2566,14 @@
         "ticker": "PRM",
         "expected_irr_pct": 5.2
       },
-      "current_price": 31.25,
+      "current_price": 31.45,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-07-31",
       "news_intelligence": {
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 1.62,
+      "fcf_yield": 1.61,
       "net_cash_m": -1296.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -2599,16 +2603,16 @@
         },
         {
           "name": "iShares Trust-iShares Russell 2000 ETF",
-          "pct": 0.0239
+          "pct": 0.0235
         }
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 5.7,
-      "return_3yr_cagr": 76.5,
+      "pct_from_200ma": 6.3,
+      "return_3yr_cagr": 84.6,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -17.3,
+      "max_drawdown": -16.6,
       "years_listed": 4.8,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -2634,7 +2638,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Industrials",
-      "market_cap": 2085095552,
+      "market_cap": 1994534144,
       "revenue": 2054531968,
       "sentiment_confidence": 5,
       "megatrend": "general",
@@ -2664,11 +2668,11 @@
       "earnings_quality": "WATCH",
       "entry_price": 8.38,
       "above_200ma": true,
-      "pct_from_high": -34.1,
-      "return_1yr": -16.1,
-      "return_vs_qqq": -37.0,
+      "pct_from_high": -36.9,
+      "return_1yr": -36.5,
+      "return_vs_qqq": -59.6,
       "trend": "UP",
-      "news_count": 10,
+      "news_count": 6,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
@@ -2731,24 +2735,24 @@
           "narrative": "TIC Solutions achieves significant revenue growth through successful implementation of its patented technology and strategic partnerships, becoming a leader in the oil and gas technology market.",
           "revenue_10yr_b": 10.0,
           "mktcap_10yr_b": 20.0,
-          "multiple": 9.6,
+          "multiple": 10.0,
           "probability": 0.4,
-          "irr_10yr_pct": 25.4
+          "irr_10yr_pct": 25.9
         },
         "base": {
           "narrative": "TIC Solutions experiences steady growth, with moderate success in its technology and partnerships, resulting in a stable market position.",
           "revenue_10yr_b": 5.0,
           "mktcap_10yr_b": 10.0,
-          "multiple": 4.8,
+          "multiple": 5.0,
           "probability": 0.3,
-          "irr_10yr_pct": 17.0
+          "irr_10yr_pct": 17.5
         },
         "bear": {
           "narrative": "TIC Solutions fails to achieve significant revenue growth due to unsuccessful implementation of its technology and lack of effective partnerships, resulting in a decline in market position.",
           "mktcap_10yr_b": 0.5,
-          "multiple": 0.2,
+          "multiple": 0.3,
           "probability": 0.3,
-          "irr_10yr_pct": -13.3
+          "irr_10yr_pct": -12.9
         },
         "current_tracking": "BULL",
         "tracking_note": "Monitoring revenue growth and partnership developments.",
@@ -2756,16 +2760,16 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-06-18T02:08:13.869179",
         "ticker": "TIC",
-        "expected_irr_pct": 11.3
+        "expected_irr_pct": 11.7
       },
-      "current_price": 9.55,
+      "current_price": 9.14,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-08-06",
       "news_intelligence": {
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 1.68,
+      "fcf_yield": 1.76,
       "net_cash_m": -1342.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -2791,7 +2795,7 @@
         },
         {
           "name": "iShares Trust-iShares Russell 2000 ETF",
-          "pct": 0.039
+          "pct": 0.0382
         },
         {
           "name": "Reaves Utility Income Fund",
@@ -2800,11 +2804,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 6.5,
+      "pct_from_200ma": 2.1,
       "return_3yr_cagr": null,
       "return_5yr_cagr": null,
       "return_10yr_cagr": null,
-      "max_drawdown": -34.1,
+      "max_drawdown": -36.9,
       "years_listed": 1.6,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -2830,7 +2834,7 @@
       "tier": "T1",
       "date_added": "2026-06-07",
       "sector": "Communication Services",
-      "market_cap": 11296302080,
+      "market_cap": 11310817280,
       "revenue": 2950725888,
       "sentiment_confidence": 1,
       "megatrend": "general",
@@ -2860,20 +2864,17 @@
       "earnings_quality": "CLEAN",
       "entry_price": 76.88,
       "above_200ma": false,
-      "pct_from_high": -18.1,
-      "return_1yr": 20.3,
-      "return_vs_qqq": -0.6,
+      "pct_from_high": -17.9,
+      "return_1yr": 21.7,
+      "return_vs_qqq": -1.4,
       "trend": "DOWN",
-      "news_count": 18,
+      "news_count": 20,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "AI demand",
-        "Partnership",
-        "Regulatory",
         "Insider activity"
       ],
       "sec_8k_count": 2,
@@ -2949,14 +2950,14 @@
         "ticker": "NYT",
         "expected_irr_pct": -0.2
       },
-      "current_price": 70.04,
+      "current_price": 70.13,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-09-09",
       "news_intelligence": {
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 5.53,
+      "fcf_yield": 5.52,
       "net_cash_m": 661.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 9.0,
@@ -2992,10 +2993,10 @@
       "congress_disclosures": [],
       "news_highlights": [],
       "pct_from_200ma": -4.4,
-      "return_3yr_cagr": 19.7,
-      "return_5yr_cagr": 8.2,
-      "return_10yr_cagr": 20.3,
-      "max_drawdown": -18.1,
+      "return_3yr_cagr": 20.8,
+      "return_5yr_cagr": 8.1,
+      "return_10yr_cagr": 20.5,
+      "max_drawdown": -17.9,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -3021,7 +3022,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Financial Services",
-      "market_cap": 10477276160,
+      "market_cap": 11147532288,
       "revenue": 1752349056,
       "sentiment_confidence": 5,
       "megatrend": "general",
@@ -3051,22 +3052,25 @@
       "earnings_quality": "CLEAN",
       "entry_price": 148.51,
       "above_200ma": true,
-      "pct_from_high": -6.1,
-      "return_1yr": -0.3,
-      "return_vs_qqq": -21.2,
+      "pct_from_high": -0.0,
+      "return_1yr": 3.0,
+      "return_vs_qqq": -20.1,
       "trend": "UP",
-      "news_count": 5,
-      "news_sentiment": "POSITIVE",
+      "news_count": 6,
+      "news_sentiment": "NEUTRAL",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "POSITIVE",
+      "overall_sentiment": "NEUTRAL",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "Regulatory",
         "Guidance"
       ],
-      "sec_8k_count": 3,
+      "sec_8k_count": 4,
       "sec_8k_events": [
+        {
+          "date": "2026-09-17",
+          "description": "Item 5.07"
+        },
         {
           "date": "2026-07-10",
           "description": "Director/officer departure or appointment, Financial statements attached"
@@ -3074,10 +3078,6 @@
         {
           "date": "2026-07-10",
           "description": "Item 3.02, Regulation FD disclosure, Financial statements attached"
-        },
-        {
-          "date": "2026-06-29",
-          "description": "Director/officer departure or appointment"
         }
       ],
       "qqq_price_at_entry": NaN,
@@ -3123,24 +3123,24 @@
           "narrative": "Freedom Holding Corp dominates the financial services market with established relationships and increasing revenue, leading to significant revenue growth and market capitalization expansion.",
           "revenue_10yr_b": 162.881355776,
           "mktcap_10yr_b": 81.440677888,
-          "multiple": 7.8,
+          "multiple": 7.3,
           "probability": 0.6,
-          "irr_10yr_pct": 22.8
+          "irr_10yr_pct": 22.0
         },
         "base": {
           "narrative": "Freedom Holding Corp maintains its position in the financial services market with steady revenue growth and moderate market capitalization expansion.",
           "revenue_10yr_b": 97.7288134656,
           "mktcap_10yr_b": 48.8644067328,
-          "multiple": 4.7,
+          "multiple": 4.4,
           "probability": 0.3,
-          "irr_10yr_pct": 16.6
+          "irr_10yr_pct": 15.9
         },
         "bear": {
           "narrative": "Freedom Holding Corp struggles to maintain its position in the financial services market with slow revenue growth and declining market capitalization.",
           "mktcap_10yr_b": 24.4322033664,
-          "multiple": 2.3,
+          "multiple": 2.2,
           "probability": 0.1,
-          "irr_10yr_pct": 8.8
+          "irr_10yr_pct": 8.2
         },
         "current_tracking": "BULL",
         "tracking_note": "Based on current financials and thesis.",
@@ -3148,16 +3148,16 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-07-13T03:24:29.031084",
         "ticker": "FRHC",
-        "expected_irr_pct": 19.5
+        "expected_irr_pct": 18.8
       },
-      "current_price": 164.25,
+      "current_price": 174.76,
       "sec_8k_highlights": [],
-      "sec_8k_latest_date": "2026-07-10",
+      "sec_8k_latest_date": "2026-09-17",
       "news_intelligence": {
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": -6.08,
+      "fcf_yield": -7.71,
       "net_cash_m": 1538.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 0.0,
@@ -3192,11 +3192,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 15.7,
-      "return_3yr_cagr": 24.7,
-      "return_5yr_cagr": 21.7,
+      "pct_from_200ma": 22.6,
+      "return_3yr_cagr": 26.3,
+      "return_5yr_cagr": 22.8,
       "return_10yr_cagr": null,
-      "max_drawdown": -13.6,
+      "max_drawdown": -8.0,
       "years_listed": 8.6,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -3222,7 +3222,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Utilities",
-      "market_cap": 0,
+      "market_cap": 3407889152,
       "revenue": 1189928960,
       "sentiment_confidence": 1,
       "megatrend": "energy_transition",
@@ -3252,20 +3252,18 @@
       "earnings_quality": "CLEAN",
       "entry_price": 75.1,
       "above_200ma": false,
-      "pct_from_high": -32.4,
-      "return_1yr": 44.6,
-      "return_vs_qqq": 23.7,
+      "pct_from_high": -31.5,
+      "return_1yr": 58.7,
+      "return_vs_qqq": 35.6,
       "trend": "DOWN",
-      "news_count": 5,
+      "news_count": 2,
       "news_sentiment": "NEUTRAL",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
       "overall_sentiment": "NEUTRAL",
       "signal_or_noise": "SIGNAL",
-      "key_themes": [
-        "Data centre"
-      ],
-      "sec_8k_count": 7,
+      "key_themes": [],
+      "sec_8k_count": 6,
       "sec_8k_events": [
         {
           "date": "2026-09-10",
@@ -3325,7 +3323,7 @@
           "mktcap_10yr_b": 23.21,
           "multiple": 6.8,
           "probability": 0.4,
-          "irr_10yr_pct": 21.2
+          "irr_10yr_pct": 21.1
         },
         "base": {
           "narrative": "Kenon Holdings maintains a steady 10% YoY revenue growth, with moderate expansion of its diversified portfolio, resulting in a stable increase in market capitalization.",
@@ -3340,7 +3338,7 @@
           "mktcap_10yr_b": 1.82,
           "multiple": 0.5,
           "probability": 0.3,
-          "irr_10yr_pct": -6.0
+          "irr_10yr_pct": -6.1
         },
         "current_tracking": "BULL",
         "tracking_note": "Kenon Holdings' strong revenue growth and diversified portfolio support the bull narrative.",
@@ -3350,14 +3348,14 @@
         "ticker": "KEN",
         "expected_irr_pct": 9.8
       },
-      "current_price": 64.56,
+      "current_price": 65.4,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-09-10",
       "news_intelligence": {
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": null,
+      "fcf_yield": 3.74,
       "net_cash_m": -1380.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -3392,11 +3390,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": -11.0,
-      "return_3yr_cagr": 58.1,
-      "return_5yr_cagr": 28.4,
-      "return_10yr_cagr": 54.2,
-      "max_drawdown": -32.4,
+      "pct_from_200ma": -10.1,
+      "return_3yr_cagr": 58.9,
+      "return_5yr_cagr": 28.7,
+      "return_10yr_cagr": 54.4,
+      "max_drawdown": -31.5,
       "years_listed": 10.0,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -3422,7 +3420,7 @@
       "tier": "T3",
       "date_added": "2026-06-07",
       "sector": "Industrials",
-      "market_cap": 76368003072,
+      "market_cap": 81130504192,
       "revenue": 3113149952,
       "sentiment_confidence": 1,
       "megatrend": "energy_transition",
@@ -3452,9 +3450,9 @@
       "earnings_quality": "CLEAN",
       "entry_price": 263.61,
       "above_200ma": true,
-      "pct_from_high": -25.0,
-      "return_1yr": 285.4,
-      "return_vs_qqq": 264.5,
+      "pct_from_high": -20.1,
+      "return_1yr": 225.4,
+      "return_vs_qqq": 202.3,
       "trend": "UP",
       "news_count": 20,
       "news_sentiment": "POSITIVE",
@@ -3463,9 +3461,10 @@
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "AI demand"
+        "AI demand",
+        "Data centre"
       ],
-      "sec_8k_count": 3,
+      "sec_8k_count": 2,
       "sec_8k_events": [
         {
           "date": "2026-07-28",
@@ -3474,10 +3473,6 @@
         {
           "date": "2026-07-09",
           "description": "Regulation FD disclosure"
-        },
-        {
-          "date": "2026-06-17",
-          "description": "Director/officer departure or appointment, Financial statements attached"
         }
       ],
       "qqq_price_at_entry": NaN,
@@ -3523,24 +3518,24 @@
           "narrative": "BE achieves significant revenue growth through innovative products and strategic expansion, leading to a market capitalization of $250B in 10 years.",
           "revenue_10yr_b": 15.0,
           "mktcap_10yr_b": 250.0,
-          "multiple": 3.3,
+          "multiple": 3.1,
           "probability": 0.4,
-          "irr_10yr_pct": 12.6
+          "irr_10yr_pct": 11.9
         },
         "base": {
           "narrative": "BE maintains steady growth, driven by its strong financial position and industry demand, resulting in a market capitalization of $150B in 10 years.",
           "revenue_10yr_b": 8.0,
           "mktcap_10yr_b": 150.0,
-          "multiple": 2.0,
+          "multiple": 1.8,
           "probability": 0.5,
-          "irr_10yr_pct": 7.0
+          "irr_10yr_pct": 6.3
         },
         "bear": {
           "narrative": "BE faces significant challenges, including increased competition and failure to achieve revenue targets, leading to a market capitalization of $50B in 10 years.",
           "mktcap_10yr_b": 50.0,
-          "multiple": 0.7,
+          "multiple": 0.6,
           "probability": 0.1,
-          "irr_10yr_pct": -4.1
+          "irr_10yr_pct": -4.7
         },
         "current_tracking": "BULL",
         "tracking_note": "BE's current financials and innovative capabilities support a bullish outlook.",
@@ -3548,16 +3543,16 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-06-18T09:02:09.967610",
         "ticker": "BE",
-        "expected_irr_pct": 8.1
+        "expected_irr_pct": 7.4
       },
-      "current_price": 259.29,
+      "current_price": 275.46,
       "sec_8k_highlights": [],
       "sec_8k_latest_date": "2026-07-28",
       "news_intelligence": {
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
       },
-      "fcf_yield": 0.89,
+      "fcf_yield": 0.84,
       "net_cash_m": -98.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 6.0,
@@ -3592,11 +3587,11 @@
       ],
       "congress_disclosures": [],
       "news_highlights": [],
-      "pct_from_200ma": 32.6,
-      "return_3yr_cagr": 161.7,
-      "return_5yr_cagr": 69.5,
+      "pct_from_200ma": 38.4,
+      "return_3yr_cagr": 172.0,
+      "return_5yr_cagr": 71.6,
       "return_10yr_cagr": null,
-      "max_drawdown": -25.0,
+      "max_drawdown": -20.1,
       "years_listed": 8.1,
       "currency": "USD",
       "reddit_source": "blocked",
@@ -3622,7 +3617,7 @@
       "tier": "T1",
       "date_added": "2026-07-08",
       "sector": "Financial Services",
-      "market_cap": 220448407552,
+      "market_cap": 211138985984,
       "revenue": 70912999424,
       "sentiment_confidence": 4,
       "megatrend": "synthetic_biology",
@@ -3656,19 +3651,19 @@
       "insider_ownership": 0.22558,
       "earnings_quality": "CLEAN",
       "entry_price": 338.67,
-      "current_price": 326.44,
+      "current_price": 312.65,
       "above_200ma": false,
-      "pct_from_high": -14.5,
-      "pct_from_200ma": -2.6,
-      "return_1yr": 1.5,
-      "return_vs_qqq": -19.4,
-      "return_3yr_cagr": 28.4,
-      "return_5yr_cagr": 16.3,
-      "return_10yr_cagr": 19.4,
-      "max_drawdown": -14.5,
+      "pct_from_high": -18.1,
+      "pct_from_200ma": -6.4,
+      "return_1yr": -7.4,
+      "return_vs_qqq": -30.5,
+      "return_3yr_cagr": 28.3,
+      "return_5yr_cagr": 13.9,
+      "return_10yr_cagr": 19.1,
+      "max_drawdown": -18.1,
       "long_term_alpha_pp": null,
       "long_term_note": "",
-      "trend": "UP",
+      "trend": "DOWN",
       "news_count": 20,
       "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
@@ -3676,10 +3671,15 @@
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "Regulatory"
+        "AI demand",
+        "Partnership"
       ],
       "sec_8k_count": 7,
       "sec_8k_events": [
+        {
+          "date": "2026-09-15",
+          "description": "Regulation FD disclosure"
+        },
         {
           "date": "2026-08-17",
           "description": "Regulation FD disclosure"
@@ -3687,14 +3687,10 @@
         {
           "date": "2026-08-12",
           "description": "Item 3.03, Amendment to articles/bylaws, Other material event, Financial statements attached"
-        },
-        {
-          "date": "2026-08-05",
-          "description": "Other material event"
         }
       ],
       "sec_8k_highlights": [],
-      "sec_8k_latest_date": "2026-08-17",
+      "sec_8k_latest_date": "2026-09-15",
       "news_intelligence": {
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
@@ -3738,9 +3734,9 @@
           "narrative": "American Express maintains its customer base and loyalty, and the company's capital allocation skills remain strong, leading to a significant increase in revenue and market capitalization.",
           "revenue_10yr_b": 123.92,
           "mktcap_10yr_b": 500.0,
-          "multiple": 2.3,
+          "multiple": 2.4,
           "probability": 0.2,
-          "irr_10yr_pct": 8.5
+          "irr_10yr_pct": 9.0
         },
         "base": {
           "narrative": "American Express maintains its customer base and loyalty, but the company's capital allocation skills decline slightly, leading to a moderate increase in revenue and market capitalization.",
@@ -3748,14 +3744,14 @@
           "mktcap_10yr_b": 300.0,
           "multiple": 1.4,
           "probability": 0.6,
-          "irr_10yr_pct": 3.1
+          "irr_10yr_pct": 3.6
         },
         "bear": {
           "narrative": "American Express fails to maintain its customer base and loyalty, and the company's capital allocation skills decline significantly, leading to a decrease in revenue and market capitalization.",
           "mktcap_10yr_b": 134.19,
           "multiple": 0.6,
           "probability": 0.2,
-          "irr_10yr_pct": -4.8
+          "irr_10yr_pct": -4.4
         },
         "current_tracking": "BASE",
         "tracking_note": "Based on current financials and thesis.",
@@ -3763,7 +3759,7 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-07-08T16:04:27.442486",
         "ticker": "AXP",
-        "expected_irr_pct": 2.6
+        "expected_irr_pct": 3.1
       },
       "institutional_holders": [
         {
@@ -3790,13 +3786,13 @@
         },
         {
           "name": "iShares Trust-iShares Core S&P 500 ETF",
-          "pct": 0.0108
+          "pct": 0.0106
         }
       ],
       "years_listed": 10.0,
       "currency": "USD",
       "congress_disclosures": [],
-      "fcf_yield": 7.28,
+      "fcf_yield": 7.6,
       "net_cash_m": -13340.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -3824,7 +3820,7 @@
       "tier": "T1",
       "date_added": "2026-07-08",
       "sector": "Communication Services",
-      "market_cap": 112546455552,
+      "market_cap": 109232177152,
       "revenue": 6829124096,
       "sentiment_confidence": 5,
       "megatrend": "ai_infrastructure",
@@ -3858,16 +3854,16 @@
       "insider_ownership": 0.14314,
       "earnings_quality": "CLEAN",
       "entry_price": 508.8,
-      "current_price": 335.02,
+      "current_price": 326.41,
       "above_200ma": false,
-      "pct_from_high": -54.4,
-      "pct_from_200ma": -30.4,
-      "return_1yr": -42.5,
-      "return_vs_qqq": -63.4,
-      "return_3yr_cagr": 96.6,
-      "return_5yr_cagr": 35.2,
+      "pct_from_high": -55.5,
+      "pct_from_200ma": -31.1,
+      "return_1yr": -49.8,
+      "return_vs_qqq": -72.9,
+      "return_3yr_cagr": 104.4,
+      "return_5yr_cagr": 35.0,
       "return_10yr_cagr": null,
-      "max_drawdown": -54.4,
+      "max_drawdown": -55.5,
       "long_term_alpha_pp": 36.3,
       "long_term_note": "",
       "trend": "DOWN",
@@ -3878,7 +3874,7 @@
       "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
-        "Guidance"
+        "Revenue beat"
       ],
       "sec_8k_count": 1,
       "sec_8k_events": [
@@ -3933,9 +3929,9 @@
           "narrative": "APP's mobile advertising platform continues to ride the trend of increasing mobile app usage, with its data monetization moat remaining intact.",
           "revenue_10yr_b": 1000.0,
           "mktcap_10yr_b": 500.0,
-          "multiple": 4.4,
+          "multiple": 4.6,
           "probability": 0.6,
-          "irr_10yr_pct": 16.1
+          "irr_10yr_pct": 16.4
         },
         "base": {
           "narrative": "APP's mobile advertising platform experiences steady growth, but faces increasing competition in the mobile advertising landscape.",
@@ -3943,14 +3939,14 @@
           "mktcap_10yr_b": 300.0,
           "multiple": 2.7,
           "probability": 0.3,
-          "irr_10yr_pct": 10.3
+          "irr_10yr_pct": 10.6
         },
         "bear": {
           "narrative": "A structural change in the mobile advertising landscape, such as a shift to voice assistants or augmented reality, significantly impacts APP's data monetization moat.",
           "mktcap_10yr_b": 150.0,
-          "multiple": 1.3,
+          "multiple": 1.4,
           "probability": 0.1,
-          "irr_10yr_pct": 2.9
+          "irr_10yr_pct": 3.2
         },
         "current_tracking": "BASE",
         "tracking_note": "Current tracking is BASE due to the steady growth of APP's mobile advertising platform, but the potential for increased competition.",
@@ -3958,7 +3954,7 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-07-08T16:04:43.473142",
         "ticker": "APP",
-        "expected_irr_pct": 13.0
+        "expected_irr_pct": 13.3
       },
       "institutional_holders": [
         {
@@ -3991,7 +3987,7 @@
       "years_listed": 5.4,
       "currency": "USD",
       "congress_disclosures": [],
-      "fcf_yield": 4.0,
+      "fcf_yield": 4.12,
       "net_cash_m": -462.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 3.3,
@@ -4019,7 +4015,7 @@
       "tier": "T1",
       "date_added": "2026-07-08",
       "sector": "Technology",
-      "market_cap": 611448782848,
+      "market_cap": 654890500096,
       "revenue": 35327500288,
       "sentiment_confidence": 5,
       "megatrend": "ai_infrastructure",
@@ -4053,28 +4049,28 @@
       "insider_ownership": 0.00016000001,
       "earnings_quality": "WATCH",
       "entry_price": 1740.58,
-      "current_price": 1591.9,
+      "current_price": 1705.0,
       "above_200ma": true,
-      "pct_from_high": -19.8,
-      "pct_from_200ma": 6.6,
-      "return_1yr": 97.1,
-      "return_vs_qqq": 76.2,
-      "return_3yr_cagr": 39.8,
-      "return_5yr_cagr": 14.3,
-      "return_10yr_cagr": 32.0,
-      "max_drawdown": -19.8,
+      "pct_from_high": -14.4,
+      "pct_from_200ma": 12.7,
+      "return_1yr": 83.7,
+      "return_vs_qqq": 60.6,
+      "return_3yr_cagr": 43.8,
+      "return_5yr_cagr": 18.0,
+      "return_10yr_cagr": 33.1,
+      "max_drawdown": -14.4,
       "long_term_alpha_pp": null,
       "long_term_note": "",
-      "trend": "DOWN",
+      "trend": "UP",
       "news_count": 20,
-      "news_sentiment": "POSITIVE",
+      "news_sentiment": "MIXED",
       "reddit_mentions": 0,
       "reddit_sentiment": "NEUTRAL",
-      "overall_sentiment": "POSITIVE",
+      "overall_sentiment": "MIXED",
       "signal_or_noise": "SIGNAL",
       "key_themes": [
         "AI demand",
-        "Insider activity"
+        "Guidance"
       ],
       "sec_8k_count": 1,
       "sec_8k_events": [
@@ -4130,7 +4126,7 @@
           "mktcap_10yr_b": 500.0,
           "multiple": 0.8,
           "probability": 0.4,
-          "irr_10yr_pct": -2.0
+          "irr_10yr_pct": -2.7
         },
         "base": {
           "narrative": "ASML's EUVL technology maintains its market share, but growth slows as the industry reaches maturity.",
@@ -4138,20 +4134,20 @@
           "mktcap_10yr_b": 300.0,
           "multiple": 0.5,
           "probability": 0.3,
-          "irr_10yr_pct": -6.9
+          "irr_10yr_pct": -7.5
         },
         "bear": {
           "narrative": "A structural change in the industry, such as a shift to alternative lithography technologies, significantly impacts ASML's business.",
           "mktcap_10yr_b": 150.0,
           "multiple": 0.2,
           "probability": 0.3,
-          "irr_10yr_pct": -13.1
+          "irr_10yr_pct": -13.7
         },
         "current_tracking": "BULL",
         "tracking_note": "Based on current financials and thesis.",
         "thesis_breaks_if": "A structural change in the industry, such as a significant shift to alternative lithography technologies or a major disruption to ASML's customer base.",
         "natural_eval_window_days": 365,
-        "expected_irr_pct": -6.8,
+        "expected_irr_pct": -7.4,
         "written_date": "2026-08-17T13:37:15.843171",
         "ticker": "ASML"
       },
@@ -4176,7 +4172,7 @@
         },
         {
           "name": "VanEck ETF Trust-VanEck Semiconductor ETF",
-          "pct": 0.0053
+          "pct": 0.0052
         },
         {
           "name": "Invesco QQQ Trust, Series 1",
@@ -4186,7 +4182,7 @@
       "years_listed": 10.0,
       "currency": "USD",
       "congress_disclosures": [],
-      "fcf_yield": 1.61,
+      "fcf_yield": 1.5,
       "net_cash_m": 5597.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 13.3,
@@ -4215,7 +4211,7 @@
       "date_added": "2026-08-17",
       "sector": "Consumer Defensive",
       "factor_group": null,
-      "market_cap": 43008905216,
+      "market_cap": 41886224384,
       "revenue": 20089999360,
       "sentiment_confidence": 5,
       "megatrend": "synthetic_biology",
@@ -4246,7 +4242,7 @@
       "de_ratio": 1.0,
       "interest_coverage": 6.38,
       "dilution_rate": 0.0,
-      "insider_ownership": 0.049850002,
+      "insider_ownership": 0.049879998,
       "earnings_quality": "CLEAN",
       "valuation_label": "FAIR",
       "valuation_note": "FCF yield 4.7%, PEG 1.1, EV/EBITDA 17 \u2014 fairly valued for its growth.",
@@ -4280,21 +4276,21 @@
         ]
       },
       "entry_price": 31.44,
-      "current_price": 31.61,
+      "current_price": 30.78,
       "above_200ma": true,
-      "pct_from_high": -5.7,
-      "pct_from_200ma": 9.0,
-      "return_1yr": 19.9,
-      "return_vs_qqq": -1.0,
-      "return_3yr_cagr": 0.8,
-      "return_5yr_cagr": 1.2,
+      "pct_from_high": -8.0,
+      "pct_from_200ma": 6.0,
+      "return_1yr": 17.5,
+      "return_vs_qqq": -5.6,
+      "return_3yr_cagr": 1.1,
+      "return_5yr_cagr": 0.6,
       "return_10yr_cagr": 10.6,
-      "max_drawdown": -12.0,
+      "max_drawdown": -14.2,
       "long_term_alpha_pp": null,
       "long_term_note": "",
       "trend": "UP",
       "news_count": 20,
-      "news_sentiment": "MIXED",
+      "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_source": "blocked",
       "reddit_sentiment": "NEUTRAL",
@@ -4304,14 +4300,15 @@
       "congress_buys": 1,
       "congress_sells": 0,
       "congress_note": "1 Senate transaction(s) \u2014 1 buy / 0 sell (last 120d): Alan Armstrong",
-      "overall_sentiment": "MIXED",
+      "overall_sentiment": "POSITIVE",
       "signal_or_noise": "SIGNAL",
-      "key_themes": [
-        "Partnership",
-        "Insider activity"
-      ],
+      "key_themes": [],
       "sec_8k_count": 6,
       "sec_8k_events": [
+        {
+          "date": "2026-09-16",
+          "description": "Other material event, Financial statements attached"
+        },
         {
           "date": "2026-09-01",
           "description": "Other material event, Financial statements attached"
@@ -4319,14 +4316,10 @@
         {
           "date": "2026-08-12",
           "description": "Director/officer departure or appointment"
-        },
-        {
-          "date": "2026-08-06",
-          "description": "Results of operations / earnings, Financial statements attached"
         }
       ],
       "sec_8k_highlights": [],
-      "sec_8k_latest_date": "2026-09-01",
+      "sec_8k_latest_date": "2026-09-16",
       "news_intelligence": {
         "_status": "failed",
         "_error": "Error code: 410 - {'type': 'about:blank', 'title': 'Gone', 'status': 410, 'detail': \"The model 'meta/llama-3.3-70b-instruct' has reached its end of li"
@@ -4384,30 +4377,30 @@
           "narrative": "Keurig Dr Pepper's diversified beverage portfolio and strong brand recognition continue to drive growth in the beverage industry, with a 10-year revenue CAGR of 5% and a 10-year market capitalization of $120B.",
           "revenue_10yr_b": 0.05,
           "mktcap_10yr_b": 500.0,
-          "multiple": 11.6,
+          "multiple": 11.9,
           "probability": 0.3,
-          "irr_10yr_pct": 27.8
+          "irr_10yr_pct": 28.1
         },
         "base": {
           "narrative": "Keurig Dr Pepper's diversified beverage portfolio and strong brand recognition maintain a stable position in the beverage industry, with a 10-year revenue CAGR of 2% and a 10-year market capitalization of $80B.",
           "revenue_10yr_b": 0.02,
           "mktcap_10yr_b": 300.0,
-          "multiple": 7.0,
+          "multiple": 7.2,
           "probability": 0.4,
-          "irr_10yr_pct": 21.4
+          "irr_10yr_pct": 21.8
         },
         "bear": {
           "narrative": "A significant change in consumer preferences or a major disruption in the beverage industry supply chain leads to a decline in Keurig Dr Pepper's market position, with a 10-year market capitalization of $40B.",
           "mktcap_10yr_b": 150.0,
-          "multiple": 3.5,
+          "multiple": 3.6,
           "probability": 0.3,
-          "irr_10yr_pct": 13.3
+          "irr_10yr_pct": 13.6
         },
         "current_tracking": "BULL",
         "tracking_note": "Based on current financials and thesis.",
         "thesis_breaks_if": "A significant change in consumer preferences or a major disruption in the beverage industry supply chain.",
         "natural_eval_window_days": 365,
-        "expected_irr_pct": 20.9,
+        "expected_irr_pct": 21.2,
         "written_date": "2026-08-17T13:32:40.727600",
         "ticker": "KDP"
       },
@@ -4447,7 +4440,7 @@
       "years_listed": 10.0,
       "currency": "USD",
       "congress_disclosures": [],
-      "fcf_yield": 4.71,
+      "fcf_yield": 4.83,
       "net_cash_m": -32002.0,
       "net_cash_flag": "LEVERAGED",
       "rd_intensity": 0.0,
@@ -4460,7 +4453,7 @@
       "date_added": "2026-09-11",
       "sector": "Consumer Cyclical",
       "factor_group": null,
-      "market_cap": 66537259008,
+      "market_cap": 62693859328,
       "revenue": 27723159552,
       "sentiment_confidence": "\u2014",
       "megatrend": "synthetic_biology",
@@ -4526,21 +4519,21 @@
         ]
       },
       "entry_price": 107.69,
-      "current_price": 108.64,
-      "above_200ma": true,
-      "pct_from_high": -44.7,
-      "pct_from_200ma": 3.2,
-      "return_1yr": -44.7,
-      "return_vs_qqq": -65.6,
-      "return_3yr_cagr": 41.5,
-      "return_5yr_cagr": -19.9,
+      "current_price": 102.36,
+      "above_200ma": false,
+      "pct_from_high": -46.9,
+      "pct_from_200ma": -1.7,
+      "return_1yr": -46.8,
+      "return_vs_qqq": -69.9,
+      "return_3yr_cagr": 36.6,
+      "return_5yr_cagr": -20.2,
       "return_10yr_cagr": null,
-      "max_drawdown": -70.5,
+      "max_drawdown": -72.1,
       "long_term_alpha_pp": -32.4,
       "long_term_note": "5yr CAGR lagged QQQ by 32.4pp \u2014 downgraded",
       "trend": "UP",
       "news_count": 20,
-      "news_sentiment": "MIXED",
+      "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_source": "blocked",
       "reddit_sentiment": "NEUTRAL",
@@ -4550,10 +4543,10 @@
       "congress_buys": 1,
       "congress_sells": 0,
       "congress_note": "1 Senate transaction(s) \u2014 1 buy / 0 sell (last 120d): Alan Armstrong",
-      "overall_sentiment": "MIXED",
-      "signal_or_noise": "MIXED",
+      "overall_sentiment": "POSITIVE",
+      "signal_or_noise": "NOISE",
       "key_themes": [
-        "Insider activity"
+        "AI demand"
       ],
       "sec_8k_count": 0,
       "sec_8k_events": [],
@@ -4616,24 +4609,24 @@
           "narrative": "Sea Limited's online gaming and e-commerce platform experiences exponential growth, capturing 20% of the global online gaming market and 15% of the global e-commerce market by 2033.",
           "revenue_10yr_b": 101.19,
           "mktcap_10yr_b": 250.0,
-          "multiple": 3.8,
+          "multiple": 4.0,
           "probability": 0.2,
-          "irr_10yr_pct": 14.2
+          "irr_10yr_pct": 14.8
         },
         "base": {
           "narrative": "Sea Limited's online gaming and e-commerce platform maintains steady growth, capturing 5% of the global online gaming market and 5% of the global e-commerce market by 2033.",
           "revenue_10yr_b": 41.09,
           "mktcap_10yr_b": 125.0,
-          "multiple": 1.9,
+          "multiple": 2.0,
           "probability": 0.6,
-          "irr_10yr_pct": 6.5
+          "irr_10yr_pct": 7.1
         },
         "bear": {
           "narrative": "Sea Limited's online gaming and e-commerce platform experiences significant decline due to increased competition and regulatory issues.",
           "mktcap_10yr_b": 50.0,
           "multiple": 0.8,
           "probability": 0.2,
-          "irr_10yr_pct": -2.8
+          "irr_10yr_pct": -2.2
         },
         "current_tracking": "BULL",
         "tracking_note": "Short-term price moves, news cycles, and 8-K noise that do not structurally change the next decade.",
@@ -4641,7 +4634,7 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-07-08T16:06:07.866129",
         "ticker": "SE",
-        "expected_irr_pct": 6.2
+        "expected_irr_pct": 6.8
       },
       "changed_this_month": false,
       "change_reason": "",
@@ -4679,7 +4672,7 @@
       "years_listed": 8.9,
       "currency": "USD",
       "congress_disclosures": [],
-      "fcf_yield": 7.05,
+      "fcf_yield": 7.48,
       "net_cash_m": 4972.0,
       "net_cash_flag": "FORTRESS",
       "rd_intensity": 4.2,
@@ -4692,7 +4685,7 @@
       "date_added": "2026-09-14",
       "sector": "Technology",
       "factor_group": null,
-      "market_cap": 141928316928,
+      "market_cap": 154396868608,
       "revenue": 1232306962432,
       "sentiment_confidence": "\u2014",
       "megatrend": "ai_infrastructure",
@@ -4757,21 +4750,21 @@
         ]
       },
       "entry_price": 199.65,
-      "current_price": 199.65,
+      "current_price": 213.86,
       "above_200ma": true,
-      "pct_from_high": -15.9,
-      "pct_from_200ma": 17.5,
-      "return_1yr": 111.6,
-      "return_vs_qqq": 90.7,
-      "return_3yr_cagr": 94.0,
-      "return_5yr_cagr": 50.5,
-      "return_10yr_cagr": 50.4,
-      "max_drawdown": -15.9,
+      "pct_from_high": -9.5,
+      "pct_from_200ma": 25.0,
+      "return_1yr": 109.9,
+      "return_vs_qqq": 86.8,
+      "return_3yr_cagr": 98.7,
+      "return_5yr_cagr": 55.4,
+      "return_10yr_cagr": 51.3,
+      "max_drawdown": -9.5,
       "long_term_alpha_pp": null,
       "long_term_note": "",
       "trend": "UP",
-      "news_count": 6,
-      "news_sentiment": "MIXED",
+      "news_count": 10,
+      "news_sentiment": "POSITIVE",
       "reddit_mentions": 0,
       "reddit_source": "blocked",
       "reddit_sentiment": "NEUTRAL",
@@ -4781,10 +4774,11 @@
       "congress_buys": 1,
       "congress_sells": 0,
       "congress_note": "1 Senate transaction(s) \u2014 1 buy / 0 sell (last 120d): Alan Armstrong",
-      "overall_sentiment": "MIXED",
-      "signal_or_noise": "MIXED",
+      "overall_sentiment": "POSITIVE",
+      "signal_or_noise": "NOISE",
       "key_themes": [
-        "AI demand"
+        "AI demand",
+        "Guidance"
       ],
       "sec_8k_count": 0,
       "sec_8k_events": [],
@@ -4835,24 +4829,24 @@
           "narrative": "ATEYY rides the trend of increasing chip complexity, with Advantest's highly specialized semiconductor equipment leading the charge in complex chip testing.",
           "revenue_10yr_b": 1000.0,
           "mktcap_10yr_b": 500.0,
-          "multiple": 22.5,
+          "multiple": 3.2,
           "probability": 0.6,
-          "irr_10yr_pct": 13.4
+          "irr_10yr_pct": 12.5
         },
         "base": {
           "narrative": "ATEYY grows in line with the technology sector, with Advantest's semiconductor equipment maintaining its market share in a growing market.",
           "revenue_10yr_b": 600.0,
           "mktcap_10yr_b": 300.0,
-          "multiple": 15.5,
+          "multiple": 1.9,
           "probability": 0.3,
-          "irr_10yr_pct": 7.8
+          "irr_10yr_pct": 6.9
         },
         "bear": {
           "narrative": "ATEYY faces increasing competition in the semiconductor equipment market, with Advantest's highly specialized equipment becoming less relevant in a simpler chip testing landscape.",
           "mktcap_10yr_b": 150.0,
-          "multiple": 10.5,
+          "multiple": 1.0,
           "probability": 0.1,
-          "irr_10yr_pct": 0.6
+          "irr_10yr_pct": -0.3
         },
         "current_tracking": "BULL",
         "tracking_note": "Current tracking is BULL due to the company's strong position in the complex chip testing market.",
@@ -4860,7 +4854,7 @@
         "natural_eval_window_days": 365,
         "written_date": "2026-07-08T16:05:24.584298",
         "ticker": "ATEYY",
-        "expected_irr_pct": 10.4
+        "expected_irr_pct": 9.5
       },
       "entry_kind": "SWAP",
       "swap_meta": {
@@ -4872,11 +4866,47 @@
         "irr_edge": 10.4
       },
       "swapped_out": "CRDO",
-      "changed_this_month": true,
-      "change_reason": "new position",
+      "changed_this_month": false,
+      "change_reason": "",
       "_prev_verdict": "CORE_HOLD",
       "_prev_tier": "T1",
-      "_prev_scenario_tracking": "BULL"
+      "_prev_scenario_tracking": "BULL",
+      "institutional_holders": [
+        {
+          "name": "Gamma Investing LLC",
+          "pct": 0.0
+        },
+        {
+          "name": "Yousif Capital Management, LLC",
+          "pct": 0.0
+        },
+        {
+          "name": "Diversified Trust Company",
+          "pct": 0.0
+        }
+      ],
+      "mutualfund_holders": [
+        {
+          "name": "Abacus FCF ETF Trust-Abacus FCF International Leaders ETF",
+          "pct": 0.0
+        },
+        {
+          "name": "-iShares Dynamic Equity Active ETF",
+          "pct": 0.0
+        },
+        {
+          "name": "Dunham Funds-Dunham International Stock Fund",
+          "pct": 0.0
+        }
+      ],
+      "years_listed": 10.0,
+      "currency": "USD",
+      "congress_disclosures": [],
+      "fcf_yield": 252.24,
+      "net_cash_m": 304958.0,
+      "net_cash_flag": "FORTRESS",
+      "rd_intensity": 0.0,
+      "moat_proxy_label": "MODERATE"
     }
   ],
   "exited": [
@@ -6061,6 +6091,13 @@
       "exits": [
         "CRDO"
       ],
+      "migrations": [],
+      "holdings_count": 25
+    },
+    {
+      "date": "2026-09-21",
+      "new_additions": [],
+      "exits": [],
       "migrations": [],
       "holdings_count": 25
     }
